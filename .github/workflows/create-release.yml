@@ -29,4 +29,4 @@ jobs:
             @semantic-release/exec
             @semantic-release/git
         env:
-          GITHUB_TOKEN: ${{ secrets.LECCA_IO_RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.LUNNOA_RELEASE_TOKEN }}
