@@ -3,7 +3,7 @@ import {
   luxonTimeFormats,
   parseDateToISO,
   timezoneDropdown,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 import { DateTime } from 'luxon';
 import { z } from 'zod';
 

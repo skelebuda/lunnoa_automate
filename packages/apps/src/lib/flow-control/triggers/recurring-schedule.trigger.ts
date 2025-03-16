@@ -1,10 +1,10 @@
-import { createScheduleTrigger, parseDateToISO } from '@lecca-io/toolkit';
+import { createScheduleTrigger, parseDateToISO } from '@lunnoa-automate/toolkit';
 import {
   createDateTimeInputField,
   createMultiSelectInputField,
   createNumberInputField,
   createSelectInputField,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 import { DateTime } from 'luxon';
 import { Options, RRule } from 'rrule';
 

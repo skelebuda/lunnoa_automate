@@ -1,4 +1,4 @@
-import { createAction, parseDateToISO } from '@lecca-io/toolkit';
+import { createAction, parseDateToISO } from '@lunnoa-automate/toolkit';
 import { DateTime } from 'luxon';
 import { z } from 'zod';
 

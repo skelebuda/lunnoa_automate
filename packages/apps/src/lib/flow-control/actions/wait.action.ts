@@ -1,9 +1,9 @@
-import { createAction } from '@lecca-io/toolkit';
+import { createAction } from '@lunnoa-automate/toolkit';
 import {
   createMarkdownField,
   createNumberInputField,
   createSelectInputField,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 export const wait = createAction({

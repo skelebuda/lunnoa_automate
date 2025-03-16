@@ -1,4 +1,4 @@
-import { createOAuth2Connection } from '@lecca-io/toolkit';
+import { createOAuth2Connection } from '@lunnoa-automate/toolkit';
 
 export const gmailOAuth2 = createOAuth2Connection({
   id: 'gmail_connection_oauth2',

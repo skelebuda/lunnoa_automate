@@ -1,5 +1,5 @@
 import { createAnthropic } from '@ai-sdk/anthropic';
-import { createSelectInputField } from '@lecca-io/toolkit';
+import { createSelectInputField } from '@lunnoa-automate/toolkit';
 
 export const shared = {
   fields: {

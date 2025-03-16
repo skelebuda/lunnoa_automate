@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { getWorksheets } from './actions/get-worksheets.action';
 import { microsoftExcel365OAuth2 } from './connections/microsoft-excel-365.oauth2';

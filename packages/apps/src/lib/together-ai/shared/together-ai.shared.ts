@@ -1,5 +1,5 @@
 import { createTogetherAI } from '@ai-sdk/togetherai';
-import { createDynamicSelectInputField } from '@lecca-io/toolkit';
+import { createDynamicSelectInputField } from '@lunnoa-automate/toolkit';
 
 export const shared = {
   fields: {

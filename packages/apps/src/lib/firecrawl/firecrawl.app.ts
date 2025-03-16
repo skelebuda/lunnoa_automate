@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { extract } from './actions/extract.action';
 import { scrape } from './actions/scrape.action';

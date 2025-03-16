@@ -1,4 +1,4 @@
-import { FieldConfig, createAction } from '@lecca-io/toolkit';
+import { FieldConfig, createAction } from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 import { shared } from '../shared/dropbox.shared';

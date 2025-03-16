@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { convertCsvToJson } from './actions/convert-csv-to-json.action';
 

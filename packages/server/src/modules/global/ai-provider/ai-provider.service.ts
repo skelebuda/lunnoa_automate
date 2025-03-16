@@ -4,7 +4,7 @@ import { createGoogleGenerativeAI } from '@ai-sdk/google';
 import { createOpenAI } from '@ai-sdk/openai';
 import { createTogetherAI } from '@ai-sdk/togetherai';
 import { createXai } from '@ai-sdk/xai';
-import { ConnectionData } from '@lecca-io/toolkit';
+import { ConnectionData } from '@lunnoa-automate/toolkit';
 import {
   BadRequestException,
   ForbiddenException,

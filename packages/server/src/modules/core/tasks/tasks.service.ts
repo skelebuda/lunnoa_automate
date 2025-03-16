@@ -1,4 +1,4 @@
-import { FieldConfig, InputConfig } from '@lecca-io/toolkit';
+import { FieldConfig, InputConfig } from '@lunnoa-automate/toolkit';
 import {
   BadRequestException,
   ForbiddenException,

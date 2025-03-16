@@ -1,4 +1,4 @@
-import { createAction } from '@lecca-io/toolkit';
+import { createAction } from '@lunnoa-automate/toolkit';
 import { generateText } from 'ai';
 import { z } from 'zod';
 

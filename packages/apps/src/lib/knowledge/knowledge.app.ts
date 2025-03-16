@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { createKnowledge } from './actions/create-knowledge.action';
 import { listKnowledge } from './actions/list-knowledge.action';

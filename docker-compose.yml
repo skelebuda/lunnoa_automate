@@ -1,7 +1,7 @@
 services:
   ui:
     image: ghcr.io/lecca-digital/lecca-io/ui:main
-    container_name: lecca-io-ui
+    container_name: lunnoa-automate-ui
     restart: unless-stopped
     ports:
       - '5173:80'
@@ -10,14 +10,14 @@ services:
 
   server:
     image: ghcr.io/lecca-digital/lecca-io/server:main
-    container_name: lecca-io-server
+    container_name: lunnoa-automate-server
     restart: unless-stopped
     ports:
       - '9094:9094'
     env_file:
       - .env
     networks:
-      - lecca-io-network
+      - lunnoa-automate-network
     depends_on:
       postgres:
         condition: service_healthy
@@ -25,7 +25,7 @@ services:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:${POSTGRES_PORT}/${POSTGRES_DB}
 
   postgres:
-    container_name: lecca-io-db
+    container_name: lunnoa-automate-db
     image: postgres:17
     restart: unless-stopped
     ports:
@@ -39,7 +39,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - lecca-io-network
+      - lunnoa-automate-network
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
       interval: 5s
@@ -47,7 +47,7 @@ services:
       retries: 5
 
 networks:
-  lecca-io-network:
+  lunnoa-automate-network:
 
 volumes:
   postgres_data:

@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { createImagePost } from './actions/create-image-post.action';
 import { createOrganizationImagePost } from './actions/create-organization-image-post.action';

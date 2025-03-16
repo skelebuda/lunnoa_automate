@@ -1,6 +1,6 @@
-# @lecca-io/apps
+# @lunnoa-automate/apps
 
-@lecca-io/apps is used in the [Lecca.io](https://github.com/lecca-digital/lecca-io) platform.
+@lunnoa-automate/apps is used in the [Lecca.io](https://github.com/lecca-digital/lecca-io) platform.
 
 This library contains all the apps provided by Lecca.io that can be used with you AI agents and in your workflow automations.
 

@@ -5,7 +5,7 @@ import {
   createNumberInputField,
   createSelectInputField,
   parseDateToISO,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 import { DateTime } from 'luxon';
 import { z } from 'zod';
 

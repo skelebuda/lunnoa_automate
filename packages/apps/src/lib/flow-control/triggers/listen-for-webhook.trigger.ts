@@ -1,7 +1,7 @@
 import {
   createCustomWebhookTrigger,
   createSelectInputField,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 
 export const listenForWebhook = createCustomWebhookTrigger({
   id: 'flow-control_trigger_listen-for-webhook',

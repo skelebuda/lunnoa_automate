@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { listOrganizationEvents } from './actions/list-organization-events.action';
 import listUserEvents from './actions/list-user-events.action';

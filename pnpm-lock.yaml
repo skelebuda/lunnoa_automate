@@ -59,10 +59,10 @@ importers:
       '@hookform/resolvers':
         specifier: ^3.3.4
         version: 3.9.1(react-hook-form@7.54.1(react@18.3.1))
-      '@lecca-io/apps':
+      '@lunnoa-automate/apps':
         specifier: 0.37.2
         version: 0.37.2
-      '@lecca-io/toolkit':
+      '@lunnoa-automate/toolkit':
         specifier: 0.37.2
         version: 0.37.2
       '@nestjs/axios':
@@ -2201,10 +2201,10 @@ packages:
     peerDependencies:
       tslib: '2'
 
-  '@lecca-io/apps@0.37.2':
+  '@lunnoa-automate/apps@0.37.2':
     resolution: {integrity: sha512-U4TwiAKjApxo1YSR+6QvDfB17Bv9wj5d7giK4peEtyeIWpKsIwJ/cTcUR7syGjUx4nB4xW54wfK2gtHbTymKdQ==}
 
-  '@lecca-io/toolkit@0.37.2':
+  '@lunnoa-automate/toolkit@0.37.2':
     resolution: {integrity: sha512-tT3yEH7oPrTOOw0pkV232T1y+TRp7SwStEUsIwLPIAGB8qTH+0TUN3B6nA10duJX/bdKRLQBfYRvDUjNZe++hw==}
 
   '@leichtgewicht/ip-codec@2.0.5':
@@ -16092,11 +16092,11 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@lecca-io/apps@0.37.2':
+  '@lunnoa-automate/apps@0.37.2':
     dependencies:
-      '@lecca-io/toolkit': 0.37.2
+      '@lunnoa-automate/toolkit': 0.37.2
 
-  '@lecca-io/toolkit@0.37.2':
+  '@lunnoa-automate/toolkit@0.37.2':
     dependencies:
       tslib: 2.8.1
 

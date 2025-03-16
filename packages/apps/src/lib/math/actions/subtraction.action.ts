@@ -1,5 +1,5 @@
-import { createAction } from '@lecca-io/toolkit';
-import { createNumberInputField } from '@lecca-io/toolkit';
+import { createAction } from '@lunnoa-automate/toolkit';
+import { createNumberInputField } from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 export const subtraction = createAction({

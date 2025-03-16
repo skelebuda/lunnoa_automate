@@ -1,7 +1,7 @@
 import {
   createTimeBasedPollTrigger,
   dateStringToMilliOrNull,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 import { DateTime } from 'luxon';
 
 export const leadStatusUpdatedOnDevice = createTimeBasedPollTrigger({

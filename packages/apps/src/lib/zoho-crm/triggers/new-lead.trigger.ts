@@ -1,7 +1,7 @@
 import {
   createTimeBasedPollTrigger,
   dateStringToMilliOrNull,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 
 export const newLead = createTimeBasedPollTrigger({
   id: 'zoho-crm_trigger_new-lead',

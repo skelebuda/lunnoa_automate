@@ -1,7 +1,7 @@
 import {
   createTimeBasedPollTrigger,
   isValidMilliOrNull,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 
 import { GmailParsedEmail, shared } from '../shared/gmail.shared';
 

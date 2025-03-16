@@ -1,5 +1,5 @@
 import { createDeepSeek } from '@ai-sdk/deepseek';
-import { createSelectInputField } from '@lecca-io/toolkit';
+import { createSelectInputField } from '@lunnoa-automate/toolkit';
 
 export const shared = {
   fields: {

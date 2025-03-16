@@ -1,4 +1,4 @@
-import { createTextInputField } from '@lecca-io/toolkit';
+import { createTextInputField } from '@lunnoa-automate/toolkit';
 
 export const shared = {
   fields: {

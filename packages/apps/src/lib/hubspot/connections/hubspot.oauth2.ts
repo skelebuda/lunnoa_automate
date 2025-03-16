@@ -1,4 +1,4 @@
-import { createOAuth2Connection } from '@lecca-io/toolkit';
+import { createOAuth2Connection } from '@lunnoa-automate/toolkit';
 
 export const hubspotOAuth2 = createOAuth2Connection({
   id: 'hubspot_connection_oauth2',

@@ -1,6 +1,6 @@
-# @lecca-io/toolkit
+# @lunnoa-automate/toolkit
 
-@lecca-io/toolkit is used in the [Lecca.io](https://github.com/lecca-digital/lecca-io) platform.
+@lunnoa-automate/toolkit is used in the [Lecca.io](https://github.com/lecca-digital/lecca-io) platform.
 
 This library contains helper functions to build your own apps, actions, and triggers that can be used by your AI agents and workflow automations.
 

@@ -2,7 +2,7 @@ import {
   createAction,
   createDynamicSelectInputField,
   createMarkdownField,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 import * as path from 'path';
 import { z } from 'zod';
 

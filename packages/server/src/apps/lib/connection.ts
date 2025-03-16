@@ -1,4 +1,4 @@
-import { InputConfig } from '@lecca-io/toolkit';
+import { InputConfig } from '@lunnoa-automate/toolkit';
 import { BadRequestException } from '@nestjs/common';
 import { Request, Response } from 'express';
 

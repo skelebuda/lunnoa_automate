@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { getDatasetItems } from './actions/get-dataset-items.action';
 import { listTasks } from './actions/list-tasks.action';

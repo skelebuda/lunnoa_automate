@@ -1,4 +1,4 @@
-import { createApiKeyConnection } from '@lecca-io/toolkit';
+import { createApiKeyConnection } from '@lunnoa-automate/toolkit';
 
 export const geminiApiKey = createApiKeyConnection({
   id: 'gemini_connection_api-key',

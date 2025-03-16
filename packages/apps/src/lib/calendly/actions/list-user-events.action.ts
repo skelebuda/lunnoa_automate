@@ -5,7 +5,7 @@ import {
   createSelectInputField,
   createTextInputField,
   parseDateToISO,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 import { shared } from '../shared/calendly.shared';

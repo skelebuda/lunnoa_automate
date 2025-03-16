@@ -2,7 +2,7 @@ import {
   FieldConfig,
   WorkflowNode,
   createManualTrigger,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 
 export const manualTrigger = createManualTrigger<ConfigValue, Response>({
   id: 'flow-control_trigger_manual',

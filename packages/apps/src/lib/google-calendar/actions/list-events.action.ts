@@ -1,4 +1,4 @@
-import { createAction, parseDateToISO } from '@lecca-io/toolkit';
+import { createAction, parseDateToISO } from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 import { shared } from '../shared/google-calendar.shared';

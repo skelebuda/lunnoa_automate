@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { createContact } from './actions/create-contact.action';
 import { getContact } from './actions/get-contact-by-resource-name.action';

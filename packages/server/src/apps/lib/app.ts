@@ -1,4 +1,4 @@
-import { CreateAppArgs, createOAuth2Connection } from '@lecca-io/toolkit';
+import { CreateAppArgs, createOAuth2Connection } from '@lunnoa-automate/toolkit';
 import { NotFoundException } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { JwtService } from '@nestjs/jwt';

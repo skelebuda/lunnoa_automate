@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { getVariable } from './actions/get-variable.action';
 import { listVariables } from './actions/list-variables.action';

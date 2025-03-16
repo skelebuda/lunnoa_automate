@@ -1,4 +1,4 @@
-import { InjectedServices } from '@lecca-io/toolkit';
+import { InjectedServices } from '@lunnoa-automate/toolkit';
 import { google } from 'googleapis';
 import Mail from 'nodemailer/lib/mailer';
 

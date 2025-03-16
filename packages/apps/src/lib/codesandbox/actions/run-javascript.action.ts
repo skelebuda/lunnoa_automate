@@ -3,7 +3,7 @@ import {
   createAction,
   createCodeInputField,
   createMarkdownField,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 export const runJavascript = createAction({

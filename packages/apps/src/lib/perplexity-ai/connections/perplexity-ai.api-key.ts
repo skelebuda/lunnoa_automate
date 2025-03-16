@@ -1,4 +1,4 @@
-import { createApiKeyConnection } from '@lecca-io/toolkit';
+import { createApiKeyConnection } from '@lunnoa-automate/toolkit';
 
 export const perplexityAiApiKey = createApiKeyConnection({
   id: 'perplexity-ai_connection_api-key',

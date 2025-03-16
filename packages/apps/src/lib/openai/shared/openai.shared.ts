@@ -1,5 +1,5 @@
 import { createOpenAI } from '@ai-sdk/openai';
-import { createDynamicSelectInputField } from '@lecca-io/toolkit';
+import { createDynamicSelectInputField } from '@lunnoa-automate/toolkit';
 import openai from 'openai';
 
 export const shared = {

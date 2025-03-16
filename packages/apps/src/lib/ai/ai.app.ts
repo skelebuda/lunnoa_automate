@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { customPrompt } from './actions/custom-prompt.action';
 import { decideWithAi } from './actions/decide-with-ai.action';

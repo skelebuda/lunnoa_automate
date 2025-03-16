@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { dropboxCreateFolder } from './actions/create-folder.action';
 import { getTemporaryLink } from './actions/get-temporary-link.action';

@@ -24,7 +24,7 @@ jobs:
 
       - name: Update Dependencies and Install
         run: |
-          pnpm up @lecca-io/apps@latest @lecca-io/toolkit@latest
+          pnpm up @lunnoa-automate/apps@latest @lunnoa-automate/toolkit@latest
           pnpm install --frozen-lockfile
 
       - name: Build toolkit
@@ -46,14 +46,14 @@ jobs:
           timeout=300  # 5 minutes timeout
           interval=10  # Check every 10 seconds
 
-          until curl -s "https://registry.npmjs.org/@lecca-io/apps/$VERSION" | grep -q "version" || [ $timeout -le 0 ]; do
-            echo "Package @lecca-io/apps@$VERSION not yet available, waiting..."
+          until curl -s "https://registry.npmjs.org/@lunnoa-automate/apps/$VERSION" | grep -q "version" || [ $timeout -le 0 ]; do
+            echo "Package @lunnoa-automate/apps@$VERSION not yet available, waiting..."
             sleep $interval
             timeout=$((timeout - interval))
           done
 
-          until curl -s "https://registry.npmjs.org/@lecca-io/toolkit/$VERSION" | grep -q "version" || [ $timeout -le 0 ]; do
-            echo "Package @lecca-io/toolkit@$VERSION not yet available, waiting..."
+          until curl -s "https://registry.npmjs.org/@lunnoa-automate/toolkit/$VERSION" | grep -q "version" || [ $timeout -le 0 ]; do
+            echo "Package @lunnoa-automate/toolkit@$VERSION not yet available, waiting..."
             sleep $interval
             timeout=$((timeout - interval))
           done

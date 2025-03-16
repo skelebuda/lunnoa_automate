@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { googleFormsOAuth2 } from './connections/google-forms.oauth2';
 import { newFormResponse } from './triggers/new-form-response.trigger';

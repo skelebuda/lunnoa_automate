@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { copyFile } from './actions/copy-file.action';
 import { createFolder } from './actions/create-folder.action';

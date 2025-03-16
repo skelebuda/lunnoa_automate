@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { searchVideos } from './actions/search-videos.action';
 import { youtubeOAuth2 } from './connections/youtube.oauth2';

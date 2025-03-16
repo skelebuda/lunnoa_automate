@@ -1,4 +1,4 @@
-import { createAction, createDynamicSelectInputField } from '@lecca-io/toolkit';
+import { createAction, createDynamicSelectInputField } from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 import { shared } from '../shared/gmail.shared';

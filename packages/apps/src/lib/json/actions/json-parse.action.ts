@@ -1,5 +1,5 @@
-import { createAction, jsonParse as jsonParseUtil } from '@lecca-io/toolkit';
-import { createTextInputField } from '@lecca-io/toolkit';
+import { createAction, jsonParse as jsonParseUtil } from '@lunnoa-automate/toolkit';
+import { createTextInputField } from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 export const jsonParse = createAction({

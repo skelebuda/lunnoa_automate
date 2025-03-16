@@ -1,4 +1,4 @@
-import { createAction, createTextInputField } from '@lecca-io/toolkit';
+import { createAction, createTextInputField } from '@lunnoa-automate/toolkit';
 import { v4 } from 'uuid';
 import { z } from 'zod';
 

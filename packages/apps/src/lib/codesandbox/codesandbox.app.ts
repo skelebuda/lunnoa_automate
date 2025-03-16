@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { runJavascript } from './actions/run-javascript.action';
 import { runPython } from './actions/run-python.action';

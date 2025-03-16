@@ -1,4 +1,4 @@
-import { WorkflowNode, createAction } from '@lecca-io/toolkit';
+import { WorkflowNode, createAction } from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 import { shared } from '../shared/flow-control.shared';

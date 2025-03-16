@@ -3,7 +3,7 @@ import {
   createNumberInputField,
   createSelectInputField,
   createTextInputField,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 export const createChatCompletion = createAction({

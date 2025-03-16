@@ -1,4 +1,4 @@
-import { createOAuth2Connection } from '@lecca-io/toolkit';
+import { createOAuth2Connection } from '@lunnoa-automate/toolkit';
 
 export const microsoftExcel365OAuth2 = createOAuth2Connection({
   id: 'microsoft-excel-365_connection_oauth2',

@@ -1,5 +1,5 @@
-import { createAction } from '@lecca-io/toolkit';
-import { createTextInputField } from '@lecca-io/toolkit';
+import { createAction } from '@lunnoa-automate/toolkit';
+import { createTextInputField } from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 import { GmailParsedEmail, shared } from '../shared/gmail.shared';

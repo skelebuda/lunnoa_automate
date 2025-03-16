@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { combineLists } from './actions/combine-lists.actions';
 import { countList } from './actions/count-list.action';

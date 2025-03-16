@@ -2,7 +2,7 @@ import {
   createAction,
   createNumberInputField,
   createTextInputField,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 export const searchLeads = createAction({

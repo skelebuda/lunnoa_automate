@@ -1,4 +1,4 @@
-import { createOAuth2Connection } from '@lecca-io/toolkit';
+import { createOAuth2Connection } from '@lunnoa-automate/toolkit';
 
 export const calendlyOAuth2 = createOAuth2Connection({
   id: 'calendly_connection_oauth2',

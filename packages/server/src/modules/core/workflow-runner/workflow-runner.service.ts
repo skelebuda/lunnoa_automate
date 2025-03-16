@@ -1,4 +1,4 @@
-import { ActionResponse } from '@lecca-io/toolkit';
+import { ActionResponse } from '@lunnoa-automate/toolkit';
 import {
   BadRequestException,
   ForbiddenException,

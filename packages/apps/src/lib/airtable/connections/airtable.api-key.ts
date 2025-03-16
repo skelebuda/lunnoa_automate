@@ -1,4 +1,4 @@
-import { createApiKeyConnection } from '@lecca-io/toolkit';
+import { createApiKeyConnection } from '@lunnoa-automate/toolkit';
 
 export const airtableApiKey = createApiKeyConnection({
   id: 'airtable_connection_api-key',

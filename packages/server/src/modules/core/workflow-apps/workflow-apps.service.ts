@@ -1,4 +1,4 @@
-import apps from '@lecca-io/apps';
+import apps from '@lunnoa-automate/apps';
 import {
   BadRequestException,
   ForbiddenException,

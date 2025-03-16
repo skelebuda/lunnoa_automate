@@ -1,7 +1,7 @@
 import {
   InjectedServices,
   createDynamicSelectInputField,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 
 export const shared = {
   fields: {

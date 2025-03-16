@@ -1,5 +1,5 @@
 import { createXai } from '@ai-sdk/xai';
-import { createSelectInputField } from '@lecca-io/toolkit';
+import { createSelectInputField } from '@lunnoa-automate/toolkit';
 
 export const shared = {
   fields: {

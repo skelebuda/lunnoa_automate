@@ -1,4 +1,4 @@
-import { createLengthBasedPollTrigger } from '@lecca-io/toolkit';
+import { createLengthBasedPollTrigger } from '@lunnoa-automate/toolkit';
 
 import { shared } from '../shared/google-sheets.shared';
 

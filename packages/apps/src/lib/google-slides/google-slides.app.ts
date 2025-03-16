@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { googleSlidesOAuth2 } from './connections/google-slides.oauth2';
 

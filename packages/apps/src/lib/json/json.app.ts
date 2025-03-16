@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { jsonParse } from './actions/json-parse.action';
 import { jsonStringify } from './actions/json-stringify.action';

@@ -6,7 +6,7 @@ import {
   createSelectInputField,
   createTextInputField,
   jsonParse,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 export const scrape = createAction({

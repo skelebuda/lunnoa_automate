@@ -5,7 +5,7 @@ import {
   RunTriggerArgs,
   filterDataByConditions,
   isValidMilliOrNull,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 import { BadRequestException, ForbiddenException } from '@nestjs/common';
 import { Connection } from '@prisma/client';
 import { CoreTool } from 'ai';

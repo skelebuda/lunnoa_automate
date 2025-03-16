@@ -1,4 +1,4 @@
-import { createAction, parseNumberOrThrow } from '@lecca-io/toolkit';
+import { createAction, parseNumberOrThrow } from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 import { shared } from '../shared/gmail.shared';

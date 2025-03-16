@@ -1,4 +1,4 @@
-import { createAction, createTextInputField } from '@lecca-io/toolkit';
+import { createAction, createTextInputField } from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 import { shared } from '../shared/slack.shared';

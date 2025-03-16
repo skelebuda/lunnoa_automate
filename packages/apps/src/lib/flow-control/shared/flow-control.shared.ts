@@ -1,4 +1,4 @@
-import { InjectedServices, InputConfig } from '@lecca-io/toolkit';
+import { InjectedServices, InputConfig } from '@lunnoa-automate/toolkit';
 import { DateTime } from 'luxon';
 
 export const shared = {

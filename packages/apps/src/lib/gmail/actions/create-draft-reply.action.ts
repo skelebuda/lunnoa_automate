@@ -1,4 +1,4 @@
-import { createAction } from '@lecca-io/toolkit';
+import { createAction } from '@lunnoa-automate/toolkit';
 import MailComposer from 'nodemailer/lib/mail-composer';
 import { z } from 'zod';
 

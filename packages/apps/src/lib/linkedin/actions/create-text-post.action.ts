@@ -1,9 +1,9 @@
-import { createAction } from '@lecca-io/toolkit';
+import { createAction } from '@lunnoa-automate/toolkit';
 import {
   createSelectInputField,
   createSwitchInputField,
   createTextInputField,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 import { shared } from '../shared/linkedin.shared';

@@ -1,4 +1,4 @@
-import { createKeyPairConnection } from '@lecca-io/toolkit';
+import { createKeyPairConnection } from '@lunnoa-automate/toolkit';
 
 export const paradigmVendoKeyPair = createKeyPairConnection({
   id: 'paradigm-vendo_connection_key-pair',

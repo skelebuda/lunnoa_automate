@@ -2,7 +2,7 @@ import {
   WorkflowNode,
   createAction,
   createMarkdownField,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 import { shared } from '../shared/flow-control.shared';

@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { createChatCompletion } from './actions/create-chat-completion.action';
 import { perplexityAiApiKey } from './connections/perplexity-ai.api-key';

@@ -3,7 +3,7 @@ import {
   createJsonInputField,
   createTextInputField,
   jsonParse,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 import { shared } from '../shared/pinecone.shared';

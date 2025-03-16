@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { listIndexes } from './actions/list-indexes.action';
 import { queryVectors } from './actions/query-vectors.action';

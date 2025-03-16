@@ -1,10 +1,10 @@
-import { createAction } from '@lecca-io/toolkit';
+import { createAction } from '@lunnoa-automate/toolkit';
 import {
   createDynamicSelectInputField,
   createNumberInputField,
   createSwitchInputField,
   createTextInputField,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 export const searchKnowledge = createAction({

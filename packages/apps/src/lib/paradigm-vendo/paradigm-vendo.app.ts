@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { getAppointment } from './actions/get-appointment.action';
 import { paradigmVendoKeyPair } from './connections/paradigm-vendo.key-pair';

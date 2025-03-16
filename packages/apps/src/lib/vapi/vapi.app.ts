@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { getPhoneCall } from './actions/get-phone-call.action';
 import { listAssistants } from './actions/list-assistants.action';

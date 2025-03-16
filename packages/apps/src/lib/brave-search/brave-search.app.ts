@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { braveSearchAction } from './actions/brave-search.action';
 import { braveSearchApiKey } from './connections/brave-search.api-key';

@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { listAgents } from './actions/list-agents.action';
 import { messageAgent } from './actions/message-agent.action';

@@ -1,4 +1,4 @@
-import { createApiKeyConnection } from '@lecca-io/toolkit';
+import { createApiKeyConnection } from '@lunnoa-automate/toolkit';
 
 export const firecrawlApiKey = createApiKeyConnection({
   id: 'firecrawl_connection_api-key',

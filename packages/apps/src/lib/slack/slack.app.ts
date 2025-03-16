@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 import crypto from 'crypto';
 
 import { createChannel } from './actions/create-channel.action';

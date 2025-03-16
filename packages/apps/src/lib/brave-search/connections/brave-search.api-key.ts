@@ -1,4 +1,4 @@
-import { createApiKeyConnection } from '@lecca-io/toolkit';
+import { createApiKeyConnection } from '@lunnoa-automate/toolkit';
 
 export const braveSearchApiKey = createApiKeyConnection({
   id: 'brave-search_connection_api-key',

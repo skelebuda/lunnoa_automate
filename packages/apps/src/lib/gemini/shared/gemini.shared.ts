@@ -1,5 +1,5 @@
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
-import { createSelectInputField } from '@lecca-io/toolkit';
+import { createSelectInputField } from '@lunnoa-automate/toolkit';
 
 export const shared = {
   fields: {

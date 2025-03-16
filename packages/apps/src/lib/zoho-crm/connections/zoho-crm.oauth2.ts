@@ -1,4 +1,4 @@
-import { createOAuth2Connection } from '@lecca-io/toolkit';
+import { createOAuth2Connection } from '@lunnoa-automate/toolkit';
 
 export const zohoCrmOAuth2US = createOAuth2Connection({
   id: 'zoho-crm_connection_oauth2-US',

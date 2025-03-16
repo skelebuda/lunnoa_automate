@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { getBaseSchema } from './actions/get-base-schema.action';
 import { listBases } from './actions/list-bases.action';

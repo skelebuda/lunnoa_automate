@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { addUser } from './actions/add-user.action';
 import { deleteUser } from './actions/delete-user.action';

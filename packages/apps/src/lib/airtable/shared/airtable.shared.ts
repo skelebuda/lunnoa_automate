@@ -1,4 +1,4 @@
-import { createDynamicSelectInputField } from '@lecca-io/toolkit';
+import { createDynamicSelectInputField } from '@lunnoa-automate/toolkit';
 
 export const shared = {
   fields: {

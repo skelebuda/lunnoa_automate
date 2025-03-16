@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { createPost } from './actions/create-post.action';
 import { replyToPost } from './actions/reply-to-post.action';

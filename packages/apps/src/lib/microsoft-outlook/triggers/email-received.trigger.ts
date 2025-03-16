@@ -1,7 +1,7 @@
 import {
   createTimeBasedPollTrigger,
   dateStringToMilliOrNull,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 
 export const emailReceived = createTimeBasedPollTrigger({
   id: 'microsoft-outlook_trigger_email-received',

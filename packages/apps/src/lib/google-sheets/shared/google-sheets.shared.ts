@@ -2,7 +2,7 @@ import {
   FieldConfig,
   createDynamicSelectInputField,
   createNumberInputField,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 import { google } from 'googleapis';
 
 export const shared = {

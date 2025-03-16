@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { formatDate } from './actions/format-date.action';
 import { getCurrentDate } from './actions/get-current-date.action';

@@ -1,4 +1,4 @@
-import { createAction, filterPathsByConditions } from '@lecca-io/toolkit';
+import { createAction, filterPathsByConditions } from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 export const conditionalPaths = createAction({

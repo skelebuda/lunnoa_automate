@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { chatFromText } from './actions/chat-from-text.action';
 import { xAiApiKey } from './connections/xai.api-key';

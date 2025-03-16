@@ -1,4 +1,4 @@
-import { createApiKeyConnection } from '@lecca-io/toolkit';
+import { createApiKeyConnection } from '@lunnoa-automate/toolkit';
 
 export const codesandboxApiKey = createApiKeyConnection({
   id: 'codesandbox_connection_-api-key',

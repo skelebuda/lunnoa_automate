@@ -1,11 +1,11 @@
 {
-  "name": "@lecca-io/apps",
+  "name": "@lunnoa-automate/apps",
   "version": "0.37.4",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@lecca-io/toolkit": "0.37.4"
+    "@lunnoa-automate/toolkit": "0.37.4"
   },
   "main": "./src/index.js",
   "types": "./src/index.d.ts",

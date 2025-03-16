@@ -1,4 +1,4 @@
-import { createAction, createMarkdownField } from '@lecca-io/toolkit';
+import { createAction, createMarkdownField } from '@lunnoa-automate/toolkit';
 import * as path from 'path';
 import { z } from 'zod';
 

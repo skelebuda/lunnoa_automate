@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { concatenate } from './actions/concatenate.action';
 import { replace } from './actions/replace.action';

@@ -1,4 +1,4 @@
-import { createAppWebhookTrigger } from '@lecca-io/toolkit';
+import { createAppWebhookTrigger } from '@lunnoa-automate/toolkit';
 
 import { shared } from '../shared/slack.shared';
 

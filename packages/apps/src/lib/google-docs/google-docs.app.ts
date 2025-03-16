@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { appendToDocument } from './actions/append-to-document.action';
 import { createDocumentFromTemplate } from './actions/create-document-from-template.action';

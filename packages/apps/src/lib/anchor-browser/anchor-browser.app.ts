@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { askWebpage } from './actions/ask-webpage.action';
 import { getWebpageContent } from './actions/get-webpage-content.action';

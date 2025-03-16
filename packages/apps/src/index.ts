@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { agents } from './lib/agents/agents.app';
 import { ai } from './lib/ai/ai.app';

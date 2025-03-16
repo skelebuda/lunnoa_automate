@@ -2,7 +2,7 @@ import {
   createAction,
   createDynamicSelectInputField,
   createTextInputField,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 import { v4 } from 'uuid';
 import { z } from 'zod';
 

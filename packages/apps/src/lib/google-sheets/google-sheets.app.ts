@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { addRowToSheet } from './actions/add-row-to-sheet.action';
 import { createSheet } from './actions/create-sheet.action';

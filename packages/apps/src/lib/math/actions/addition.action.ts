@@ -1,4 +1,4 @@
-import { createAction, createNumberInputField } from '@lecca-io/toolkit';
+import { createAction, createNumberInputField } from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 export const addition = createAction({

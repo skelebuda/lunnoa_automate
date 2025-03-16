@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { serperSearch } from './actions/serper-search.action';
 import { serperApiKey } from './connections/serper.api-key';
