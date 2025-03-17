@@ -24,6 +24,7 @@ jobs:
 
       - name: Update Dependencies and Install
         run: |
+          pnpm up @lunnoa-automate/apps@latest @lunnoa-automate/toolkit@latest
           pnpm install --frozen-lockfile
 
       - name: Build toolkit

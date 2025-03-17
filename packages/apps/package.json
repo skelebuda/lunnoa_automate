@@ -5,7 +5,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@lunnoa-automate/toolkit": "0.37.4"
+    "@lunnoa-automate/toolkit": "1.0.0"
   },
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
