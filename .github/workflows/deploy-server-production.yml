@@ -98,6 +98,14 @@ jobs:
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ needs.build-and-push.outputs.image }}
 
+      # Register the task definition first
+      - name: Register task definition
+        id: register-task-def
+        run: |
+          TASK_DEF_ARN=$(aws ecs register-task-definition --cli-input-json file://${{ steps.task-def.outputs.task-definition }} --query 'taskDefinition.taskDefinitionArn' --output text)
+          echo "TASK_DEF_ARN=$TASK_DEF_ARN" >> $GITHUB_ENV
+          echo "Task definition registered: $TASK_DEF_ARN"
+
       - name: Check if ECS service exists
         id: check-service
         run: |
@@ -113,7 +121,7 @@ jobs:
           aws ecs create-service \
             --cluster ${{ env.ECS_CLUSTER }} \
             --service-name ${{ env.ECS_SERVICE }} \
-            --task-definition ${{ steps.task-def.outputs.task-definition }} \
+            --task-definition ${{ env.TASK_DEF_ARN }} \
             --desired-count 1 \
             --launch-type EC2 \
             --scheduling-strategy REPLICA \
