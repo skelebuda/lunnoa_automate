@@ -9,7 +9,7 @@ on:
 
 env:
   SERVER_REGISTRY: ghcr.io
-  SERVER_IMAGE_NAME: ${{ github.repository_owner }}/lunnoa_automate/server
+  SERVER_IMAGE_NAME: ${{ github.repository }}/server
   ECS_CLUSTER: lunnoa-automate-server-core
   ECS_SERVICE: lunnoa-automate-server-core-service
   ECS_TASK_DEFINITION: .aws/task-definition.json
@@ -57,14 +57,12 @@ jobs:
         env:
           VERSION: ${{ github.ref_name }}
         run: |
-          REPO_LOWERCASE=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
-          
-          docker build -t ${{ env.SERVER_REGISTRY }}/$REPO_LOWERCASE/server:$VERSION -f packages/server/Dockerfile .
-          docker tag ${{ env.SERVER_REGISTRY }}/$REPO_LOWERCASE/server:$VERSION ${{ env.SERVER_REGISTRY }}/$REPO_LOWERCASE/server:latest
-          docker push ${{ env.SERVER_REGISTRY }}/$REPO_LOWERCASE/server:$VERSION
-          docker push ${{ env.SERVER_REGISTRY }}/$REPO_LOWERCASE/server:latest
+          docker build -t ${{ env.SERVER_REGISTRY }}/${{ github.repository }}/server:$VERSION -f packages/server/Dockerfile .
+          docker tag ${{ env.SERVER_REGISTRY }}/${{ github.repository }}/server:$VERSION ${{ env.SERVER_REGISTRY }}/${{ github.repository }}/server:latest
+          docker push ${{ env.SERVER_REGISTRY }}/${{ github.repository }}/server:$VERSION
+          docker push ${{ env.SERVER_REGISTRY }}/${{ github.repository }}/server:latest
 
-          echo "image=${{ env.SERVER_REGISTRY }}/$REPO_LOWERCASE/server:$VERSION" >> $GITHUB_OUTPUT
+          echo "image=${{ env.SERVER_REGISTRY }}/${{ github.repository }}/server:$VERSION" >> $GITHUB_OUTPUT
 
   deploy-to-ecs:
     name: Deploy to ECS
