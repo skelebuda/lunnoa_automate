@@ -4,7 +4,7 @@
   "license": "Apache-2.0 with Commons Clause",
   "repository": {
     "type": "git",
-    "url": "https://github.com/skelebuda/Lunnoa_Automate.git"
+    "url": "https://github.com/skelebuda/lunnoa_automate.git"
   },
   "scripts": {
     "vercel-build": "nx build ui",
