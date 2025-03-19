@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.16.0...v1.17.0) (2025-03-19)
+
+
+### Features
+
+* trigger initial release ([8edf045](https://github.com/skelebuda/lunnoa_automate/commit/8edf045d79a35bde81faeac183d10ed29a7e79bc))
+
 # [1.16.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.15.0...v1.16.0) (2025-03-18)
 
 
