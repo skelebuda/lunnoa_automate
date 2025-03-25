@@ -228,7 +228,7 @@ export function AdditionalSideNavContent({
       isCollapsed={isCollapsed}
       isSheet={isSheet}
       links={[
-        {
+       /* {
           title: 'Docs',
           to: 'https://lecca.io/docs/overview',
           newTab: true,
@@ -257,7 +257,7 @@ export function AdditionalSideNavContent({
               {...props}
             />
           ),
-        },
+        },*/
         {
           title: 'Settings',
           to: '/workspace-user-account',

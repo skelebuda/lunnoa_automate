@@ -81,10 +81,10 @@ export function WelcomePage() {
             alt="Lecca.io Logo"
           />
           <h1 className="text-2xl font-semibold tracking-tight">
-            Create an account
+            Create an demo account on Lunnoa Automate
           </h1>
           <p className="text-sm text-muted-foreground">
-            Enter your information below to create your account
+            This is only a demo instance of Lunnoa Automate.
           </p>
         </div>
         <div className={cn('grid gap-6')}>
