@@ -68,11 +68,11 @@ export default function LoginPage() {
           <img
             src="branding/logo.png"
             className="size-20"
-            alt="Lecca.io Logo"
+            alt="Lunnoa Automate Logo"
           />
           <h1 className="text-2xl font-semibold tracking-tight">Login</h1>
           <p className="text-sm text-muted-foreground">
-            Welcome back to Lecca.io
+            Welcome back to Lunnoa Automate
           </p>
         </div>
         <div className={cn('grid gap-6')}>

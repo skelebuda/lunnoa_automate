@@ -133,7 +133,7 @@ function SetupWorkspaceStep({ nextStep }: { nextStep: () => void }) {
         <Card.Title className="leading-0 text-lg md:text-xl">
           {workspaceUser?.user?.name},
           <br />
-          Welcome to Lecca.io
+          Welcome to Lunnoa Automate
         </Card.Title>
         <Card.Description className="">
           Before you start building agents and automations, let's get your
@@ -215,12 +215,12 @@ function CreateWorkflowStep({ previousStep }: { previousStep: () => void }) {
         </Card.Description>
         <Card.Description>
           Agents can run workflows, search knowledge, and use custom tools you
-          provide them. This is what makes Lecca.io so powerful.
+          provide them. This is what makes Lunnoa Automate so powerful.
         </Card.Description>
         <br />
         <Card.Description>
           <Link
-            to="https://lecca.io/docs/overview"
+            to="https://lunnoalabs.ch"
             target="_blank"
             className="flex items-center space-x-2 hover:underline"
           >

@@ -78,7 +78,7 @@ export function WelcomePage() {
           <img
             src="branding/logo.png"
             className="size-20"
-            alt="Lecca.io Logo"
+            alt="Lunnoa Automate Logo"
           />
           <h1 className="text-2xl font-semibold tracking-tight">
             Create an demo account on Lunnoa Automate
@@ -160,6 +160,7 @@ export function WelcomePage() {
             </Button>
           </div>
         </div>
+        {/*
         <p className="text-center text-sm text-muted-foreground">
           By continuing, you agree to our
           <br />
@@ -178,6 +179,7 @@ export function WelcomePage() {
           </a>
           .
         </p>
+        */}
       </div>
     </div>
   );

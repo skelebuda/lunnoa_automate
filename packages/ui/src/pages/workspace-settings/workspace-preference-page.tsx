@@ -111,7 +111,7 @@ export default function WorkspacePreferencesPage() {
                     />
                   </Form.Control>
                   <Form.Description className="ml-1">
-                    You may only use Lecca.io for certain features. You can hide
+                    You may only use Lunnoa Automate for certain features. You can hide
                     features to simplify the interface.
                   </Form.Description>
                   <Form.Message />
