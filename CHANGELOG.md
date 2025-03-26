@@ -1,3 +1,10 @@
+# [1.26.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.25.0...v1.26.0) (2025-03-26)
+
+
+### Features
+
+* corect keys and new icons ([9c30f3e](https://github.com/skelebuda/lunnoa_automate/commit/9c30f3ea3a00ecd25bf06d447e7e02e90e23dc5f))
+
 # [1.25.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.24.0...v1.25.0) (2025-03-25)
 
 
