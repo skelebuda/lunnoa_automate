@@ -52,7 +52,7 @@ export const ServerConfig = {
    * The name of the platform. This is used for white labeling the platform
    * You must have a commercial license to change this value.
    */
-  PLATFORM_NAME: process.env.PLATFORM_NAME || 'Lecca.io',
+  PLATFORM_NAME: process.env.PLATFORM_NAME || 'Lunnoa Automate',
 
   /**
    *

@@ -234,8 +234,8 @@ export function AdditionalSideNavContent({
           newTab: true,
           icon: (props: any) => (
             <img
-              src="/icons/lecca-digital.png"
-              alt="Lecca Digital"
+              src="/icons/lunnoa-automate-digital.png"
+              alt="Lunnoa Automate"
               style={{
                 backgroundColor: 'white',
                 borderRadius: '50%',
