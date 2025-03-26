@@ -1,3 +1,10 @@
+# [1.28.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.27.0...v1.28.0) (2025-03-26)
+
+
+### Features
+
+* new logo and remove onboarda ([cbc610d](https://github.com/skelebuda/lunnoa_automate/commit/cbc610dc33c2fc134d2211f2bb77afa49f6da492))
+
 # [1.27.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.26.0...v1.27.0) (2025-03-26)
 
 
