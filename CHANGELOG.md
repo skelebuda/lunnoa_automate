@@ -1,3 +1,10 @@
+# [1.27.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.26.0...v1.27.0) (2025-03-26)
+
+
+### Features
+
+* new API keys for web scraping ([f90937e](https://github.com/skelebuda/lunnoa_automate/commit/f90937ef835294fd9539e9252016924a7b5e8f62))
+
 # [1.26.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.25.0...v1.26.0) (2025-03-26)
 
 
