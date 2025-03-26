@@ -8,7 +8,7 @@ import { useUser } from '../../hooks/useUser';
 import { Theme } from '../../models/workspace-user-preferences-model';
 import { cn } from '../../utils/cn';
 import { Icons } from '../icons';
-import { useOnborda } from '../onboarda/OnbordaContext';
+//import { useOnborda } from '../onboarda/OnbordaContext';
 import { Avatar } from '../ui/avatar';
 import { buttonVariants } from '../ui/button';
 import { DropdownMenu } from '../ui/dropdown-menu';
@@ -23,7 +23,7 @@ import WorkspaceSelector from './workspace-selector';
 export function ApplicationSideNav() {
   const { agentId } = useParams();
   const { isCollapsed } = useApplicationSideNav();
-  const { startOnborda } = useOnborda();
+  //const { startOnborda } = useOnborda();
   const { workspaceUser } = useUser();
   const location = useLocation();
   const [
@@ -42,14 +42,14 @@ export function ApplicationSideNav() {
         //In that case we don't want to show the onboarding for the application overview
         if (!location.pathname.includes('/agents')) {
           setAlreadyShowedApplicationOverview(true);
-          startOnborda('application-overview');
+          //startOnborda('application-overview');
         }
       }
     }, 1000);
   }, [
     alreadyShowedApplicationOverview,
     location.pathname,
-    startOnborda,
+    //startOnborda,
     workspaceUser?.user?.toursCompleted,
   ]);
 

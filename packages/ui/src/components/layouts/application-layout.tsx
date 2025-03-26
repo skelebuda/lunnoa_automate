@@ -32,13 +32,13 @@ export default function ApplicationLayout() {
 
   return (
     <Tooltip.Provider delayDuration={0}>
-      <OnbordaProvider>
+      {/*<OnbordaProvider>
         <Onborda
           tours={tours}
           cardComponent={OnboardingCard}
           shadowRgb={'0, 0, 0'}
           shadowOpacity=".5"
-        >
+        >*/}
           <ResizablePanelGroup direction={'horizontal'}>
             {agentId && <AgentSideNav />}
 
@@ -76,8 +76,9 @@ export default function ApplicationLayout() {
             </ResizablePanel>
             {/* <ApplicationRightRail /> */}
           </ResizablePanelGroup>
+          {/*
         </Onborda>
-      </OnbordaProvider>
+      </OnbordaProvider>*/}
     </Tooltip.Provider>
   );
 }

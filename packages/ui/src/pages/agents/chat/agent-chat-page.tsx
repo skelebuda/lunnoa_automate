@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import useApiQuery from '../../../api/use-api-query';
 import { UserSettings } from '../../../components/layouts/application-side-nav';
 import { Loader } from '../../../components/loaders/loader';
-import { useOnborda } from '../../../components/onboarda/OnbordaContext';
+//import { useOnborda } from '../../../components/onboarda/OnbordaContext';
 import { useUser } from '../../../hooks/useUser';
 import { FormattedTaskMessage } from '../../../models/task/formatted-task-message-model';
 import { NavAgentSelector } from '../../projects/components/nav-selectors/nav-agent-selector';
@@ -15,7 +15,7 @@ import { formatSavedMessagesToStreamedMessageFormat } from './utils/format-saved
 export function AgentChatPage() {
   const { workspaceUser } = useUser();
   const { projectId, agentId, taskId } = useParams();
-  const { startOnborda } = useOnborda();
+  //const { startOnborda } = useOnborda();
   const [alreadyShowedAgentOverview, setAlreadyShowedAgentOverview] =
     useState(false);
 
@@ -53,13 +53,13 @@ export function AgentChatPage() {
         !isLoadingAgent
       ) {
         setAlreadyShowedAgentOverview(true);
-        startOnborda('agents-overview');
+        //startOnborda('agents-overview');
       }
     }, 500);
   }, [
     alreadyShowedAgentOverview,
     isLoadingAgent,
-    startOnborda,
+    //startOnborda,
     workspaceUser?.user?.toursCompleted,
   ]);
 
