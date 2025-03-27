@@ -1,3 +1,12 @@
+# [1.29.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.28.0...v1.29.0) (2025-03-27)
+
+
+### Features
+
+* email adaption ([c206d07](https://github.com/skelebuda/lunnoa_automate/commit/c206d07ce65ad34d6d209b7ed45385b79a84cb4d))
+* email adaption ([c13186e](https://github.com/skelebuda/lunnoa_automate/commit/c13186e6685524a16e78e5401e2f39064904ca9d))
+* remove lecca.io texts ([9d4a0e6](https://github.com/skelebuda/lunnoa_automate/commit/9d4a0e600b9b72b2b7bd63ed932ae6cd78314687))
+
 # [1.28.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.27.0...v1.28.0) (2025-03-26)
 
 
