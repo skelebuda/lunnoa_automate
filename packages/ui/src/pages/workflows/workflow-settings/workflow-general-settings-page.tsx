@@ -219,7 +219,7 @@ export default function WorkflowGeneralSettingsPage() {
             </Button>
           </form>
         </Form>
-        {workspaceUser?.user?.email?.includes('admin@lecca.io') && (
+        {workspaceUser?.user?.email?.includes('sasakelebuda@lunnoalabs.ch') && (
           <>
             <Separator />
             <div className="space-y-4">

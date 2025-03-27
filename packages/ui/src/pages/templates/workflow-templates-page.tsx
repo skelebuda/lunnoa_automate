@@ -159,7 +159,7 @@ export function WorkflowTemplatesPage() {
           </div>
           <Tabs.List
             className={cn({
-              hidden: !workspaceUser?.user?.email.includes('admin@lecca.io'),
+              hidden: !workspaceUser?.user?.email.includes('sasakelebuda@lunnoalabs.ch'),
             })}
           >
             <Tabs.Trigger
