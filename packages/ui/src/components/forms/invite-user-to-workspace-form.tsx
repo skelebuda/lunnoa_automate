@@ -54,7 +54,7 @@ export function InviteUsertoWorkspaceForm() {
       },
     );
   };
-
+{/*}
   if (
     enabledFeatures.BILLING &&
     (!workspace?.billing ||
@@ -98,7 +98,7 @@ export function InviteUsertoWorkspaceForm() {
       </div>
     );
   }
-
+*/}
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
