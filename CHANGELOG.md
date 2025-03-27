@@ -1,3 +1,11 @@
+# [1.30.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.29.0...v1.30.0) (2025-03-27)
+
+
+### Features
+
+* deploy with google aps and s3 bucket access ([1037f9f](https://github.com/skelebuda/lunnoa_automate/commit/1037f9fae913d891a0691a0cbe7305d6f2598df5))
+* invitation ([dbd7e38](https://github.com/skelebuda/lunnoa_automate/commit/dbd7e383356aa8b4389e27d200ce9cef11889e6c))
+
 # [1.29.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.28.0...v1.29.0) (2025-03-27)
 
 
