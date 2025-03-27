@@ -91,7 +91,7 @@ export function InviteUsertoWorkspaceForm() {
         </Form.Header>
         <Form.Content>
           <Form.Subtitle>
-            Reach out to support@lecca.io for more information regarding our
+            Reach out to info@lunnoalabs.ch for more information regarding our
             commercial license.
           </Form.Subtitle>
         </Form.Content>

@@ -109,7 +109,7 @@ export default function BetaPage() {
               )}
             ></Form.Field>
             <Card.Description className="mt-4">
-              Email support@lecca.io for a beta key.
+              Email info@lunnoalabs.ch for a beta key.
             </Card.Description>
           </Card.Content>
         </Card>
