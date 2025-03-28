@@ -1,3 +1,10 @@
+# [1.31.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.30.0...v1.31.0) (2025-03-28)
+
+
+### Features
+
+* deploy with google apps ([c650700](https://github.com/skelebuda/lunnoa_automate/commit/c650700e72d2cbf31d600657b88a4806660ee2b4))
+
 # [1.30.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.29.0...v1.30.0) (2025-03-27)
 
 
