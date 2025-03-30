@@ -1,3 +1,10 @@
+# [1.36.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.35.0...v1.36.0) (2025-03-30)
+
+
+### Features
+
+* correct secret ([60876f7](https://github.com/skelebuda/lunnoa_automate/commit/60876f76760cfd9dde81c4552dffc7bcc2595222))
+
 # [1.35.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.34.0...v1.35.0) (2025-03-30)
 
 
