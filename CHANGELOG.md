@@ -1,3 +1,10 @@
+# [1.35.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.34.0...v1.35.0) (2025-03-30)
+
+
+### Features
+
+* google integrations ([5fdaa72](https://github.com/skelebuda/lunnoa_automate/commit/5fdaa72d0ef332742c490ea7b4694e5d455505b5))
+
 # [1.34.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.33.0...v1.34.0) (2025-03-28)
 
 
