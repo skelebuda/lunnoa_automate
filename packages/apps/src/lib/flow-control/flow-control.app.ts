@@ -2,6 +2,7 @@ import { createApp } from '@lunnoa-automate/toolkit';
 
 import { conditionalPaths } from './actions/conditional-paths.action';
 import { getCustomInput } from './actions/get-custom-input.action';
+import { listLoop } from './actions/list-loop.action';
 import { manuallyDecidePaths } from './actions/manually-decide-path.action';
 import { outputWorkflowData } from './actions/output-workflow-data.action';
 import { pause } from './actions/pause.action';
@@ -27,6 +28,7 @@ export const flowControl = createApp({
     schedule,
     pause,
     wait,
+    listLoop,
   ],
   triggers: [manualTrigger, recurringSchedule, listenForWebhook],
   connections: [],
