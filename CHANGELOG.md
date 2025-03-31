@@ -1,3 +1,10 @@
+# [1.37.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.36.0...v1.37.0) (2025-03-31)
+
+
+### Features
+
+* new delete first list item action ([4408860](https://github.com/skelebuda/lunnoa_automate/commit/44088600ae2805b0a215ff3143a09d383dc51ee1))
+
 # [1.36.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.35.0...v1.36.0) (2025-03-30)
 
 
