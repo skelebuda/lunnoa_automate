@@ -87,6 +87,7 @@ export const listLoop = createAction({
     projectId,
     agentId,
     prisma,
+    execution,
   }) => {
     if (requestingWorkflowId === configValue.workflowId) {
       throw new Error(`Workflow cannot run itself`);
@@ -130,16 +131,23 @@ export const listLoop = createAction({
       const item = items[i];
       
       try {
-        // Create a new execution for each item
-        const newExecution = await prisma.execution.create({
-          data: {
-            FK_workflowId: configValue.workflowId,
-            status: 'RUNNING',
-            inputData: {
-              [configValue.itemVariableName]: item
-            },
-          },
+        // Create input data object with the current item
+        const inputData = {
+          [configValue.itemVariableName]: item
+        };
+        
+        // Use the execution service to run the workflow
+        const newExecution = await execution.manuallyExecuteWorkflow({
+          workflowId: configValue.workflowId,
+          skipQueue: true,
+          inputData: inputData,
         });
+
+        if (!newExecution) {
+          throw new Error(
+            `Could not execute workflow for item at index ${i}: ${configValue.workflowId}`
+          );
+        }
 
         const executionWithProject = await prisma.execution.findUnique({
           where: {
