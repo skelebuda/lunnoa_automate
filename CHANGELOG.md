@@ -1,3 +1,10 @@
+# [1.46.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.45.0...v1.46.0) (2025-04-01)
+
+
+### Features
+
+* loop error ([fcb30f3](https://github.com/skelebuda/lunnoa_automate/commit/fcb30f3753eef01d882ef41e523a57b44ea3ea31))
+
 # [1.45.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.44.0...v1.45.0) (2025-04-01)
 
 
