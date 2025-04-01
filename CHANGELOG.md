@@ -1,3 +1,10 @@
+# [1.40.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.39.0...v1.40.0) (2025-04-01)
+
+
+### Features
+
+* loop with variable setting ([6ab4c5a](https://github.com/skelebuda/lunnoa_automate/commit/6ab4c5a35ed807bb3e9c92f8c3bced22c1c2b742))
+
 # [1.39.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.38.0...v1.39.0) (2025-03-31)
 
 
