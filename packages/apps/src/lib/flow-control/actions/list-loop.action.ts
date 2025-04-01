@@ -5,7 +5,7 @@ export const listLoop = createAction({
   id: 'flow-control_action_list-loop',
   name: 'List Loop',
   description: 'Loop through a list, set a variable for each item, and run a workflow.',
-  iconUrl: `https://lecca-io.s3.us-east-2.amazonaws.com/assets/actions/flow-control_action_list-loop.svg`,
+  iconUrl: `https://lecca-io.s3.us-east-2.amazonaws.com/assets/apps/list.svg`,
   viewOptions: {
     saveButtonOptions: {
       replaceSaveAndTestButton: {
@@ -122,13 +122,38 @@ export const listLoop = createAction({
     if (requestingWorkflowId === configValue.workflowId) {
       throw new Error(`Workflow cannot run itself`);
     }
-
-    // Parse the list from JSON
+  
+    // ================== IMPROVED LIST PARSING ================== //
     let items;
     try {
-      items = JSON.parse(configValue.list);
+      // Case 1: Already an array (no parsing needed)
+      if (Array.isArray(configValue.list)) {
+        items = configValue.list;
+      }
+      // Case 2: String that might be JSON or CSV
+      else if (typeof configValue.list === 'string') {
+        // Try parsing as JSON first
+        try {
+          items = JSON.parse(configValue.list);
+        } catch (jsonError) {
+          // Fallback to CSV parsing if JSON fails
+          items = configValue.list
+            .split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/) // Handles quoted commas
+            .map(item => item.trim().replace(/^"|"$/g, ''));
+        }
+        
+        // Validate we got an array
+        if (!Array.isArray(items)) {
+          throw new Error('Input must parse to an array');
+        }
+      } else {
+        throw new Error('Input must be an array or JSON/CSV string');
+      }
     } catch (error) {
-      throw new Error(`Invalid JSON list: ${error.message}`);
+      throw new Error(`Invalid list format: ${error.message}. Please provide:\n` + 
+                     '- A JSON array (e.g., ["item1", "item2"])\n' +
+                     '- A CSV string (e.g., "item1","item2")\n' +
+                     '- Or a raw JavaScript array');
     }
 
     if (!Array.isArray(items)) {
