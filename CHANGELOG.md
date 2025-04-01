@@ -1,3 +1,10 @@
+# [1.48.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.47.0...v1.48.0) (2025-04-01)
+
+
+### Features
+
+* execution error ([2b24bd2](https://github.com/skelebuda/lunnoa_automate/commit/2b24bd25b2b19f7243b877320c496c7c4f0081f6))
+
 # [1.47.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.46.0...v1.47.0) (2025-04-01)
 
 
