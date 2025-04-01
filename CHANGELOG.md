@@ -1,3 +1,10 @@
+# [1.39.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.38.0...v1.39.0) (2025-03-31)
+
+
+### Features
+
+* list loop action fix ([b7ecfd0](https://github.com/skelebuda/lunnoa_automate/commit/b7ecfd0add436ecd6a15c5bdb8e69246cc28c22d))
+
 # [1.38.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.37.0...v1.38.0) (2025-03-31)
 
 
