@@ -4,7 +4,7 @@ import { z } from 'zod';
 export const listLoop = createAction({
   id: 'flow-control_action_list-loop',
   name: 'List Loop',
-  description: 'Loop through a list, set a variable for each item, and run a workflow.',
+  description: 'Loop through CSV data converted to JSON and run a workflow for each item.',
   iconUrl: `https://lecca-io.s3.us-east-2.amazonaws.com/assets/actions/flow-control_action_list-loop.svg`,
   viewOptions: {
     saveButtonOptions: {
@@ -17,18 +17,18 @@ export const listLoop = createAction({
   },
   inputConfig: [
     createJsonInputField({
-      id: 'list',
-      label: 'List to Loop Through',
-      description: 'The list of items to iterate through. Can be a JSON array or an object with a "result" property containing an array (like from CSV to JSON conversion).',
+      id: 'csvJsonData',
+      label: 'CSV JSON Data',
+      description: 'The JSON data from a Convert CSV to JSON action.',
       required: {
-        missingMessage: 'List is required',
+        missingMessage: 'CSV JSON data is required',
         missingStatus: 'warning',
       },
     }),
     createDynamicSelectInputField({
       id: 'variableId',
       label: 'Variable to Update',
-      description: 'Select a variable that will be updated with each item in the list.',
+      description: 'Select a variable that will be updated with each row from the CSV data.',
       _getDynamicValues: async ({ projectId, workspaceId, prisma }) => {
         const variables = await prisma.variable.findMany({
           where: {
@@ -67,7 +67,7 @@ export const listLoop = createAction({
     }),
     createDynamicSelectInputField({
       id: 'workflowId',
-      label: 'Workflow to Run for Each Item',
+      label: 'Workflow to Run for Each Row',
       description: 'Only manual and scheduled workflows can be triggered by a workflow.',
       placeholder: 'Select a workflow',
       hideCustomTab: true,
@@ -106,7 +106,7 @@ export const listLoop = createAction({
     }),
   ],
   aiSchema: z.object({
-    list: z.string(),
+    csvJsonData: z.string(),
     variableId: z.string(),
     workflowId: z.string(),
   }),
@@ -123,199 +123,87 @@ export const listLoop = createAction({
       throw new Error(`Workflow cannot run itself`);
     }
 
-    // Parse the list from JSON and handle CSV to JSON conversion format
-    let items;
+    // Parse the CSV JSON data
+    let csvRows;
     try {
-      const parsedInput = JSON.parse(configValue.list);
+      const parsedInput = JSON.parse(configValue.csvJsonData);
       
-      // Handle both direct arrays and objects with a "result" property (from CSV to JSON)
-      if (Array.isArray(parsedInput)) {
-        items = parsedInput;
-      } else if (parsedInput && typeof parsedInput === 'object') {
-        // Check if this is the format from CSV to JSON conversion
-        if (Array.isArray(parsedInput.result)) {
-          items = parsedInput.result;
-        } else {
-          // If it's a single object, wrap it in an array
-          items = [parsedInput];
-        }
+      // Extract the result array from the CSV to JSON conversion output
+      if (parsedInput && typeof parsedInput === 'object' && Array.isArray(parsedInput.result)) {
+        csvRows = parsedInput.result;
       } else {
-        throw new Error('Invalid input format');
+        throw new Error('Invalid CSV JSON data format. Expected an object with a "result" array property.');
       }
     } catch (error) {
-      throw new Error(`Invalid JSON list: ${error.message}`);
+      throw new Error(`Failed to parse CSV JSON data: ${error.message}`);
     }
 
-    if (!Array.isArray(items)) {
-      throw new Error('The provided list must be a valid JSON array or an object with a "result" array property');
-    }
-
-    if (items.length === 0) {
+    if (csvRows.length === 0) {
       return {
         totalItems: 0,
         successfulExecutions: 0,
         failedExecutions: 0,
-        results: [],
-        errors: [],
-        message: "The list is empty, no workflows were executed."
+        message: 'No rows found in CSV data',
       };
     }
 
-    // Check if the workflow exists in the project
-    const workflowExistsInProject = await prisma.workflow.findFirst({
-      where: {
-        AND: [
-          {
-            id: configValue.workflowId,
-          },
-          {
-            FK_projectId: projectId,
-          },
-        ],
-      },
-    });
-
-    if (!workflowExistsInProject) {
-      throw new Error(`Workflow not found: ${configValue.workflowId}`);
-    }
-
-    // Check if the variable exists and get its data type
-    const variable = await prisma.variable.findFirst({
-      where: {
-        AND: [
-          { id: configValue.variableId },
-          {
-            OR: [
-              {
-                FK_projectId: projectId,
-              },
-              {
-                AND: [
-                  {
-                    FK_workspaceId: workspaceId,
-                  },
-                  {
-                    FK_projectId: null,
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-      select: {
-        id: true,
-        name: true,
-        dataType: true,
-      },
+    // Get the variable to update
+    const variable = await prisma.variable.findUnique({
+      where: { id: configValue.variableId },
+      select: { id: true, name: true, dataType: true },
     });
 
     if (!variable) {
-      throw new Error('Variable not found');
+      throw new Error(`Variable with ID ${configValue.variableId} not found`);
     }
 
+    // Get the workflow to run
+    const executionWithProject = await prisma.execution.findFirst({
+      where: {
+        id: execution.id,
+      },
+      select: {
+        workflow: {
+          select: {
+            FK_projectId: true,
+          },
+        },
+      },
+    });
+
+    if (!executionWithProject) {
+      throw new Error('Could not find execution');
+    }
+
+    // Process each row in the CSV data
     const results = [];
     const errors = [];
 
-    // Process each item in the list
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i];
+    for (let i = 0; i < csvRows.length; i++) {
+      const row = csvRows[i];
       
       try {
-        // Update the variable with the current item
-        let formattedValue = item;
-        
-        // Format the value based on the variable's data type
-        switch (variable.dataType) {
-          case 'boolean':
-            if (typeof item !== 'boolean' && item !== 'true' && item !== 'false') {
-              throw new Error(`Item at index ${i} cannot be converted to boolean`);
-            }
-            formattedValue = item === 'true' ? true : Boolean(item);
-            break;
-          case 'number':
-            if (typeof item !== 'number' && isNaN(Number(item))) {
-              throw new Error(`Item at index ${i} cannot be converted to number`);
-            }
-            formattedValue = Number(item);
-            break;
-          case 'string':
-            formattedValue = String(item);
-            break;
-          case 'date':
-            try {
-              // Attempt to parse as date if it's a string
-              if (typeof item === 'string') {
-                const date = new Date(item);
-                if (isNaN(date.getTime())) {
-                  throw new Error();
-                }
-                formattedValue = date.toISOString();
-              } else {
-                throw new Error();
-              }
-            } catch {
-              throw new Error(`Item at index ${i} cannot be converted to date`);
-            }
-            break;
-          case 'json':
-            // If it's already an object, we can use it directly
-            if (typeof item === 'object') {
-              formattedValue = item;
-            } else {
-              // Try to parse as JSON if it's a string
-              try {
-                formattedValue = typeof item === 'string' ? JSON.parse(item) : item;
-              } catch {
-                throw new Error(`Item at index ${i} cannot be converted to JSON`);
-              }
-            }
-            break;
-        }
-
-        // Update the variable with the current item
+        // Update the variable with the current row
         await prisma.variable.update({
-          where: {
-            id: configValue.variableId,
-          },
-          data: {
-            value: formattedValue,
-          },
+          where: { id: variable.id },
+          data: { value: JSON.stringify(row) },
         });
-        
+
         // Run the workflow
         const newExecution = await execution.manuallyExecuteWorkflow({
           workflowId: configValue.workflowId,
-          skipQueue: true,
-          inputData: {}, // No direct input data needed as we're using variables
+          projectId: executionWithProject.workflow.FK_projectId,
+          agentId,
+          requestingWorkflowId,
         });
 
-        if (!newExecution) {
-          throw new Error(
-            `Could not execute workflow for item at index ${i}: ${configValue.workflowId}`
-          );
-        }
-
-        const executionWithProject = await prisma.execution.findUnique({
-          where: {
-            id: newExecution.id,
-          },
-          select: {
-            workflow: {
-              select: {
-                FK_projectId: true,
-              },
-            },
-          },
-        });
-
+        // Poll for execution completion
         const maxPolls = 30;
         const pollIntervalInSeconds = 2;
         let polls = 0;
 
         const executionLink = `${process.env.CLIENT_URL}/projects/${executionWithProject.workflow.FK_projectId}/executions/${newExecution.id}`;
 
-        // Poll for execution completion
         while (polls < maxPolls) {
           const execution = await prisma.execution.findUnique({
             where: {
@@ -338,8 +226,8 @@ export const listLoop = createAction({
               executionLink,
               statusMessage: execution.statusMessage,
               data: execution.output,
-              index: i,
-              item,
+              rowIndex: i,
+              row,
             });
             break;
           } else if (execution.status === 'RUNNING') {
@@ -362,20 +250,20 @@ export const listLoop = createAction({
 
         if (polls >= maxPolls) {
           throw new Error(
-            `Workflow execution time out after ${maxPolls * pollIntervalInSeconds} seconds for item at index ${i}.${agentId ? ` For more details visit: ${executionLink}` : ''}`
+            `Workflow execution time out after ${maxPolls * pollIntervalInSeconds} seconds for row at index ${i}.${agentId ? ` For more details visit: ${executionLink}` : ''}`
           );
         }
       } catch (error) {
         errors.push({
-          index: i,
-          item,
+          rowIndex: i,
+          row,
           error: error.message,
         });
       }
     }
 
     return {
-      totalItems: items.length,
+      totalItems: csvRows.length,
       successfulExecutions: results.length,
       failedExecutions: errors.length,
       variableName: variable.name,
@@ -384,35 +272,21 @@ export const listLoop = createAction({
     };
   },
   mockRun: async ({ configValue, prisma }) => {
-    let items;
+    let csvRows;
     try {
-      const parsedInput = JSON.parse(configValue.list);
+      const parsedInput = JSON.parse(configValue.csvJsonData);
       
-      // Handle both direct arrays and objects with a "result" property (from CSV to JSON)
-      if (Array.isArray(parsedInput)) {
-        items = parsedInput;
-      } else if (parsedInput && typeof parsedInput === 'object') {
-        // Check if this is the format from CSV to JSON conversion
-        if (Array.isArray(parsedInput.result)) {
-          items = parsedInput.result;
-        } else {
-          // If it's a single object, wrap it in an array
-          items = [parsedInput];
-        }
+      // Extract the result array from the CSV to JSON conversion output
+      if (parsedInput && typeof parsedInput === 'object' && Array.isArray(parsedInput.result)) {
+        csvRows = parsedInput.result;
       } else {
         return {
-          error: 'Invalid input format',
+          error: 'Invalid CSV JSON data format. Expected an object with a "result" array property.',
         };
       }
     } catch (error) {
       return {
-        error: `Invalid JSON list: ${error.message}`,
-      };
-    }
-
-    if (!Array.isArray(items)) {
-      return {
-        error: 'The provided list must be a valid JSON array or an object with a "result" array property',
+        error: `Failed to parse CSV JSON data: ${error.message}`,
       };
     }
 
@@ -427,14 +301,14 @@ export const listLoop = createAction({
     });
 
     return {
-      totalItems: items.length,
-      successfulExecutions: items.length,
+      totalItems: csvRows.length,
+      successfulExecutions: csvRows.length,
       failedExecutions: 0,
       variableName: variable?.name || 'Unknown variable',
-      mockResults: `Would run workflow "${workflowWithOutputData?.name || configValue.workflowId}" for ${items.length} items, updating variable "${variable?.name || configValue.variableId}" for each iteration`,
+      mockResults: `Would run workflow "${workflowWithOutputData?.name || configValue.workflowId}" for ${csvRows.length} CSV rows, updating variable "${variable?.name || configValue.variableId}" for each row`,
       note: workflowWithOutputData?.output
         ? undefined
-        : 'If you want your workflow to return data for each item, make sure to add the "Output Workflow Data" action to your workflow.',
+        : 'If you want your workflow to return data for each row, make sure to add the "Output Workflow Data" action to your workflow.',
     };
   },
 }); 
