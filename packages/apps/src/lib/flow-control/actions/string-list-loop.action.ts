@@ -5,7 +5,7 @@ export const stringListLoop = createAction({
   id: 'flow-control_action_string-list-loop',
   name: 'String List Loop',
   description: 'Loop through a comma-separated list and run a workflow for each item.',
-  iconUrl: `https://unpkg.com/@mynaui/icons/icons/repeat.svg`,
+  iconUrl: `https://lecca-io.s3.us-east-2.amazonaws.com/assets/actions/flow-control_action_run-workflow.svg`,
   viewOptions: {
     saveButtonOptions: {
       replaceSaveAndTestButton: {
