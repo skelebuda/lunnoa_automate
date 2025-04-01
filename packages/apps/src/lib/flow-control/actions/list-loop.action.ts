@@ -1,4 +1,4 @@
-import { createAction, createDynamicSelectInputField, createTextInputField } from '@lunnoa-automate/toolkit';
+import { createAction, createDynamicSelectInputField, createJsonInputField } from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 export const listLoop = createAction({
@@ -16,7 +16,7 @@ export const listLoop = createAction({
     },
   },
   inputConfig: [
-    createTextInputField({
+    createJsonInputField({
       id: 'list',
       label: 'List to Loop Through',
       description: 'The list of items to iterate through. Must be a valid JSON array.',
