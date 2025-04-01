@@ -1,3 +1,10 @@
+# [1.42.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.41.0...v1.42.0) (2025-04-01)
+
+
+### Features
+
+* textinputfield for loops ([99a4f7c](https://github.com/skelebuda/lunnoa_automate/commit/99a4f7c1dcbdc8d18e13c2749100a96118f0de7b))
+
 # [1.41.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.40.0...v1.41.0) (2025-04-01)
 
 
