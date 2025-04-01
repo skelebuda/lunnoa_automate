@@ -5,7 +5,7 @@ export const listLoop = createAction({
   id: 'flow-control_action_list-loop',
   name: 'List Loop',
   description: 'Loop through a list, set a variable for each item, and run a workflow.',
-  iconUrl: `https://lecca-io.s3.us-east-2.amazonaws.com/assets/apps/list.svg`,
+  iconUrl: `https://lecca-io.s3.us-east-2.amazonaws.com/assets/actions/flow-control_action_list-loop.svg`,
   viewOptions: {
     saveButtonOptions: {
       replaceSaveAndTestButton: {
@@ -19,7 +19,7 @@ export const listLoop = createAction({
     createJsonInputField({
       id: 'list',
       label: 'List to Loop Through',
-      description: 'The list of items to iterate through. Must be a valid JSON array.',
+      description: 'The list of items to iterate through. Can be a JSON array or an object with a "result" property containing an array (like from CSV to JSON conversion).',
       required: {
         missingMessage: 'List is required',
         missingStatus: 'warning',
@@ -122,42 +122,43 @@ export const listLoop = createAction({
     if (requestingWorkflowId === configValue.workflowId) {
       throw new Error(`Workflow cannot run itself`);
     }
-  
-    // ================== IMPROVED LIST PARSING ================== //
+
+    // Parse the list from JSON and handle CSV to JSON conversion format
     let items;
     try {
-      // Case 1: Already an array (no parsing needed)
-      if (Array.isArray(configValue.list)) {
-        items = configValue.list;
-      }
-      // Case 2: String that might be JSON or CSV
-      else if (typeof configValue.list === 'string') {
-        // Try parsing as JSON first
-        try {
-          items = JSON.parse(configValue.list);
-        } catch (jsonError) {
-          // Fallback to CSV parsing if JSON fails
-          items = configValue.list
-            .split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/) // Handles quoted commas
-            .map(item => item.trim().replace(/^"|"$/g, ''));
-        }
-        
-        // Validate we got an array
-        if (!Array.isArray(items)) {
-          throw new Error('Input must parse to an array');
+      const parsedInput = JSON.parse(configValue.list);
+      
+      // Handle both direct arrays and objects with a "result" property (from CSV to JSON)
+      if (Array.isArray(parsedInput)) {
+        items = parsedInput;
+      } else if (parsedInput && typeof parsedInput === 'object') {
+        // Check if this is the format from CSV to JSON conversion
+        if (Array.isArray(parsedInput.result)) {
+          items = parsedInput.result;
+        } else {
+          // If it's a single object, wrap it in an array
+          items = [parsedInput];
         }
       } else {
-        throw new Error('Input must be an array or JSON/CSV string');
+        throw new Error('Invalid input format');
       }
     } catch (error) {
-      throw new Error(`Invalid list format: ${error.message}. Please provide:\n` + 
-                     '- A JSON array (e.g., ["item1", "item2"])\n' +
-                     '- A CSV string (e.g., "item1","item2")\n' +
-                     '- Or a raw JavaScript array');
+      throw new Error(`Invalid JSON list: ${error.message}`);
     }
 
     if (!Array.isArray(items)) {
-      throw new Error('The provided list must be a valid JSON array');
+      throw new Error('The provided list must be a valid JSON array or an object with a "result" array property');
+    }
+
+    if (items.length === 0) {
+      return {
+        totalItems: 0,
+        successfulExecutions: 0,
+        failedExecutions: 0,
+        results: [],
+        errors: [],
+        message: "The list is empty, no workflows were executed."
+      };
     }
 
     // Check if the workflow exists in the project
@@ -385,15 +386,33 @@ export const listLoop = createAction({
   mockRun: async ({ configValue, prisma }) => {
     let items;
     try {
-      items = JSON.parse(configValue.list);
-      if (!Array.isArray(items)) {
+      const parsedInput = JSON.parse(configValue.list);
+      
+      // Handle both direct arrays and objects with a "result" property (from CSV to JSON)
+      if (Array.isArray(parsedInput)) {
+        items = parsedInput;
+      } else if (parsedInput && typeof parsedInput === 'object') {
+        // Check if this is the format from CSV to JSON conversion
+        if (Array.isArray(parsedInput.result)) {
+          items = parsedInput.result;
+        } else {
+          // If it's a single object, wrap it in an array
+          items = [parsedInput];
+        }
+      } else {
         return {
-          error: 'The provided list must be a valid JSON array',
+          error: 'Invalid input format',
         };
       }
     } catch (error) {
       return {
         error: `Invalid JSON list: ${error.message}`,
+      };
+    }
+
+    if (!Array.isArray(items)) {
+      return {
+        error: 'The provided list must be a valid JSON array or an object with a "result" array property',
       };
     }
 
