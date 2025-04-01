@@ -1,3 +1,11 @@
+# [1.43.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.42.0...v1.43.0) (2025-04-01)
+
+
+### Features
+
+* back to json for loop ([4d5c598](https://github.com/skelebuda/lunnoa_automate/commit/4d5c598fe1e44cb778d9384ad8e4bc5469a549d2))
+* loop improvement for csv converter ([258f8e8](https://github.com/skelebuda/lunnoa_automate/commit/258f8e8e211915f64bbee1a9e19737acb08f5393))
+
 # [1.42.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.41.0...v1.42.0) (2025-04-01)
 
 
