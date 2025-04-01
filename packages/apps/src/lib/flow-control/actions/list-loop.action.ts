@@ -5,7 +5,7 @@ export const listLoop = createAction({
   id: 'flow-control_action_list-loop',
   name: 'List Loop',
   description: 'Loop through CSV data converted to JSON and run a workflow for each item.',
-  iconUrl: `https://lecca-io.s3.us-east-2.amazonaws.com/assets/actions/flow-control_action_list-loop.svg`,
+  iconUrl: `https://unpkg.com/@mynaui/icons/icons/repeat.svg`,
   viewOptions: {
     saveButtonOptions: {
       replaceSaveAndTestButton: {

@@ -5,7 +5,7 @@ export const stringListLoop = createAction({
   id: 'flow-control_action_string-list-loop',
   name: 'String List Loop',
   description: 'Loop through a comma-separated list and run a workflow for each item.',
-  iconUrl: `https://lecca-io.s3.us-east-2.amazonaws.com/assets/actions/flow-control_action_string-list-loop.svg`,
+  iconUrl: `https://unpkg.com/@mynaui/icons/icons/repeat.svg`,
   viewOptions: {
     saveButtonOptions: {
       replaceSaveAndTestButton: {
@@ -154,27 +154,12 @@ export const stringListLoop = createAction({
       throw new Error(`Variable with ID ${configValue.variableId} not found`);
     }
 
-    // Get the workflow to run
-    const executionWithProject = await prisma.execution.findFirst({
-      where: {
-        id: requestingWorkflowId,
-      },
-      select: {
-        workflow: {
-          select: {
-            FK_projectId: true,
-          },
-        },
-      },
-    });
-
-    if (!executionWithProject) {
-      throw new Error('Could not find execution');
-    }
-
     // Process each item in the list
     const results = [];
     const errors = [];
+
+    const executionLink = (newExecutionId) => 
+      `${process.env.CLIENT_URL}/projects/${projectId}/executions/${newExecutionId}`;
 
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
@@ -193,12 +178,13 @@ export const stringListLoop = createAction({
           inputData: {},
         });
 
+        // Use the function to generate the link
+        const execLink = executionLink(newExecution.id);
+
         // Poll for execution completion
         const maxPolls = 30;
         const pollIntervalInSeconds = 2;
         let polls = 0;
-
-        const executionLink = `${process.env.CLIENT_URL}/projects/${executionWithProject.workflow.FK_projectId}/executions/${newExecution.id}`;
 
         while (polls < maxPolls) {
           const execution = await prisma.execution.findUnique({
@@ -214,12 +200,12 @@ export const stringListLoop = createAction({
 
           if (execution.status === 'FAILED') {
             throw new Error(
-              `${execution.statusMessage}.${agentId ? ` For more details visit: ${executionLink}` : ''}`
+              `${execution.statusMessage}.${agentId ? ` For more details visit: ${execLink}` : ''}`
             );
           } else if (execution.status === 'SUCCESS') {
             results.push({
               executionId: newExecution.id,
-              executionLink,
+              executionLink: execLink,
               statusMessage: execution.statusMessage,
               data: execution.output,
               itemIndex: i,
@@ -233,11 +219,11 @@ export const stringListLoop = createAction({
             polls++;
           } else if (execution.status === 'NEEDS_INPUT') {
             throw new Error(
-              `Workflows that need input cannot be triggered in a loop.${agentId ? ` For more details visit: ${executionLink}` : ''}`
+              `Workflows that need input cannot be triggered in a loop.${agentId ? ` For more details visit: ${execLink}` : ''}`
             );
           } else if (execution.status === 'SCHEDULED') {
             throw new Error(
-              `Workflows that wait or are scheduled cannot be triggered in a loop.${agentId ? ` For more details visit: ${executionLink}` : ''}`
+              `Workflows that wait or are scheduled cannot be triggered in a loop.${agentId ? ` For more details visit: ${execLink}` : ''}`
             );
           } else {
             throw new Error(`Execution status unknown: ${execution.status}`);
@@ -246,7 +232,7 @@ export const stringListLoop = createAction({
 
         if (polls >= maxPolls) {
           throw new Error(
-            `Workflow execution time out after ${maxPolls * pollIntervalInSeconds} seconds for item at index ${i}.${agentId ? ` For more details visit: ${executionLink}` : ''}`
+            `Workflow execution time out after ${maxPolls * pollIntervalInSeconds} seconds for item at index ${i}.${agentId ? ` For more details visit: ${execLink}` : ''}`
           );
         }
       } catch (error) {
