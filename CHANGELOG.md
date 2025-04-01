@@ -1,3 +1,10 @@
+# [1.44.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.43.0...v1.44.0) (2025-04-01)
+
+
+### Features
+
+* loop with csv ([86d9409](https://github.com/skelebuda/lunnoa_automate/commit/86d94091e09b7311117aec7d94ed2e4546cd69dd))
+
 # [1.43.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.42.0...v1.43.0) (2025-04-01)
 
 
