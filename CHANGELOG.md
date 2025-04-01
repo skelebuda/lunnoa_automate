@@ -1,3 +1,10 @@
+# [1.47.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.46.0...v1.47.0) (2025-04-01)
+
+
+### Features
+
+* sting list loop ([17840e1](https://github.com/skelebuda/lunnoa_automate/commit/17840e1b092eed9ad5a649b1e4a6102c9077ad4f))
+
 # [1.46.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.45.0...v1.46.0) (2025-04-01)
 
 
