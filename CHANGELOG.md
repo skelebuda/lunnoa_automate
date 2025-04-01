@@ -1,3 +1,10 @@
+# [1.41.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.40.0...v1.41.0) (2025-04-01)
+
+
+### Features
+
+* improved loop ([a333fad](https://github.com/skelebuda/lunnoa_automate/commit/a333fad9e5aa1a5f444f9f889c3fc1388dbda0fa))
+
 # [1.40.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.39.0...v1.40.0) (2025-04-01)
 
 
