@@ -126,11 +126,31 @@ export const listLoop = createAction({
     // Parse the CSV JSON data
     let csvRows;
     try {
-      const parsedInput = JSON.parse(configValue.csvJsonData);
+      // Check if csvJsonData is undefined or empty
+      if (!configValue.csvJsonData) {
+        throw new Error('CSV JSON data is missing or empty');
+      }
+      
+      let parsedInput;
+      
+      // Handle both string and object inputs
+      if (typeof configValue.csvJsonData === 'string') {
+        parsedInput = JSON.parse(configValue.csvJsonData);
+      } else if (typeof configValue.csvJsonData === 'object') {
+        parsedInput = configValue.csvJsonData;
+      } else {
+        throw new Error(`Invalid CSV JSON data type: ${typeof configValue.csvJsonData}`);
+      }
       
       // Extract the result array from the CSV to JSON conversion output
-      if (parsedInput && typeof parsedInput === 'object' && Array.isArray(parsedInput.result)) {
-        csvRows = parsedInput.result;
+      if (parsedInput && typeof parsedInput === 'object') {
+        if (Array.isArray(parsedInput)) {
+          csvRows = parsedInput;
+        } else if (Array.isArray(parsedInput.result)) {
+          csvRows = parsedInput.result;
+        } else {
+          throw new Error('Invalid CSV JSON data format. Expected an array or an object with a "result" array property.');
+        }
       } else {
         throw new Error('Invalid CSV JSON data format. Expected an object with a "result" array property.');
       }
