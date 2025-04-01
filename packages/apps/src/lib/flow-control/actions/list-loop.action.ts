@@ -4,7 +4,7 @@ import { z } from 'zod';
 export const listLoop = createAction({
   id: 'flow-control_action_list-loop',
   name: 'List Loop',
-  description: 'Loop through a list and run a workflow for each item.',
+  description: 'Loop through a list, set a variable for each item, and run a workflow.',
   iconUrl: `https://lecca-io.s3.us-east-2.amazonaws.com/assets/actions/flow-control_action_list-loop.svg`,
   viewOptions: {
     saveButtonOptions: {
@@ -22,6 +22,46 @@ export const listLoop = createAction({
       description: 'The list of items to iterate through. Must be a valid JSON array.',
       required: {
         missingMessage: 'List is required',
+        missingStatus: 'warning',
+      },
+    }),
+    createDynamicSelectInputField({
+      id: 'variableId',
+      label: 'Variable to Update',
+      description: 'Select a variable that will be updated with each item in the list.',
+      _getDynamicValues: async ({ projectId, workspaceId, prisma }) => {
+        const variables = await prisma.variable.findMany({
+          where: {
+            OR: [
+              {
+                FK_projectId: projectId,
+              },
+              {
+                AND: [
+                  {
+                    FK_workspaceId: workspaceId,
+                  },
+                  {
+                    FK_projectId: null,
+                  },
+                ],
+              },
+            ],
+          },
+          select: {
+            id: true,
+            name: true,
+            dataType: true,
+          },
+        });
+
+        return variables.map((variable) => ({
+          label: variable.name,
+          value: variable.id,
+        }));
+      },
+      required: {
+        missingMessage: 'Variable is required',
         missingStatus: 'warning',
       },
     }),
@@ -64,27 +104,17 @@ export const listLoop = createAction({
         missingStatus: 'warning',
       },
     }),
-    {
-      id: 'itemVariableName',
-      inputType: 'text',
-      label: 'Item Variable Name',
-      description: 'The name of the variable to pass each item as to the workflow.',
-      defaultValue: 'item',
-      required: {
-        missingMessage: 'Item variable name is required',
-        missingStatus: 'warning',
-      },
-    },
   ],
   aiSchema: z.object({
     list: z.string(),
+    variableId: z.string(),
     workflowId: z.string(),
-    itemVariableName: z.string(),
   }),
   run: async ({
     configValue,
     workflowId: requestingWorkflowId,
     projectId,
+    workspaceId,
     agentId,
     prisma,
     execution,
@@ -123,6 +153,41 @@ export const listLoop = createAction({
       throw new Error(`Workflow not found: ${configValue.workflowId}`);
     }
 
+    // Check if the variable exists and get its data type
+    const variable = await prisma.variable.findFirst({
+      where: {
+        AND: [
+          { id: configValue.variableId },
+          {
+            OR: [
+              {
+                FK_projectId: projectId,
+              },
+              {
+                AND: [
+                  {
+                    FK_workspaceId: workspaceId,
+                  },
+                  {
+                    FK_projectId: null,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      select: {
+        id: true,
+        name: true,
+        dataType: true,
+      },
+    });
+
+    if (!variable) {
+      throw new Error('Variable not found');
+    }
+
     const results = [];
     const errors = [];
 
@@ -131,16 +196,72 @@ export const listLoop = createAction({
       const item = items[i];
       
       try {
-        // Create input data object with the current item
-        const inputData = {
-          [configValue.itemVariableName]: item
-        };
+        // Update the variable with the current item
+        let formattedValue = item;
         
-        // Use the execution service to run the workflow
+        // Format the value based on the variable's data type
+        switch (variable.dataType) {
+          case 'boolean':
+            if (typeof item !== 'boolean' && item !== 'true' && item !== 'false') {
+              throw new Error(`Item at index ${i} cannot be converted to boolean`);
+            }
+            formattedValue = item === 'true' ? true : Boolean(item);
+            break;
+          case 'number':
+            if (typeof item !== 'number' && isNaN(Number(item))) {
+              throw new Error(`Item at index ${i} cannot be converted to number`);
+            }
+            formattedValue = Number(item);
+            break;
+          case 'string':
+            formattedValue = String(item);
+            break;
+          case 'date':
+            try {
+              // Attempt to parse as date if it's a string
+              if (typeof item === 'string') {
+                const date = new Date(item);
+                if (isNaN(date.getTime())) {
+                  throw new Error();
+                }
+                formattedValue = date.toISOString();
+              } else {
+                throw new Error();
+              }
+            } catch {
+              throw new Error(`Item at index ${i} cannot be converted to date`);
+            }
+            break;
+          case 'json':
+            // If it's already an object, we can use it directly
+            if (typeof item === 'object') {
+              formattedValue = item;
+            } else {
+              // Try to parse as JSON if it's a string
+              try {
+                formattedValue = typeof item === 'string' ? JSON.parse(item) : item;
+              } catch {
+                throw new Error(`Item at index ${i} cannot be converted to JSON`);
+              }
+            }
+            break;
+        }
+
+        // Update the variable with the current item
+        await prisma.variable.update({
+          where: {
+            id: configValue.variableId,
+          },
+          data: {
+            value: formattedValue,
+          },
+        });
+        
+        // Run the workflow
         const newExecution = await execution.manuallyExecuteWorkflow({
           workflowId: configValue.workflowId,
           skipQueue: true,
-          inputData: inputData,
+          inputData: {}, // No direct input data needed as we're using variables
         });
 
         if (!newExecution) {
@@ -231,6 +352,7 @@ export const listLoop = createAction({
       totalItems: items.length,
       successfulExecutions: results.length,
       failedExecutions: errors.length,
+      variableName: variable.name,
       results,
       errors,
     };
@@ -255,11 +377,17 @@ export const listLoop = createAction({
       select: { output: true, name: true },
     });
 
+    const variable = await prisma.variable.findUnique({
+      where: { id: configValue.variableId },
+      select: { name: true },
+    });
+
     return {
       totalItems: items.length,
       successfulExecutions: items.length,
       failedExecutions: 0,
-      mockResults: `Would run workflow "${workflowWithOutputData?.name || configValue.workflowId}" for ${items.length} items`,
+      variableName: variable?.name || 'Unknown variable',
+      mockResults: `Would run workflow "${workflowWithOutputData?.name || configValue.workflowId}" for ${items.length} items, updating variable "${variable?.name || configValue.variableId}" for each iteration`,
       note: workflowWithOutputData?.output
         ? undefined
         : 'If you want your workflow to return data for each item, make sure to add the "Output Workflow Data" action to your workflow.',
