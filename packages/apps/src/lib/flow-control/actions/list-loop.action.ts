@@ -160,7 +160,7 @@ export const listLoop = createAction({
     // Get the workflow to run
     const executionWithProject = await prisma.execution.findFirst({
       where: {
-        id: execution.id,
+        id: requestingWorkflowId,
       },
       select: {
         workflow: {
@@ -192,9 +192,8 @@ export const listLoop = createAction({
         // Run the workflow
         const newExecution = await execution.manuallyExecuteWorkflow({
           workflowId: configValue.workflowId,
-          projectId: executionWithProject.workflow.FK_projectId,
-          agentId,
-          requestingWorkflowId,
+          skipQueue: true,
+          inputData: {},
         });
 
         // Poll for execution completion
