@@ -209,7 +209,7 @@ export class Action {
     } else {
       try {
         const runResponse = await this.run({
-          values: args.configValue,
+          configValue: args.configValue,
           connection,
           workspaceId: args.workspaceId,
           projectId: args.projectId,
@@ -220,6 +220,13 @@ export class Action {
           prisma: this.app.prisma,
           http: this.app.http,
           notification: this.app.notification,
+          fileHandler: this.app.fileHandler,
+          s3: this.app.s3,
+          aiProviders: this.app.aiProviders,
+          credits: this.app.credits,
+          task: this.app.task,
+          knowledge: this.app.knowledge,
+          execution: this.app.execution,
         });
 
         if (this.handleInterruptingResponse) {
