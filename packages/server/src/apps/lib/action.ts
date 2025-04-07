@@ -207,33 +207,37 @@ export class Action {
         }),
       };
     } else {
-      const runResponse = await this.run({
-        configValue: args.configValue,
-        projectId: args.projectId,
-        workflowId: args.workflowId,
-        agentId: args.agentId,
-        workspaceId: args.workspaceId,
-        executionId: args.executionId,
-        taskId: args.taskId,
-        connection,
-        prisma: this.app.prisma,
-        http: this.app.http,
-        fileHandler: this.app.fileHandler,
-        s3: this.app.s3,
-        aiProviders: this.app.aiProviders,
-        credits: this.app.credits,
-        task: this.app.task,
-        knowledge: this.app.knowledge,
-        notification: this.app.notification,
-        execution: this.app.execution,
-      });
+      try {
+        const runResponse = await this.run({
+          values: args.configValue,
+          connection,
+          workspaceId: args.workspaceId,
+          projectId: args.projectId,
+          workflowId: args.workflowId,
+          agentId: args.agentId,
+          executionId: args.executionId,
+          taskId: args.taskId,
+          prisma: this.app.prisma,
+          http: this.app.http,
+          notification: this.app.notification,
+        });
 
-      if (this.handleInterruptingResponse) {
-        //These have unique response objects when they pause the execution
-        return this.handleInterruptingResponse({ runResponse });
-      } else {
+        if (this.handleInterruptingResponse) {
+          return this.handleInterruptingResponse({ runResponse });
+        } else {
+          return {
+            success: runResponse,
+          };
+        }
+      } catch (error) {
         return {
-          success: runResponse,
+          failure:
+            error?.response?.message ||
+            error?.response?.data ||
+            error?.response?.data?.errorDetails ||
+            error?.response?.error ||
+            error.message ||
+            `Something went wrong while running action: ${this.name}}`,
         };
       }
     }
