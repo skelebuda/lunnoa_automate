@@ -1,3 +1,10 @@
+# [1.50.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.49.0...v1.50.0) (2025-04-07)
+
+
+### Features
+
+* fixed runner pause ([0bd8315](https://github.com/skelebuda/lunnoa_automate/commit/0bd8315a6fd1c48ad55217c904cff9f40ba7e4b7))
+
 # [1.49.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.48.0...v1.49.0) (2025-04-01)
 
 
