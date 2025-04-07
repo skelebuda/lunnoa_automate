@@ -1,3 +1,10 @@
+# [1.49.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.48.0...v1.49.0) (2025-04-01)
+
+
+### Features
+
+* icons fix ([3205195](https://github.com/skelebuda/lunnoa_automate/commit/3205195c26411b03eee4f60121c8ff4af5ff8059))
+
 # [1.48.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.47.0...v1.48.0) (2025-04-01)
 
 
