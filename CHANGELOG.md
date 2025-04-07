@@ -1,3 +1,10 @@
+# [1.52.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.51.0...v1.52.0) (2025-04-07)
+
+
+### Features
+
+* fixed paused and manual input ([0a336b5](https://github.com/skelebuda/lunnoa_automate/commit/0a336b52040550a3c63389fe076539844f24f463))
+
 # [1.51.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.50.0...v1.51.0) (2025-04-07)
 
 
