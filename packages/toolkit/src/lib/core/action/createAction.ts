@@ -104,4 +104,5 @@ export type ActionResponse<T> = {
   failure?: unknown;
   needsInput?: unknown;
   scheduled?: unknown;
+  paused?: unknown;
 };

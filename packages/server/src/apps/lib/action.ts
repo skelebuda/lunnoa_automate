@@ -84,7 +84,13 @@ export class Action {
         executionId: args.executionId,
       });
 
-      return await this.runAction(args);
+      const response = await this.runAction(args);
+
+      if (response.needsInput || response.scheduled) {
+        return response;
+      } else {
+        return response;
+      }
     } catch (error) {
       /**
        * If there's an error, check if it's a 401 error.
@@ -228,9 +234,12 @@ export class Action {
           knowledge: this.app.knowledge,
           execution: this.app.execution,
         });
+        console.log('Run response:', JSON.stringify(runResponse));
 
         if (this.handleInterruptingResponse) {
-          return this.handleInterruptingResponse({ runResponse });
+          const interruptingResponse = this.handleInterruptingResponse({ runResponse });
+          console.log('Interrupting response:', JSON.stringify(interruptingResponse));
+          return interruptingResponse;
         } else {
           return {
             success: runResponse,

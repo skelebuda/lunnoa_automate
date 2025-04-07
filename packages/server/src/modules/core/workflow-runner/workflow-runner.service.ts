@@ -622,7 +622,12 @@ export class WorkflowRunnerService {
 
     const endTime = new Date();
 
+    console.log('Action ID:', action?.id || node.actionId);
+    console.log('Action response:', JSON.stringify(response));
+    console.log('Has needsInput?', Boolean((response as ActionResponse<unknown>).needsInput));
+
     if (response) {
+      // Check for direct needsInput property
       if ((response as ActionResponse<unknown>).needsInput) {
         await this.#handleNeedsInputResponse({
           responseData: (response as ActionResponse<unknown>).needsInput,
@@ -631,7 +636,28 @@ export class WorkflowRunnerService {
           startTime,
           endTime,
         });
-      } else if ((response as ActionResponse<unknown>).scheduled) {
+      } 
+      // Check for success with needsCustomInput property
+      else if (response.success && (response.success as any).needsCustomInput) {
+        await this.#handleNeedsInputResponse({
+          responseData: response.success,
+          node,
+          execution,
+          startTime,
+          endTime,
+        });
+      }
+      // Check for success with paused property
+      else if (response.success && (response.success as any).paused) {
+        await this.#handleNeedsInputResponse({
+          responseData: response.success,
+          node,
+          execution,
+          startTime,
+          endTime,
+        });
+      }
+      else if ((response as ActionResponse<unknown>).scheduled) {
         await this.#handleScheduledResponse({
           responseData: (response as ActionResponse<unknown>).scheduled,
           node,

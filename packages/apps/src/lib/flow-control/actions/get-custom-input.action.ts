@@ -132,16 +132,21 @@ export const getCustomInput = createAction({
       }
 
       return {
+        paused: true,
         assignee: sendNotification === 'true' ? assignee : undefined,
       };
     }
   },
   mockRun: async ({ configValue }) => {
     if (!configValue.customInputConfig) {
-      return {};
+      return {
+        paused: true,
+      };
     }
 
-    const returnInputData: Record<string, any> = {};
+    const returnInputData: Record<string, any> = {
+      paused: true,
+    };
 
     for (const input of Object.values(configValue.customInputConfig ?? {})) {
       returnInputData[(input as any).id] = '';

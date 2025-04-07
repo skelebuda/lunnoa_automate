@@ -24,9 +24,12 @@ export const pause = createAction<any>({
     },
   },
   aiSchema: z.object({}),
-  handleInterruptingResponse: ({ runResponse }) => ({
-    needsInput: runResponse,
-  }),
+  handleInterruptingResponse: ({ runResponse }) => {
+    console.log('Pause action response:', runResponse);
+    return {
+      needsInput: runResponse
+    };
+  },
   inputConfig: [
     {
       id: 'resumeExecution',
