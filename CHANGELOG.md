@@ -1,3 +1,10 @@
+# [1.53.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.52.0...v1.53.0) (2025-04-10)
+
+
+### Features
+
+* hubspot integration ([2b5bf0e](https://github.com/skelebuda/lunnoa_automate/commit/2b5bf0eeebe8a0c642173e414d178532c7edeabe))
+
 # [1.52.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.51.0...v1.52.0) (2025-04-07)
 
 
