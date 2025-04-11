@@ -1,3 +1,10 @@
+# [1.54.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.53.0...v1.54.0) (2025-04-11)
+
+
+### Features
+
+* hubspot action retrieve contact ([932768c](https://github.com/skelebuda/lunnoa_automate/commit/932768cb360084abd7c660d4c9a1acb8ca1b62aa))
+
 # [1.53.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.52.0...v1.53.0) (2025-04-10)
 
 
