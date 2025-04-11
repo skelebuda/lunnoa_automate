@@ -1,5 +1,6 @@
 import { createApp } from '@lunnoa-automate/toolkit';
 
+import { retrieveContact } from './actions/retrieve-contact.action';
 import { addContactToList } from './actions/add-contact-to-list.action';
 import { createContact } from './actions/create-contact.action';
 import { removeContactFromList } from './actions/remove-contact-from-list.action';
@@ -15,6 +16,7 @@ export const hubspot = createApp({
   logoUrl:
     'https://lecca-io.s3.us-east-2.amazonaws.com/assets/apps/hubspot.svg',
   actions: [
+    retrieveContact,
     upsertContact,
     createContact,
     updateContact,
