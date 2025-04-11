@@ -1,6 +1,8 @@
 import { createAction, createTextInputField } from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
+import { shared } from '../shared/hubspot.shared';
+
 export const retrieveContact = createAction({
   id: 'hubspot_action_retrieve-contact',
   name: 'Retrieve Contact',
