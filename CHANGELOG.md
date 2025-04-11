@@ -1,3 +1,10 @@
+# [1.55.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.54.0...v1.55.0) (2025-04-11)
+
+
+### Features
+
+* retrieve fix ([53bfa29](https://github.com/skelebuda/lunnoa_automate/commit/53bfa29ab8b88ffcb9aee65353f7681376873569))
+
 # [1.54.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.53.0...v1.54.0) (2025-04-11)
 
 
