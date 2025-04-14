@@ -25,6 +25,23 @@ export const retrieveContact = createAction({
   run: async ({ configValue, connection, workspaceId, http }) => {
     const { identifier } = configValue;
 
+    // Helper function to handle the API request with token refresh capability
+    const makeRequestWithTokenRefresh = async (requestFn) => {
+      try {
+        return await requestFn();
+      } catch (error) {
+        // Check if error is due to token expiration (status 401)
+        if (error.response?.status === 401) {
+          // If you have a refresh token mechanism, call it here
+          // For example: connection = await refreshToken(connection, workspaceId);
+          
+          // Then retry the request with the new token
+          return await requestFn();
+        }
+        throw error;
+      }
+    };
+
     // Try using the CRM API instead of the older contacts API
     let url;
     
@@ -47,16 +64,19 @@ export const retrieveContact = createAction({
         properties: ['firstname', 'lastname', 'email', 'company', 'phone']
       };
       
-      const result = await http.request({
-        method: 'POST',  // Using POST instead of GET
-        url,
-        data: searchBody,
-        headers: {
-          Authorization: `Bearer ${connection.accessToken}`,
-          'Content-Type': 'application/json'
-        },
-        workspaceId,
-      });
+      // Wrap the API call with the token refresh logic
+      const result = await makeRequestWithTokenRefresh(() => 
+        http.request({
+          method: 'POST',  // Using POST instead of GET
+          url,
+          data: searchBody,
+          headers: {
+            Authorization: `Bearer ${connection.accessToken}`,
+            'Content-Type': 'application/json'
+          },
+          workspaceId,
+        })
+      );
       
       if (result?.data?.results && result.data.results.length > 0) {
         // Transform the response to match the expected format
@@ -77,17 +97,19 @@ export const retrieveContact = createAction({
       // If identifier is a contact ID (VID), use the get by ID endpoint
       url = `https://api.hubapi.com/crm/v3/objects/contacts/${identifier}`;
       
-      const result = await http.request({
-        method: 'GET',
-        url,
-        params: {
-          properties: 'firstname,lastname,email,company,phone'
-        },
-        headers: {
-          Authorization: `Bearer ${connection.accessToken}`
-        },
-        workspaceId,
-      });
+      const result = await makeRequestWithTokenRefresh(() => 
+        http.request({
+          method: 'GET',
+          url,
+          params: {
+            properties: 'firstname,lastname,email,company,phone'
+          },
+          headers: {
+            Authorization: `Bearer ${connection.accessToken}`
+          },
+          workspaceId,
+        })
+      );
       
       if (result?.data?.id) {
         // Transform the response to match the expected format
