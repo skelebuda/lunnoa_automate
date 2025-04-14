@@ -25,107 +25,30 @@ export const retrieveContact = createAction({
   run: async ({ configValue, connection, workspaceId, http }) => {
     const { identifier } = configValue;
 
-    // Helper function to handle the API request with token refresh capability
-    const makeRequestWithTokenRefresh = async (requestFn) => {
-      try {
-        return await requestFn();
-      } catch (error) {
-        // Check if error is due to token expiration (status 401)
-        if (error.response?.status === 401) {
-          // If you have a refresh token mechanism, call it here
-          // For example: connection = await refreshToken(connection, workspaceId);
-          
-          // Then retry the request with the new token
-          return await requestFn();
-        }
-        throw error;
-      }
-    };
-
-    // Try using the CRM API instead of the older contacts API
+    // Use the older v1 API instead of the CRM v3 API
     let url;
     
     if (identifier.includes('@')) {
-      // If identifier is an email, use the search endpoint
-      url = 'https://api.hubapi.com/crm/v3/objects/contacts/search';
-      
-      const searchBody = {
-        filterGroups: [
-          {
-            filters: [
-              {
-                propertyName: 'email',
-                operator: 'EQ',
-                value: identifier
-              }
-            ]
-          }
-        ],
-        properties: ['firstname', 'lastname', 'email', 'company', 'phone']
-      };
-      
-      // Wrap the API call with the token refresh logic
-      const result = await makeRequestWithTokenRefresh(() => 
-        http.request({
-          method: 'POST',  // Using POST instead of GET
-          url,
-          data: searchBody,
-          headers: {
-            Authorization: `Bearer ${connection.accessToken}`,
-            'Content-Type': 'application/json'
-          },
-          workspaceId,
-        })
-      );
-      
-      if (result?.data?.results && result.data.results.length > 0) {
-        // Transform the response to match the expected format
-        const contact = result.data.results[0];
-        return {
-          vid: contact.id,
-          'canonical-vid': contact.id,
-          'portal-id': contact.properties.hs_object_id,
-          properties: Object.entries(contact.properties).reduce((acc, [key, value]) => {
-            acc[key] = { value };
-            return acc;
-          }, {})
-        };
-      } else {
-        throw new Error('Contact not found');
-      }
+      // If identifier is an email, use the email endpoint
+      url = `https://api.hubapi.com/contacts/v1/contact/email/${encodeURIComponent(identifier)}/profile`;
     } else {
-      // If identifier is a contact ID (VID), use the get by ID endpoint
-      url = `https://api.hubapi.com/crm/v3/objects/contacts/${identifier}`;
-      
-      const result = await makeRequestWithTokenRefresh(() => 
-        http.request({
-          method: 'GET',
-          url,
-          params: {
-            properties: 'firstname,lastname,email,company,phone'
-          },
-          headers: {
-            Authorization: `Bearer ${connection.accessToken}`
-          },
-          workspaceId,
-        })
-      );
-      
-      if (result?.data?.id) {
-        // Transform the response to match the expected format
-        const contact = result.data;
-        return {
-          vid: contact.id,
-          'canonical-vid': contact.id,
-          'portal-id': contact.properties.hs_object_id,
-          properties: Object.entries(contact.properties).reduce((acc, [key, value]) => {
-            acc[key] = { value };
-            return acc;
-          }, {})
-        };
-      } else {
-        throw new Error('Contact not found');
-      }
+      // If identifier is a contact ID (VID), use the VID endpoint
+      url = `https://api.hubapi.com/contacts/v1/contact/vid/${encodeURIComponent(identifier)}/profile`;
+    }
+    
+    const result = await http.request({
+      method: 'GET',
+      url,
+      headers: {
+        Authorization: `Bearer ${connection.accessToken}`,
+      },
+      workspaceId,
+    });
+    
+    if (result?.data) {
+      return result.data;
+    } else {
+      throw new Error('Contact not found');
     }
   },
   mockRun: async () => {
