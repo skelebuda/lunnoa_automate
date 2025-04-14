@@ -1,3 +1,10 @@
+# [1.57.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.56.0...v1.57.0) (2025-04-14)
+
+
+### Features
+
+* token refresher ([9ecdd83](https://github.com/skelebuda/lunnoa_automate/commit/9ecdd83787a1f7d6125d3da821255e9a018f8967))
+
 # [1.56.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.55.0...v1.56.0) (2025-04-12)
 
 
