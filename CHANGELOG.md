@@ -1,3 +1,10 @@
+# [1.58.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.57.0...v1.58.0) (2025-04-14)
+
+
+### Features
+
+* old hubspot retriebe API ([6baa71c](https://github.com/skelebuda/lunnoa_automate/commit/6baa71c3a1de88688b549dcbac4eacada43d624e))
+
 # [1.57.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.56.0...v1.57.0) (2025-04-14)
 
 
