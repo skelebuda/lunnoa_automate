@@ -6,55 +6,55 @@ import { shared } from '../shared/hubspot.shared';
 export const retrieveContact = createAction({
   id: 'hubspot_action_retrieve-contact',
   name: 'Retrieve Contact',
-  description: 'Retrieves a contact from HubSpot by email or ID',
+  description: 'Retrieves a contact from HubSpot by email',
   inputConfig: [
     createTextInputField({
-      id: 'identifier',
-      label: 'Contact Identifier',
-      description: 'The email address or contact ID to retrieve',
-      placeholder: 'Enter an email or contact ID',
+      id: 'email',
+      label: 'Email',
+      description: 'The email address of the contact to retrieve',
+      placeholder: 'Enter an email address',
       required: {
-        missingMessage: 'Identifier is required',
+        missingMessage: 'Email is required',
         missingStatus: 'warning',
       },
     }),
   ],
   aiSchema: z.object({
-    identifier: z
+    email: z
       .string()
-      .describe('The email address or contact ID to retrieve'),
+      .email()
+      .describe('The email address of the contact to retrieve'),
   }),
   run: async ({ configValue, connection, workspaceId, http }) => {
-    const { identifier } = configValue;
+    const { email } = configValue;
+    
+    // Use only the email endpoint
+    const url = `https://api.hubapi.com/contacts/v1/contact/email/${encodeURIComponent(email)}/profile`;
 
-    // Determine which endpoint to use based on identifier format
-    let url;
-    if (identifier.includes('@')) {
-      // If identifier is an email, use the email endpoint
-      url = `https://api.hubapi.com/contacts/v1/contact/email/${encodeURIComponent(identifier)}/profile`;
-    } else {
-      // If identifier is a contact ID (VID), use the VID endpoint
-      url = `https://api.hubapi.com/contacts/v1/contact/vid/${encodeURIComponent(identifier)}/profile`;
-    }
-
-    // Use the shared request wrapper with token refresh
-    const result = await shared.makeRequestWithTokenRefresh({
-      connection,
-      workspaceId,
-      http,
-      requestConfig: {
+    try {
+      const result = await http.request({
         method: 'GET',
         url,
         headers: {
-          'Content-Type': 'application/json',
+          Authorization: `Bearer ${connection.accessToken}`,
         },
-      },
-    });
-    
-    if (result?.data) {
-      return result.data;
-    } else {
-      throw new Error('Contact not found');
+        workspaceId,
+      });
+      
+      if (result?.data) {
+        return result.data;
+      } else {
+        throw new Error('Contact not found');
+      }
+    } catch (error) {
+      // Check if it's a token expiration error
+      if (error.response?.status === 401) {
+        throw new Error('Your HubSpot authentication has expired. Please reconnect your account.');
+      }
+      
+      // For other errors, provide more details if available
+      const errorMessage = error.response?.data?.message || error.message || 'Unknown error';
+      throw new Error(`Failed to retrieve contact: ${errorMessage}`);
     }
   },
   mockRun: async () => {
