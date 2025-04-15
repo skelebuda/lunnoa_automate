@@ -1,3 +1,10 @@
+# [1.59.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.58.0...v1.59.0) (2025-04-15)
+
+
+### Features
+
+* refresh token before every call ([4de2319](https://github.com/skelebuda/lunnoa_automate/commit/4de23191e7cc9dec4a5913427ca8beeecae90b08))
+
 # [1.58.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.57.0...v1.58.0) (2025-04-14)
 
 
