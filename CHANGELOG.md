@@ -1,3 +1,10 @@
+# [1.61.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.60.0...v1.61.0) (2025-04-15)
+
+
+### Features
+
+* new oauth ([1ab01a1](https://github.com/skelebuda/lunnoa_automate/commit/1ab01a1ae80abcc99f785fe7766600c98ce9c342))
+
 # [1.60.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.59.0...v1.60.0) (2025-04-15)
 
 
