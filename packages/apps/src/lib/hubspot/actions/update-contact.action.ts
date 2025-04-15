@@ -52,22 +52,32 @@ export const updateContact = createAction({
       })),
     };
 
-    const result = await http.request({
-      method: 'POST',
-      url,
-      data,
-      headers: {
-        Authorization: `Bearer ${connection.accessToken}`,
-      },
-      workspaceId,
-    });
-
-    if (result?.data) {
+    try {
+      const result = await http.request({
+        method: 'POST',
+        url,
+        data,
+        headers: {
+          Authorization: `Bearer ${connection.accessToken}`,
+        },
+        workspaceId,
+      });
+      
+      // HubSpot might not return data even on successful updates
+      // So we'll consider it a success unless there's a specific error
       return {
         updated: true,
+        message: 'Contact updated successfully',
       };
-    } else {
-      throw new Error(`Something went wrong updating the contact`);
+    } catch (error) {
+      // Check if it's a token expiration error
+      if (error.response?.status === 401) {
+        throw new Error('Your HubSpot authentication has expired. Please reconnect your account.');
+      }
+      
+      // For other errors, provide more details if available
+      const errorMessage = error.response?.data?.message || error.message || 'Unknown error';
+      throw new Error(`Failed to update contact: ${errorMessage}`);
     }
   },
   mockRun: async () => {
