@@ -305,7 +305,7 @@ export function SelectNodeTypeForm({
           </DropdownMenu.Label>
           <DropdownMenu.Group className="max-h-[calc(40dvh-135px)]">
             {workflowAppsWithAppNameAndIdOnActionsAndTriggers
-              ?.filter((app) => app.id !== 'flow-control' && app.id !== 'ai')
+              ?.filter((app) => app.id !== 'flow-control')
               ?.map((app) => {
                 let items;
                 if (placeholderType === 'trigger') {

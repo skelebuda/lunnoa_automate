@@ -10,6 +10,7 @@ import { sendMessageToChannel } from './actions/send-message-to-channel.action';
 import { sendMessageToUser } from './actions/send-message-to-user.action';
 import { slackOAuth2 } from './connections/slack.oauth2';
 import { newMessage } from './triggers/new-message.trigger';
+import { searchMessages } from './actions/search.messages.action';
 
 export const slack = createApp({
   id: 'slack',
@@ -25,6 +26,7 @@ export const slack = createApp({
     createChannel,
     listChannels,
     listUsers,
+    searchMessages,
   ],
   triggers: [newMessage],
   connections: [slackOAuth2],
