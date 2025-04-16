@@ -1,3 +1,10 @@
+# [1.62.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.61.0...v1.62.0) (2025-04-16)
+
+
+### Features
+
+* **apps:** slack find message and think tool ([e8becee](https://github.com/skelebuda/lunnoa_automate/commit/e8beceecd21e9f10e4b1b1d22e5ff2f0fe5581ee))
+
 # [1.61.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.60.0...v1.61.0) (2025-04-15)
 
 
