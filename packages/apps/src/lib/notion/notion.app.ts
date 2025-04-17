@@ -1,4 +1,4 @@
-import { createApp } from '@lecca-io/toolkit';
+import { createApp } from '@lunnoa-automate/toolkit';
 
 import { addDatabaseItem } from './actions/add-database-item.action';
 import { appendPage } from './actions/append-to-page.action';

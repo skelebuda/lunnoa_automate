@@ -1,5 +1,5 @@
-import { createAction } from '@lecca-io/toolkit';
-import { createDynamicSelectInputField } from '@lecca-io/toolkit';
+import { createAction } from '@lunnoa-automate/toolkit';
+import { createDynamicSelectInputField } from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
 export const clearKnowledge = createAction({

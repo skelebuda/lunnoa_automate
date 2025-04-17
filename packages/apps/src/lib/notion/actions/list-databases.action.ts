@@ -1,4 +1,4 @@
-import { createAction } from '@lecca-io/toolkit';
+import { createAction } from '@lunnoa-automate/toolkit';
 import { DatabaseObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import { z } from 'zod';
 

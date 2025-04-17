@@ -2,7 +2,7 @@ import {
   FieldConfig,
   createDynamicSelectInputField,
   createNestedFields,
-} from '@lecca-io/toolkit';
+} from '@lunnoa-automate/toolkit';
 import { Client } from '@notionhq/client';
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
