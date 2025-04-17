@@ -2,11 +2,11 @@ import { createApp } from '@lunnoa-automate/toolkit';
 
 import { agents } from './lib/agents/agents.app';
 import { ai } from './lib/ai/ai.app';
-import { airtable } from './lib/airtable/airtable.app';
+//import { airtable } from './lib/airtable/airtable.app';
 import { anchorBrowser } from './lib/anchor-browser/anchor-browser.app';
 import { anthropic } from './lib/anthropic/anthropic.app';
 import { apify } from './lib/apify/apify.app';
-import { braveSearch } from './lib/brave-search/brave-search.app';
+//import { braveSearch } from './lib/brave-search/brave-search.app';
 import { calendly } from './lib/calendly/calendly.app';
 import { codesandbox } from './lib/codesandbox/codesandbox.app';
 import { csv } from './lib/csv/csv.app';
@@ -38,13 +38,13 @@ import { paradigmVendo } from './lib/paradigm-vendo/paradigm-vendo.app';
 import { perplexityAi } from './lib/perplexity-ai/perplexity-ai.app';
 import { phone } from './lib/phone/phone.app';
 import { pinecone } from './lib/pinecone/pinecone.app';
-import { salesRabbit } from './lib/sales-rabbit/sales-rabbit.app';
+//import { salesRabbit } from './lib/sales-rabbit/sales-rabbit.app';
 import { serper } from './lib/serper/serper.app';
 import { slack } from './lib/slack/slack.app';
 import { surgemsg } from './lib/surgemsg/surgemsg.app';
 import { text } from './lib/text/text.app';
 import { togetherAi } from './lib/together-ai/together-ai.app';
-import { vapi } from './lib/vapi/vapi.app';
+//import { vapi } from './lib/vapi/vapi.app';
 import { variables } from './lib/variables/variables.app';
 import { web } from './lib/web/web.app';
 import { x } from './lib/x/x.app';
@@ -56,11 +56,11 @@ import { zohoCrm } from './lib/zoho-crm/zoho-crm.app';
 const apps: Record<string, ReturnType<typeof createApp>> = {
   [agents.id]: agents,
   [ai.id]: ai,
-  [airtable.id]: airtable,
+  //[airtable.id]: airtable,
   [anchorBrowser.id]: anchorBrowser,
   [anthropic.id]: anthropic,
   [apify.id]: apify,
-  [braveSearch.id]: braveSearch,
+ // [braveSearch.id]: braveSearch,
   [calendly.id]: calendly,
   [codesandbox.id]: codesandbox,
   [csv.id]: csv,
@@ -92,13 +92,13 @@ const apps: Record<string, ReturnType<typeof createApp>> = {
   [perplexityAi.id]: perplexityAi,
   [phone.id]: phone,
   [pinecone.id]: pinecone,
-  [salesRabbit.id]: salesRabbit,
+  //[salesRabbit.id]: salesRabbit,
   [serper.id]: serper,
   [slack.id]: slack,
   [surgemsg.id]: surgemsg,
   [text.id]: text,
   [togetherAi.id]: togetherAi,
-  [vapi.id]: vapi,
+ // [vapi.id]: vapi,
   [variables.id]: variables,
   [web.id]: web,
   [x.id]: x,
