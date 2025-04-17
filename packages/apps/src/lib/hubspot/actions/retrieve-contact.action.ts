@@ -1,8 +1,6 @@
 import { createAction, createTextInputField } from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
-import { shared } from '../shared/hubspot.shared';
-
 export const retrieveContact = createAction({
   id: 'hubspot_action_retrieve-contact',
   name: 'Retrieve Contact',
@@ -31,30 +29,19 @@ export const retrieveContact = createAction({
     // Use only the email endpoint
     const url = `https://api.hubapi.com/contacts/v1/contact/email/${encodeURIComponent(email)}/profile`;
 
-    try {
-      const result = await http.request({
-        method: 'GET',
-        url,
-        headers: {
-          Authorization: `Bearer ${connection.accessToken}`,
-        },
-        workspaceId,
-      });
-      
-      if (result?.data) {
-        return result.data;
-      } else {
-        throw new Error('Contact not found');
-      }
-    } catch (error) {
-      // Check if it's a token expiration error
-      if (error.response?.status === 401) {
-        throw new Error('Your HubSpot authentication has expired. Please reconnect your account.');
-      }
-      
-      // For other errors, provide more details if available
-      const errorMessage = error.response?.data?.message || error.message || 'Unknown error';
-      throw new Error(`Failed to retrieve contact: ${errorMessage}`);
+    const result = await http.request({
+      method: 'GET',
+      url,
+      headers: {
+        Authorization: `Bearer ${connection.accessToken}`,
+      },
+      workspaceId,
+    });
+    
+    if (result?.data) {
+      return result.data;
+    } else {
+      throw new Error('Contact not found');
     }
   },
   mockRun: async () => {
