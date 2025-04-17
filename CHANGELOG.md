@@ -1,3 +1,10 @@
+# [1.76.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.75.0...v1.76.0) (2025-04-17)
+
+
+### Features
+
+* disables some app and hubspot ([da932ec](https://github.com/skelebuda/lunnoa_automate/commit/da932ec85d58ab633a609ea3e8bab2530fdcf34c))
+
 # [1.75.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.74.0...v1.75.0) (2025-04-17)
 
 
