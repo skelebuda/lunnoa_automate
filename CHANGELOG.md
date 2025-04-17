@@ -1,3 +1,11 @@
+# [1.66.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.65.0...v1.66.0) (2025-04-17)
+
+
+### Features
+
+* Merge branch 'main' of https://github.com/skelebuda/Lunnoa_Automate ([af03038](https://github.com/skelebuda/lunnoa_automate/commit/af0303875d3e40a47818090e667c51420d964638))
+* version mismatch fix ([17630c8](https://github.com/skelebuda/lunnoa_automate/commit/17630c8e7966cf33d5bfd3acdbdbaa58282e5c30))
+
 # [1.65.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.64.0...v1.65.0) (2025-04-17)
 
 
