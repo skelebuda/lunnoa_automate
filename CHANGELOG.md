@@ -1,3 +1,10 @@
+# [1.69.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.68.0...v1.69.0) (2025-04-17)
+
+
+### Features
+
+* realase ([bccc001](https://github.com/skelebuda/lunnoa_automate/commit/bccc0018696c8e904e82f129db56becb4c1915fd))
+
 # [1.68.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.67.0...v1.68.0) (2025-04-17)
 
 
