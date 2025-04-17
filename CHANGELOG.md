@@ -1,3 +1,10 @@
+# [1.65.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.64.0...v1.65.0) (2025-04-17)
+
+
+### Features
+
+* fix knowledge import ([6f76543](https://github.com/skelebuda/lunnoa_automate/commit/6f76543f991b30ce3eaf202d1dbc3000a6faae19))
+
 # [1.64.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.63.0...v1.64.0) (2025-04-17)
 
 
