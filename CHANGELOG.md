@@ -1,3 +1,10 @@
+# [1.74.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.73.0...v1.74.0) (2025-04-17)
+
+
+### Features
+
+* connection projectId Fix ([cf785c5](https://github.com/skelebuda/lunnoa_automate/commit/cf785c5113075983c45ca363aa7300628bef2170))
+
 # [1.73.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.72.0...v1.73.0) (2025-04-17)
 
 
