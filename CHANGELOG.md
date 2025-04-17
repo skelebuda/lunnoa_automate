@@ -1,3 +1,10 @@
+# [1.75.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.74.0...v1.75.0) (2025-04-17)
+
+
+### Features
+
+* better error logging ([8216a8b](https://github.com/skelebuda/lunnoa_automate/commit/8216a8bf6cadc8b1c012c5e1bea0f7bb5a2a7f0e))
+
 # [1.74.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.73.0...v1.74.0) (2025-04-17)
 
 
