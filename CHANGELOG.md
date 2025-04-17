@@ -1,3 +1,10 @@
+# [1.71.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.70.0...v1.71.0) (2025-04-17)
+
+
+### Features
+
+* **app:** retrieve action now throws 401 error ([2213cdf](https://github.com/skelebuda/lunnoa_automate/commit/2213cdf7e684ffe50ba1d9783be7793a10987011))
+
 # [1.70.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.69.0...v1.70.0) (2025-04-17)
 
 
