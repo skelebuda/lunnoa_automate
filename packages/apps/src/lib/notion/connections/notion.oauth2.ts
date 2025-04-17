@@ -1,4 +1,4 @@
-import { createOAuth2Connection } from '@lunnoa-automate/toolkit';
+import { createOAuth2Connection } from '@lecca-io/toolkit';
 
 export const notionOAuth2 = createOAuth2Connection({
   id: 'notion_connection_oauth2',

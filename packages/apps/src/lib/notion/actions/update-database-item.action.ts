@@ -1,4 +1,4 @@
-import { createAction } from '@lunnoa-automate/toolkit';
+import { createAction } from '@lecca-io/toolkit';
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import { z } from 'zod';
 

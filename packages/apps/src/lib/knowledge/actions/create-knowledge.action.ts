@@ -2,7 +2,7 @@ import {
   createAction,
   createSelectInputField,
   createTextInputField,
-} from '@lunnoa-automate/toolkit';
+} from '@lecca-io/toolkit';
 import { z } from 'zod';
 
 export const createKnowledge = createAction({

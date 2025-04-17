@@ -1,4 +1,4 @@
-import { createAction } from '@lunnoa-automate/toolkit';
+import { createAction } from '@lecca-io/toolkit';
 import { z } from 'zod';
 
 import { shared } from '../shared/notion.shared';

@@ -1,7 +1,7 @@
 import {
   createTimeBasedPollTrigger,
   dateStringToMilliOrNull,
-} from '@lunnoa-automate/toolkit';
+} from '@lecca-io/toolkit';
 
 import { shared } from '../shared/notion.shared';
 

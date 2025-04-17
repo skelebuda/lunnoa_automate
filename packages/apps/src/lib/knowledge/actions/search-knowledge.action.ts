@@ -1,10 +1,10 @@
-import { createAction } from '@lunnoa-automate/toolkit';
+import { createAction } from '@lecca-io/toolkit';
 import {
   createDynamicSelectInputField,
   createNumberInputField,
   createSwitchInputField,
   createTextInputField,
-} from '@lunnoa-automate/toolkit';
+} from '@lecca-io/toolkit';
 import { z } from 'zod';
 
 export const searchKnowledge = createAction({
@@ -161,12 +161,14 @@ export const searchKnowledge = createAction({
     });
 
     return {
+      knowledgeId: configValue.knowledgeId,
       results: contextFromKnowledge ?? [],
     };
   },
 
   mockRun: async () => {
     return {
+      knowledgeId: 'knowledgeId',
       results: ['result 1', 'result 2', 'result 3'],
     };
   },

@@ -3,7 +3,7 @@ import {
   createDynamicSelectInputField,
   createNumberInputField,
   createTextInputField,
-} from '@lunnoa-automate/toolkit';
+} from '@lecca-io/toolkit';
 import { z } from 'zod';
 
 export const saveToKnowledge = createAction({
