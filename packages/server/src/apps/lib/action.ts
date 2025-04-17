@@ -92,6 +92,13 @@ export class Action {
         return response;
       }
     } catch (error) {
+      console.log(`[ACTION ERROR] Error:`, {
+        message: error.message,
+        status: error?.status,
+        responseStatus: error?.response?.status,
+        responseData: error?.response?.data,
+        stack: error.stack,
+      });
       /**
        * If there's an error, check if it's a 401 error.
        * If it is, check if the connection has a refresh token and a refresh method.
@@ -99,24 +106,10 @@ export class Action {
        * If the refresh doesn't work, return the failure.
        * If the refresh works, then run the action again.
        */
-      console.log(`[ACTION ERROR] Action: ${this.id}, Error:`, {
-        message: error.message,
-        status: error?.status,
-        responseStatus: error?.response?.status,
-        responseData: error?.response?.data,
-        errorObject: JSON.stringify(error),
-        hasResponse: !!error.response,
-        needsConnection: this.needsConnection
-      });
-      
       try {
         const status = error?.status ?? error.response?.status;
-        console.log(`[STATUS CHECK] Action: ${this.id}, Extracted status: ${status}, needsConnection: ${this.needsConnection}, connectionId: ${(args.configValue as any).connectionId}`);
-        
         //if error status is 401, call this.refreshToken
         if (status === 401 && this.needsConnection) {
-          console.log(`[TOKEN REFRESH] Starting token refresh for action: ${this.id}`);
-          
           const connection = await this.app.connection.findOne({
             connectionId: (args.configValue as any).connectionId,
             expansion: { credentials: true, connectionId: true },
