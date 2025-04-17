@@ -1,3 +1,10 @@
+# [1.64.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.63.0...v1.64.0) (2025-04-17)
+
+
+### Features
+
+* **fix:** import update for lunnoa automate ([d7052fb](https://github.com/skelebuda/lunnoa_automate/commit/d7052fb1126325faddac90c37385ad4d7c6f7d85))
+
 # [1.63.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.62.0...v1.63.0) (2025-04-17)
 
 
