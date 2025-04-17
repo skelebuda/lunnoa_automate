@@ -1,3 +1,10 @@
+# [1.63.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.62.0...v1.63.0) (2025-04-17)
+
+
+### Features
+
+* **apps:** new apps added for notion ([7a24556](https://github.com/skelebuda/lunnoa_automate/commit/7a24556db990b4f1ef1bee6c3dc1e86f543b10e2))
+
 # [1.62.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.61.0...v1.62.0) (2025-04-16)
 
 
