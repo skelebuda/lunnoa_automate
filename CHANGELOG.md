@@ -1,3 +1,10 @@
+# [1.68.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.67.0...v1.68.0) (2025-04-17)
+
+
+### Features
+
+* pnpm lock fix ([9516d31](https://github.com/skelebuda/lunnoa_automate/commit/9516d3138afa4ca9fd3c1a19fd4ebbbef5f7c95b))
+
 # [1.67.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.66.0...v1.67.0) (2025-04-17)
 
 
