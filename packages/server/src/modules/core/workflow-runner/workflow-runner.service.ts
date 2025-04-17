@@ -679,7 +679,7 @@ export class WorkflowRunnerService {
 
     let response: ActionResponse<unknown> | TriggerResponse<unknown>;
 
-    console.log(`[RUN NODE START] Node: ${node.id}, Action: ${node.actionId}`);
+    console.log(`[RUN NODE START]  Node: ${node.id}, Action: ${node.actionId}`);
     
     if (type === 'action') {
       try {
