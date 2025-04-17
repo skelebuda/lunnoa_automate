@@ -158,7 +158,7 @@ export class OAuth2Connection extends Connection {
       connectionId: this.id,
       description: args.configValue?.description,
       workspaceId: args.workspaceId,
-      // projectId: args.configValue?.projectId,
+      projectId: args.configValue?.projectId,
     };
 
     // Create a URL object from this.authUrl() to handle possible existing query params
