@@ -16,7 +16,7 @@ export const slack = createApp({
   id: 'slack',
   name: 'Slack',
   description:
-    'Slack is a messaging app for business that connects people to the information they need.',
+    'Slack is a messaging app for business that connects people to the information they need',
   logoUrl: 'https://lecca-io.s3.us-east-2.amazonaws.com/assets/apps/slack.svg',
   actions: [
     sendMessageToUser,
