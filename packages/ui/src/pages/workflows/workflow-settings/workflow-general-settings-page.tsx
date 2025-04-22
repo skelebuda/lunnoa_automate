@@ -219,8 +219,6 @@ export default function WorkflowGeneralSettingsPage() {
             </Button>
           </form>
         </Form>
-        {workspaceUser?.user?.email?.includes('sasakelebuda@lunnoalabs.ch') && (
-          <>
             <Separator />
             <div className="space-y-4">
               <Card.Title>Template</Card.Title>
@@ -244,8 +242,29 @@ export default function WorkflowGeneralSettingsPage() {
                 </Card.Description>
               </div>
             </div>
-          </>
-        )}
+        <Separator />
+        <div className="space-y-4">
+              <Card.Title>App (Beta)</Card.Title>
+              <div className="space-y-2">
+                <Card className="flex justify-between items-center">
+                  <Card.Header>
+                    <Card.Title>Create App</Card.Title>
+                  </Card.Header>
+                  <Card.Content className="flex items-center p-6">
+                    <Button
+                      variant="outline"
+                      onClick={handleSaveAsTemplate}
+                      loading={isCreatingTemplate}
+                    >
+                      Publish
+                    </Button>
+                  </Card.Content>
+                </Card>
+                <Card.Description>
+                  Publish this workflow as app globally.
+                </Card.Description>
+              </div>
+            </div>
         <Separator />
         <div className="space-y-4">
           <Card.Title>Danger Zone</Card.Title>

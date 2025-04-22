@@ -48,7 +48,7 @@ export function TeamMembersPage() {
   return (
     <PageLayout
       title="Team Members"
-      subtitle="Collaborate on projects as a team."
+      subtitle="Collaborate on workspaces and projects as a team."
       actions={
         (!isLoadingWorkspaceInvitations &&
           enabledFeatures?.TEAMS &&

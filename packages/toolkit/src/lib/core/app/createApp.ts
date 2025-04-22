@@ -27,6 +27,11 @@ export type CreateAppArgs = {
   description: string;
 
   /**
+   * The access control of the app.
+   */
+  accessControl?: Array<'global' | 'workspace' | 'project' | 'private'>;
+
+  /**
    * The logo URL of the app.
    */
   logoUrl: string;

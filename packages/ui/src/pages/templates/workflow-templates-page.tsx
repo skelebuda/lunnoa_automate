@@ -157,11 +157,7 @@ export function WorkflowTemplatesPage() {
                 />
               )}
           </div>
-          <Tabs.List
-            className={cn({
-              hidden: !workspaceUser?.user?.email.includes('sasakelebuda@lunnoalabs.ch'),
-            })}
-          >
+          <Tabs.List>
             <Tabs.Trigger
               onClick={() => setSharedToType('project')}
               value="project"
