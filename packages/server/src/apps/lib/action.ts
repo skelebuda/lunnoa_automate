@@ -92,7 +92,7 @@ export class Action {
         return response;
       }
     } catch (error) {
-      console.log(`[ACTION ERROR] Error:`, {
+      console.log(`[ACTION ERROR] Error in prepareAndRunAction for ${this.id}:`, {
         message: error.message,
         status: error?.status,
         responseStatus: error?.response?.status,
@@ -108,18 +108,25 @@ export class Action {
        */
       try {
         const status = error?.status ?? error.response?.status;
+        console.log(`[ACTION REFRESH] Checking for 401 status. Current status: ${status}, needsConnection: ${this.needsConnection}`);
+        
         //if error status is 401, call this.refreshToken
         if (status === 401 && this.needsConnection) {
+          console.log(`[ACTION REFRESH] 401 error detected, attempting to refresh token`);
+          
           const connection = await this.app.connection.findOne({
             connectionId: (args.configValue as any).connectionId,
             expansion: { credentials: true, connectionId: true },
             throwNotFoundException: true,
           });
+          
+          console.log(`[ACTION REFRESH] Found connection: ${connection.id}, hasRefreshToken: ${!!connection.refreshToken}`);
 
           const appConnection = this.app.connectionMap[connection.connectionId];
 
           if (appConnection && connection.refreshToken) {
             try {
+              console.log(`[ACTION REFRESH] Attempting to refresh token for connection ${connection.id}`);
               await (appConnection as OAuth2Connection).refreshAccessToken?.({
                 connection: {
                   id: connection.id,
@@ -127,9 +134,16 @@ export class Action {
                 },
                 workspaceId: args.workspaceId,
               });
+              console.log(`[ACTION REFRESH] Token refreshed successfully, retrying action`);
 
               return await this.runAction(args);
             } catch (error) {
+              console.log(`[ACTION REFRESH] Failed to refresh token:`, {
+                message: error.message,
+                status: error?.status,
+                responseStatus: error?.response?.status,
+              });
+              
               return {
                 failure:
                   error?.response?.message ||
@@ -140,7 +154,11 @@ export class Action {
                   `Something went wrong while running action: ${this.name}}`,
               };
             }
+          } else {
+            console.log(`[ACTION REFRESH] Cannot refresh token - missing appConnection or refreshToken`);
           }
+        } else {
+          console.log(`[ACTION REFRESH] Not a 401 error or doesn't need connection, status: ${status}, needsConnection: ${this.needsConnection}`);
         }
 
         return {
@@ -153,6 +171,10 @@ export class Action {
             `Something went wrong while running action: ${this.name}}`,
         };
       } catch (error) {
+        console.log(`[ACTION REFRESH] Error in error handling:`, {
+          message: error.message,
+        });
+        
         return {
           failure:
             error?.response?.message ||
