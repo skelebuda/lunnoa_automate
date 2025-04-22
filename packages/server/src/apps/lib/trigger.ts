@@ -589,24 +589,13 @@ export class Trigger {
             aiProviders: this.app.aiProviders,
           });
         } catch (err) {
-          console.log(`[TRIGGER REFRESH] Error in _getDynamicValues:`, {
-            message: err.message,
-            status: err?.status,
-            responseStatus: err?.response?.status,
-            responseData: err?.response?.data,
-          });
-          
           const status = err.status ?? err.response?.status;
-          console.log(`[TRIGGER REFRESH] Checking for 401 status. Current status: ${status}, hasConnection: ${!!connection}`);
-
           if (status === 401 && connection) {
-            console.log(`[TRIGGER REFRESH] 401 error detected, attempting to refresh token`);
-            const appConnection = this.app.connectionMap[connection.connectionId];
-            console.log(`[TRIGGER REFRESH] Found appConnection: ${!!appConnection}, hasRefreshMethod: ${!!(appConnection && (appConnection as any).refreshAccessToken)}`);
+            const appConnection =
+              this.app.connectionMap[connection.connectionId];
 
             if (appConnection && connection.refreshToken) {
               try {
-                console.log(`[TRIGGER REFRESH] Attempting to refresh token for connection ${connection.id}`);
                 await (appConnection as OAuth2Connection).refreshAccessToken?.({
                   connection: {
                     id: connection.id,
@@ -614,7 +603,6 @@ export class Trigger {
                   },
                   workspaceId,
                 });
-                console.log(`[TRIGGER REFRESH] Token refreshed successfully, retrying dynamic values fetch`);
 
                 const updatedConnection = await this.app.connection.findOne({
                   connectionId: connectionId,
@@ -633,20 +621,12 @@ export class Trigger {
                   prisma: this.app.prisma,
                   aiProviders: this.app.aiProviders,
                 });
-              } catch (refreshError) {
-                console.log(`[TRIGGER REFRESH] Failed to refresh token:`, {
-                  message: refreshError.message,
-                });
-                
+              } catch {
                 throw new ForbiddenException(
                   'Please re-authenticate your connection',
                 );
               }
-            } else {
-              console.log(`[TRIGGER REFRESH] Cannot refresh token - missing appConnection or refreshToken`);
             }
-          } else {
-            console.log(`[TRIGGER REFRESH] Not a 401 error or doesn't have connection, status: ${status}`);
           }
 
           throw err;
