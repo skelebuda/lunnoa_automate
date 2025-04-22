@@ -1,3 +1,10 @@
+# [1.78.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.77.0...v1.78.0) (2025-04-22)
+
+
+### Features
+
+* app maker ([f683d2e](https://github.com/skelebuda/lunnoa_automate/commit/f683d2e7b63bfa457d176b234510dc6b7696892b))
+
 # [1.77.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.76.0...v1.77.0) (2025-04-17)
 
 
