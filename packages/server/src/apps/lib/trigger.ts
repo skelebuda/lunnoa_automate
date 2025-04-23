@@ -403,19 +403,11 @@ export class Trigger {
       try {
         const status = error.status ?? error.response?.status;
         //if error status is 401, call this.refreshToken
-        console.log('Checking for refresh token conditions - Error status:', status, 'Connection needed:', this.needsConnection);
-        
         if (status === 401 && this.needsConnection) {
           const connection = await this.app.connection.findOne({
             connectionId: (args.configValue as any).connectionId,
             expansion: { credentials: true, connectionId: true },
             throwNotFoundException: true,
-          });
-
-          console.log('Attempting token refresh - Status:', status, 'Connection:', {
-            id: connection.id,
-            connectionId: connection.connectionId,
-            hasRefreshToken: !!connection.refreshToken
           });
           
           const appConnection = this.app.connectionMap[connection.connectionId];

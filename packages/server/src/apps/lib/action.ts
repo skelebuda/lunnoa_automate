@@ -121,7 +121,18 @@ export class Action {
                 workspaceId: args.workspaceId,
               });
 
-              return await this.runAction(args);
+              // Fetch the updated connection with the new access token
+              const updatedConnection = await this.app.connection.findOne({
+                connectionId: (args.configValue as any).connectionId,
+                expansion: { credentials: true, connectionId: true },
+                throwNotFoundException: true,
+              });
+
+              // Update the configValue with the updated connection if needed
+              // (This might be necessary if your runTrigger method uses the connection from configValue)
+
+              const response = await this.runAction(args);
+              return response;
             } catch (error) {
               return {
                 failure:
