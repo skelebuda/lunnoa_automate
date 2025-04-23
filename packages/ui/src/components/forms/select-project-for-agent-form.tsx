@@ -18,8 +18,8 @@ import { Skeleton } from '../ui/skeleton';
 import { CreateProjectForm } from './create-project-form';
 
 const selectProjectForAgentSchema = z.object({
-  projectId: z.string(),
-  agentName: z.string(),
+  projectId: z.string().min(1, "Project is required"),
+  agentName: z.string().min(1, "Agent name is required"),
 });
 
 type SelectProjectType = z.infer<typeof selectProjectForAgentSchema>;
@@ -37,8 +37,9 @@ export function SelectProjectForAgentForm() {
     resolver: zodResolver(selectProjectForAgentSchema),
     defaultValues: {
       agentName: '',
-      projectId: projectId,
+      projectId: projectId || '',
     },
+    mode: "onChange",
   });
 
   //Only getting agents to get the count of agents. Agents should be cached already.
