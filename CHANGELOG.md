@@ -1,3 +1,10 @@
+# [1.87.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.86.0...v1.87.0) (2025-04-23)
+
+
+### Features
+
+* extenden Loggin ([42cbc82](https://github.com/skelebuda/lunnoa_automate/commit/42cbc823efefa6e94f6f277cb1052070209c1854))
+
 # [1.86.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.85.0...v1.86.0) (2025-04-23)
 
 
