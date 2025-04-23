@@ -1,3 +1,10 @@
+# [1.89.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.88.0...v1.89.0) (2025-04-23)
+
+
+### Features
+
+* server update ([44be45f](https://github.com/skelebuda/lunnoa_automate/commit/44be45fd3a1ced471d92570219a77a3762abdf65))
+
 # [1.88.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.87.0...v1.88.0) (2025-04-23)
 
 
