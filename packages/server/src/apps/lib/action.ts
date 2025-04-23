@@ -283,7 +283,7 @@ export class Action {
       };
     } else {
       try {
-        const runResponse = await this.run({
+        const result = await this.run({
           configValue: args.configValue,
           connection,
           workspaceId: args.workspaceId,
@@ -303,26 +303,26 @@ export class Action {
           knowledge: this.app.knowledge,
           execution: this.app.execution,
         });
-        console.log('Run response:', JSON.stringify(runResponse));
 
-        if (this.handleInterruptingResponse) {
-          const interruptingResponse = this.handleInterruptingResponse({ runResponse });
-          console.log('Interrupting response:', JSON.stringify(interruptingResponse));
-          return interruptingResponse;
-        } else {
-          return {
-            success: runResponse,
-          };
-        }
-      } catch (error) {
         return {
-          failure:
-            error?.response?.message ||
-            error?.response?.data ||
-            error?.response?.data?.errorDetails ||
-            error?.response?.error ||
-            error.message ||
-            `Something went wrong while running action: ${this.name}}`,
+          success: result,
+        };
+      } catch (error) {
+        console.log(`[ACTION] Error in run method:`, {
+          message: error.message,
+          status: error?.status,
+          responseStatus: error?.response?.status
+        });
+        
+        // If this is a 401 error, re-throw it so prepareAndRunAction can handle it
+        if (error.status === 401 || error.response?.status === 401) {
+          console.log(`[ACTION] Re-throwing 401 error for token refresh`);
+          throw error;
+        }
+        
+        // For other errors, return a failure response
+        return {
+          failure: error.message,
         };
       }
     }
