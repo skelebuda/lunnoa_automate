@@ -1,3 +1,10 @@
+# [1.90.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.89.0...v1.90.0) (2025-04-23)
+
+
+### Features
+
+* fix acessControl ([673e125](https://github.com/skelebuda/lunnoa_automate/commit/673e1258200479684fd4b8972ae9a450d63c08d7))
+
 # [1.89.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.88.0...v1.89.0) (2025-04-23)
 
 
