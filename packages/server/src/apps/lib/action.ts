@@ -128,21 +128,15 @@ export class Action {
                 throwNotFoundException: true,
               });
 
-              // Update the configValue with the updated connection if needed
-              // (This might be necessary if your runTrigger method uses the connection from configValue)
-
-              const response = await this.runAction(args);
+              // Now run the action again with the same args but with the updated connection
+              const response = await this.runAction({
+                ...args,
+                connection: updatedConnection  // Pass the updated connection explicitly
+              });
               return response;
             } catch (error) {
-              return {
-                failure:
-                  error?.response?.message ||
-                  error?.response?.data ||
-                  error?.response?.data?.errorDetails ||
-                  error?.response?.error ||
-                  error.message ||
-                  `Something went wrong while running action: ${this.name}}`,
-              };
+              // Match the error handling pattern from retrieveDynamicValues
+              throw new ForbiddenException('Please re-authenticate your connection');
             }
           }
         }
@@ -180,6 +174,7 @@ export class Action {
     executionId: string | undefined;
     taskId: string | undefined;
     shouldMock?: boolean;
+    connection?: Partial<Connection>;
   }): Promise<ActionResponse<unknown>> {
     let connection: Partial<Connection>;
 
@@ -657,4 +652,5 @@ type PrepareAndRunActionArgs = {
   taskId: string | undefined;
   shouldMock?: boolean;
   testing?: boolean;
+  connection?: Partial<Connection>;
 };
