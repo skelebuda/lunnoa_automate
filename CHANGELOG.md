@@ -1,3 +1,10 @@
+# [1.92.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.91.0...v1.92.0) (2025-04-23)
+
+
+### Features
+
+* make workflow to isApp true ([89ed890](https://github.com/skelebuda/lunnoa_automate/commit/89ed8900ac2d0bdd0c13f34e3803326fbae24bc5))
+
 # [1.91.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.90.0...v1.91.0) (2025-04-23)
 
 
