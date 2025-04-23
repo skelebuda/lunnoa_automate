@@ -104,10 +104,15 @@ export default function WorkflowGeneralSettingsPage() {
   const handleWorkflowToApp = useCallback(async (isApp: boolean) => {
     setIsWorkflowToApp(true);
     return await WorkflowToApp.mutateAsync(
-      { id: workflowId as string, data: { isApp: isApp } },
+      { 
+        id: workflowId as string, 
+        data: { isApp: isApp } 
+      },
       {
         onSuccess: () => {
-          toast({ title: 'Workflow made to app' });
+          toast({
+            title: isApp ? 'Workflow published' : 'Workflow unpublished',
+          });
         },
         onSettled: () => {
           setIsWorkflowToApp(false);
@@ -147,7 +152,7 @@ export default function WorkflowGeneralSettingsPage() {
       });
     }
   }, [form, workflow]);
-
+  console.log(workflow);
   if (isLoadingWorkflow) {
     return <Loader />;
   }
