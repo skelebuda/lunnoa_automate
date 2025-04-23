@@ -410,6 +410,12 @@ export class Trigger {
             throwNotFoundException: true,
           });
 
+          console.log('Attempting token refresh - Status:', status, 'Connection:', {
+            id: connection.id,
+            connectionId: connection.connectionId,
+            hasRefreshToken: !!connection.refreshToken
+          });
+          
           const appConnection = this.app.connectionMap[connection.connectionId];
 
           if (appConnection && connection.refreshToken) {
