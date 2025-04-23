@@ -124,6 +124,7 @@ export class WorkflowsService {
         updatedAt: expansion?.updatedAt ?? false,
         isActive: expansion?.isActive ?? false,
         isInternal: expansion?.isInternal ?? false,
+        isApp: expansion?.isApp ?? false,
         nodes: expansion?.nodes ?? false,
         edges: expansion?.edges ?? false,
         triggerNode: expansion?.triggerNode ?? false,
@@ -263,6 +264,19 @@ export class WorkflowsService {
     return this.findOne({
       workflowId: updatedWorkflow.id,
       expansion,
+    });
+  }
+
+  async WorkflowToApp({
+    workflowId,
+    isApp,
+  }: {
+    workflowId: string;
+    isApp: boolean;
+  }) {
+    await this.prisma.workflow.update({
+      where: { id: workflowId },
+      data: { isApp: isApp },
     });
   }
 

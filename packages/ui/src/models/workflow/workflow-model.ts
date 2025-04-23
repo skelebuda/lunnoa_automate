@@ -27,6 +27,7 @@ export const workflowSchema = z.object({
     .transform((val) => newDateOrUndefined(val)),
   name: z.string(),
   isActive: z.boolean(),
+  isApp: z.boolean().optional(),
   isInternal: z.boolean().optional(),
   description: z.string().optional(),
   triggerAndActionIds: z.array(z.string()).optional(),
@@ -57,6 +58,7 @@ export const updateWorkflowSchema = workflowSchema
     edges: true,
     name: true,
     isActive: true,
+    isApp: true,
     description: true,
     workflowOrientation: true,
   })

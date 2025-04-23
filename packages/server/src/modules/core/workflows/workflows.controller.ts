@@ -138,6 +138,18 @@ export class WorkflowsController {
     return workflow;
   }
 
+  @Patch(':workflowId/make-app')
+  @BelongsTo({ owner: 'either', key: 'workflowId', roles: ['MAINTAINER'] })
+   makeWorkflowToApp(
+    @Param('workflowId') workflowId: string,
+    @Body() data: { isApp: boolean },
+  ) {
+    return this.workflowsService.WorkflowToApp({
+      workflowId,
+      isApp: data.isApp,
+    });
+  }
+
   @Delete(':workflowId')
   @BelongsTo({ owner: 'either', key: 'workflowId', roles: ['MAINTAINER'] })
   delete(@Param('workflowId') workflowId: string) {

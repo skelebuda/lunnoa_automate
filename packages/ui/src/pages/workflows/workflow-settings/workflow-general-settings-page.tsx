@@ -27,6 +27,7 @@ export default function WorkflowGeneralSettingsPage() {
   const [isDeleting, setIsDeleting] = useState(false);
   const { workspaceUser } = useUser();
   const [isCreatingTemplate, setIsCreatingTemplate] = useState(false);
+  const [isWorkflowToApp, setIsWorkflowToApp] = useState(false);
   const navigate = useNavigate();
   const { data: workflow, isLoading: isLoadingWorkflow } = useApiQuery({
     service: 'workflows',
@@ -63,6 +64,11 @@ export default function WorkflowGeneralSettingsPage() {
     method: 'create',
   });
 
+  const WorkflowToApp = useApiMutation({
+    service: 'workflows',
+    method: 'WorkflowToApp',
+  });
+
   const handleSaveAsTemplate = useCallback(async () => {
     setIsCreatingTemplate(true);
     return await createWorkflowTemplate.mutateAsync(
@@ -95,6 +101,21 @@ export default function WorkflowGeneralSettingsPage() {
     );
   }, [createWorkflowTemplate, navigate, projectId, workflowId]);
 
+  const handleWorkflowToApp = useCallback(async (isApp: boolean) => {
+    setIsWorkflowToApp(true);
+    return await WorkflowToApp.mutateAsync(
+      { id: workflowId as string, data: { isApp: isApp } },
+      {
+        onSuccess: () => {
+          toast({ title: 'Workflow made to app' });
+        },
+        onSettled: () => {
+          setIsWorkflowToApp(false);
+        },
+      },
+    );
+  }, [WorkflowToApp, workflowId]);
+
   const onSubmit = async (data: UpdateWorkflowType) => {
     setIsSubmitting(true);
 
@@ -122,6 +143,7 @@ export default function WorkflowGeneralSettingsPage() {
         description: workflow.description ?? '',
         name: workflow.name,
         workflowOrientation: workflow.workflowOrientation,
+        isApp: workflow.isApp,
       });
     }
   }, [form, workflow]);
@@ -243,18 +265,20 @@ export default function WorkflowGeneralSettingsPage() {
               </div>
             </div>
         <Separator />
+        {!workflow.isApp ? (
+          <>
         <div className="space-y-4">
               <Card.Title>App (Beta)</Card.Title>
               <div className="space-y-2">
                 <Card className="flex justify-between items-center">
                   <Card.Header>
-                    <Card.Title>Create App</Card.Title>
+                    <Card.Title>Publish as App</Card.Title>
                   </Card.Header>
                   <Card.Content className="flex items-center p-6">
                     <Button
                       variant="outline"
-                      onClick={handleSaveAsTemplate}
-                      loading={isCreatingTemplate}
+                      onClick={() => handleWorkflowToApp(true)}
+                      loading={isWorkflowToApp}
                     >
                       Publish
                     </Button>
@@ -265,9 +289,29 @@ export default function WorkflowGeneralSettingsPage() {
                 </Card.Description>
               </div>
             </div>
-        <Separator />
-        <div className="space-y-4">
-          <Card.Title>Danger Zone</Card.Title>
+          </>
+        ) : (
+          <div className="space-y-4">
+            <Card.Title>App (Beta)</Card.Title>
+            <Card className="flex justify-between items-center">
+              <Card.Header>
+                <Card.Title>Unpublish App</Card.Title>
+              </Card.Header>
+              <Card.Content className="flex items-center p-6">
+                <Button 
+                variant="outline"
+                onClick={() => handleWorkflowToApp(false)}
+                loading={isWorkflowToApp}
+                >Unpublish</Button>
+              </Card.Content>
+            </Card>
+            <Card.Description>
+              Unpublish this workflow as app globally.
+            </Card.Description>
+          </div>
+        )}
+          <div className="space-y-4">
+            <Card.Title>Danger Zone</Card.Title>
           <Card className="flex justify-between items-center">
             <Card.Header>
               <Card.Title>Delete workflow</Card.Title>

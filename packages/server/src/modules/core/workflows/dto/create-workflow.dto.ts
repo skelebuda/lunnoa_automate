@@ -26,6 +26,10 @@ export class CreateWorkflowDto {
   @IsOptional()
   isInternal?: boolean;
 
+  @IsBoolean()
+  @IsOptional()
+  isApp?: boolean;
+
   @IsArray()
   nodes: any;
 

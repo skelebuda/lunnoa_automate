@@ -141,6 +141,18 @@ export default class WorkflowsService extends ApiLibraryHelper {
     });
   }
 
+  WorkflowToApp({ id, data, config }: { id: string; data: { isApp: boolean }; config?: ApiLibraryConfig }) {
+    return super.apiFetch<Workflow>({
+      httpMethod: 'patch',
+      mockConfig: {
+        schema: null,
+      },
+      path: `${this.path}/${id}/make-app`,
+      data,
+      config,
+    });
+  }
+
   /**
    * @description Get's a list of recent workflows this user has interacted with.
    */

@@ -19,6 +19,10 @@ export class WorkflowExpansionDto {
 
   @IsOptional()
   @IsBoolean()
+  isApp?: boolean;
+
+  @IsOptional()
+  @IsBoolean()
   description?: boolean;
 
   @IsOptional()
