@@ -1,3 +1,11 @@
+# [1.81.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.80.0...v1.81.0) (2025-04-23)
+
+
+### Features
+
+* logging ([f22ba56](https://github.com/skelebuda/lunnoa_automate/commit/f22ba565195cff2e27a40dfef00ef07a106f1431))
+* only log for trigger ([ca7bbcd](https://github.com/skelebuda/lunnoa_automate/commit/ca7bbcdab66ab5ce3dd341f059f4ec8abbcfdeb2))
+
 # [1.80.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.79.0...v1.80.0) (2025-04-22)
 
 
