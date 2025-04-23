@@ -1,3 +1,10 @@
+# [1.83.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.82.0...v1.83.0) (2025-04-23)
+
+
+### Features
+
+* new connection in new call ([c783cc8](https://github.com/skelebuda/lunnoa_automate/commit/c783cc8fab69880f036ff5ca53845f235fea954d))
+
 # [1.82.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.81.0...v1.82.0) (2025-04-23)
 
 
