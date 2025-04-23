@@ -80,6 +80,7 @@ export default class WorkflowsService extends ApiLibraryHelper {
             'createdAt',
             'updatedAt',
             'isActive',
+            'isApp',
             'description',
             'project',
             'edges',
