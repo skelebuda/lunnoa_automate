@@ -39,6 +39,13 @@ export type CreateAppArgs = {
   isPublished?: boolean;
 
   /**
+   * The access control of the app.
+   *
+   * default: `public`
+   */
+  accessControl?: 'global' | 'private' | 'workspace' | 'project';
+
+  /**
    * If the app is available for agents to use.
    *
    * default: `true`
