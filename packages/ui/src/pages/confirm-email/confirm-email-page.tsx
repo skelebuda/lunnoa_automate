@@ -100,7 +100,7 @@ export default function ConfirmEmailPage() {
         <Card className="border-none bg-background">
           <Card.Header>
             <Card.Title className="leading-0 text-lg md:text-xl">
-              <span className="mr-2">Welcome to Lecca.io!</span> 🎉
+              <span className="mr-2">Welcome to Lunnoa Automate!</span> 🎉
             </Card.Title>
           </Card.Header>
           <Card.Content>

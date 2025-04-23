@@ -19,7 +19,7 @@ export const sendMessageToChannel = createAction({
       inputType: 'markdown',
       label: '',
       description: '',
-      markdown: `Make sure to invite Lecca.io to the channel you want to send a message to. You can do this by typing \`/invite @Lecca.io\` in the channel.`,
+      markdown: `Make sure to invite Lunnoa Labs to the channel you want to send a message to. You can do this by typing \`/invite @Lecca.io\` in the channel.`,
     },
     shared.fields.dynamicSelectChannel,
     createTextInputField({

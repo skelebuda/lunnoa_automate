@@ -297,7 +297,7 @@ export const ServerConfig = {
    * These funtions and endpoints are available in the dev module.
    * Make sure to include the '@' symbol.
    */
-  DEV_EMAIL_DOMAIN: process.env.DEV_EMAIL_DOMAIN || '@lecca.io',
+  DEV_EMAIL_DOMAIN: process.env.DEV_EMAIL_DOMAIN || '@lunnoalabs.ch',
 
   /**
    * If set to `'true'`, upon account creation, the email will automatically

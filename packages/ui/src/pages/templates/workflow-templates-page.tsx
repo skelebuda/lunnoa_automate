@@ -190,7 +190,7 @@ export function WorkflowTemplatesPage() {
                     !!workspaceUser?.roles.includes('MAINTAINER')
                   }
                   canShareToPublic={
-                    !!workspaceUser?.user?.email.includes('admin@lecca.io')
+                    !!workspaceUser?.user?.email.includes('lunnoalabs.ch')
                   }
                 />
               ))}
@@ -376,7 +376,7 @@ export const WorkflowTemplateCard = ({
                         <AlertDialog.Header>
                           <AlertDialog.Title>Share to Public</AlertDialog.Title>
                           <AlertDialog.Description>
-                            Share with all Lecca.io users.
+                            Share with all Lunnoa Automate users.
                           </AlertDialog.Description>
                           <AlertDialog.Description>
                             All variables and connections will be removed. All

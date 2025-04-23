@@ -158,7 +158,7 @@ export class OAuth2Connection extends Connection {
       connectionId: this.id,
       description: args.configValue?.description,
       workspaceId: args.workspaceId,
-      projectId: args.configValue?.projectId,
+      // projectId: args.configValue?.projectId,
     };
 
     // Create a URL object from this.authUrl() to handle possible existing query params
@@ -289,10 +289,7 @@ export class OAuth2Connection extends Connection {
     };
     workspaceId: string;
   }): Promise<void> {
-    console.log(`[REFRESH] Starting token refresh for connection ID: ${args.connection.id}`);
-    
     if (!args.connection.refreshToken) {
-      console.log(`[REFRESH] No refresh token found for connection ID: ${args.connection.id}`);
       throw new Error('No refresh token found, cannot refresh access token');
     }
 
@@ -328,44 +325,29 @@ export class OAuth2Connection extends Connection {
       });
     }
 
-    try {
-      // Make the POST request to refresh the token
-      console.log(`[REFRESH] Making token refresh request to: ${url}`);
-      const result = await this.app.http.request({
-        method: 'POST',
-        url,
-        data,
-        headers,
-        workspaceId: args.workspaceId,
-      });
+    // Make the POST request to refresh the token
+    const result = await this.app.http.request({
+      method: 'POST',
+      url,
+      data,
+      headers,
+      workspaceId: args.workspaceId,
+    });
 
-      // Extract the access_token, refresh_token, and any additional metadata
-      const { access_token, refresh_token, ...metadata } = result.data;
-      console.log(`[REFRESH] Got new access token: ${access_token?.substring(0, 10)}...`);
-      console.log(`[REFRESH] Got new refresh token: ${refresh_token ? 'yes' : 'no'}`);
+    // Extract the access_token, refresh_token, and any additional metadata
+    const { access_token, refresh_token, ...metadata } = result.data;
 
-      // Update the connection with the new access token, refresh token, and metadata
-      console.log(`[REFRESH] Updating connection in database: ${args.connection.id}`);
-      await this.app.connection.update({
-        connectionId: args.connection.id,
-        data: {
-          accessToken: access_token,
-          refreshToken: refresh_token || args.connection.refreshToken, // Keep old refresh token if none returned
-          metadata,
-        },
-      });
-      console.log(`[REFRESH] Database update completed for connection ID: ${args.connection.id}`);
+    // Update the connection with the new access token, refresh token, and metadata
+    await this.app.connection.update({
+      connectionId: args.connection.id,
+      data: {
+        accessToken: access_token,
+        refreshToken: refresh_token,
+        metadata,
+      },
+    });
 
-      return;
-    } catch (error) {
-      console.log(`[REFRESH] Error refreshing token:`, {
-        message: error.message,
-        status: error?.status,
-        responseStatus: error?.response?.status,
-        responseData: error?.response?.data,
-      });
-      throw error;
-    }
+    return;
   }
 
   async sendAuthorizeUrl(args: {

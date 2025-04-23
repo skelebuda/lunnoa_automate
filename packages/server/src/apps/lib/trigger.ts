@@ -409,7 +409,7 @@ export class Trigger {
             expansion: { credentials: true, connectionId: true },
             throwNotFoundException: true,
           });
-          
+
           const appConnection = this.app.connectionMap[connection.connectionId];
 
           if (appConnection && connection.refreshToken) {

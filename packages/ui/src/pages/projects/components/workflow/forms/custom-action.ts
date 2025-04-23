@@ -4,7 +4,7 @@ export const CUSTOM_ACTIONS: WorkflowApp['actions'] = [
   {
     id: '909e8400-e29b-41d4-a716-e849ro540001',
     name: 'HTTP Request',
-    description: 'Custom action provided by Lecca.io',
+    description: 'Custom action provided by Lunnoa Automate',
     needsConnection: false,
     inputConfig: [
       {
@@ -26,7 +26,7 @@ export const CUSTOM_ACTIONS: WorkflowApp['actions'] = [
     id: '909e8400-890e-41d4-a716-e849ro540001',
     name: 'Parse JSON',
     needsConnection: false,
-    description: 'Custom action provided by Lecca.io',
+    description: 'Custom action provided by Lunnoa Automate',
     inputConfig: [],
   },
 ] as const;

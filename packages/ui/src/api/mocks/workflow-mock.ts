@@ -34,7 +34,7 @@ export const WORKFLOW_MOCK: Workflow = {
       appId: '550e8400-e29b-41d4-a716-e849ro540000',
       nodeType: 'action',
       actionId: '909e8400-e29b-41d4-a716-e849ro540001',
-      description: 'Custom action provided by Lecca.io',
+      description: 'Custom action provided by Lunnoa Automate',
       name: 'HTTP Request',
       position: {
         x: 200,
@@ -340,7 +340,7 @@ export const WORKFLOW_MOCK: Workflow = {
       appId: '550e8400-e29b-41d4-a716-e849ro540000',
       nodeType: 'action',
       actionId: '909e8400-890e-41d4-a716-e849ro540001',
-      description: 'Custom action provided by Lecca.io',
+      description: 'Custom action provided by Lunnoa Automate',
       name: 'Parse JSON',
       position: {
         x: 800,

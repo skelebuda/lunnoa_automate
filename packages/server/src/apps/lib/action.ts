@@ -76,38 +76,16 @@ export class Action {
   async prepareAndRunAction(
     args: PrepareAndRunActionArgs,
   ): Promise<ActionResponse<unknown>> {
-    console.log(`[ACTION TRACE] Starting prepareAndRunAction for action ${this.id}`);
     try {
-      console.log(`[ACTION TRACE] Swapping variables in configValue`);
       await this.app.swapOutAllVariablesInObject(args.configValue);
-      
-      console.log(`[ACTION TRACE] Swapping references in configValue`);
       await this.app.swapOutAllReferencesInObject({
         values: args.configValue,
         workflowId: args.workflowId,
         executionId: args.executionId,
       });
 
-      console.log(`[ACTION TRACE] Calling runAction`);
-      const response = await this.runAction(args);
-      console.log(`[ACTION TRACE] runAction completed successfully`);
-
-      if (response.needsInput || response.scheduled) {
-        console.log(`[ACTION TRACE] Returning early with needsInput or scheduled`);
-        return response;
-      } else {
-        console.log(`[ACTION TRACE] Returning success response`);
-        return response;
-      }
+      return await this.runAction(args);
     } catch (error) {
-      console.log(`[ACTION TRACE] Caught error in prepareAndRunAction:`, {
-        message: error.message,
-        status: error?.status,
-        responseStatus: error?.response?.status,
-        responseData: JSON.stringify(error?.response?.data),
-        stack: error.stack?.split('\n').slice(0, 3).join('\n')
-      });
-      
       /**
        * If there's an error, check if it's a 401 error.
        * If it is, check if the connection has a refresh token and a refresh method.
@@ -116,90 +94,42 @@ export class Action {
        * If the refresh works, then run the action again.
        */
       try {
-        console.log(`[ACTION TRACE] Entering error handling block`);
         const status = error?.status ?? error.response?.status;
-        console.log(`[ACTION TRACE] Extracted status: ${status}`);
-        
         //if error status is 401, call this.refreshToken
         if (status === 401 && this.needsConnection) {
-          console.log(`[ACTION TRACE] 401 error detected, will attempt token refresh`);
-          
-          console.log(`[ACTION TRACE] Fetching connection from database`);
           const connection = await this.app.connection.findOne({
             connectionId: (args.configValue as any).connectionId,
             expansion: { credentials: true, connectionId: true },
             throwNotFoundException: true,
           });
-          
-          console.log(`[ACTION TRACE] Found connection: ${connection.id}`);
-          console.log(`[ACTION TRACE] Connection details:`, {
-            id: connection.id,
-            connectionId: connection.connectionId,
-            hasAccessToken: !!connection.accessToken,
-            hasRefreshToken: !!connection.refreshToken
-          });
 
-          console.log(`[ACTION TRACE] Looking up appConnection in connectionMap`);
           const appConnection = this.app.connectionMap[connection.connectionId];
-          console.log(`[ACTION TRACE] appConnection found:`, {
-            exists: !!appConnection,
-            type: appConnection ? appConnection.constructor.name : 'N/A',
-            hasRefreshMethod: !!(appConnection && (appConnection as any).refreshAccessToken)
-          });
 
           if (appConnection && connection.refreshToken) {
-            console.log(`[ACTION TRACE] Both appConnection and refreshToken exist, will attempt refresh`);
             try {
-              console.log(`[ACTION TRACE] Calling refreshAccessToken`);
-              await (appConnection as OAuth2Connection).refreshAccessToken({
+              await (appConnection as OAuth2Connection).refreshAccessToken?.({
                 connection: {
                   id: connection.id,
                   refreshToken: connection.refreshToken,
                 },
                 workspaceId: args.workspaceId,
               });
-              console.log(`[ACTION TRACE] refreshAccessToken completed successfully`);
-              
-              console.log(`[ACTION TRACE] Fetching updated connection`);
-              const updatedConnection = await this.app.connection.findOne({
-                connectionId: (args.configValue as any).connectionId,
-                expansion: { credentials: true, connectionId: true },
-                throwNotFoundException: true,
-              });
-              console.log(`[ACTION TRACE] Updated connection details:`, {
-                id: updatedConnection.id,
-                hasNewAccessToken: !!updatedConnection.accessToken,
-                accessTokenChanged: connection.accessToken !== updatedConnection.accessToken
-              });
 
-              console.log(`[ACTION TRACE] Retrying action with updated connection`);
-              const response = await this.runAction({
-                ...args,
-                connection: updatedConnection
-              });
-              console.log(`[ACTION TRACE] Retry succeeded, returning response`);
-              return response;
+              return await this.runAction(args);
             } catch (error) {
-              console.log(`[ACTION TRACE] Token refresh failed:`, {
-                message: error.message,
-                stack: error.stack?.split('\n').slice(0, 3).join('\n')
-              });
-              throw new ForbiddenException('Please re-authenticate your connection');
+              return {
+                failure:
+                  error?.response?.message ||
+                  error?.response?.data ||
+                  error?.response?.data?.errorDetails ||
+                  error?.response?.error ||
+                  error.message ||
+                  `Something went wrong while running action: ${this.name}}`,
+              };
             }
-          } else {
-            console.log(`[ACTION TRACE] Cannot refresh token:`, {
-              hasAppConnection: !!appConnection,
-              hasRefreshToken: !!connection.refreshToken
-            });
           }
-        } else {
-          console.log(`[ACTION TRACE] Not a 401 error or doesn't need connection:`, {
-            status,
-            needsConnection: this.needsConnection
-          });
         }
 
-        console.log(`[ACTION TRACE] Returning failure response`);
         return {
           failure:
             error?.response?.message ||
@@ -210,10 +140,6 @@ export class Action {
             `Something went wrong while running action: ${this.name}}`,
         };
       } catch (error) {
-        console.log(`[ACTION TRACE] Error in error handling:`, {
-          message: error.message,
-          stack: error.stack?.split('\n').slice(0, 3).join('\n')
-        });
         return {
           failure:
             error?.response?.message ||
@@ -237,7 +163,6 @@ export class Action {
     executionId: string | undefined;
     taskId: string | undefined;
     shouldMock?: boolean;
-    connection?: Partial<Connection>;
   }): Promise<ActionResponse<unknown>> {
     let connection: Partial<Connection>;
 
@@ -282,47 +207,33 @@ export class Action {
         }),
       };
     } else {
-      try {
-        const result = await this.run({
-          configValue: args.configValue,
-          connection,
-          workspaceId: args.workspaceId,
-          projectId: args.projectId,
-          workflowId: args.workflowId,
-          agentId: args.agentId,
-          executionId: args.executionId,
-          taskId: args.taskId,
-          prisma: this.app.prisma,
-          http: this.app.http,
-          notification: this.app.notification,
-          fileHandler: this.app.fileHandler,
-          s3: this.app.s3,
-          aiProviders: this.app.aiProviders,
-          credits: this.app.credits,
-          task: this.app.task,
-          knowledge: this.app.knowledge,
-          execution: this.app.execution,
-        });
+      const runResponse = await this.run({
+        configValue: args.configValue,
+        projectId: args.projectId,
+        workflowId: args.workflowId,
+        agentId: args.agentId,
+        workspaceId: args.workspaceId,
+        executionId: args.executionId,
+        taskId: args.taskId,
+        connection,
+        prisma: this.app.prisma,
+        http: this.app.http,
+        fileHandler: this.app.fileHandler,
+        s3: this.app.s3,
+        aiProviders: this.app.aiProviders,
+        credits: this.app.credits,
+        task: this.app.task,
+        knowledge: this.app.knowledge,
+        notification: this.app.notification,
+        execution: this.app.execution,
+      });
 
+      if (this.handleInterruptingResponse) {
+        //These have unique response objects when they pause the execution
+        return this.handleInterruptingResponse({ runResponse });
+      } else {
         return {
-          success: result,
-        };
-      } catch (error) {
-        console.log(`[ACTION] Error in run method:`, {
-          message: error.message,
-          status: error?.status,
-          responseStatus: error?.response?.status
-        });
-        
-        // If this is a 401 error, re-throw it so prepareAndRunAction can handle it
-        if (error.status === 401 || error.response?.status === 401) {
-          console.log(`[ACTION] Re-throwing 401 error for token refresh`);
-          throw error;
-        }
-        
-        // For other errors, return a failure response
-        return {
-          failure: error.message,
+          success: runResponse,
         };
       }
     }
@@ -715,5 +626,4 @@ type PrepareAndRunActionArgs = {
   taskId: string | undefined;
   shouldMock?: boolean;
   testing?: boolean;
-  connection?: Partial<Connection>;
 };

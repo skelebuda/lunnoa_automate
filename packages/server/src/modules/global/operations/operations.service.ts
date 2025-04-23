@@ -20,7 +20,7 @@ export class OperationsService {
   }): void {
     if (ServerConfig.ENVIRONMENT === 'production') {
       const webhookUrl =
-        'https://api.lecca.io/webhooks/workflows/e55ab91a-cf75-491d-804a-1f50ed91b081';
+        'https://api.lunnoalabs.ch/webhooks/workflows/e55ab91a-cf75-491d-804a-1f50ed91b081';
       const payload = {
         email,
         firstName,

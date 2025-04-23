@@ -1,4 +1,4 @@
-import { ActionResponse } from '@lunnoa-automate/toolkit';
+import { ActionResponse } from '@lunnoa-automate/toolkit'
 import {
   BadRequestException,
   ForbiddenException,
@@ -679,30 +679,17 @@ export class WorkflowRunnerService {
 
     let response: ActionResponse<unknown> | TriggerResponse<unknown>;
 
-    console.log(`[RUN NODE START]  Node: ${node.id}, Action: ${node.actionId}`);
-    
     if (type === 'action') {
-      try {
-        response = await action.prepareAndRunAction({
-          configValue: value,
-          nodeId: node.id,
-          workflowId: execution.workflow.id,
-          executionId: execution.id,
-          workspaceId: execution.workflow.project.workspace.id,
-          projectId: execution.workflow.project.id,
-          agentId: undefined,
-          taskId: undefined,
-        });
-        console.log(`[RUN NODE SUCCESS] Node: ${node.id}, Response:`, response);
-      } catch (error) {
-        console.log(`[RUN NODE ERROR] Node: ${node.id}, Error:`, {
-          message: error.message,
-          status: error?.status,
-          responseStatus: error?.response?.status,
-          errorObject: JSON.stringify(error)
-        });
-        throw error;
-      }
+      response = await action.prepareAndRunAction({
+        configValue: value,
+        nodeId: node.id,
+        workflowId: execution.workflow.id,
+        executionId: execution.id,
+        workspaceId: execution.workflow.project.workspace.id,
+        projectId: execution.workflow.project.id,
+        agentId: undefined,
+        taskId: undefined,
+      });
     } else {
       response = await trigger.prepareAndRunTrigger({
         configValue: value,
