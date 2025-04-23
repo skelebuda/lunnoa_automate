@@ -1,3 +1,10 @@
+# [1.94.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.93.0...v1.94.0) (2025-04-23)
+
+
+### Features
+
+* check for published app ([ba6f3bf](https://github.com/skelebuda/lunnoa_automate/commit/ba6f3bfa4ec2e122fc57804b236e396dcaf6b4e4))
+
 # [1.93.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.92.0...v1.93.0) (2025-04-23)
 
 
