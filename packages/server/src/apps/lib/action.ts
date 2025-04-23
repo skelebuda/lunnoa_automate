@@ -129,13 +129,37 @@ export class Action {
           if (appConnection && connection.refreshToken) {
             try {
               console.log(`[ACTION DEBUG] Attempting to refresh token for connection ${connection.id}`);
-              await (appConnection as OAuth2Connection).refreshAccessToken?.({
-                connection: {
-                  id: connection.id,
-                  refreshToken: connection.refreshToken,
-                },
-                workspaceId: args.workspaceId,
+              
+              // Check if refreshAccessToken exists
+              if (!(appConnection as OAuth2Connection).refreshAccessToken) {
+                console.log(`[ACTION DEBUG] refreshAccessToken method does not exist on appConnection`);
+                throw new Error('refreshAccessToken method not found');
+              }
+              
+              // Log the arguments being passed
+              console.log(`[ACTION DEBUG] Calling refreshAccessToken with:`, {
+                connectionId: connection.id,
+                hasRefreshToken: !!connection.refreshToken,
+                workspaceId: args.workspaceId
               });
+              
+              // Call the method with await and catch any errors
+              try {
+                await (appConnection as OAuth2Connection).refreshAccessToken({
+                  connection: {
+                    id: connection.id,
+                    refreshToken: connection.refreshToken,
+                  },
+                  workspaceId: args.workspaceId,
+                });
+                console.log(`[ACTION DEBUG] refreshAccessToken completed successfully`);
+              } catch (refreshError) {
+                console.log(`[ACTION DEBUG] refreshAccessToken failed:`, {
+                  message: refreshError.message,
+                  stack: refreshError.stack?.split('\n').slice(0, 3).join('\n')
+                });
+                throw refreshError;
+              }
               
               // Fetch the updated connection with the new access token
               const updatedConnection = await this.app.connection.findOne({
