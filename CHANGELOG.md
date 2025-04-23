@@ -1,3 +1,10 @@
+# [1.84.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.83.0...v1.84.0) (2025-04-23)
+
+
+### Features
+
+* logging to refreshToken added ([d79721a](https://github.com/skelebuda/lunnoa_automate/commit/d79721afbd61fc45eb9287110c17aafc7456090e))
+
 # [1.83.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.82.0...v1.83.0) (2025-04-23)
 
 
