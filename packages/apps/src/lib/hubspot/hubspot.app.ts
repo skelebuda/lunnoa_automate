@@ -15,7 +15,6 @@ export const hubspot = createApp({
     'HubSpot is a cloud-based platform that connects marketing, sales, and customer service tools into a single CRM database.',
   logoUrl:
     'https://lecca-io.s3.us-east-2.amazonaws.com/assets/apps/hubspot.svg',
-  accessControl: ["global"],
   actions: [
     retrieveContact,
     upsertContact,
