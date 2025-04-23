@@ -92,6 +92,14 @@ export class Action {
         return response;
       }
     } catch (error) {
+      console.log(`[ACTION DEBUG] Error in prepareAndRunAction:`, {
+        message: error.message,
+        status: error?.status,
+        responseStatus: error?.response?.status,
+        responseData: JSON.stringify(error?.response?.data),
+        stack: error.stack?.split('\n').slice(0, 3).join('\n')
+      });
+      
       /**
        * If there's an error, check if it's a 401 error.
        * If it is, check if the connection has a refresh token and a refresh method.
@@ -101,18 +109,26 @@ export class Action {
        */
       try {
         const status = error?.status ?? error.response?.status;
+        console.log(`[ACTION DEBUG] Checking for 401 status. Current status: ${status}, needsConnection: ${this.needsConnection}`);
+        
         //if error status is 401, call this.refreshToken
         if (status === 401 && this.needsConnection) {
+          console.log(`[ACTION DEBUG] 401 error detected, attempting to refresh token`);
+          
           const connection = await this.app.connection.findOne({
             connectionId: (args.configValue as any).connectionId,
             expansion: { credentials: true, connectionId: true },
             throwNotFoundException: true,
           });
+          
+          console.log(`[ACTION DEBUG] Found connection: ${connection.id}, hasRefreshToken: ${!!connection.refreshToken}`);
 
           const appConnection = this.app.connectionMap[connection.connectionId];
+          console.log(`[ACTION DEBUG] Found appConnection: ${!!appConnection}, hasRefreshMethod: ${!!(appConnection && (appConnection as any).refreshAccessToken)}`);
 
           if (appConnection && connection.refreshToken) {
             try {
+              console.log(`[ACTION DEBUG] Attempting to refresh token for connection ${connection.id}`);
               await (appConnection as OAuth2Connection).refreshAccessToken?.({
                 connection: {
                   id: connection.id,
@@ -120,7 +136,7 @@ export class Action {
                 },
                 workspaceId: args.workspaceId,
               });
-
+              
               // Fetch the updated connection with the new access token
               const updatedConnection = await this.app.connection.findOne({
                 connectionId: (args.configValue as any).connectionId,

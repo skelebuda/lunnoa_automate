@@ -29,19 +29,31 @@ export const retrieveContact = createAction({
     // Use only the email endpoint
     const url = `https://api.hubapi.com/contacts/v1/contact/email/${encodeURIComponent(email)}/profile`;
 
-    const result = await http.request({
-      method: 'GET',
-      url,
-      headers: {
-        Authorization: `Bearer ${connection.accessToken}`,
-      },
-      workspaceId,
-    });
-    
-    if (result?.data) {
-      return result.data;
-    } else {
-      throw new Error('Contact not found');
+    try {
+      console.log(`[HUBSPOT DEBUG] Making request to ${url} with token ${connection.accessToken?.substring(0, 10)}...`);
+      const result = await http.request({
+        method: 'GET',
+        url,
+        headers: {
+          Authorization: `Bearer ${connection.accessToken}`,
+        },
+        workspaceId,
+      });
+      
+      console.log(`[HUBSPOT DEBUG] Request successful`);
+      if (result?.data) {
+        return result.data;
+      } else {
+        throw new Error('Contact not found');
+      }
+    } catch (error) {
+      console.log(`[HUBSPOT DEBUG] Request failed:`, {
+        message: error.message,
+        status: error?.status,
+        responseStatus: error?.response?.status,
+        responseData: JSON.stringify(error?.response?.data)
+      });
+      throw error; // Make sure to re-throw the error to trigger token refresh
     }
   },
   mockRun: async () => {
