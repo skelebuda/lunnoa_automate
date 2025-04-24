@@ -1,3 +1,10 @@
+# [1.97.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.96.0...v1.97.0) (2025-04-24)
+
+
+### Features
+
+* no migration ([82cb8e0](https://github.com/skelebuda/lunnoa_automate/commit/82cb8e09cda6d778bde1570401953bc3c58a9951))
+
 # [1.96.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.95.0...v1.96.0) (2025-04-24)
 
 
