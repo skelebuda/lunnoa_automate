@@ -1,3 +1,10 @@
+# [1.96.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.95.0...v1.96.0) (2025-04-24)
+
+
+### Features
+
+* custom apps added ([b6d45d6](https://github.com/skelebuda/lunnoa_automate/commit/b6d45d6dee780887649a66917c276c0c5860dd06))
+
 # [1.95.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.94.0...v1.95.0) (2025-04-23)
 
 
