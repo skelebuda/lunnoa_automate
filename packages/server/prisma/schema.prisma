@@ -297,6 +297,7 @@ model Workflow {
   description String? @db.VarChar(1000)
   isActive    Boolean @default(true)
   isInternal  Boolean @default(false)
+  isApp       Boolean @default(false)
 
   //Data from nodes
   triggerAndActionIds String[]
