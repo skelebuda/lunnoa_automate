@@ -154,6 +154,18 @@ export default class WorkflowsService extends ApiLibraryHelper {
     });
   }
 
+  getAllWorkflowsAsApps({ config }: { config?: ApiLibraryConfig }) {
+    return super.apiFetch<Workflow[]>({
+      httpMethod: 'get',
+      mockConfig: {
+        schema: workflowSchema,
+        isArray: true,
+      },
+      path: `${this.path}/as-apps`,
+      config,
+    });
+  }
+
   /**
    * @description Get's a list of recent workflows this user has interacted with.
    */

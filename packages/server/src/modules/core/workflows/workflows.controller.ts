@@ -14,6 +14,7 @@ import { BelongsTo } from '../../../decorators/belongs-to.decorator';
 import { Expansion } from '../../../decorators/expansion.decorator';
 import { FilterBy } from '../../../decorators/filter-by.decorator';
 import { IncludeType } from '../../../decorators/include-type.decorator';
+import { Public } from '../../../decorators/public.decorator';
 import { User } from '../../../decorators/user.decorator';
 import { WorkflowAccessedByWorkspaceUserEventPayload } from '../../../types/event-payloads/workflow-access-by-workspace-user-event-payload.type';
 import { JwtUser } from '../../../types/jwt-user.type';
@@ -24,6 +25,7 @@ import { WorkflowExpansionDto } from './dto/workflow-expansion.dto';
 import { WorkflowFilterByDto } from './dto/workflow-filter-by.dto';
 import { WorkflowIncludeTypeDto } from './dto/workflow-include-type.dto';
 import { WorkflowsService } from './workflows.service';
+
 
 @Controller('projects/:projectId/workflows')
 @ApiTags('Workflows')
@@ -80,6 +82,13 @@ export class WorkflowsController {
       includeType,
       expansion,
       filterBy,
+    });
+  }
+
+  @Get('as-apps')
+  findAllWorkflowsAsApps(@User() user: JwtUser) {
+    return this.workflowsService.findAllWorkflowsAsApps({
+      jwtUser: user
     });
   }
 

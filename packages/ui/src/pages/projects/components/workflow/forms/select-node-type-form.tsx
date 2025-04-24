@@ -109,6 +109,7 @@ export function SelectNodeTypeForm({
             knowledge: { 'knowledge_action_search-knowledge': true },
             web: { 'web_action_google-search': true },
             phone: { 'phone_action_make-phone-call': true },
+            customApp: { 'custom-app_action_run-custom-app': true },
           };
 
           const importantActions: any[] = [];
@@ -170,7 +171,8 @@ export function SelectNodeTypeForm({
                 app.id === 'flow-control' ||
                 app.id === 'ai' ||
                 app.id === 'web' ||
-                app.id === 'knowledge'
+                app.id === 'knowledge' ||
+                app.id === 'custom-app'
               );
             });
 

@@ -20,6 +20,11 @@ export default function () {
     method: 'getList',
     apiLibraryArgs: {},
   });
+  const { data: customApps, isLoading: isLoadingCustomApps } = useApiQuery({
+    service: 'workflows',
+    method: 'getAllWorkflowsAsApps',
+    apiLibraryArgs: {},
+  });
 
   const { data: connections } = useApiQuery({
     service: 'connections',
@@ -32,7 +37,7 @@ export default function () {
       title="Apps"
       subtitle="Browse and connect to your favorite apps."
     >
-      {isLoadingWorkflowApps || !workflowApps ? (
+      {isLoadingWorkflowApps || !workflowApps || isLoadingCustomApps || !customApps ? (
         <div className="space-y-6">
           <Skeleton className="h-12 w-[200px] lg:w-[250px]" />
           <GridLoader itemClassName="h-40" />
@@ -48,6 +53,7 @@ export default function () {
               setPublishedSearch(e.target.value);
             }}
           />
+          <h2 className="text-lg font-semibold">System Apps</h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pb-4">
             {workflowApps
               .filter(
@@ -107,6 +113,19 @@ export default function () {
                   </Dialog.Content>
                 </Dialog>
               ))}
+          </div>
+          <h2 className="text-lg font-semibold">Custom Apps</h2>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pb-4">
+            {customApps.map((app, index) => (
+              <Card key={app.id + index}>
+                <Card.Header>
+                  <Card.Title>
+                    <span>{app.name}</span> 
+                  </Card.Title>
+                  <Card.Description>{app.description}</Card.Description>
+                </Card.Header>
+              </Card>
+            ))}
           </div>
         </div>
       )}

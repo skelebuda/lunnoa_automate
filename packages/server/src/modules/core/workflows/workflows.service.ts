@@ -280,6 +280,24 @@ export class WorkflowsService {
     });
   }
 
+  async findAllWorkflowsAsApps({
+    jwtUser,
+  }: {
+    jwtUser: JwtUser;
+  }) {
+    return this.prisma.workflow.findMany({
+      where: { 
+        isApp: true,
+      },
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        createdAt: true,
+      },
+    });
+  }
+
   async findAllForWorkspace({
     jwtUser,
     workspaceId,

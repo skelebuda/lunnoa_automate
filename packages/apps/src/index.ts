@@ -52,6 +52,7 @@ import { xai } from './lib/xai/xai.app';
 import { youtube } from './lib/youtube/youtube.app';
 import { zohoBooks } from './lib/zoho-books/zoho-books.app';
 import { zohoCrm } from './lib/zoho-crm/zoho-crm.app';
+import { customApp } from './lib/custom-app/custom-app.app'
 
 const apps: Record<string, ReturnType<typeof createApp>> = {
   [agents.id]: agents,
@@ -106,6 +107,7 @@ const apps: Record<string, ReturnType<typeof createApp>> = {
   [youtube.id]: youtube,
   [zohoBooks.id]: zohoBooks,
   [zohoCrm.id]: zohoCrm,
+  [customApp.id]: customApp,
 };
 
 export default apps;
