@@ -1,3 +1,10 @@
+# [1.98.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.97.0...v1.98.0) (2025-04-24)
+
+
+### Features
+
+* is app removed ([b8fea9d](https://github.com/skelebuda/lunnoa_automate/commit/b8fea9d362d9c964c2a4a7abaa8e9f7a9772fb2d))
+
 # [1.97.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.96.0...v1.97.0) (2025-04-24)
 
 
