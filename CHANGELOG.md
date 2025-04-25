@@ -1,3 +1,10 @@
+# [1.101.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.100.0...v1.101.0) (2025-04-25)
+
+
+### Features
+
+* load all custom apps not only project ([bdd0521](https://github.com/skelebuda/lunnoa_automate/commit/bdd0521cec28a0264c7ce084c979e2cfa3593568))
+
 # [1.100.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.99.0...v1.100.0) (2025-04-25)
 
 
