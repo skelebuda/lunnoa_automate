@@ -76,9 +76,6 @@ export const runCustomApp = createAction({
           where: {
             AND: [
               { id: workflowId },
-              {
-                FK_projectId: projectId,
-              },
             ],
           },
           select: {
@@ -109,8 +106,8 @@ export const runCustomApp = createAction({
   run: async ({
     configValue,
     workflowId: requestingWorkflowId,
-    projectId,
     agentId,
+    projectId,
     prisma,
     execution,
   }) => {
