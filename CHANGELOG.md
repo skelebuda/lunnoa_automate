@@ -1,3 +1,10 @@
+# [1.100.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.99.0...v1.100.0) (2025-04-25)
+
+
+### Features
+
+* new migration prisma ([8297f29](https://github.com/skelebuda/lunnoa_automate/commit/8297f29f7fb3135552023138e87fc2ecb6dfdfff))
+
 # [1.99.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.98.0...v1.99.0) (2025-04-24)
 
 
