@@ -1,3 +1,10 @@
+# [1.102.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.101.0...v1.102.0) (2025-04-25)
+
+
+### Features
+
+* dynamic values with no projectId ([3afd566](https://github.com/skelebuda/lunnoa_automate/commit/3afd56638d01820dcff0bcf305b28149e49bdcb1))
+
 # [1.101.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.100.0...v1.101.0) (2025-04-25)
 
 
