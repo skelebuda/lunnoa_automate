@@ -107,7 +107,6 @@ export const runCustomApp = createAction({
     configValue,
     workflowId: requestingWorkflowId,
     agentId,
-    projectId,
     prisma,
     execution,
   }) => {
@@ -115,22 +114,19 @@ export const runCustomApp = createAction({
       throw new Error(`Workflow cannot run itself`);
     }
 
-    const workflowExistsInProject = await prisma.workflow.findFirst({
+    const workflowExists = await prisma.workflow.findFirst({
       where: {
         AND: [
           {
             id: configValue.workflowId,
-          },
-          {
-            FK_projectId: projectId,
-          },
+          }
         ],
       },
     });
 
-    if (!workflowExistsInProject) {
+    if (!workflowExists) {
       throw new Error(
-        `Workflow does not exist in this project: ${configValue.workflowId}`,
+        `Workflow does not exist: ${configValue.workflowId}`,
       );
     }
 
