@@ -31,9 +31,6 @@ export const runCustomApp = createAction({
                 id: { not: workflowId },
               },
               {
-                FK_projectId: projectId,
-              },
-              {
                 strategy: { in: ['manual', 'schedule'] },
               },
               {
