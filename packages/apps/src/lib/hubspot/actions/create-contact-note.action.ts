@@ -79,12 +79,15 @@ export const createContactNote = createAction({
       // Step 2: Create the note
       const createNoteUrl = `https://api.hubapi.com/crm/v3/objects/notes`;
       
+      const currentTimestamp = new Date().getTime();
+      
       const createNoteResult = await http.request({
         method: 'POST',
         url: createNoteUrl,
         data: {
           properties: {
             hs_note_body: noteContent,
+            hs_timestamp: currentTimestamp,
           }
         },
         headers: {
