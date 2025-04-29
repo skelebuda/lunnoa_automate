@@ -1,3 +1,10 @@
+# [1.104.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.103.0...v1.104.0) (2025-04-29)
+
+
+### Features
+
+* retrieve notes action added for hubspot ([7cd5bda](https://github.com/skelebuda/lunnoa_automate/commit/7cd5bda7bfc3fb99879215b29b7252b4b28db27f))
+
 # [1.103.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.102.0...v1.103.0) (2025-04-25)
 
 
