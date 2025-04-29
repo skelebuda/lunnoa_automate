@@ -1,6 +1,6 @@
 {
   "name": "@lunnoa-automate/toolkit",
-  "version": "1.104.0",
+  "version": "1.105.0",
   "publishConfig": {
     "access": "public"
   },

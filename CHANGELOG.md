@@ -1,3 +1,10 @@
+# [1.105.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.104.0...v1.105.0) (2025-04-29)
+
+
+### Features
+
+* create contact note and reload page for app published and default view for templates ([902bb75](https://github.com/skelebuda/lunnoa_automate/commit/902bb75111e47c2e7a0028221450be7fe505f3ed))
+
 # [1.104.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.103.0...v1.104.0) (2025-04-29)
 
 
