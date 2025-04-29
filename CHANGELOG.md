@@ -1,3 +1,10 @@
+# [1.106.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.105.0...v1.106.0) (2025-04-29)
+
+
+### Features
+
+* create note fix ([3a2d6e3](https://github.com/skelebuda/lunnoa_automate/commit/3a2d6e375d2ba3aa3360383a08addd40b452703d))
+
 # [1.105.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.104.0...v1.105.0) (2025-04-29)
 
 
