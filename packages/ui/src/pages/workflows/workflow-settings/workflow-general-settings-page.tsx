@@ -29,7 +29,7 @@ export default function WorkflowGeneralSettingsPage() {
   const [isCreatingTemplate, setIsCreatingTemplate] = useState(false);
   const [isWorkflowToApp, setIsWorkflowToApp] = useState(false);
   const navigate = useNavigate();
-  const { data: workflow, isLoading: isLoadingWorkflow } = useApiQuery({
+  const { data: workflow, isLoading: isLoadingWorkflow, refetch } = useApiQuery({
     service: 'workflows',
     method: 'getById',
     apiLibraryArgs: {
@@ -109,17 +109,31 @@ export default function WorkflowGeneralSettingsPage() {
         data: { isApp: isApp } 
       },
       {
-        onSuccess: () => {
+        onSuccess: (data) => {
           toast({
             title: isApp ? 'Workflow published' : 'Workflow unpublished',
+            action: isApp ? (
+              <ToastAction
+                altText="View App"
+                onClick={() => navigate(`/apps`)}
+                className="space-x-2"
+              >
+                <span>View Apps</span>
+                <Icons.arrowRight />
+              </ToastAction>
+            ) : undefined,
           });
+          
+          form.setValue('isApp', isApp);
+          
+          refetch();
         },
         onSettled: () => {
           setIsWorkflowToApp(false);
         },
       },
     );
-  }, [WorkflowToApp, workflowId]);
+  }, [WorkflowToApp, workflowId, form, navigate, refetch]);
 
   const onSubmit = async (data: UpdateWorkflowType) => {
     setIsSubmitting(true);

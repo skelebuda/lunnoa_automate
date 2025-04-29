@@ -34,7 +34,7 @@ export function WorkflowTemplatesPage() {
   const [includeType, setIncludeType] = useState<string[]>([]);
   const [sharedToType, setSharedToType] = useState<
     'project' | 'workspace' | 'global'
-  >('global');
+  >('project');
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoadingWorkflowTemplates, setIsLoadingWorkflowTemplates] =
     useState(true);
