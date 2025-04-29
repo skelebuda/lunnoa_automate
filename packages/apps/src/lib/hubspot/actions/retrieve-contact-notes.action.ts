@@ -29,54 +29,38 @@ export const retrieveContactNotes = createAction({
     try {
       // Step 1: First find the contact by email to get the contact ID
       console.log(`[HUBSPOT DEBUG] Searching for contact with email: ${email}`);
-      const searchContactUrl = `https://api.hubapi.com/crm/v3/objects/contacts/search`;
+      const contactUrl = `https://api.hubapi.com/contacts/v1/contact/email/${encodeURIComponent(email)}/profile`;
       
-      const contactSearchResult = await http.request({
-        method: 'POST',
-        url: searchContactUrl,
-        data: {
-          filterGroups: [
-            {
-              filters: [
-                {
-                  propertyName: 'email',
-                  operator: 'EQ',
-                  value: email
-                }
-              ]
-            }
-          ],
-          properties: ['email'],
-          limit: 1
-        },
+      const contactResult = await http.request({
+        method: 'GET',
+        url: contactUrl,
         headers: {
           Authorization: `Bearer ${connection.accessToken}`,
-          'Content-Type': 'application/json'
         },
         workspaceId,
       });
       
-      if (!contactSearchResult?.data?.results || contactSearchResult.data.results.length === 0) {
+      if (!contactResult?.data?.vid) {
         throw new Error(`Contact with email ${email} not found`);
       }
       
-      const contactId = contactSearchResult.data.results[0].id;
+      const contactId = contactResult.data.vid;
       console.log(`[HUBSPOT DEBUG] Found contact with ID: ${contactId}`);
       
-      // Step 2: Find all notes associated with this contact
-      const associationsUrl = `https://api.hubapi.com/crm/v3/objects/contacts/${contactId}/associations/notes`;
+      // Step 2: Get all engagements (including notes) for this contact
+      const engagementsUrl = `https://api.hubapi.com/engagements/v1/engagements/associated/contact/${contactId}/paged`;
       
-      const associationsResult = await http.request({
+      const engagementsResult = await http.request({
         method: 'GET',
-        url: associationsUrl,
+        url: engagementsUrl,
         headers: {
           Authorization: `Bearer ${connection.accessToken}`,
         },
         workspaceId,
       });
       
-      if (!associationsResult?.data?.results || associationsResult.data.results.length === 0) {
-        console.log(`[HUBSPOT DEBUG] No notes found for contact with ID: ${contactId}`);
+      if (!engagementsResult?.data?.results) {
+        console.log(`[HUBSPOT DEBUG] No engagements found for contact with ID: ${contactId}`);
         return { 
           contactId,
           email,
@@ -84,44 +68,29 @@ export const retrieveContactNotes = createAction({
         };
       }
       
-      // Extract note IDs from associations
-      const noteIds = associationsResult.data.results.map(result => result.id);
-      console.log(`[HUBSPOT DEBUG] Found ${noteIds.length} notes for contact`);
+      // Filter only the notes from all engagements
+      const notes = engagementsResult.data.results
+        .filter(engagement => engagement.engagement.type === 'NOTE')
+        .map(engagement => {
+          return {
+            id: engagement.engagement.id,
+            properties: {
+              hs_note_body: engagement.engagement.bodyPreview || engagement.metadata.body || '',
+              hs_createdate: engagement.engagement.createdAt,
+              hs_lastmodifieddate: engagement.engagement.lastUpdated
+            },
+            createdAt: new Date(engagement.engagement.createdAt).toISOString(),
+            updatedAt: new Date(engagement.engagement.lastUpdated).toISOString()
+          };
+        });
       
-      // Step 3: Batch read the notes
-      if (noteIds.length === 0) {
-        return { 
-          contactId,
-          email,
-          notes: [] 
-        };
-      }
-      
-      const batchReadUrl = `https://api.hubapi.com/crm/v3/objects/notes/batch/read`;
-      
-      const batchReadResult = await http.request({
-        method: 'POST',
-        url: batchReadUrl,
-        data: {
-          inputs: noteIds.map(id => ({ id })),
-          properties: ['hs_note_body', 'hs_createdate', 'hs_lastmodifieddate']
-        },
-        headers: {
-          Authorization: `Bearer ${connection.accessToken}`,
-          'Content-Type': 'application/json'
-        },
-        workspaceId,
-      });
-      
-      if (!batchReadResult?.data?.results) {
-        throw new Error('Failed to retrieve notes details');
-      }
+      console.log(`[HUBSPOT DEBUG] Found ${notes.length} notes for contact`);
       
       // Return the contact ID, email, and all notes
       return {
         contactId,
         email,
-        notes: batchReadResult.data.results
+        notes
       };
       
     } catch (error) {
@@ -170,4 +139,4 @@ export const retrieveContactNotes = createAction({
       ]
     };
   },
-}); 
+});
