@@ -1,7 +1,6 @@
 import { createApp } from '@lunnoa-automate/toolkit';
 
 import { runCustomApp } from './actions/run-custom-app.action';
-import { runCustomAppSingle } from './actions/run-custom-app-single.action';
 
 // Function to fetch workflows that could be moved to a shared utility
 

@@ -1,10 +1,10 @@
 import { createAction, createTextInputField } from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
-export const retrieveContact = createAction({
-  id: 'hubspot_action_retrieve-contact',
-  name: 'Retrieve Contact',
-  description: 'Retrieves a contact from HubSpot by email',
+export const retrieveContactByEmail = createAction({
+  id: 'hubspot_action_retrieve-contact-by-email',
+  name: 'Retrieve Contact by Email (v3)',
+  description: 'Retrieves a contact from HubSpot by email using the v3 API',
   inputConfig: [
     createTextInputField({
       id: 'email',
@@ -26,23 +26,39 @@ export const retrieveContact = createAction({
   run: async ({ configValue, connection, workspaceId, http }) => {
     const { email } = configValue;
     
-    // Use only the email endpoint
-    const url = `https://api.hubapi.com/contacts/v1/contact/email/${encodeURIComponent(email)}/profile`;
+    // Using v3 API - search endpoint to find contact by email
+    const url = `https://api.hubapi.com/crm/v3/objects/contacts/search`;
 
     try {
-      console.log(`[HUBSPOT DEBUG] Making request to ${url} with token ${connection.accessToken?.substring(0, 10)}...`);
+      console.log(`[HUBSPOT DEBUG] Making search request to ${url} with token ${connection.accessToken?.substring(0, 10)}...`);
       const result = await http.request({
-        method: 'GET',
+        method: 'POST',
         url,
+        data: {
+          filterGroups: [
+            {
+              filters: [
+                {
+                  propertyName: 'email',
+                  operator: 'EQ',
+                  value: email
+                }
+              ]
+            }
+          ],
+          properties: ['firstname', 'lastname', 'email', 'company', 'phone'],
+          limit: 1
+        },
         headers: {
           Authorization: `Bearer ${connection.accessToken}`,
+          'Content-Type': 'application/json'
         },
         workspaceId,
       });
       
       console.log(`[HUBSPOT DEBUG] Request successful`);
-      if (result?.data) {
-        return result.data;
+      if (result?.data?.results && result.data.results.length > 0) {
+        return result.data.results[0];
       } else {
         throw new Error('Contact not found');
       }
@@ -58,17 +74,16 @@ export const retrieveContact = createAction({
   },
   mockRun: async () => {
     return {
-      vid: 123,
-      'canonical-vid': 123,
-      'merged-vids': [],
-      'portal-id': 123,
+      id: '123',
       properties: {
-        firstname: { value: 'John' },
-        lastname: { value: 'Doe' },
-        email: { value: 'test@test.com' },
-        company: { value: 'Acme' },
-        phone: { value: '123-456-7890' },
+        firstname: 'John',
+        lastname: 'Doe',
+        email: 'test@test.com',
+        company: 'Acme',
+        phone: '123-456-7890'
       },
+      createdAt: '2023-01-01T00:00:00.000Z',
+      updatedAt: '2023-01-01T00:00:00.000Z'
     };
   },
-});
+}); 
