@@ -1,3 +1,10 @@
+# [1.107.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.106.0...v1.107.0) (2025-04-29)
+
+
+### Features
+
+* downgrade of Hubspot retrieve contact to v1 ([dcf4b0c](https://github.com/skelebuda/lunnoa_automate/commit/dcf4b0c357ce510aa61fd57c7029e16aaf2571fc))
+
 # [1.106.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.105.0...v1.106.0) (2025-04-29)
 
 
