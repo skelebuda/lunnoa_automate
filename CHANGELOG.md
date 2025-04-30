@@ -1,3 +1,10 @@
+# [1.110.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.109.0...v1.110.0) (2025-04-30)
+
+
+### Features
+
+* delete billing part for front part 1 ([35a2700](https://github.com/skelebuda/lunnoa_automate/commit/35a27006bd27c9e3d7e2846126380a93e44483f6))
+
 # [1.109.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.108.0...v1.109.0) (2025-04-30)
 
 
