@@ -1,3 +1,10 @@
+# [1.108.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.107.0...v1.108.0) (2025-04-30)
+
+
+### Features
+
+* deploy with correct error throw for retrieve note ([0aef99b](https://github.com/skelebuda/lunnoa_automate/commit/0aef99b5c8d0b2cea76bbe73fe051120c81fe852))
+
 # [1.107.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.106.0...v1.107.0) (2025-04-29)
 
 
