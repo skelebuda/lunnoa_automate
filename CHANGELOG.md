@@ -1,3 +1,10 @@
+# [1.111.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.110.0...v1.111.0) (2025-04-30)
+
+
+### Features
+
+* removed billing and credits from front part 2 ([4f49606](https://github.com/skelebuda/lunnoa_automate/commit/4f49606ddea6775358cc33d1025417a6aebaefa8))
+
 # [1.110.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.109.0...v1.110.0) (2025-04-30)
 
 
