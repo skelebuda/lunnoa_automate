@@ -1,7 +1,5 @@
 import { z } from 'zod';
 
-import { billingPlanTypeSchema, billingStatus } from './billing-model';
-
 export const workspaceSchema = z.object({
   id: z.string().uuid(),
   createdAt: z.string().optional(),
@@ -17,20 +15,6 @@ export const workspaceSchema = z.object({
       id: z.string().uuid(),
       type: z.enum(['free', 'starter', 'pro', 'enterprise']),
     })
-    .optional(),
-  billing: z
-    .object({
-      planType: billingPlanTypeSchema,
-      status: billingStatus,
-    })
-    .nullable()
-    .optional(),
-  usage: z
-    .object({
-      allottedCredits: z.number(),
-      purchasedCredits: z.number(),
-    })
-    .nullable()
     .optional(),
   createdByWorkspaceUser: z
     .object({

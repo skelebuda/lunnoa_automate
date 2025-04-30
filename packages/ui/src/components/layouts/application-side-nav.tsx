@@ -1,6 +1,6 @@
 import { IconProps } from '@radix-ui/react-icons/dist/types';
-import React, { useEffect, useMemo, useState } from 'react';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation, useParams } from 'react-router-dom';
 
 import useApiMutation from '../../api/use-api-mutation';
 import { useApplicationSideNav } from '../../hooks/useApplicationSideNav';
@@ -74,7 +74,6 @@ export function ApplicationSideNav() {
         <MainSideNavContent isCollapsed={isCollapsed} />
       </div>
       <div>
-        <Credits isCollapsed={isCollapsed} />
         <div className="mb-2">
           <UserSettings isCollapsed={isCollapsed} />
         </div>
@@ -201,14 +200,6 @@ export function MainSideNavContent({
                   icon: Icons.templates,
                   idSelector: 'onboarding-step12',
                 },
-            !enabledFeatures.BILLING || isOnAgentSideNav
-              ? null
-              : {
-                  title: 'Credit Usage',
-                  to: '/credits',
-                  icon: Icons.creditCard,
-                  idSelector: 'onboarding-step13',
-                },
           ].filter(Boolean) as any
         }
       />
@@ -266,70 +257,6 @@ export function AdditionalSideNavContent({
       ]}
     />
   );
-}
-
-export function Credits({ isCollapsed }: { isCollapsed: boolean }) {
-  const navigate = useNavigate();
-  const { workspace, workspaceUser, enabledFeatures } = useUser();
-
-  const shouldShowManagePlanButton = useMemo(() => {
-    if (!workspaceUser?.roles.includes('MAINTAINER')) {
-      return false;
-    } else if (workspace?.billing?.planType === 'free' || !workspace?.billing) {
-      return true;
-    } else if (workspace?.billing?.status === 'canceled') {
-      return true;
-    } else if (workspace?.billing?.status === 'unpaid') {
-      return true;
-    }
-
-    return false;
-
-    // return true;
-  }, [workspace?.billing, workspaceUser?.roles]);
-
-  const creditsRemaining = useMemo(() => {
-    let credits = 0;
-
-    if (workspace?.usage) {
-      credits =
-        workspace.usage.allottedCredits + workspace.usage.purchasedCredits;
-    }
-
-    return credits;
-  }, [workspace?.usage]);
-
-  return enabledFeatures.BILLING ? (
-    <div
-      className={cn('flex flex-col px-2 mb-2 space-y-3', {
-        hidden: isCollapsed,
-      })}
-    >
-      <div
-        className={cn('flex items-center justify-between px-3 py-1 group', {
-          'cursor-pointer rounded hover:bg-muted': shouldShowManagePlanButton,
-        })}
-        onClick={() => {
-          if (shouldShowManagePlanButton) {
-            navigate('/workspace-billing');
-          }
-        }}
-      >
-        <div className="flex items-center space-x-2">
-          <Icons.creditCard className="size-6 border rounded-full p-1" />
-          <div className="flex flex-col">
-            <span className="text-[10px] text-muted-foreground">Credits</span>
-            <span className="text-xs font-semibold">
-              {creditsRemaining.toLocaleString()}
-            </span>
-          </div>
-        </div>
-        {shouldShowManagePlanButton && (
-          <Icons.chevronRight className="hidden group-hover:block" />
-        )}
-      </div>
-    </div>
-  ) : null;
 }
 
 export function UserSettings({

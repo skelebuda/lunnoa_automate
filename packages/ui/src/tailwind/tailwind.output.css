@@ -1420,10 +1420,6 @@ body {
   height: calc(100dvh - 170px);
 }
 
-.h-\[calc\(100dvh-180px\)\] {
-  height: calc(100dvh - 180px);
-}
-
 .h-\[calc\(100dvh-275px\)\] {
   height: calc(100dvh - 275px);
 }

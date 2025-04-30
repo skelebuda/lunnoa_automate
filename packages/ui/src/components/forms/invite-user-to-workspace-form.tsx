@@ -54,51 +54,6 @@ export function InviteUsertoWorkspaceForm() {
       },
     );
   };
-{/*}
-  if (
-    enabledFeatures.BILLING &&
-    (!workspace?.billing ||
-      (workspace.billing.planType !== 'team' &&
-        workspace.billing.planType !== 'business'))
-  ) {
-    return (
-      <div>
-        <Form.Header>
-          <Form.Title>Upgrade Plans</Form.Title>
-        </Form.Header>
-        <Form.Content>
-          <Form.Subtitle>
-            Your workspace needs to be on a <strong>Team</strong> plan to invite
-            more users.
-          </Form.Subtitle>
-          <Form.Subtitle>
-            Go to the
-            <Button asChild variant={'link'} className="px-1">
-              <Link to="/workspace-billing" className="text-primary">
-                billing page
-              </Link>
-            </Button>
-            to learn more.
-          </Form.Subtitle>
-        </Form.Content>
-      </div>
-    );
-  } else if (!enabledFeatures.TEAMS) {
-    return (
-      <div>
-        <Form.Header>
-          <Form.Title>Commercial License Required</Form.Title>
-        </Form.Header>
-        <Form.Content>
-          <Form.Subtitle>
-            Reach out to info@lunnoalabs.ch for more information regarding our
-            commercial license.
-          </Form.Subtitle>
-        </Form.Content>
-      </div>
-    );
-  }
-*/}
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">

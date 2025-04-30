@@ -143,14 +143,28 @@ export default class WorkflowsService extends ApiLibraryHelper {
   }
 
   WorkflowToApp({ id, data, config }: { id: string; data: { isApp: boolean }; config?: ApiLibraryConfig }) {
-    return super.apiFetch<Workflow>({
+    return super.apiFetch<Workflow | void>({
       httpMethod: 'patch',
       mockConfig: {
-        schema: null,
+        schema: workflowSchema,
+        mockData: WORKFLOW_MOCK,
       },
       path: `${this.path}/${id}/make-app`,
       data,
       config,
+      onSuccess: async () => {
+        await Promise.all([
+          appQueryClient.invalidateQueries({
+            queryKey: [this.serviceName, 'getById', id],
+          }),
+          appQueryClient.invalidateQueries({
+            queryKey: [this.serviceName, 'getList'],
+          }),
+          appQueryClient.invalidateQueries({
+            queryKey: [this.serviceName, 'getAllWorkflowsAsApps'],
+          }),
+        ]);
+      },
     });
   }
 

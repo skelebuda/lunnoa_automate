@@ -489,7 +489,7 @@ export function WorkflowBuilderPage() {
       actions={
         executionId && execution
           ? [<ExecutionInformation execution={execution} />]
-          : [
+          : [ <><span>Active</span>
               <Switch
                 checked={tempIsActive}
                 onClick={(e) => {
@@ -498,7 +498,7 @@ export function WorkflowBuilderPage() {
                 onCheckedChange={(checked) => {
                   setTempIsActive(checked);
                 }}
-              />,
+              /></>,
               <Button
                 className="space-x-2"
                 onClick={handleClear}

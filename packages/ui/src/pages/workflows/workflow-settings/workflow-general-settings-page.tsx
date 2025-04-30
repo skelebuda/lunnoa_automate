@@ -103,36 +103,47 @@ export default function WorkflowGeneralSettingsPage() {
 
   const handleWorkflowToApp = useCallback(async (isApp: boolean) => {
     setIsWorkflowToApp(true);
-    return await WorkflowToApp.mutateAsync(
-      { 
-        id: workflowId as string, 
-        data: { isApp: isApp } 
-      },
-      {
-        onSuccess: (data) => {
-          toast({
-            title: isApp ? 'Workflow published' : 'Workflow unpublished',
-            action: isApp ? (
-              <ToastAction
-                altText="View App"
-                onClick={() => navigate(`/apps`)}
-                className="space-x-2"
-              >
-                <span>View Apps</span>
-                <Icons.arrowRight />
-              </ToastAction>
-            ) : undefined,
-          });
-          
-          form.setValue('isApp', isApp);
-          
-          refetch();
+    try {
+      await WorkflowToApp.mutateAsync(
+        { 
+          id: workflowId as string, 
+          data: { isApp: isApp } 
         },
-        onSettled: () => {
-          setIsWorkflowToApp(false);
+        {
+          onSuccess: (data) => {
+            console.error("Success callback executed");
+          },
+          onError: (error) => {
+            console.error("Error in mutation callback:", error);
+          },
         },
-      },
-    );
+      );
+      
+      toast({
+        title: isApp ? 'Workflow published' : 'Workflow unpublished',
+        action: isApp ? (
+          <ToastAction
+            altText="View App"
+            onClick={() => navigate(`/apps`)}
+            className="space-x-2"
+          >
+            <span>View Apps</span>
+            <Icons.arrowRight />
+          </ToastAction>
+        ) : undefined,
+      });
+      
+    } catch (error) {
+      console.error("Error in try/catch:", error);
+    } finally {
+      form.setValue('isApp', isApp);
+      
+      refetch().catch(err => {
+        console.error("Error refetching workflow data:", err);
+      });
+      
+      setIsWorkflowToApp(false);
+    }
   }, [WorkflowToApp, workflowId, form, navigate, refetch]);
 
   const onSubmit = async (data: UpdateWorkflowType) => {
@@ -158,6 +169,7 @@ export default function WorkflowGeneralSettingsPage() {
 
   useEffect(() => {
     if (workflow) {
+      console.log("Setting form values from workflow:", workflow);
       form.reset({
         description: workflow.description ?? '',
         name: workflow.name,
@@ -166,7 +178,15 @@ export default function WorkflowGeneralSettingsPage() {
       });
     }
   }, [form, workflow]);
-  console.log(workflow);
+
+  useEffect(() => {
+    if (workflow) {
+      console.log("Workflow data updated:", workflow);
+    }
+  }, [workflow]);
+
+  console.log("Current workflow state:", workflow);
+
   if (isLoadingWorkflow) {
     return <Loader />;
   }
@@ -285,32 +305,30 @@ export default function WorkflowGeneralSettingsPage() {
             </div>
         <Separator />
         {!workflow.isApp ? (
-          <>
-        <div className="space-y-4">
-              <Card.Title>App (Beta)</Card.Title>
-              <div className="space-y-2">
-                <Card className="flex justify-between items-center">
-                  <Card.Header>
-                    <Card.Title>Publish as App</Card.Title>
-                  </Card.Header>
-                  <Card.Content className="flex items-center p-6">
-                    <Button
-                      variant="outline"
-                      onClick={() => handleWorkflowToApp(true)}
-                      loading={isWorkflowToApp}
-                    >
-                      Publish
-                    </Button>
-                  </Card.Content>
-                </Card>
-                <Card.Description>
-                  Publish this workflow as app globally.
-                </Card.Description>
-              </div>
+          <div className="space-y-4" key={`app-section-${workflow.isApp}`}>
+            <Card.Title>App (Beta)</Card.Title>
+            <div className="space-y-2">
+              <Card className="flex justify-between items-center">
+                <Card.Header>
+                  <Card.Title>Publish as App</Card.Title>
+                </Card.Header>
+                <Card.Content className="flex items-center p-6">
+                  <Button
+                    variant="outline"
+                    onClick={() => handleWorkflowToApp(true)}
+                    loading={isWorkflowToApp}
+                  >
+                    Publish
+                  </Button>
+                </Card.Content>
+              </Card>
+              <Card.Description>
+                Publish this workflow as app globally.
+              </Card.Description>
             </div>
-          </>
+          </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-4" key={`app-section-${workflow.isApp}`}>
             <Card.Title>App (Beta)</Card.Title>
             <Card className="flex justify-between items-center">
               <Card.Header>
@@ -318,10 +336,12 @@ export default function WorkflowGeneralSettingsPage() {
               </Card.Header>
               <Card.Content className="flex items-center p-6">
                 <Button 
-                variant="outline"
-                onClick={() => handleWorkflowToApp(false)}
-                loading={isWorkflowToApp}
-                >Unpublish</Button>
+                  variant="outline"
+                  onClick={() => handleWorkflowToApp(false)}
+                  loading={isWorkflowToApp}
+                >
+                  Unpublish
+                </Button>
               </Card.Content>
             </Card>
             <Card.Description>

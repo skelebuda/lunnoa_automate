@@ -14,7 +14,7 @@ import { Separator } from '../ui/separator';
 import { Skeleton } from '../ui/skeleton';
 import { Tooltip } from '../ui/tooltip';
 
-import { Credits, MainSideNavContent, Nav } from './application-side-nav';
+import { MainSideNavContent, Nav } from './application-side-nav';
 
 export function AgentSideNav() {
   const { agentId, projectId } = useParams();
@@ -220,7 +220,6 @@ export function AgentSideNavContent({
         <Separator className="mb-0" />
         <MainSideNavContent isCollapsed={isCollapsed} isOnAgentSideNav />
         <Separator className="mb-4" />
-        <Credits isCollapsed={isCollapsed} />
       </div>
     </div>
   );

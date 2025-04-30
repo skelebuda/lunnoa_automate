@@ -6,7 +6,7 @@ import { PageSideNavLink } from '../../components/layouts/page-side-nav';
 import { useUser } from '../../hooks/useUser';
 
 export default function LayoutComponent() {
-  const { workspace, enabledFeatures } = useUser();
+  const { workspace } = useUser();
 
   const leftRailNavigationItems: React.ReactNode[] = [
     <PageSideNavLink
@@ -15,9 +15,6 @@ export default function LayoutComponent() {
     <PageSideNavLink
       item={{ title: 'Preferences', to: '/workspace-preferences' }}
     />,
-    enabledFeatures.BILLING && (
-      <PageSideNavLink item={{ title: 'Billing', to: '/workspace-billing' }} />
-    ),
     <PageSideNavLink
       item={{ title: 'Invitations', to: '/workspace-invitations' }}
     />,

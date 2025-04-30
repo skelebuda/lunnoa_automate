@@ -11,7 +11,6 @@ import { Sheet } from '../ui/sheet';
 
 import {
   AdditionalSideNavContent,
-  Credits,
   MainSideNavContent,
   UserSettings,
 } from './application-side-nav';
@@ -32,7 +31,6 @@ export default function ApplicationNav() {
             </ScrollArea>
             <Separator />
             <ScrollArea>
-              <Credits isCollapsed={false} />
               <UserSettings isCollapsed={false} />
               <AdditionalSideNavContent isCollapsed={false} isSheet />
             </ScrollArea>

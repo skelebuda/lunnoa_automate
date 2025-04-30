@@ -15,11 +15,9 @@ import { AppDetailsTriggers } from '../pages/apps/app-details-triggers';
 import AppsPage from '../pages/apps/apps-page';
 import AssetsPage from '../pages/assets/assets-page';
 import BetaPage from '../pages/beta/beta-page';
-import { BillingPage } from '../pages/billing/billing-page';
 import ConfirmEmailPage from '../pages/confirm-email/confirm-email-page';
 import ConnectionDetailsPage from '../pages/connections/connection-details-page';
 import ConnectionsPage from '../pages/connections/connections-page';
-import CreditsPage from '../pages/credits/credits-page';
 import ExecutionsPage from '../pages/executions/executions-page';
 import ForgotPasswordPage from '../pages/forgot-password/forgot-password';
 import HomePage from '../pages/home/home-page';
@@ -60,7 +58,6 @@ import { WorkflowDetailsPage } from '../pages/workflows/workflow-details-page';
 import WorkflowGeneralSettingsPage from '../pages/workflows/workflow-settings/workflow-general-settings-page';
 import { WorkflowSettingsLayout } from '../pages/workflows/workflow-settings/workflow-settings-page-layout';
 import WorkflowsPage from '../pages/workflows/workflows-page';
-import { WorkspaceBillingPage } from '../pages/workspace-settings/workspace-billing-page';
 import { WorkspaceInvitationsPage } from '../pages/workspace-settings/workspace-invitations-page';
 import WorkspaceNotificationPreferencesPage from '../pages/workspace-settings/workspace-notification-preferences';
 import WorkspacePreferencesPage from '../pages/workspace-settings/workspace-preference-page';
@@ -275,11 +272,6 @@ export const AppRoutes = () => {
             </Route>
           </Route>
 
-          {/* CREDITS */}
-          <Route path="/credits">
-            <Route index element={<CreditsPage />} />
-          </Route>
-
           {/* EXECUTIONS */}
           <Route path="/executions">
             <Route index element={<ExecutionsPage />} />
@@ -335,11 +327,6 @@ export const AppRoutes = () => {
             <Route path="/assets" element={<AssetsPage />} />
           </Route>
 
-          {/* BILLING */}
-          <Route path="/billing">
-            <Route index element={<BillingPage />} />
-          </Route>
-
           {/* SETTINGS */}
           <Route element={<SettingsPageLayout />}>
             <Route
@@ -374,9 +361,6 @@ export const AppRoutes = () => {
               path="/workspace-preferences"
               element={<WorkspacePreferencesPage />}
             />
-            <Route path="/workspace-billing">
-              <Route index element={<WorkspaceBillingPage />} />
-            </Route>
             <Route
               path="/workspace-invitations"
               element={<WorkspaceInvitationsPage />}
