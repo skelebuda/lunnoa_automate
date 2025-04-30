@@ -140,14 +140,8 @@ export const createContactNote = createAction({
         responseData: JSON.stringify(error?.response?.data)
       });
       
-      // Check if it's a token expiration error
-      if (error.response?.status === 401) {
-        throw new Error('Your HubSpot authentication has expired. Please reconnect your account.');
-      }
-      
-      // For other errors, provide more details if available
-      const errorMessage = error.response?.data?.message || error.message || 'Unknown error';
-      throw new Error(`Failed to create contact note: ${errorMessage}`);
+      // Simply throw the original error, just like in retrieve-contact.action.ts
+      throw error;
     }
   },
   mockRun: async () => {
