@@ -185,12 +185,6 @@ export default function WorkspaceSettingsPage() {
                       <AlertDialog.Header>
                         <AlertDialog.Title>Delete Workspace</AlertDialog.Title>
                         <AlertDialog.Description>
-                          <strong>
-                            If you're not on the starter plan, make sure to
-                            cancel your subscription before deleting.
-                          </strong>
-                          <br />
-                          <br />
                           All your projects, workflows, connections, variables,
                           .etc will be deleted. This cannot be undone. Are you
                           sure you want to delete{' '}
@@ -232,8 +226,7 @@ export default function WorkspaceSettingsPage() {
                     <Tooltip.Trigger className="absolute w-full h-full bg-muted/25 top-0 left-0 right-0 bottom-0 cursor-not-allowed"></Tooltip.Trigger>
                     <Tooltip.Content className="max-w-2xl">
                       You can't delete the default created workspace. This is
-                      the workspace that was created when you signed up. It is
-                      your only workspace that get's monthly credits.
+                      the workspace that was created when you signed up.
                     </Tooltip.Content>
                   </Tooltip>
                 )}

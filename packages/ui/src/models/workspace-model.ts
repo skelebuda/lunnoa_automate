@@ -10,12 +10,6 @@ export const workspaceSchema = z.object({
   inBeta: z.boolean(), //This is temporary while we're in beta. If a workspace is not inBeta they cannot access to app
   onboarded: z.boolean(),
   defaultCreatedWorkspace: z.boolean().optional(),
-  subscription: z
-    .object({
-      id: z.string().uuid(),
-      type: z.enum(['free', 'starter', 'pro', 'enterprise']),
-    })
-    .optional(),
   createdByWorkspaceUser: z
     .object({
       id: z.string().uuid(),

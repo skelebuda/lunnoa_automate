@@ -13,8 +13,6 @@ import { AppDetailsLayout } from '../pages/apps/app-details-layout';
 import { AppDetailsOverview } from '../pages/apps/app-details-overview';
 import { AppDetailsTriggers } from '../pages/apps/app-details-triggers';
 import AppsPage from '../pages/apps/apps-page';
-import AssetsPage from '../pages/assets/assets-page';
-import BetaPage from '../pages/beta/beta-page';
 import ConfirmEmailPage from '../pages/confirm-email/confirm-email-page';
 import ConnectionDetailsPage from '../pages/connections/connection-details-page';
 import ConnectionsPage from '../pages/connections/connections-page';
@@ -25,7 +23,6 @@ import { KnowledgePage } from '../pages/knowledge/knowledge-page';
 import { KnowledgeDetailsPage } from '../pages/knowledge/vectorRefs/knowledge-details-page';
 import LoginPage from '../pages/login/login-page';
 import LogoutPage from '../pages/logout/logout-page';
-import { OnboardingPage } from '../pages/onboarding/onboarding-page';
 import { ExecutionProvider } from '../pages/projects/execution-provider';
 import { ProjectAgentsPage } from '../pages/projects/project-agents-page';
 import { ProjectDetailsPage } from '../pages/projects/project-details-page';
@@ -40,7 +37,6 @@ import { WorkflowBuilderPage } from '../pages/projects/workflow-builder-page';
 import { PublicAppsPage } from '../pages/public/public-apps-page';
 import { RedirectPage } from '../pages/redirect/redirect-page';
 import ResetPasswordPage from '../pages/reset-password/reset-password-page';
-import { SuccessfulPaymentPage } from '../pages/successful-payment/successful-payment-page';
 import { TaskDetailsPage } from '../pages/tasks/tasks-details-page';
 import TasksPage from '../pages/tasks/tasks-page';
 import { TeamMembersPage } from '../pages/team-members/team-members-page';
@@ -322,11 +318,6 @@ export const AppRoutes = () => {
             </Route>
           </Route>
 
-          {/* ASSETS */}
-          <Route path="/assets">
-            <Route path="/assets" element={<AssetsPage />} />
-          </Route>
-
           {/* SETTINGS */}
           <Route element={<SettingsPageLayout />}>
             <Route
@@ -366,15 +357,6 @@ export const AppRoutes = () => {
               element={<WorkspaceInvitationsPage />}
             />
           </Route>
-        </Route>
-
-        <Route element={<OnboardingLayout />}>
-          <Route path="/onboarding" element={<OnboardingPage />} />
-          <Route path="/beta" element={<BetaPage />} />
-          <Route
-            path="successful-payment"
-            element={<SuccessfulPaymentPage />}
-          />
         </Route>
 
         <Route path="/logout" element={<LogoutPage />} />

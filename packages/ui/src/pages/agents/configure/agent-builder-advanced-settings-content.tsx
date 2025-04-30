@@ -347,7 +347,9 @@ export function AgentBuilderAdvancedSettingsContent({ agent }: PropType) {
                         This provider requires an API key.
                       </span>
                     ) : (
-                      <span>Use your API key instead of credits.</span>
+                      <span className={cn({ 'text-red-500': !field.value })}>
+                        This provider requires an API key.
+                      </span>
                     )}
                     <Tooltip>
                       <Tooltip.Trigger type="button">

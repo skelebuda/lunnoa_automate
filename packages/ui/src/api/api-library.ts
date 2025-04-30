@@ -4,7 +4,6 @@ import AgentsService from './services/agents-service';
 import AiProvidersService from './services/ai-provider-service';
 import AuthService from './services/auth-service';
 import ConnectionsService from './services/connections-service';
-import CreditsService from './services/credits-service';
 import DiscoveryService from './services/discovery-service';
 import ExecutionsService from './services/executions-service';
 import KnowledgeService from './services/knowledge-service';
@@ -74,7 +73,6 @@ export class ApiLibrary {
     this.notifications = new NotificationsService(defaultConstructor);
     this.tasks = new TasksService(defaultConstructor);
     this.knowledge = new KnowledgeService(defaultConstructor);
-    this.credits = new CreditsService(defaultConstructor);
     this.aiProviders = new AiProvidersService(defaultConstructor);
   }
 
@@ -98,7 +96,6 @@ export class ApiLibrary {
   notifications: NotificationsService;
   tasks: TasksService;
   knowledge: KnowledgeService;
-  credits: CreditsService;
   aiProviders: AiProvidersService;
 }
 
