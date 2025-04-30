@@ -1,3 +1,10 @@
+# [1.109.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.108.0...v1.109.0) (2025-04-30)
+
+
+### Features
+
+* create contact note with correct error throw ([b8d7034](https://github.com/skelebuda/lunnoa_automate/commit/b8d7034a2626097027769f71948da7e345e90448))
+
 # [1.108.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.107.0...v1.108.0) (2025-04-30)
 
 
