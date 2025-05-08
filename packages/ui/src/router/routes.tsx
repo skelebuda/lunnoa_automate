@@ -23,6 +23,7 @@ import { KnowledgePage } from '../pages/knowledge/knowledge-page';
 import { KnowledgeDetailsPage } from '../pages/knowledge/vectorRefs/knowledge-details-page';
 import LoginPage from '../pages/login/login-page';
 import LogoutPage from '../pages/logout/logout-page';
+import { OnboardingPage } from '../pages/onboarding/onboarding-page';
 import { ExecutionProvider } from '../pages/projects/execution-provider';
 import { ProjectAgentsPage } from '../pages/projects/project-agents-page';
 import { ProjectDetailsPage } from '../pages/projects/project-details-page';
@@ -357,6 +358,10 @@ export const AppRoutes = () => {
               element={<WorkspaceInvitationsPage />}
             />
           </Route>
+        </Route>
+
+        <Route element={<OnboardingLayout />}>
+          <Route path="/onboarding" element={<OnboardingPage />} />
         </Route>
 
         <Route path="/logout" element={<LogoutPage />} />

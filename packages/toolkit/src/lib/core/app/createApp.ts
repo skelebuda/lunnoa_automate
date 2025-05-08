@@ -38,6 +38,11 @@ export type CreateAppArgs = {
    */
   isPublished?: boolean;
   /**
+   *  if the app connection is set globally instead of each user by himself
+   * if the app is set to globally then always the default connection is used
+   */
+  isGlobal?: boolean;
+  /**
    * If the app is available for agents to use.
    *
    * default: `true`
