@@ -1,3 +1,10 @@
+# [1.114.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.113.0...v1.114.0) (2025-05-15)
+
+
+### Features
+
+* outlook key fix ([801c1dd](https://github.com/skelebuda/lunnoa_automate/commit/801c1dda7a1ca0f306a695fc2d2b796255b47347))
+
 # [1.113.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.112.0...v1.113.0) (2025-05-15)
 
 
