@@ -1,3 +1,10 @@
+# [1.115.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.114.0...v1.115.0) (2025-05-15)
+
+
+### Features
+
+* excel integration ([0df7e7d](https://github.com/skelebuda/lunnoa_automate/commit/0df7e7de98581d04e39e736bf58f5b0cdbb31f49))
+
 # [1.114.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.113.0...v1.114.0) (2025-05-15)
 
 
