@@ -5,13 +5,13 @@ import { ai } from './lib/ai/ai.app';
 //import { airtable } from './lib/airtable/airtable.app';
 import { anchorBrowser } from './lib/anchor-browser/anchor-browser.app';
 import { anthropic } from './lib/anthropic/anthropic.app';
-import { apify } from './lib/apify/apify.app';
+//import { apify } from './lib/apify/apify.app';
 //import { braveSearch } from './lib/brave-search/brave-search.app';
 import { calendly } from './lib/calendly/calendly.app';
 import { codesandbox } from './lib/codesandbox/codesandbox.app';
 import { csv } from './lib/csv/csv.app';
 import { date } from './lib/date/date.app';
-import { deepseek } from './lib/deepseek/deepseek.app';
+//import { deepseek } from './lib/deepseek/deepseek.app';
 import { dropbox } from './lib/dropbox/dropbox.app';
 import { firecrawl } from './lib/firecrawl/firecrawl.app';
 import { flowControl } from './lib/flow-control/flow-control.app';
@@ -32,10 +32,10 @@ import { list } from './lib/list/list.app';
 import { math } from './lib/math/math.app';
 import { microsoftExcel365 } from './lib/microsoft-excel-365/microsoft-excel-365.app';
 import { microsoftOutlook } from './lib/microsoft-outlook/microsoft-outlook.app';
-import { notion } from './lib/notion/notion.app';
+//import { notion } from './lib/notion/notion.app';
 import { openai } from './lib/openai/openai.app';
-import { paradigmVendo } from './lib/paradigm-vendo/paradigm-vendo.app';
-import { perplexityAi } from './lib/perplexity-ai/perplexity-ai.app';
+//import { paradigmVendo } from './lib/paradigm-vendo/paradigm-vendo.app';
+//import { perplexityAi } from './lib/perplexity-ai/perplexity-ai.app';
 import { phone } from './lib/phone/phone.app';
 import { pinecone } from './lib/pinecone/pinecone.app';
 //import { salesRabbit } from './lib/sales-rabbit/sales-rabbit.app';
@@ -43,15 +43,15 @@ import { serper } from './lib/serper/serper.app';
 import { slack } from './lib/slack/slack.app';
 import { surgemsg } from './lib/surgemsg/surgemsg.app';
 import { text } from './lib/text/text.app';
-import { togetherAi } from './lib/together-ai/together-ai.app';
+//import { togetherAi } from './lib/together-ai/together-ai.app';
 //import { vapi } from './lib/vapi/vapi.app';
 import { variables } from './lib/variables/variables.app';
 import { web } from './lib/web/web.app';
 import { x } from './lib/x/x.app';
-import { xai } from './lib/xai/xai.app';
-import { youtube } from './lib/youtube/youtube.app';
-import { zohoBooks } from './lib/zoho-books/zoho-books.app';
-import { zohoCrm } from './lib/zoho-crm/zoho-crm.app';
+//import { xai } from './lib/xai/xai.app';
+//import { youtube } from './lib/youtube/youtube.app';
+//import { zohoBooks } from './lib/zoho-books/zoho-books.app';
+//import { zohoCrm } from './lib/zoho-crm/zoho-crm.app';
 import { customApp } from './lib/custom-app/custom-app.app'
 
 const apps: Record<string, ReturnType<typeof createApp>> = {
@@ -60,13 +60,13 @@ const apps: Record<string, ReturnType<typeof createApp>> = {
   //[airtable.id]: airtable,
   [anchorBrowser.id]: anchorBrowser,
   [anthropic.id]: anthropic,
-  [apify.id]: apify,
+  //[apify.id]: apify,
  // [braveSearch.id]: braveSearch,
   [calendly.id]: calendly,
   [codesandbox.id]: codesandbox,
   [csv.id]: csv,
   [date.id]: date,
-  [deepseek.id]: deepseek,
+  //[deepseek.id]: deepseek,
   [dropbox.id]: dropbox,
   [firecrawl.id]: firecrawl,
   [flowControl.id]: flowControl,
@@ -87,10 +87,10 @@ const apps: Record<string, ReturnType<typeof createApp>> = {
   [math.id]: math,
   [microsoftExcel365.id]: microsoftExcel365,
   [microsoftOutlook.id]: microsoftOutlook,
-  [notion.id]: notion,
+  //[notion.id]: notion,
   [openai.id]: openai,
-  [paradigmVendo.id]: paradigmVendo,
-  [perplexityAi.id]: perplexityAi,
+  //[paradigmVendo.id]: paradigmVendo,
+  //[perplexityAi.id]: perplexityAi,
   [phone.id]: phone,
   [pinecone.id]: pinecone,
   //[salesRabbit.id]: salesRabbit,
@@ -98,15 +98,15 @@ const apps: Record<string, ReturnType<typeof createApp>> = {
   [slack.id]: slack,
   [surgemsg.id]: surgemsg,
   [text.id]: text,
-  [togetherAi.id]: togetherAi,
+//[togetherAi.id]: togetherAi,
  // [vapi.id]: vapi,
   [variables.id]: variables,
   [web.id]: web,
   [x.id]: x,
-  [xai.id]: xai,
-  [youtube.id]: youtube,
-  [zohoBooks.id]: zohoBooks,
-  [zohoCrm.id]: zohoCrm,
+  //[xai.id]: xai,
+  //[youtube.id]: youtube,
+  //[zohoBooks.id]: zohoBooks,
+  //[zohoCrm.id]: zohoCrm,
   [customApp.id]: customApp,
 };
 
