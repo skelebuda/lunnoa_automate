@@ -1,3 +1,10 @@
+# [1.113.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.112.0...v1.113.0) (2025-05-15)
+
+
+### Features
+
+* excel and outlook integration ([ef2c475](https://github.com/skelebuda/lunnoa_automate/commit/ef2c47501c85dd1d6a42b53cb1d6de942b21e931))
+
 # [1.112.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.111.0...v1.112.0) (2025-05-08)
 
 
