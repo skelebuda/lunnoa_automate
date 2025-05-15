@@ -1,3 +1,10 @@
+# [1.118.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.117.0...v1.118.0) (2025-05-15)
+
+
+### Features
+
+* add row to worksheet ([8881132](https://github.com/skelebuda/lunnoa_automate/commit/8881132e5cdc355fcb3cdf07647fb3e259922079))
+
 # [1.117.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.116.0...v1.117.0) (2025-05-15)
 
 
