@@ -1,3 +1,10 @@
+# [1.117.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.116.0...v1.117.0) (2025-05-15)
+
+
+### Features
+
+* create workbook and get worksheet data for excel ([9c5b8d4](https://github.com/skelebuda/lunnoa_automate/commit/9c5b8d4dea7bbc437f93e7c98da5953c67c4c0a4))
+
 # [1.116.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.115.0...v1.116.0) (2025-05-15)
 
 
