@@ -1,3 +1,10 @@
+# [1.116.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.115.0...v1.116.0) (2025-05-15)
+
+
+### Features
+
+* removed not needed tools ([4c36198](https://github.com/skelebuda/lunnoa_automate/commit/4c36198157307f93311e28abfebaa38218e5860a))
+
 # [1.115.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.114.0...v1.115.0) (2025-05-15)
 
 
