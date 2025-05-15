@@ -1,3 +1,10 @@
+# [1.112.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.111.0...v1.112.0) (2025-05-08)
+
+
+### Features
+
+* fix onboarding ([af640a9](https://github.com/skelebuda/lunnoa_automate/commit/af640a9b63a0f05606c2c49f11457e3fd87a70ac))
+
 # [1.111.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.110.0...v1.111.0) (2025-04-30)
 
 
