@@ -1,3 +1,10 @@
+# [1.122.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.121.0...v1.122.0) (2025-05-16)
+
+
+### Features
+
+* fix search for sheets ([a82da07](https://github.com/skelebuda/lunnoa_automate/commit/a82da07216943ce753a10292bfc3785adc898c87))
+
 # [1.121.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.120.0...v1.121.0) (2025-05-16)
 
 
