@@ -1,3 +1,10 @@
+# [1.123.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.122.0...v1.123.0) (2025-05-16)
+
+
+### Features
+
+* new scope files.readwrite.all ([f580e47](https://github.com/skelebuda/lunnoa_automate/commit/f580e477235271bd2c8c49b968a01f63b6fe33a9))
+
 # [1.122.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.121.0...v1.122.0) (2025-05-16)
 
 
