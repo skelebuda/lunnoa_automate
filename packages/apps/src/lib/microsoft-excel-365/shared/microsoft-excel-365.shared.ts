@@ -8,9 +8,8 @@ export const shared = {
       label: 'Workbook',
       description: 'Select a workbook',
       _getDynamicValues: async ({ connection, workspaceId, http }) => {
-        const url =
-          "https://graph.microsoft.com/v1.0/me/drive/root/search(q='.xlsx')?select=id,name";
-
+        const url = "https://graph.microsoft.com/v1.0/me/drive/root/children?$select=id,name,file";
+      
         const response = await http.request({
           method: 'GET',
           url,
@@ -19,11 +18,16 @@ export const shared = {
           },
           workspaceId,
         });
-
-        return response?.data?.value.map((item: any) => ({
-          value: item.id,
-          label: item.name,
-        }));
+      
+        // Filter for Excel files based on MIME type
+        return response?.data?.value
+          .filter((item: any) =>
+            item.file?.mimeType === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+          )
+          .map((item: any) => ({
+            value: item.id,
+            label: item.name,
+          }));
       },
       required: {
         missingStatus: 'warning',
