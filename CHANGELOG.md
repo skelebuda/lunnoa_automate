@@ -1,3 +1,10 @@
+# [1.124.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.123.0...v1.124.0) (2025-05-16)
+
+
+### Features
+
+* add row to worksheet action ([74f2cea](https://github.com/skelebuda/lunnoa_automate/commit/74f2ceae2b37867a59ca4c9ab7e564937764a50e))
+
 # [1.123.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.122.0...v1.123.0) (2025-05-16)
 
 
