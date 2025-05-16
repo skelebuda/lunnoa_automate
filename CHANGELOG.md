@@ -1,3 +1,10 @@
+# [1.119.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.118.0...v1.119.0) (2025-05-16)
+
+
+### Features
+
+* New scopes ([cdf8d4a](https://github.com/skelebuda/lunnoa_automate/commit/cdf8d4a50386b323341b873fde8510d7120c303e))
+
 # [1.118.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.117.0...v1.118.0) (2025-05-15)
 
 
