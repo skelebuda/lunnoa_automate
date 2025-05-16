@@ -10,6 +10,6 @@ export const microsoftExcel365OAuth2 = createOAuth2Connection({
   getClientId: () => process.env.INTEGRATION_MICROSOFT_365_GRAPH_CLIENT_ID,
   getClientSecret: () =>
     process.env.INTEGRATION_MICROSOFT_365_GRAPH_CLIENT_SECRET,
-  scopes: ['Files.Read', 'Files.ReadWrite', 'User.Read', 'offline_access', 'Sites.Read.All', 'Sites.ReadWrite.All'],
+  scopes: ['Files.ReadWrite', 'User.Read', 'offline_access'],
   redirectToLocalHostInDevelopment: true,
 });
