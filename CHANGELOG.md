@@ -1,3 +1,10 @@
+# [1.125.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.124.0...v1.125.0) (2025-05-18)
+
+
+### Features
+
+* finnova, bsi and confluence ([dbd51b6](https://github.com/skelebuda/lunnoa_automate/commit/dbd51b6877355c9460a3fd24fa005fada9fe157e))
+
 # [1.124.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.123.0...v1.124.0) (2025-05-16)
 
 
