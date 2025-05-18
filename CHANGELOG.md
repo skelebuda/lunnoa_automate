@@ -1,3 +1,10 @@
+# [1.126.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.125.0...v1.126.0) (2025-05-18)
+
+
+### Features
+
+* new confluence action ([76e8ab7](https://github.com/skelebuda/lunnoa_automate/commit/76e8ab7932c65a1042896fe11fa12648bfcc5ac3))
+
 # [1.125.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.124.0...v1.125.0) (2025-05-18)
 
 
