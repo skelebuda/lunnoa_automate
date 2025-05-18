@@ -55,6 +55,8 @@ import { x } from './lib/x/x.app';
 import { customApp } from './lib/custom-app/custom-app.app'
 import { confluence } from './lib/confluence/confluence.app';
 import { finnova } from './lib/finnova/finnova.app';
+import { bsiCustomerSuite } from './lib/bsi-customer-suite/bsi-customer-suite.app';
+
 const apps: Record<string, ReturnType<typeof createApp>> = {
   [agents.id]: agents,
   [ai.id]: ai,
@@ -111,6 +113,7 @@ const apps: Record<string, ReturnType<typeof createApp>> = {
   [customApp.id]: customApp,
   [confluence.id]: confluence,
   [finnova.id]: finnova,
+  [bsiCustomerSuite.id]: bsiCustomerSuite,
 };
 
 export default apps;
