@@ -53,7 +53,8 @@ import { x } from './lib/x/x.app';
 //import { zohoBooks } from './lib/zoho-books/zoho-books.app';
 //import { zohoCrm } from './lib/zoho-crm/zoho-crm.app';
 import { customApp } from './lib/custom-app/custom-app.app'
-
+import { confluence } from './lib/confluence/confluence.app';
+import { finnova } from './lib/finnova/finnova.app';
 const apps: Record<string, ReturnType<typeof createApp>> = {
   [agents.id]: agents,
   [ai.id]: ai,
@@ -108,6 +109,8 @@ const apps: Record<string, ReturnType<typeof createApp>> = {
   //[zohoBooks.id]: zohoBooks,
   //[zohoCrm.id]: zohoCrm,
   [customApp.id]: customApp,
+  [confluence.id]: confluence,
+  [finnova.id]: finnova,
 };
 
 export default apps;
