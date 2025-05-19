@@ -11,9 +11,9 @@ export const addRowToWorksheet = createAction({
     shared.fields.dynamicSelectWorksheets,
     createTextInputField({
       id: 'values',
-      label: 'Row Values (comma separated)',
-      description: 'Values for the new row, separated by commas.',
-      placeholder: 'e.g. John, 30, john@example.com',
+      label: 'Row Values (semicolon separated)',
+      description: 'Values for the new row, separated by semicolons.',
+      placeholder: 'e.g. John; 30; john@example.com',
       required: {
         missingMessage: 'Row values are required',
         missingStatus: 'warning',
@@ -23,11 +23,11 @@ export const addRowToWorksheet = createAction({
   aiSchema: z.object({
     workbookId: z.string().describe('The ID of the Excel workbook.'),
     worksheetId: z.string().describe('The ID of the worksheet.'),
-    values: z.string().describe('Comma-separated values for the new row.'),
+    values: z.string().describe('Semicolon-separated values for the new row.'),
   }),
   run: async ({ configValue, connection, workspaceId, http }) => {
     const { workbookId, worksheetId, values } = configValue;
-    const rowValues = values.split(',').map((v: string) => v.trim());
+    const rowValues = values.split(';').map((v: string) => v.trim());
 
     // 1. Get the used range to find the next empty row
     const usedRangeUrl = `https://graph.microsoft.com/v1.0/me/drive/items/${workbookId}/workbook/worksheets/${worksheetId}/usedRange`;
@@ -74,7 +74,7 @@ export const addRowToWorksheet = createAction({
     };
   },
   mockRun: async ({ configValue }) => {
-    const rowValues = configValue.values.split(',').map((v: string) => v.trim());
+    const rowValues = configValue.values.split(';').map((v: string) => v.trim());
     return {
       address: 'Sheet1!A11:C11',
       values: [rowValues],
