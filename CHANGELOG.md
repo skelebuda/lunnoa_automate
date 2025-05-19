@@ -1,3 +1,10 @@
+# [1.128.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.127.0...v1.128.0) (2025-05-19)
+
+
+### Features
+
+* excel seperate by ";" ([5494d9a](https://github.com/skelebuda/lunnoa_automate/commit/5494d9a9bc154d9b8d8b3ca9c52fa2d2b9120c4e))
+
 # [1.127.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.126.0...v1.127.0) (2025-05-18)
 
 
