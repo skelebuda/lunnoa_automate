@@ -1,3 +1,10 @@
+# [1.127.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.126.0...v1.127.0) (2025-05-18)
+
+
+### Features
+
+* bsi ([c9b3512](https://github.com/skelebuda/lunnoa_automate/commit/c9b3512ec318682c40fc45f7e6a16b1075e75eb0))
+
 # [1.126.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.125.0...v1.126.0) (2025-05-18)
 
 
