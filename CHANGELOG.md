@@ -1,3 +1,11 @@
+# [1.130.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.129.0...v1.130.0) (2025-06-08)
+
+
+### Features
+
+* new merge ([197e07d](https://github.com/skelebuda/lunnoa_automate/commit/197e07d5ab26b8500a132388fffa7c1c104076ce))
+* release new package ([e9005a3](https://github.com/skelebuda/lunnoa_automate/commit/e9005a38cc82eb8477289b20f75d5518319b7dfc))
+
 # [1.129.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.128.0...v1.129.0) (2025-06-08)
 
 
