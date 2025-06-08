@@ -1,3 +1,10 @@
+# [1.129.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.128.0...v1.129.0) (2025-06-08)
+
+
+### Features
+
+* new loop through list for workflow and agent ([82c7ced](https://github.com/skelebuda/lunnoa_automate/commit/82c7ceda04ec92c1f6773112c8a9de95ea68a39d))
+
 # [1.128.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.127.0...v1.128.0) (2025-05-19)
 
 
