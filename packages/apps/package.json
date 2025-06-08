@@ -1,6 +1,6 @@
 {
   "name": "@lunnoa-automate/apps",
-  "version": "1.128.0",
+  "version": "1.130.0",
   "publishConfig": {
     "access": "public"
   },
