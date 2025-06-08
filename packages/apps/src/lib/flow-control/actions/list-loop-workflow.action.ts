@@ -1,8 +1,8 @@
 import { createAction, createDynamicSelectInputField, createTextInputField } from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
 
-export const stringListLoop = createAction({
-  id: 'flow-control_action_string-list-loop',
+export const listLoopWorkflow = createAction({
+  id: 'flow-control_action_list-loop-workflow',
   name: 'String List Loop',
   description: 'Loop through a comma-separated list and run a workflow for each item.',
   iconUrl: `https://lecca-io.s3.us-east-2.amazonaws.com/assets/actions/flow-control_action_run-workflow.svg`,
@@ -22,46 +22,6 @@ export const stringListLoop = createAction({
       description: 'A list of items separated by commas (e.g., "item1, item2, item3")',
       required: {
         missingMessage: 'Comma-separated list is required',
-        missingStatus: 'warning',
-      },
-    }),
-    createDynamicSelectInputField({
-      id: 'variableId',
-      label: 'Variable to Update',
-      description: 'Select a variable that will be updated with each item from the list.',
-      _getDynamicValues: async ({ projectId, workspaceId, prisma }) => {
-        const variables = await prisma.variable.findMany({
-          where: {
-            OR: [
-              {
-                FK_projectId: projectId,
-              },
-              {
-                AND: [
-                  {
-                    FK_workspaceId: workspaceId,
-                  },
-                  {
-                    FK_projectId: null,
-                  },
-                ],
-              },
-            ],
-          },
-          select: {
-            id: true,
-            name: true,
-            dataType: true,
-          },
-        });
-
-        return variables.map((variable) => ({
-          label: variable.name,
-          value: variable.id,
-        }));
-      },
-      required: {
-        missingMessage: 'Variable is required',
         missingStatus: 'warning',
       },
     }),
@@ -104,11 +64,103 @@ export const stringListLoop = createAction({
         missingStatus: 'warning',
       },
     }),
+    createDynamicSelectInputField({
+      id: 'targetInputId',
+      label: 'Loop Item Target Input',
+      description:
+        'Select the input field of the target workflow to populate with the current item from the list.',
+      placeholder: 'Select an input',
+      hideCustomTab: true,
+      loadOptions: {
+        dependsOn: ['workflowId'],
+      },
+      _getDynamicValues: async ({ projectId, extraOptions, prisma }) => {
+        const { workflowId } = extraOptions as { workflowId: string };
+
+        if (!workflowId) {
+          throw new Error('Workflow ID is required to get target inputs.');
+        }
+
+        const workflow = await prisma.workflow.findFirst({
+          where: {
+            AND: [{ id: workflowId }, { FK_projectId: projectId }],
+          },
+          select: {
+            triggerNode: true,
+          },
+        });
+
+        if (!workflow) {
+          return [];
+        }
+
+        const triggerNode = workflow.triggerNode as any;
+
+        const customInputs = triggerNode.value?.customInputConfig ?? [];
+
+        return customInputs.map((input: any) => ({
+          label: input.label || input.id,
+          value: input.id,
+        }));
+      },
+      required: {
+        missingMessage: 'Target input is required',
+        missingStatus: 'warning',
+      },
+    }),
+    {
+      id: 'customInputConfigValues',
+      inputType: 'dynamic-input-config',
+      label: 'Workflow Input Data',
+      description:
+        'These are the custom fields configured in the workflow "Manually Run" trigger. The selected Loop Item Target Input will be overriden by the loop.',
+      loadOptions: {
+        dependsOn: ['workflowId'],
+        workflowOnly: true,
+        forceRefresh: true,
+      },
+      _getDynamicValues: async ({ projectId, extraOptions, prisma }) => {
+        const { workflowId } = extraOptions as { workflowId: string };
+
+        if (!workflowId) {
+          throw new Error('Workflow ID is required');
+        }
+
+        const workflow = await prisma.workflow.findFirst({
+          where: {
+            AND: [
+              { id: workflowId },
+              {
+                FK_projectId: projectId,
+              },
+            ],
+          },
+          select: {
+            triggerNode: true,
+          },
+        });
+
+        if (!workflow) {
+          throw new Error('Workflow not found');
+        }
+
+        const triggerNode = workflow.triggerNode as any;
+
+        return (
+          triggerNode.value?.customInputConfig?.map((input: any) => {
+            const formattedInput = { ...input };
+            formattedInput.label = input.id;
+            return formattedInput;
+          }) ?? []
+        );
+      },
+    },
   ],
   aiSchema: z.object({
     stringList: z.string(),
-    variableId: z.string(),
     workflowId: z.string(),
+    targetInputId: z.string(),
+    customInputConfigValues: z.record(z.union([z.string(), z.number()])).optional(),
   }),
   run: async ({
     configValue,
@@ -143,17 +195,6 @@ export const stringListLoop = createAction({
         message: 'No items found in the list',
       };
     }
-
-    // Get the variable to update
-    const variable = await prisma.variable.findUnique({
-      where: { id: configValue.variableId },
-      select: { id: true, name: true, dataType: true },
-    });
-
-    if (!variable) {
-      throw new Error(`Variable with ID ${configValue.variableId} not found`);
-    }
-
     // Process each item in the list
     const results = [];
     const errors = [];
@@ -165,17 +206,15 @@ export const stringListLoop = createAction({
       const item = items[i];
       
       try {
-        // Update the variable with the current item
-        await prisma.variable.update({
-          where: { id: variable.id },
-          data: { value: item },
-        });
-
+        const inputData = {
+          ...(configValue.customInputConfigValues ?? {}),
+          [configValue.targetInputId]: item,
+        };
         // Run the workflow
         const newExecution = await execution.manuallyExecuteWorkflow({
           workflowId: configValue.workflowId,
           skipQueue: true,
-          inputData: {},
+          inputData,
         });
 
         // Use the function to generate the link
@@ -248,7 +287,6 @@ export const stringListLoop = createAction({
       totalItems: items.length,
       successfulExecutions: results.length,
       failedExecutions: errors.length,
-      variableName: variable.name,
       results,
       errors,
     };
@@ -275,17 +313,12 @@ export const stringListLoop = createAction({
       select: { output: true, name: true },
     });
 
-    const variable = await prisma.variable.findUnique({
-      where: { id: configValue.variableId },
-      select: { name: true },
-    });
 
     return {
       totalItems: items.length,
       successfulExecutions: items.length,
       failedExecutions: 0,
-      variableName: variable?.name || 'Unknown variable',
-      mockResults: `Would run workflow "${workflowWithOutputData?.name || configValue.workflowId}" for ${items.length} items, updating variable "${variable?.name || configValue.variableId}" for each item`,
+      mockResults: `Would run workflow "${workflowWithOutputData?.name || configValue.workflowId}" for ${items.length} items`,
       note: workflowWithOutputData?.output
         ? undefined
         : 'If you want your workflow to return data for each item, make sure to add the "Output Workflow Data" action to your workflow.',

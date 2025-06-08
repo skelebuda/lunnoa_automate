@@ -7,6 +7,7 @@ import { listAgents } from './actions/list-agents.action';
 import { messageAgent } from './actions/message-agent.action';
 import { summarizeText } from './actions/summarize-text.action';
 import { translateText } from './actions/translate-text.action';
+import { listLoopAgent } from './actions/list-loop-agent.action';
 import { think } from './actions/think.action';
 
 export const ai = createApp({
@@ -23,6 +24,7 @@ export const ai = createApp({
     translateText,
     summarizeText,
     listAgents,
+    listLoopAgent,
   ],
   triggers: [],
   connections: [],
