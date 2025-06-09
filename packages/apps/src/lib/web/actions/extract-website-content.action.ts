@@ -49,12 +49,17 @@ export const extractWebsiteContent = createAction({
   }) => {
     const { url } = configValue;
 
+    if (!process.env.APIFY_EXTRACT_DYNAMIC_CONTENT_TASK_ID || !process.env.APIFY_API_KEY) {
+      throw new Error('Apify environment variables are not configured.');
+    }
+
     await credits.checkIfWorkspaceHasEnoughCredits({
       workspaceId,
       usageType: 'extract-dynamic-website-content',
     });
 
-    const taskUrl = `https://api.apify.com/v2/actor-tasks/${process.env.APIFY_EXTRACT_DYNAMIC_CONTENT_TASK_ID}/runs?timeout=60&waitForFinish=60`;
+    const taskId = process.env.APIFY_EXTRACT_DYNAMIC_CONTENT_TASK_ID.replace('/', '~');
+    const taskUrl = `https://api.apify.com/v2/actor-tasks/${taskId}/runs?token=${process.env.APIFY_API_KEY}&timeout=60&waitForFinish=60`;
 
     let urlToSearch = url;
     if (
@@ -70,9 +75,6 @@ export const extractWebsiteContent = createAction({
       data: {
         startUrls: [{ url: urlToSearch }],
       },
-      headers: {
-        Authorization: `Bearer ${process.env.APIFY_API_KEY}`,
-      },
       workspaceId,
     })) as { data: { data: RunSyncResponse } };
 
@@ -82,14 +84,11 @@ export const extractWebsiteContent = createAction({
       throw new Error('Web search ran, but no data was returned.');
     }
 
-    const datasetUrl = `https://api.apify.com/v2/datasets/${datasetId}/items`;
+    const datasetUrl = `https://api.apify.com/v2/datasets/${datasetId}/items?token=${process.env.APIFY_API_KEY}`;
 
     const datasetItemResponse = (await http.request({
       method: 'GET',
       url: datasetUrl,
-      headers: {
-        Authorization: `Bearer ${process.env.APIFY_API_KEY}`,
-      },
       workspaceId,
     })) as { data: DatasetItemResponse };
 
