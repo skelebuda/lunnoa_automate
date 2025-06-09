@@ -1,3 +1,10 @@
+# [1.132.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.131.0...v1.132.0) (2025-06-09)
+
+
+### Features
+
+* new apify search url ([407a656](https://github.com/skelebuda/lunnoa_automate/commit/407a656d8d06772a5a606f5b7783ca5b121747ea))
+
 # [1.131.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.130.0...v1.131.0) (2025-06-09)
 
 
