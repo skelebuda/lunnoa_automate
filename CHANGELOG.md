@@ -1,3 +1,10 @@
+# [1.131.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.130.0...v1.131.0) (2025-06-09)
+
+
+### Features
+
+* new outlook send email and apify fix ([22a74a8](https://github.com/skelebuda/lunnoa_automate/commit/22a74a8d8f33f17e308a823c01b9d368f85fadf5))
+
 # [1.130.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.129.0...v1.130.0) (2025-06-08)
 
 
