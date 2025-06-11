@@ -1,3 +1,11 @@
+# [1.135.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.134.0...v1.135.0) (2025-06-11)
+
+
+### Features
+
+* correct scope deliminater ([6e42108](https://github.com/skelebuda/lunnoa_automate/commit/6e4210817749719f52915a2b88e59e742c4e3654))
+* new get user tasks monday action ([d9837f8](https://github.com/skelebuda/lunnoa_automate/commit/d9837f8b96daf49bbce46e32a0cb29a57b13c977))
+
 # [1.134.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.133.0...v1.134.0) (2025-06-11)
 
 
