@@ -1,3 +1,10 @@
+# [1.133.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.132.0...v1.133.0) (2025-06-11)
+
+
+### Features
+
+* monday integration ([9f7ec9a](https://github.com/skelebuda/lunnoa_automate/commit/9f7ec9a0d6e50c17a4c0c2d0d0cc60408cd4fc3b))
+
 # [1.132.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.131.0...v1.132.0) (2025-06-09)
 
 
