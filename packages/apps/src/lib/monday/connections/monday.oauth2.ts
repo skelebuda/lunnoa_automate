@@ -7,8 +7,24 @@ export const mondayOAuth2 = createOAuth2Connection({
   inputConfig: [],
   authorizeUrl: 'https://auth.monday.com/oauth2/authorize',
   tokenUrl: 'https://auth.monday.com/oauth2/token',
-  getClientId: () => process.env.MONDAY_CLIENT_ID,
-  getClientSecret: () => process.env.MONDAY_CLIENT_SECRET,
+  getClientId: () => {
+    const clientId = process.env.MONDAY_CLIENT_ID;
+    if (!clientId) {
+      throw new Error(
+        'Missing MONDAY_CLIENT_ID environment variable. Please ensure it is set and the application is restarted.',
+      );
+    }
+    return clientId;
+  },
+  getClientSecret: () => {
+    const clientSecret = process.env.MONDAY_CLIENT_SECRET;
+    if (!clientSecret) {
+      throw new Error(
+        'Missing MONDAY_CLIENT_SECRET environment variable. Please ensure it is set and the application is restarted.',
+      );
+    }
+    return clientSecret;
+  },
   scopeDelimiter: ' ',
   scopes: [
     'me:read',
@@ -29,6 +45,6 @@ export const mondayOAuth2 = createOAuth2Connection({
   extraAuthParams: {
     owner: 'user',
   },
-  authorizationMethod: 'header',
+  authorizationMethod: 'body',
   redirectToLocalHostInDevelopment: true,
 });
