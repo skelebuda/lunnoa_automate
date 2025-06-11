@@ -1,3 +1,10 @@
+# [1.136.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.135.0...v1.136.0) (2025-06-11)
+
+
+### Features
+
+* authorizationMethod to body for monday ([d3a6d85](https://github.com/skelebuda/lunnoa_automate/commit/d3a6d853794b108ec06a24429d86f108a78f62ec))
+
 # [1.135.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.134.0...v1.135.0) (2025-06-11)
 
 
