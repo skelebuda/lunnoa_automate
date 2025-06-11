@@ -85,5 +85,55 @@ export const shared = {
         }));
       },
     }),
+    dynamicSelectPersonColumn: createDynamicSelectInputField({
+      id: 'personColumnId',
+      label: 'Person Column',
+      description: 'Select the person column to search for the user.',
+      required: {
+        missingMessage: 'Person column is required',
+        missingStatus: 'warning',
+      },
+      loadOptions: {
+        dependsOn: ['boardId'],
+      },
+      _getDynamicValues: async ({
+        http,
+        workspaceId,
+        connection,
+        extraOptions,
+      }) => {
+        const boardId = extraOptions?.boardId as string;
+        if (!boardId) return [];
+
+        const query = `query($boardId: ID!) {
+          boards(ids: [$boardId]) {
+            columns(types: [people]) {
+              id
+              title
+            }
+          }
+        }`;
+        const variables = { boardId: Number(boardId) };
+
+        const data = await shared.mondayApiRequest({
+          http,
+          workspaceId,
+          connection,
+          query,
+          variables,
+        });
+
+        if (!data.boards || data.boards.length === 0) {
+          return [];
+        }
+
+        return data.boards[0].columns.map(
+          (column: { id: string; title: string }) => ({
+            label: column.title,
+            value: column.id,
+          }),
+        );
+      },
+    }),
   },
 };
