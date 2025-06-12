@@ -22,24 +22,31 @@ export const getUserTasks = createAction({
     const { boardId, personColumnId, userId } = configValue;
 
     const query = `
-      query ($boardId: ID!, $columnId: String!, $columnValue: String!) {
-        items_by_multiple_column_values (
+      query ($boardId: ID!, $personColumnId: String!, $userId: String!) {
+        items_page_by_column_values (
           board_id: $boardId,
-          column_id: $columnId,
-          column_value: $columnValue
+          columns: [
+            {
+              column_id: $personColumnId,
+              column_values: [$userId]
+            }
+          ]
         ) {
-          id
-          name
-          state
-          updated_at
+          cursor
+          items {
+            id
+            name
+            state
+            updated_at
+          }
         }
       }
     `;
 
     const variables = {
       boardId: Number(boardId),
-      columnId: personColumnId,
-      columnValue: String(userId),
+      personColumnId,
+      userId: String(userId),
     };
 
     const data = await shared.mondayApiRequest({
@@ -50,7 +57,7 @@ export const getUserTasks = createAction({
       variables,
     });
 
-    return { tasks: data.items_by_multiple_column_values };
+    return { tasks: data.items_page_by_column_values.items };
   },
   mockRun: async () => {
     return {
