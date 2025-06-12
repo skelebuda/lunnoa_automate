@@ -1,3 +1,10 @@
+# [1.138.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.137.0...v1.138.0) (2025-06-12)
+
+
+### Features
+
+* better description of userId ([d766d45](https://github.com/skelebuda/lunnoa_automate/commit/d766d453dbd1cdfd21dee8ebf3d47be12f585f77))
+
 # [1.137.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.136.0...v1.137.0) (2025-06-12)
 
 
