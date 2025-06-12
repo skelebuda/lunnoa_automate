@@ -1,3 +1,10 @@
+# [1.144.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.143.0...v1.144.0) (2025-06-12)
+
+
+### Features
+
+* correct item query variable ([a701080](https://github.com/skelebuda/lunnoa_automate/commit/a7010805ce4b457c7f7ed65a0d69ed6a6460e688))
+
 # [1.143.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.142.0...v1.143.0) (2025-06-12)
 
 
