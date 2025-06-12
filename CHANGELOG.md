@@ -1,3 +1,10 @@
+# [1.140.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.139.0...v1.140.0) (2025-06-12)
+
+
+### Features
+
+* connection fix for postgresql ([3963fce](https://github.com/skelebuda/lunnoa_automate/commit/3963fce60c479b8090617eb5ae1c865a05a0e12c))
+
 # [1.139.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.138.0...v1.139.0) (2025-06-12)
 
 
