@@ -1,3 +1,10 @@
+# [1.141.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.140.0...v1.141.0) (2025-06-12)
+
+
+### Features
+
+* import fix postgressql app ([744890e](https://github.com/skelebuda/lunnoa_automate/commit/744890e6640b62f0a03bb78048eb427800d36d60))
+
 # [1.140.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.139.0...v1.140.0) (2025-06-12)
 
 
