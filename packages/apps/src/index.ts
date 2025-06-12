@@ -41,7 +41,7 @@ import { openai } from './lib/openai/openai.app';
 //import { perplexityAi } from './lib/perplexity-ai/perplexity-ai.app';
 import { phone } from './lib/phone/phone.app';
 import { pinecone } from './lib/pinecone/pinecone.app';
-import { postgresql } from './lib/postgresql/postgresql.app';
+import { postgresqlApp } from './lib/postgresql/postgresql.app';
 //import { salesRabbit } from './lib/sales-rabbit/sales-rabbit.app';
 import { serper } from './lib/serper/serper.app';
 import { slack } from './lib/slack/slack.app';
