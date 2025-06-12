@@ -1,3 +1,10 @@
+# [1.142.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.141.0...v1.142.0) (2025-06-12)
+
+
+### Features
+
+* postgresql import ([55d22bc](https://github.com/skelebuda/lunnoa_automate/commit/55d22bc13232c5941fb7480943a88f2a49495d16))
+
 # [1.141.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.140.0...v1.141.0) (2025-06-12)
 
 
