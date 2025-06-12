@@ -1,3 +1,10 @@
+# [1.137.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.136.0...v1.137.0) (2025-06-12)
+
+
+### Features
+
+* get all users on monday ([aff8674](https://github.com/skelebuda/lunnoa_automate/commit/aff86745745b2ba4d69df3429f0854e5805b0fef))
+
 # [1.136.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.135.0...v1.136.0) (2025-06-11)
 
 
