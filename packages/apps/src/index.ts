@@ -5,6 +5,7 @@ import { ai } from './lib/ai/ai.app';
 //import { airtable } from './lib/airtable/airtable.app';
 import { anchorBrowser } from './lib/anchor-browser/anchor-browser.app';
 import { anthropic } from './lib/anthropic/anthropic.app';
+import { bsiCustomerSuite } from './lib/bsi-customer-suite/bsi-customer-suite.app';
 //import { apify } from './lib/apify/apify.app';
 //import { braveSearch } from './lib/brave-search/brave-search.app';
 import { calendly } from './lib/calendly/calendly.app';
@@ -13,6 +14,7 @@ import { csv } from './lib/csv/csv.app';
 import { date } from './lib/date/date.app';
 //import { deepseek } from './lib/deepseek/deepseek.app';
 import { dropbox } from './lib/dropbox/dropbox.app';
+import { finnova } from './lib/finnova/finnova.app';
 import { firecrawl } from './lib/firecrawl/firecrawl.app';
 import { flowControl } from './lib/flow-control/flow-control.app';
 import { gemini } from './lib/gemini/gemini.app';
@@ -32,12 +34,14 @@ import { list } from './lib/list/list.app';
 import { math } from './lib/math/math.app';
 import { microsoftExcel365 } from './lib/microsoft-excel-365/microsoft-excel-365.app';
 import { microsoftOutlook } from './lib/microsoft-outlook/microsoft-outlook.app';
+import { monday } from './lib/monday/monday.app';
 //import { notion } from './lib/notion/notion.app';
 import { openai } from './lib/openai/openai.app';
 //import { paradigmVendo } from './lib/paradigm-vendo/paradigm-vendo.app';
 //import { perplexityAi } from './lib/perplexity-ai/perplexity-ai.app';
 import { phone } from './lib/phone/phone.app';
 import { pinecone } from './lib/pinecone/pinecone.app';
+import { postgresql } from './lib/postgresql/postgresql.app';
 //import { salesRabbit } from './lib/sales-rabbit/sales-rabbit.app';
 import { serper } from './lib/serper/serper.app';
 import { slack } from './lib/slack/slack.app';
@@ -54,9 +58,7 @@ import { x } from './lib/x/x.app';
 //import { zohoCrm } from './lib/zoho-crm/zoho-crm.app';
 import { customApp } from './lib/custom-app/custom-app.app'
 import { confluence } from './lib/confluence/confluence.app';
-import { finnova } from './lib/finnova/finnova.app';
-import { bsiCustomerSuite } from './lib/bsi-customer-suite/bsi-customer-suite.app';
-import { monday } from './lib/monday/monday.app';
+
 
 const apps: Record<string, ReturnType<typeof createApp>> = {
   [agents.id]: agents,
