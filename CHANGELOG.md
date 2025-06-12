@@ -1,3 +1,10 @@
+# [1.143.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.142.0...v1.143.0) (2025-06-12)
+
+
+### Features
+
+* fix get user tasks for monday ([cadf42f](https://github.com/skelebuda/lunnoa_automate/commit/cadf42f12766ae4cad3c298e39754d7f7011f0c2))
+
 # [1.142.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.141.0...v1.142.0) (2025-06-12)
 
 
