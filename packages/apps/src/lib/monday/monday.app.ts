@@ -10,7 +10,7 @@ export const monday = createApp({
   description:
     'monday.com is a Work Operating System (Work OS) that powers teams to run projects and workflows with confidence.',
   logoUrl:
-    'https://lecca-io.s3.us-east-2.amazonaws.com/assets/apps/monday.svg',
+    'https://images.seeklogo.com/logo-png/39/2/monday-logo-png_seeklogo-394605.png',
   actions: [createItem, getUserTasks, getAllUsers],
   triggers: [],
   connections: [mondayOAuth2],

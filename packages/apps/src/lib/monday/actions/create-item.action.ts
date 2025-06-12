@@ -57,34 +57,35 @@ export const createItem = createAction({
       },
     }),
     createDynamicSelectInputField({
-        id: 'userId',
-        label: 'User to Assign',
-        description: 'Select a user to assign the task to. (Optional)',
-        loadOptions: {
-            dependsOn: ['personColumnId']
-        },
-        _getDynamicValues: async ({ http, workspaceId, connection, extraOptions }) => {
-            if(!extraOptions?.personColumnId) return [];
-            const query = `query { users { id name } }`;
-            const data = await shared.mondayApiRequest({
-              http,
-              workspaceId,
-              connection,
-              query,
-            });
+      id: 'userId',
+      label: 'User to Assign',
+      description:
+        'Select a user to assign the task to. If a user is available, it is recommended to assign the task to a user.',
+      loadOptions: {
+        dependsOn: ['personColumnId', 'boardId'],
+      },
+      _getDynamicValues: async ({ http, workspaceId, connection, extraOptions }) => {
+        if(!extraOptions?.personColumnId) return [];
+        const query = `query { users { id name } }`;
+        const data = await shared.mondayApiRequest({
+          http,
+          workspaceId,
+          connection,
+          query,
+        });
     
-            return data.users.map((user: { id: string; name: string }) => ({
-              label: user.name,
-              value: user.id,
-            }));
-        }
+        return data.users.map((user: { id: string; name: string }) => ({
+          label: user.name,
+          value: user.id,
+        }));
+      }
     })
   ],
   aiSchema: z.object({
-    boardId: z.string(),
-    itemName: z.string(),
-    personColumnId: z.string().optional(),
-    userId: z.string().optional(),
+    boardId: z.string().describe('The ID of the board where the item will be created. The AI should infer this from the context or ask the user if it is unclear.'),
+    itemName: z.string().describe('The name of the item (task) to create.'),
+    personColumnId: z.string().optional().describe('The ID of the person column to which a user will be assigned. This is needed to assign a user.'),
+    userId: z.string().optional().describe("The ID of the user to assign to the item. If you have a user's name, you must find their ID to assign them."),
   }),
   run: async ({ configValue, http, workspaceId, connection }) => {
     const { boardId, itemName, personColumnId, userId } = configValue;
