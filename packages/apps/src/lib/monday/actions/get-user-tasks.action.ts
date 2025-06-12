@@ -22,8 +22,12 @@ export const getUserTasks = createAction({
     const { boardId, personColumnId, userId } = configValue;
 
     const query = `
-      query get_items_by_column_values($boardId: ID!, $columnId: String!, $columnValue: String!) {
-        items_by_column_values(board_id: $boardId, column_id: $columnId, column_value: $columnValue) {
+      query ($boardId: ID!, $columnId: String!, $columnValue: String!) {
+        items_by_multiple_column_values (
+          board_id: $boardId,
+          column_id: $columnId,
+          column_value: $columnValue
+        ) {
           id
           name
           state
@@ -46,7 +50,7 @@ export const getUserTasks = createAction({
       variables,
     });
 
-    return { tasks: data.items_by_column_values };
+    return { tasks: data.items_by_multiple_column_values };
   },
   mockRun: async () => {
     return {
