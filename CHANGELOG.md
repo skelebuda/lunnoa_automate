@@ -1,3 +1,10 @@
+# [1.139.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.138.0...v1.139.0) (2025-06-12)
+
+
+### Features
+
+* postgreSQL integration ([a6afc60](https://github.com/skelebuda/lunnoa_automate/commit/a6afc600fb163cb17a9a0e2b120adde7f43a3e67))
+
 # [1.138.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.137.0...v1.138.0) (2025-06-12)
 
 
