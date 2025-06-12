@@ -99,6 +99,7 @@ const apps: Record<string, ReturnType<typeof createApp>> = {
   //[perplexityAi.id]: perplexityAi,
   [phone.id]: phone,
   [pinecone.id]: pinecone,
+  [postgresqlApp.id]: postgresqlApp,
   //[salesRabbit.id]: salesRabbit,
   [serper.id]: serper,
   [slack.id]: slack,
