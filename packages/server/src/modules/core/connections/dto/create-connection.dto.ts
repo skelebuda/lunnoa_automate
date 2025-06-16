@@ -1,4 +1,4 @@
-import { IsObject, IsOptional, IsString, MaxLength } from 'class-validator';
+import { IsNumber, IsObject, IsOptional, IsString, MaxLength } from 'class-validator';
 
 export class CreateConnectionDto {
   @IsString()
@@ -52,6 +52,18 @@ export class CreateConnectionDto {
   @IsOptional()
   @IsString()
   publicKey?: string;
+
+  @IsOptional()
+  @IsString()
+  database?: string;
+
+  @IsOptional()
+  @IsString()
+  host?: string;
+
+  @IsOptional()
+  @IsNumber()
+  port?: number;
 
   //METADATA
   @IsOptional()

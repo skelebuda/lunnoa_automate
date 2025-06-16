@@ -26,6 +26,7 @@ import {
   ConnectionConstructorArgs,
   KeyPairConnection,
   OAuth2Connection,
+  DatabaseConnection,
 } from './connection';
 import {
   CustomWebhookTrigger,
@@ -197,6 +198,8 @@ export class App {
           return new BasicAuthConnection(baseArgs);
         case 'keyPair':
           return new KeyPairConnection(baseArgs);
+        case 'database':
+          return new DatabaseConnection(baseArgs);
         case 'oauth2': {
           const oAuth2Connection = connection as ReturnType<
             typeof createOAuth2Connection

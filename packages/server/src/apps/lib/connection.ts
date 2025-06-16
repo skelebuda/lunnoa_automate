@@ -35,13 +35,11 @@ export class Connection {
           args,
         );
       case 'basic':
-        return await (
-          this as unknown as BasicAuthConnection
-        ).connectBasicAuthApp(args);
+        return await (this as unknown as BasicAuthConnection).connectBasicAuthApp(args);
       case 'keyPair':
-        return await (this as unknown as KeyPairConnection).connectKeyPairApp(
-          args,
-        );
+        return await (this as unknown as KeyPairConnection).connectKeyPairApp(args);
+      case 'database':
+        return await (this as unknown as DatabaseConnection).connectDatabaseApp(args);
       case 'oauth2':
         return await (this as unknown as OAuth2Connection).sendAuthorizeUrl(
           args,
@@ -56,6 +54,8 @@ export class Connection {
       case 'basic':
         return true;
       case 'keyPair':
+        return true;
+      case 'database':
         return true;
       case 'oauth2': {
         const connection = this as unknown as OAuth2Connection;
@@ -506,6 +506,38 @@ export class KeyPairConnection extends Connection {
   }
 }
 
+export class DatabaseConnection extends Connection {
+  constructor(args: ConnectionConstructorArgs) {
+    super(args);
+    this.connectionType = 'database';
+  }
+
+  async connectDatabaseApp(args: {
+    workspaceId: string;
+    configValue: DatabaseConfigValues;
+    res: Response;
+    req: Request;
+  }) {
+    await this.app.connection.create({
+      data: {
+        name: args.configValue.name,
+        description: args.configValue.description,
+        workflowAppId: this.app.id,
+        connectionId: this.id,
+        FK_workspaceId: args.workspaceId,
+        FK_projectId: args.configValue.projectId,
+        database: args.configValue.database,
+        host: args.configValue.host,
+        port: args.configValue.port,
+      },
+    });
+
+    return args.res.status(200).json({
+      data: true,
+    });
+  }
+}
+
 export type ConnectionConstructorArgs = {
   app: App;
   id: string;
@@ -536,6 +568,8 @@ export type ApiKeyConnectionConstructorArgs = ConnectionConstructorArgs;
 export type BasicAuthConnectionConstructorArgs = ConnectionConstructorArgs;
 
 export type KeyPairConnectionConstructorArgs = ConnectionConstructorArgs;
+
+export type DatabaseConnectionConstructorArgs = ConnectionConstructorArgs;
 
 export type OAuth2CallbackState = {
   name: string;
@@ -576,7 +610,18 @@ export type KeyPairConfigValues = {
   projectId?: string;
 };
 
-export type ConnectionType = 'oauth2' | 'basic' | 'apiKey' | 'keyPair';
+export type DatabaseConfigValues = {
+  name: string;
+  description?: string;
+  username: string;
+  password: string;
+  database: string;
+  host: string;
+  port: number;
+  projectId?: string;
+};
+
+export type ConnectionType = 'oauth2' | 'basic' | 'apiKey' | 'keyPair' | 'database';
 
 export type HandleCallbackArgs = {
   res: Response;

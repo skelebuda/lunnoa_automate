@@ -755,6 +755,9 @@ model Connection {
   password     String? @db.VarChar
   publicKey    String? @db.VarChar
   privateKey   String? @db.VarChar
+  database     String? @db.VarChar
+  host         String? @db.VarChar
+  port         Int?
 
   //Connection metadata that was returned when authenticating
   metadata Json? @db.JsonB

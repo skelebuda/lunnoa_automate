@@ -6,7 +6,10 @@ export type ConnectionData = {
   password?: string | null;
   publicKey?: string | null;
   privateKey?: string | null;
+  database?: string | null;
+  host?: string | null;
+  port?: number | null;
   metadata?: any | null;
 };
 
-export type ConnectionType = 'oauth2' | 'basic' | 'apiKey' | 'keyPair';
+export type ConnectionType = 'oauth2' | 'basic' | 'apiKey' | 'keyPair' | 'database';

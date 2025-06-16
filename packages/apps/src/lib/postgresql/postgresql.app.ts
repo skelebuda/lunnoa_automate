@@ -1,6 +1,6 @@
 import { createApp } from "@lunnoa-automate/toolkit";
 import { executeQuery } from "./actions/execute-query.action";
-import { postgresqlConnection } from "./connections/postgresql.connection";
+import { postgresqlConnection } from "./connections/postgresql.database";
 
 export const postgresqlApp = createApp({
   id: "postgresql",

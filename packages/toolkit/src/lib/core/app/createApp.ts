@@ -4,6 +4,7 @@ import {
   createBasicAuthConnection,
   createKeyPairConnection,
   createOAuth2Connection,
+  createDatabaseConnection,
 } from '../connection';
 
 export function createApp(args: CreateAppArgs) {
@@ -67,6 +68,7 @@ export type CreateAppArgs = {
     | ReturnType<typeof createBasicAuthConnection>
     | ReturnType<typeof createOAuth2Connection>
     | ReturnType<typeof createKeyPairConnection>
+    | ReturnType<typeof createDatabaseConnection>
   )[];
 
   /**

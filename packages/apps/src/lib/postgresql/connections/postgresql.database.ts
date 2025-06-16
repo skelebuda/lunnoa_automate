@@ -1,6 +1,6 @@
-import { createBasicAuthConnection, createTextInputField } from "@lunnoa-automate/toolkit";
+import { createDatabaseConnection, createTextInputField } from "@lunnoa-automate/toolkit";
 
-export const postgresqlConnection = createBasicAuthConnection({
+export const postgresqlConnection = createDatabaseConnection({
   id: "postgresql_connection",
   name: "PostgreSQL",
   description: "Connect to your PostgreSQL database",
