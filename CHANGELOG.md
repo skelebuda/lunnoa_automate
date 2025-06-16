@@ -1,3 +1,10 @@
+# [1.146.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.145.0...v1.146.0) (2025-06-16)
+
+
+### Features
+
+* postgreSQL DB Migration ([82b97b6](https://github.com/skelebuda/lunnoa_automate/commit/82b97b676368dcef80c78d64fa8ff2fc93186e72))
+
 # [1.145.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.144.0...v1.145.0) (2025-06-12)
 
 
