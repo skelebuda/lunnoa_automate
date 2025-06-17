@@ -1,3 +1,10 @@
+# [1.150.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.149.0...v1.150.0) (2025-06-17)
+
+
+### Features
+
+* remove executor ([b613fd0](https://github.com/skelebuda/lunnoa_automate/commit/b613fd024e9e3f1cecb5246a8d44342579212b46))
+
 # [1.149.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.148.0...v1.149.0) (2025-06-17)
 
 
