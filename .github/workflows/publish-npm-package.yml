@@ -24,8 +24,10 @@ jobs:
         with:
           version: 9
 
-      - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Update Dependencies and Install
+        run: |
+          pnpm up @lunnoa-automate/apps@latest @lunnoa-automate/toolkit@latest
+          pnpm install --frozen-lockfile
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
