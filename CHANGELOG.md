@@ -1,3 +1,10 @@
+# [1.147.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.146.0...v1.147.0) (2025-06-17)
+
+
+### Features
+
+* sql query fix ([5b2d38d](https://github.com/skelebuda/lunnoa_automate/commit/5b2d38d2a43dc3d1e6b218b352549fa9827eec94))
+
 # [1.146.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.145.0...v1.146.0) (2025-06-16)
 
 
