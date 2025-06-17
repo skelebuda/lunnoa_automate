@@ -33,7 +33,7 @@ export const executeQuery = createAction({
     });
 
     try {
-      const result = await pool.query(sqlQuery);
+      const result = await pool.query({text: sqlQuery});
       await pool.end();
       return result.rows;
     } catch (error) {

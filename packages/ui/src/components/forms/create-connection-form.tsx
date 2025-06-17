@@ -101,6 +101,7 @@ export function CreateConnectionForm({
 
   const onSubmit = async (values: CreateConnectionType) => {
     setCreateStatus('loading');
+    console.log(values);
     await mutation.mutateAsync(
       {
         appId: values.workflowAppId,
@@ -249,8 +250,16 @@ export function CreateConnectionForm({
                               <KeyPairContent form={form} />
                             </Tabs.Content>
                           );
-                        default:
-                          return null;
+                        case 'database':
+                          return (
+                            <Tabs.Content
+                              key={connection.id}
+                              value={connection.id}
+                              className="space-y-4"
+                            >
+                              <DatabaseContent form={form} />
+                            </Tabs.Content>
+                          );
                       }
                     })}
                   </Tabs>
@@ -397,6 +406,108 @@ function KeyPairContent({ form }: { form: UseFormReturn & any }) {
       />
     </>
   );
+}
+
+function DatabaseContent({ form }: { form: UseFormReturn & any }) {
+  return (
+    <>
+    <Form.Field
+        control={form.control}
+        name="database"
+        render={({ field }) => (
+          <Form.Item>
+            <Form.Label>Database</Form.Label>
+            <Form.Message />
+            <Form.Control>
+              <Input
+                value={field.value ?? ''}
+                placeholder="Add database"
+                {...form.register('database', {
+                  required: true,
+                })}
+              />
+            </Form.Control>
+          </Form.Item>
+        )}
+      />
+      <Form.Field
+        control={form.control}
+        name="host"
+        render={({ field }) => (
+          <Form.Item>
+            <Form.Label>Host</Form.Label>
+            <Form.Message />
+            <Form.Control>
+              <Input
+                value={field.value ?? ''}
+                placeholder="Add host"
+                {...form.register('host', {
+                  required: true,
+                })}
+              />
+            </Form.Control>
+          </Form.Item>
+        )}
+      />
+      <Form.Field
+        control={form.control}
+        name="port"
+        render={({ field }) => (
+          <Form.Item>
+            <Form.Label>Port</Form.Label>
+            <Form.Message />
+            <Form.Control>
+              <Input
+                value={field.value ?? ''}
+                placeholder="Add port"
+                {...form.register('port', {
+                  required: true,
+                })}
+              />
+            </Form.Control>
+          </Form.Item>
+        )}
+      />
+     <Form.Field
+        control={form.control}
+        name="username"
+        render={({ field }) => (
+          <Form.Item>
+            <Form.Label>Username</Form.Label>
+            <Form.Message />
+            <Form.Control>
+              <Input
+                value={field.value ?? ''}
+                placeholder="Username for authenticating"
+                {...form.register('username', {
+                  required: true,
+                })}
+              />
+            </Form.Control>
+          </Form.Item>
+        )}
+      />
+      <Form.Field
+        control={form.control}
+        name="password"
+        render={({ field }) => (
+          <Form.Item>
+            <Form.Label>Password</Form.Label>
+            <Form.Message />
+            <Form.Control>
+              <Input
+                value={field.value ?? ''}
+                placeholder="Password for authenticating"
+                {...form.register('password', {
+                  required: true,
+                })}
+              />
+            </Form.Control>
+          </Form.Item> 
+        )}
+      />
+    </>
+  )
 }
 
 function SharedFields({ form }: { form: UseFormReturn & any }) {

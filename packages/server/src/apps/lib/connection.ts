@@ -526,6 +526,8 @@ export class DatabaseConnection extends Connection {
         connectionId: this.id,
         FK_workspaceId: args.workspaceId,
         FK_projectId: args.configValue.projectId,
+        username: args.configValue.username,
+        password: args.configValue.password,
         database: args.configValue.database,
         host: args.configValue.host,
         port: args.configValue.port,

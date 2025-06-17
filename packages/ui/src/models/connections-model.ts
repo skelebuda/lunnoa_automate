@@ -50,6 +50,16 @@ const apiKeySchema = baseCreateSchema.extend({
   apiKey: z.string(),
 });
 
+const databaseSchema = baseCreateSchema.extend({
+  username: z.string(),
+  password: z.string(),
+  database: z.string(),
+  host: z.string(),
+  port: z.coerce.number(),
+});
+
+const oauth2Schema = baseCreateSchema;
+
 const basicSchema = baseCreateSchema.extend({
   username: z.string(),
   password: z.string(),
@@ -60,10 +70,9 @@ const keyPairSchema = baseCreateSchema.extend({
   privateKey: z.string(),
 });
 
-const oauth2Schema = baseCreateSchema;
-
 export const createConnectionSchema = z.union([
   apiKeySchema,
+  databaseSchema,
   basicSchema,
   oauth2Schema,
   keyPairSchema,

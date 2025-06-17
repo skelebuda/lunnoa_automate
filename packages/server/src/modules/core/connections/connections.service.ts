@@ -158,6 +158,7 @@ export class ConnectionsService {
   }) {
     this.#validateCreateConnectionArgs({ data });
     this.#encryptCredentials({ data });
+    console.log(data);
 
     const newConnection = await this.prisma.connection.create({
       data,
@@ -211,6 +212,9 @@ export class ConnectionsService {
         password: expansion?.credentials ?? false,
         privateKey: expansion?.credentials ?? false,
         publicKey: expansion?.credentials ?? false,
+        database: expansion?.credentials ?? false,
+        host: expansion?.credentials ?? false,
+        port: expansion?.credentials ?? false,
         metadata: expansion?.metadata ?? false,
         connectionId: expansion?.connectionId ?? false,
         workflowAppId: expansion?.workflowAppId ?? false,
@@ -494,6 +498,12 @@ export class ConnectionsService {
       if (data.publicKey) {
         data.publicKey = this.cryptoService.decrypt(data.publicKey);
       }
+      if (data.host) {
+        data.host = this.cryptoService.decrypt(data.host);
+      }
+      if (data.database) {
+        data.database = this.cryptoService.decrypt(data.database)
+      }
     } catch {
       throw new ForbiddenException('Invalid credentials');
     }
@@ -526,6 +536,12 @@ export class ConnectionsService {
 
     if (data.publicKey) {
       data.publicKey = this.cryptoService.encrypt(data.publicKey);
+    }
+    if (data.host) {
+      data.host = this.cryptoService.encrypt(data.host);
+    }
+    if (data.database) {
+      data.database = this.cryptoService.encrypt(data.database)
     }
   }
 }
