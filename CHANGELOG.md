@@ -1,3 +1,10 @@
+# [1.151.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.150.0...v1.151.0) (2025-06-17)
+
+
+### Features
+
+* versioning ([3f9e92b](https://github.com/skelebuda/lunnoa_automate/commit/3f9e92bcd7d692aede1f70a6b83f0fb2198321a4))
+
 # [1.150.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.149.0...v1.150.0) (2025-06-17)
 
 
