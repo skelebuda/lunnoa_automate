@@ -25,7 +25,6 @@
       }
     },
     "nx-release-publish": {
-      "executor": "@nx/js:npm-publish",
       "options": {
         "packageRoot": "dist/{projectRoot}"
       }
