@@ -11,8 +11,6 @@ if (!newVersion) {
 
 // List of package.json files to update
 const packagePaths = [
-  'packages/toolkit/package.json',
-  'packages/apps/package.json',
   'package.json',
 ];
 
@@ -27,10 +25,10 @@ packagePaths.forEach((packagePath) => {
     // Update the version
     packageJson.version = newVersion;
 
-    // Update @lecca-io dependencies if they exist
+    // Update @lunnoa-automate dependencies if they exist
     if (packageJson.dependencies) {
       Object.keys(packageJson.dependencies).forEach((dep) => {
-        if (dep.startsWith('@lecca-io/')) {
+        if (dep.startsWith('@lunnoa-automate/')) {
           packageJson.dependencies[dep] = newVersion;
         }
       });
