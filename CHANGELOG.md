@@ -1,3 +1,10 @@
+# [1.169.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.168.0...v1.169.0) (2025-06-18)
+
+
+### Features
+
+* no bump up ([12a5047](https://github.com/skelebuda/lunnoa_automate/commit/12a50475998deab04f6da84963c52abc9f14605e))
+
 # [1.168.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.167.0...v1.168.0) (2025-06-18)
 
 
