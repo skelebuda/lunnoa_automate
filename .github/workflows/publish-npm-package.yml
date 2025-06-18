@@ -33,7 +33,7 @@ jobs:
         run: pnpm nx run-many --target=build --projects=apps,toolkit
 
       - name: Publish Packages
-        run: pnpm nx run-many --target=nx-release-publish --projects=apps,toolkit
+        run: pnpm nx run-many --target=nx-release-publish --projects=apps,toolkit --verbose
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
