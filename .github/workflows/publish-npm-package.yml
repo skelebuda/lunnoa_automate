@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20.8.1'
           registry-url: 'https://registry.npmjs.org'
@@ -20,24 +20,19 @@ jobs:
           scope: '@lunnoa-automate'
 
       - name: Setup PNPM
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
           version: 9
 
-      - name: Update Dependencies and Install
-        run: |
-          pnpm up @lunnoa-automate/apps@latest @lunnoa-automate/toolkit@latest
-          pnpm install --frozen-lockfile
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Build toolkit
-        run: pnpm nx build toolkit
+      - name: Build Packages
+        run: pnpm nx run-many --target=build --projects=apps,toolkit
 
-      - name: Build apps
-        run: pnpm nx build apps
-
-      - name: Publish apps and toolkit using NX
+      - name: Publish Packages
         run: pnpm nx run-many --target=nx-release-publish --projects=apps,toolkit
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

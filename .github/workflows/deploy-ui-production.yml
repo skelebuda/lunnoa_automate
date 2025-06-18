@@ -28,14 +28,12 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Setup PNPM
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
           version: 9
 
-      - name: Update Dependencies and Install
-        run: |
-          pnpm up @lunnoa-automate/apps@${{ env.VERSION }} @lunnoa-automate/toolkit@${{ env.VERSION }}
-          pnpm install --frozen-lockfile
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
@@ -68,7 +66,7 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v20
+        uses: amondnet/vercel-action@v25
         env:
           VERSION: ${{ env.VERSION }}
         with:
