@@ -29,6 +29,11 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: Check if NPM token is valid
+        run: pnpm whoami
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Build Packages
         run: pnpm nx run-many --target=build --projects=apps,toolkit
 
