@@ -1,3 +1,10 @@
+# [1.167.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.166.0...v1.167.0) (2025-06-18)
+
+
+### Features
+
+* decupling of apps and toolkit ([c5a1e6c](https://github.com/skelebuda/lunnoa_automate/commit/c5a1e6cd6298bfd2f4b6ae8167a81447a515b289))
+
 # [1.166.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.165.0...v1.166.0) (2025-06-18)
 
 
