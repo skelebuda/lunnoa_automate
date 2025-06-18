@@ -32,10 +32,17 @@ jobs:
       - name: Build Packages
         run: pnpm nx run-many --target=build --projects=apps,toolkit
 
-      - name: Publish Packages
-        run: pnpm nx run-many --target=nx-release-publish --projects=apps,toolkit --verbose
+      - name: Publish toolkit
+        run: pnpm nx run toolkit:nx-release-publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NX_VERBOSE_LOGGING: true
+
+      - name: Publish apps
+        run: pnpm nx run apps:nx-release-publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NX_VERBOSE_LOGGING: true
 
       # Add this verification step at the end
       - name: Wait for NPM packages to be available
