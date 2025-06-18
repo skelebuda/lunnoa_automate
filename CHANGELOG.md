@@ -1,3 +1,10 @@
+# [1.157.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.156.0...v1.157.0) (2025-06-18)
+
+
+### Features
+
+* new publish workflow ([48b7b41](https://github.com/skelebuda/lunnoa_automate/commit/48b7b4174ef0e20ec2be44ef316f7e191d60026b))
+
 # [1.156.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.155.0...v1.156.0) (2025-06-17)
 
 
