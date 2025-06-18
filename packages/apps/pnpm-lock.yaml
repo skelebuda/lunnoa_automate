@@ -9,20 +9,20 @@ importers:
   .:
     dependencies:
       '@lunnoa-automate/toolkit':
-        specifier: 1.160.0
-        version: 1.160.0
+        specifier: 1.161.3
+        version: 1.161.3
 
 packages:
 
-  '@lunnoa-automate/toolkit@1.160.0':
-    resolution: {integrity: sha512-dq3OdixPojs4T+6jmMjb/ePE5QxFdZddH9HGZkXZRbq0Mbf5YoJpyAzsk/LSUb3xOctxzOB1PI6b9n1NYajtxQ==}
+  '@lunnoa-automate/toolkit@1.161.3':
+    resolution: {integrity: sha512-Tcl2jx6yWXcQHt3V5+DwpTZRz+P/+Cs7PrNukCNkh2NIhkAa3GbQLSaRaB7SQmwCfBYYJYjBBYM3DkmX81keUg==}
 
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
 snapshots:
 
-  '@lunnoa-automate/toolkit@1.160.0':
+  '@lunnoa-automate/toolkit@1.161.3':
     dependencies:
       tslib: 2.8.1
 
