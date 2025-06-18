@@ -1,3 +1,11 @@
+# [1.166.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.165.0...v1.166.0) (2025-06-18)
+
+
+### Features
+
+* check token ([c3767cd](https://github.com/skelebuda/lunnoa_automate/commit/c3767cd790cad8c7c3b501a91f6a4cc71712372b))
+* publish check ([9519cae](https://github.com/skelebuda/lunnoa_automate/commit/9519caee218401f01e795962beea0f932174a651))
+
 # [1.165.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.164.0...v1.165.0) (2025-06-18)
 
 
