@@ -1,3 +1,10 @@
+# [1.161.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.160.0...v1.161.0) (2025-06-18)
+
+
+### Features
+
+* changed projectRoot ([5e3f940](https://github.com/skelebuda/lunnoa_automate/commit/5e3f940036bdb19939b01f6b00e73fd0d3125a6a))
+
 # [1.160.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.159.0...v1.160.0) (2025-06-18)
 
 
