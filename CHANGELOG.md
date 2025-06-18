@@ -1,3 +1,10 @@
+# [1.165.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.164.0...v1.165.0) (2025-06-18)
+
+
+### Features
+
+* verbose added ([38b89ce](https://github.com/skelebuda/lunnoa_automate/commit/38b89ce2977b57d6761c47eecadc3ba0836d7a94))
+
 # [1.164.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.163.0...v1.164.0) (2025-06-18)
 
 
