@@ -1,3 +1,10 @@
+# [1.160.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.159.0...v1.160.0) (2025-06-18)
+
+
+### Features
+
+* new lock file ([4b4f56a](https://github.com/skelebuda/lunnoa_automate/commit/4b4f56ae0994c58b4cb946ec4c72a20b5e7997db))
+
 # [1.159.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.158.0...v1.159.0) (2025-06-18)
 
 
