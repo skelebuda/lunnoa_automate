@@ -8,6 +8,8 @@
 !../../tsconfig.base.json
 !../../libs
 !../../packages/server
+!../../packages/apps
+!../../packages/toolkit
 
 # Node specific
 node_modules
