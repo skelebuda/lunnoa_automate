@@ -1,3 +1,10 @@
+# [1.173.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.172.0...v1.173.0) (2025-06-28)
+
+
+### Features
+
+* new avatars ([2400c30](https://github.com/skelebuda/lunnoa_automate/commit/2400c30b3c4b34b866f9a4758b030ea2152c307c))
+
 # [1.172.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.171.0...v1.172.0) (2025-06-18)
 
 
