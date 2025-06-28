@@ -1,3 +1,10 @@
+# [1.174.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.173.0...v1.174.0) (2025-06-28)
+
+
+### Features
+
+* remove user onboarda ([49d3139](https://github.com/skelebuda/lunnoa_automate/commit/49d313943babd35f08647d311667608bdfd69b7b))
+
 # [1.173.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.172.0...v1.173.0) (2025-06-28)
 
 
