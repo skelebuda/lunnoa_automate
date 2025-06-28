@@ -10,7 +10,7 @@ const AvatarRoot = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AvatarPrimitive.Root
     ref={ref}
-    className={cn('relative flex h-10 w-10 shrink-0 rounded-full', className)}
+    className={cn('relative flex h-10 w-10 shrink-0 rounded-lg', className)}
     {...props}
   />
 ));
@@ -23,7 +23,7 @@ const AvatarImage = React.forwardRef<
   <AvatarPrimitive.Image
     ref={ref}
     className={cn(
-      'aspect-square object-cover h-full w-full rounded-full',
+      'aspect-square object-cover h-full w-full rounded-lg',
       className,
     )}
     {...props}
@@ -55,7 +55,7 @@ const AvatarFallback = React.forwardRef<
     <AvatarPrimitive.Fallback
       ref={ref}
       className={cn(
-        `flex h-full w-full items-center justify-center rounded-full text-xs bg-muted`,
+        `flex h-full w-full items-center justify-center rounded-lg text-xs bg-muted`,
         className,
       )}
       {...props}
@@ -65,7 +65,7 @@ const AvatarFallback = React.forwardRef<
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
 
 const avatarBadgeVariants = cva(
-  'absolute w-4 h-4 rounded-full bg-background flex items-stretch justify-stretch [&>*]:grow [&>*]:rounded-full',
+  'absolute w-4 h-4 rounded-lg bg-background flex items-stretch justify-stretch [&>*]:grow [&>*]:rounded-lg',
   {
     variants: {
       position: {
@@ -178,7 +178,7 @@ const AvatarOverflowIndicator = React.forwardRef<
     <span
       ref={ref}
       className={cn(
-        'relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground text-xs cursor-default',
+        'relative flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground text-xs cursor-default',
         className,
       )}
       {...props}

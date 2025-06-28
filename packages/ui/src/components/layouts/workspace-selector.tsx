@@ -80,7 +80,7 @@ export default function WorkspaceSelector({
               </Avatar>
             ) : (
               <>
-                <Avatar className="size-6 rounded-full border relative mr-2">
+                <Avatar className="size-6 rounded-lg border relative mr-2">
                   <Avatar.Image src={workspace?.logoUrl} />
                   <Avatar.Fallback className="text-sm">
                     {selectedWorkspace.name?.[0]}

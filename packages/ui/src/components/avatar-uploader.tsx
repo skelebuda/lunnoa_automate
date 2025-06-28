@@ -82,7 +82,7 @@ export function AvatarUploader({
 
   return (
     <Avatar
-      className={cn('size-24 rounded-full border relative group', className)}
+      className={cn('size-24 rounded-lg border relative group', className)}
       onClick={() => inputRef.current?.click()}
     >
       <Avatar.Image src={src ?? undefined} />
