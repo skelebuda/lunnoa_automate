@@ -8,7 +8,6 @@ import { useUser } from '../../hooks/useUser';
 import { Theme } from '../../models/workspace-user-preferences-model';
 import { cn } from '../../utils/cn';
 import { Icons } from '../icons';
-//import { useOnborda } from '../onboarda/OnbordaContext';
 import { Avatar } from '../ui/avatar';
 import { buttonVariants } from '../ui/button';
 import { DropdownMenu } from '../ui/dropdown-menu';
