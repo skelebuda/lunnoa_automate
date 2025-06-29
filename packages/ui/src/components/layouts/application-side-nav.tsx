@@ -178,10 +178,24 @@ export function MainSideNavContent({
             isOnAgentSideNav
               ? null
               : {
+                  title: 'User Management',
+                  to: '/user-management',
+                  icon: Icons.plusUser,
+                },
+            isOnAgentSideNav
+              ? null
+              : {
                   title: 'Team',
                   to: '/team-members',
                   icon: Icons.users,
                   idSelector: 'onboarding-step10',
+                },
+            !enabledFeatures.CONNECTIONS || isOnAgentSideNav
+              ? null
+              : {
+                  title: 'Connection Creator',
+                  to: '/connection-creator',
+                  icon: Icons.plus,
                 },
             !enabledFeatures.CONNECTIONS || isOnAgentSideNav
               ? null
