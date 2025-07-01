@@ -1,3 +1,17 @@
+# [1.175.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.174.0...v1.175.0) (2025-07-01)
+
+
+### Features
+
+* dont care about case ([3e54c4e](https://github.com/skelebuda/lunnoa_automate/commit/3e54c4e34813b289844fa89ff4387897d01342b1))
+* lower case ([96cc703](https://github.com/skelebuda/lunnoa_automate/commit/96cc703dada8ca55cef0e65d4cc9254c797e66a7))
+* new client id integration ([2a85de6](https://github.com/skelebuda/lunnoa_automate/commit/2a85de60c9d37744d5a6588545483220de853c15))
+* New Client ID Integration ([ddab302](https://github.com/skelebuda/lunnoa_automate/commit/ddab302ae2f7415cd53a204d4c42a653a9dd3770))
+* test ([2321792](https://github.com/skelebuda/lunnoa_automate/commit/23217928e3df8c2af94fe52da57fab55cbf19ac1))
+* Test ([c663052](https://github.com/skelebuda/lunnoa_automate/commit/c66305283d31108a62d17ee343481bf742b5e746))
+* user management UI ([fe372d4](https://github.com/skelebuda/lunnoa_automate/commit/fe372d4761e0a210c39aeda3fcff3964c8724cf9))
+* User Management UI ([eebd7c7](https://github.com/skelebuda/lunnoa_automate/commit/eebd7c75557e84df1f9c8b3f3f05b218d739a1e5))
+
 # [1.174.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.173.0...v1.174.0) (2025-06-28)
 
 
