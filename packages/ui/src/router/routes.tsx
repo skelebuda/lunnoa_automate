@@ -16,6 +16,7 @@ import AppsPage from '../pages/apps/apps-page';
 import ConfirmEmailPage from '../pages/confirm-email/confirm-email-page';
 import ConnectionDetailsPage from '../pages/connections/connection-details-page';
 import ConnectionsPage from '../pages/connections/connections-page';
+// import { ConnectionCreatorPage } from '../pages/connection-creator/connection-creator-page';
 import ExecutionsPage from '../pages/executions/executions-page';
 import ForgotPasswordPage from '../pages/forgot-password/forgot-password';
 import HomePage from '../pages/home/home-page';
@@ -41,6 +42,8 @@ import ResetPasswordPage from '../pages/reset-password/reset-password-page';
 import { TaskDetailsPage } from '../pages/tasks/tasks-details-page';
 import TasksPage from '../pages/tasks/tasks-page';
 import { TeamMembersPage } from '../pages/team-members/team-members-page';
+// import { UserManagementPage } from '../pages/user-management/user-management-page';
+// import { UserDetailPage } from '../pages/user-management/user-detail-page';
 import { WorkflowTemplateDetailsPage } from '../pages/templates/workflow-template-details-page';
 import { WorkflowTemplatesPage } from '../pages/templates/workflow-templates-page';
 import UserAccountPage from '../pages/user-settings/account/account-page';
@@ -83,6 +86,14 @@ export const AppRoutes = () => {
         <Route element={<ApplicationLayout />}>
           {/* HOME */}
           <Route path="/" element={<HomePage />} />
+
+          {/* ADDED ROUTES 
+          <Route path="/user-management" element={<UserManagementPage />} />
+          <Route path="/user-management/:userId" element={<UserDetailPage />} />
+          <Route
+            path="/connection-creator"
+            element={<ConnectionCreatorPage />}
+          /> */}
 
           {/* PROJECTS */}
           <Route path="/projects">

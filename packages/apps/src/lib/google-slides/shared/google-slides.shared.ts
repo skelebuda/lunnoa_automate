@@ -9,8 +9,8 @@ export const shared = {
     refreshToken: string;
   }) {
     const oAuth2Client = new google.auth.OAuth2(
-      process.env.INTEGRATION_GOOGLE_SLIDES_CLIENT_ID,
-      process.env.INTEGRATION_GOOGLE_SLIDES_CLIENT_SECRET,
+      process.env.INTEGRATION_GOOGLE_CLIENT_ID,
+      process.env.INTEGRATION_GOOGLE_CLIENT_SECRET,
       `${process.env.SERVER_URL}/workflow-apps/oauth2callback`,
     );
 
