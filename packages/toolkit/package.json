@@ -1,6 +1,6 @@
 {
-  "name": "@lunnoa-automate/toolkit",
-  "version": "1.170.0",
+  "name": "@lecca-io/toolkit",
+  "version": "0.45.0",
   "publishConfig": {
     "access": "public"
   },
@@ -12,6 +12,6 @@
   "license": "Apache-2.0 with Commons Clause",
   "repository": {
     "type": "git",
-    "url": "https://github.com/skelebuda/Lunnoa_Automate.git"
+    "url": "https://github.com/lecca-digital/lecca-io"
   }
 }

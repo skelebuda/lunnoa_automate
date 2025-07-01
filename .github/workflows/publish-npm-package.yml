@@ -9,40 +9,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: '20.8.1'
           registry-url: 'https://registry.npmjs.org'
-          always-auth: true
-          scope: '@lunnoa-automate'
 
       - name: Setup PNPM
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v2
         with:
           version: 9
 
-      - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Update Dependencies and Install
+        run: |
+          pnpm up @lunnoa-automate/apps@latest @lunnoa-automate/toolkit@latest
+          pnpm install --frozen-lockfile
+
+      - name: Build toolkit
+        run: pnpm nx build toolkit
+
+      - name: Build apps
+        run: pnpm nx build apps
+
+      - name: Publish apps and toolkit using NX
+        run: pnpm nx run-many --target=nx-release-publish --projects=apps,toolkit
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Build Packages
-        run: pnpm nx run-many --target=build --projects=apps,toolkit
-
-      - name: Publish toolkit
-        run: pnpm nx run toolkit:nx-release-publish --verbose
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NX_VERBOSE_LOGGING: true
-
-      - name: Publish apps
-        run: pnpm nx run apps:nx-release-publish --verbose
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NX_VERBOSE_LOGGING: true
 
       # Add this verification step at the end
       - name: Wait for NPM packages to be available
@@ -52,13 +46,13 @@ jobs:
           timeout=300  # 5 minutes timeout
           interval=10  # Check every 10 seconds
 
-          until curl -s -H "Authorization: Bearer ${{ secrets.NPM_TOKEN }}" "https://registry.npmjs.org/@lunnoa-automate/apps/$VERSION" | grep -q "version" || [ $timeout -le 0 ]; do
+          until curl -s "https://registry.npmjs.org/@lunnoa-automate/apps/$VERSION" | grep -q "version" || [ $timeout -le 0 ]; do
             echo "Package @lunnoa-automate/apps@$VERSION not yet available, waiting..."
             sleep $interval
             timeout=$((timeout - interval))
           done
 
-          until curl -s -H "Authorization: Bearer ${{ secrets.NPM_TOKEN }}" "https://registry.npmjs.org/@lunnoa-automate/toolkit/$VERSION" | grep -q "version" || [ $timeout -le 0 ]; do
+          until curl -s "https://registry.npmjs.org/@lunnoa-automate/toolkit/$VERSION" | grep -q "version" || [ $timeout -le 0 ]; do
             echo "Package @lunnoa-automate/toolkit@$VERSION not yet available, waiting..."
             sleep $interval
             timeout=$((timeout - interval))
