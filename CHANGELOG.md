@@ -1,3 +1,10 @@
+# [1.185.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.184.0...v1.185.0) (2025-07-01)
+
+
+### Features
+
+* release npm works ([1062cfb](https://github.com/skelebuda/lunnoa_automate/commit/1062cfb04cea50300b679a5557079a52849ac07b))
+
 # [1.184.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.183.0...v1.184.0) (2025-07-01)
 
 
