@@ -39,7 +39,7 @@ jobs:
           NX_VERBOSE_LOGGING: true
 
       - name: Publish apps
-        run: pnpm nx run apps:nx-release-publish
+        run: pnpm nx run apps:nx-release-publish --verbose
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NX_VERBOSE_LOGGING: true
