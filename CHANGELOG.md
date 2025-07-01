@@ -1,3 +1,10 @@
+# [1.181.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.180.0...v1.181.0) (2025-07-01)
+
+
+### Features
+
+* wait for server and UI ([cd11ad1](https://github.com/skelebuda/lunnoa_automate/commit/cd11ad11e8eb44397d03c92df447361e8fa49f78))
+
 # [1.180.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.179.0...v1.180.0) (2025-07-01)
 
 
