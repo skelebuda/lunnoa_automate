@@ -4,7 +4,7 @@ import { z } from 'zod';
 export const listAgents = createAction({
   id: 'agents_action_list-agents',
   name: 'List Agents',
-  description: 'Lists all AI agents available to the project.',
+  description: 'Lists all AI agents available to the project. ',
   inputConfig: [
     createMarkdownField({
       id: 'markdown',
