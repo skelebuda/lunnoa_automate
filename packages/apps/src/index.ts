@@ -18,7 +18,7 @@ import { finnova } from './lib/finnova/finnova.app';
 import { firecrawl } from './lib/firecrawl/firecrawl.app';
 import { flowControl } from './lib/flow-control/flow-control.app';
 import { gemini } from './lib/gemini/gemini.app';
-import { gmail } from './lib/gmail/gmail.app';
+import { gmail } from './lib/google-gmail/gmail.app';
 import { googleCalendar } from './lib/google-calendar/google-calendar.app';
 import { googleContacts } from './lib/google-contacts/google-contacts.app';
 import { googleDocs } from './lib/google-docs/google-docs.app';
