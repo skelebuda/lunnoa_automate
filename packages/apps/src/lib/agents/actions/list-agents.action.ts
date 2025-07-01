@@ -8,7 +8,7 @@ export const listAgents = createAction({
   inputConfig: [
     createMarkdownField({
       id: 'markdown',
-      markdown: 'Lists all AI agents available to the project. ',
+      markdown: 'Lists all AI agents available to the project.',
     }),
   ],
   aiSchema: z.object({}),
