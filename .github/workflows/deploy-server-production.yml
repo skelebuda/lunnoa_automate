@@ -1,8 +1,10 @@
 name: Build Docker Image & Deploy to ECS
 
 on:
-  release:
-    types: [published]
+  workflow_run:
+    workflows: ['Publish NPM Packages']
+    types:
+      - completed
 
 env:
   SERVER_REGISTRY: ghcr.io
