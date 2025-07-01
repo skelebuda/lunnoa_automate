@@ -6,10 +6,18 @@
     "@semantic-release/changelog",
     "@semantic-release/github",
     [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "node scripts/update-package-versions.js ${nextRelease.version}"
+      }
+    ],
+    [
       "@semantic-release/git",
       {
         "assets": [
           "package.json",
+          "packages/toolkit/package.json",
+          "packages/apps/package.json",
           "CHANGELOG.md"
         ],
         "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
