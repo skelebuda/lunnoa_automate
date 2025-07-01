@@ -11,6 +11,8 @@ if (!newVersion) {
 
 // List of package.json files to update
 const packagePaths = [
+  'packages/toolkit/package.json',
+  'packages/apps/package.json',
   'package.json',
 ];
 
