@@ -1,3 +1,10 @@
+# [1.192.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.191.0...v1.192.0) (2025-07-07)
+
+
+### Features
+
+* workspace package version ([a795cc7](https://github.com/skelebuda/lunnoa_automate/commit/a795cc7a78e50e8ec66c2e9ea00ed02bbd5617c2))
+
 # [1.191.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.190.0...v1.191.0) (2025-07-07)
 
 
