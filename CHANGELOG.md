@@ -1,3 +1,10 @@
+# [1.195.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.194.0...v1.195.0) (2025-07-07)
+
+
+### Features
+
+* install ([fa29ba2](https://github.com/skelebuda/lunnoa_automate/commit/fa29ba2f6e791e82fb1ff22a60b8ef3da0c65aee))
+
 # [1.194.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.193.0...v1.194.0) (2025-07-07)
 
 
