@@ -55,7 +55,7 @@ export function AppDetailsActions() {
         <div className="flex flex-col">
           <h3 className="text-lg font-medium">Actions</h3>
           <p className="text-sm text-muted-foreground">
-            Actions are actions or processes used as an automation step.
+            Actions are actions or processes used as an automation step. 
           </p>
         </div>
         {canEdit && app?.actions.length !== 0 && (
