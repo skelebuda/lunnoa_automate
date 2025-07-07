@@ -7,7 +7,7 @@
     "url": "https://github.com/skelebuda/lunnoa_automate.git"
   },
   "scripts": {
-    "vercel-build": "pnpm install && nx build ui",
+    "vercel-build": "nx build ui",
     "start:server": "nx serve server",
     "start:ui": "nx serve ui",
     "watch:toolkit": "nx build toolkit --watch",
