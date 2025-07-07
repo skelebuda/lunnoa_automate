@@ -1,3 +1,10 @@
+# [1.198.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.197.0...v1.198.0) (2025-07-07)
+
+
+### Features
+
+* new slides action ([7160008](https://github.com/skelebuda/lunnoa_automate/commit/716000802dbc004701d7811ef7ce1c3faeaa49ca))
+
 # [1.197.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.196.0...v1.197.0) (2025-07-07)
 
 
