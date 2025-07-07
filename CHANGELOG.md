@@ -1,3 +1,10 @@
+# [1.194.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.193.0...v1.194.0) (2025-07-07)
+
+
+### Features
+
+* check vercel ([fb7a625](https://github.com/skelebuda/lunnoa_automate/commit/fb7a625222665000e187480efc09228efd6463b2))
+
 # [1.193.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.192.0...v1.193.0) (2025-07-07)
 
 
