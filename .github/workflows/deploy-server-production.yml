@@ -41,7 +41,7 @@ jobs:
 
       - name: Update Dependencies and Install
         run: |
-            pnpm install
+            pnpm up @lunnoa-automate/apps@${{ env.VERSION }} @lunnoa-automate/toolkit@${{ env.VERSION }}
             pnpm install --frozen-lockfile
   
       - name: Log in to GitHub Container Registry
