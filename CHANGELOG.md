@@ -1,3 +1,10 @@
+# [1.200.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.199.0...v1.200.0) (2025-07-09)
+
+
+### Features
+
+* google oauth fix ([1e9604b](https://github.com/skelebuda/lunnoa_automate/commit/1e9604b7b7cd8041b145ff0c82951cca6e171d58))
+
 # [1.199.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.198.0...v1.199.0) (2025-07-07)
 
 
