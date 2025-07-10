@@ -52,10 +52,15 @@ export const postgresqlConnection = createDatabaseConnection({
       },
     }),
     createSwitchInputField({
-      id: "ssl",
-      label: "Enable SSL",
-      description: "Enable SSL for the connection",
-      defaultValue: true,
+      label: 'Enable SSL',
+      id: 'ssl',
+      switchOptions: {
+        checked: 'true',
+        unchecked: 'false',
+        defaultChecked: true,
+      },
+      description:
+        'Whether to enable SSL for the connection',
     }),
   ],
 }); 
