@@ -1,3 +1,10 @@
+# [1.205.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.204.0...v1.205.0) (2025-07-10)
+
+
+### Features
+
+* item status update ([ade8959](https://github.com/skelebuda/lunnoa_automate/commit/ade89590dfc9a5cea8495efc5568b87efe8b8901))
+
 # [1.204.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.203.0...v1.204.0) (2025-07-10)
 
 
