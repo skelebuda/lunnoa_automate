@@ -89,20 +89,15 @@ export const updateItemStatus = createAction({
         const columns = statusData.boards[0].columns;
 
         for (const column of columns) {
-          try {
-            const settings = JSON.parse(column.settings_str);
-            if (settings && settings.labels) {
-              for (const label of Object.values(
-                settings.labels,
-              ) as string[]) {
-                options.push({
-                  label: `${column.title}: ${label}`,
-                  value: `${column.id}|${label}`,
-                });
-              }
+          const settings = JSON.parse(column.settings_str);
+          if (settings && settings.labels) {
+            for (const index in settings.labels) {
+              const label = settings.labels[index];
+              options.push({
+                label: `${column.title}: ${label}`,
+                value: `${column.id}|${label}`,
+              });
             }
-          } catch (error) {
-            // Silently ignore columns with invalid settings
           }
         }
         return options;
