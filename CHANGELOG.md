@@ -1,3 +1,10 @@
+# [1.204.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.203.0...v1.204.0) (2025-07-10)
+
+
+### Features
+
+* id number fetch fix ([522d15f](https://github.com/skelebuda/lunnoa_automate/commit/522d15fea80a9cd17535cfa187ef677a454ad517))
+
 # [1.203.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.202.0...v1.203.0) (2025-07-10)
 
 
