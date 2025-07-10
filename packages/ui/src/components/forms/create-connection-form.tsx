@@ -19,6 +19,7 @@ import { Form } from '../ui/form';
 import { Input } from '../ui/input';
 import { Skeleton } from '../ui/skeleton';
 import { Tabs } from '../ui/tabs';
+import { Switch } from '../ui/switch';
 
 import { SelectProjectField } from './select-project-form-field';
 
@@ -496,6 +497,25 @@ function DatabaseContent({ form }: { form: UseFormReturn & any }) {
             <Form.Message />
             <Form.Control>
               <Input
+                value={field.value ?? ''}
+                placeholder="Password for authenticating"
+                {...form.register('password', {
+                  required: true,
+                })}
+              />
+            </Form.Control>
+          </Form.Item> 
+        )}
+      />
+      <Form.Field
+        control={form.control}
+        name="ssl"
+        render={({ field }) => (
+          <Form.Item>
+            <Form.Label>Enable SSL</Form.Label>
+            <Form.Message />
+            <Form.Control>
+              <Switch
                 value={field.value ?? ''}
                 placeholder="Password for authenticating"
                 {...form.register('password', {
