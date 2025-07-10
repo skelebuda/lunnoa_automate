@@ -38,7 +38,7 @@ export const updateItemStatus = createAction({
         extraOptions,
       }) => {
         const itemId = extraOptions?.itemId as string;
-        if (!itemId) {
+        if (!itemId || isNaN(Number(itemId))) {
           return [];
         }
 
