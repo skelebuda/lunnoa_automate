@@ -37,52 +37,53 @@ export const updateItemStatus = createAction({
         connection,
         extraOptions,
       }) => {
-        const itemId = extraOptions?.itemId as string;
-        if (!itemId || isNaN(Number(itemId))) {
-          return [];
-        }
-        const itemQuery = `query($itemIds: [ID!]) { items(ids: $itemIds) { board { id } } }`;
-        const itemVariables = { itemIds: [Number(itemId)] };
-        const itemData = await shared.mondayApiRequest({
-          http,
-          workspaceId,
-          connection,
-          query: itemQuery,
-          variables: itemVariables,
-        });
-        if (
-          !itemData.items ||
-          itemData.items.length === 0 ||
-          !itemData.items[0].board
-        ) {
-          return [];
-        }
-        const boardId = itemData.items[0].board.id;
-        const statusQuery = `query($boardIds: [ID!]) {
-          boards(ids: $boardIds) {
-            columns(types: [status]) {
-              id
-              title
-            }
+        try {
+          const itemId = extraOptions?.itemId as string;
+          if (!itemId || isNaN(Number(itemId))) {
+            return [];
           }
-        }`;
-        const statusVariables = { boardIds: [Number(boardId)] };
-        const statusData = await shared.mondayApiRequest({
-          http,
-          workspaceId,
-          connection,
-          query: statusQuery,
-          variables: statusVariables,
-        });
-        if (!statusData.boards || statusData.boards.length === 0) {
-          return [];
+
+          const query = `query($itemIds: [ID!]) {
+            items(ids: $itemIds) {
+              board {
+                columns(types: [status]) {
+                  id
+                  title
+                }
+              }
+            }
+          }`;
+
+          const variables = { itemIds: [Number(itemId)] };
+
+          const data = await shared.mondayApiRequest({
+            http,
+            workspaceId,
+            connection,
+            query,
+            variables,
+          });
+
+          if (
+            !data.items ||
+            data.items.length === 0 ||
+            !data.items[0].board ||
+            !data.items[0].board.columns
+          ) {
+            throw new Error(
+              `Could not find status columns for Item ID: ${itemId}. Please check the ID and your permissions.`,
+            );
+          }
+
+          return data.items[0].board.columns.map(
+            (column: { id: string; title: string }) => ({
+              label: column.title,
+              value: column.id,
+            }),
+          );
+        } catch (error) {
+          throw new Error(`Failed to load status columns: ${error.message}`);
         }
-        return statusData.boards[0].columns.map(
-          (column: { id: string; title: string }) => ({
-            label: column.title,
-            value: column.id,
-          }),
-        );
       },
     }),
     createDynamicSelectInputField({
@@ -108,55 +109,38 @@ export const updateItemStatus = createAction({
           return [];
         }
 
-        const itemQuery = `query($itemIds: [ID!]) { items(ids: $itemIds) { board { id } } }`;
-        const itemVariables = { itemIds: [Number(itemId)] };
-        const itemData = await shared.mondayApiRequest({
-          http,
-          workspaceId,
-          connection,
-          query: itemQuery,
-          variables: itemVariables,
-        });
-
-        if (
-          !itemData.items ||
-          itemData.items.length === 0 ||
-          !itemData.items[0].board
-        ) {
-          return [];
-        }
-        const boardId = itemData.items[0].board.id;
-
-        const statusQuery = `query($boardIds: [ID!], $columnIds: [String!]) {
-          boards(ids: $boardIds) {
-            columns(ids: $columnIds) {
-              settings_str
+        const query = `query($itemIds: [ID!]) {
+          items(ids: $itemIds) {
+            board {
+              columns(ids: ["${statusColumnId}"]) {
+                settings_str
+              }
             }
           }
         }`;
-        const statusVariables = {
-          boardIds: [Number(boardId)],
-          columnIds: [statusColumnId],
-        };
+        const variables = { itemIds: [Number(itemId)] };
 
-        const statusData = await shared.mondayApiRequest({
+        const data = await shared.mondayApiRequest({
           http,
           workspaceId,
           connection,
-          query: statusQuery,
-          variables: statusVariables,
+          query,
+          variables,
         });
 
         if (
-          !statusData.boards ||
-          statusData.boards.length === 0 ||
-          !statusData.boards[0].columns ||
-          statusData.boards[0].columns.length === 0
+          !data.items ||
+          data.items.length === 0 ||
+          !data.items[0].board ||
+          !data.items[0].board.columns ||
+          data.items[0].board.columns.length === 0
         ) {
           return [];
         }
 
-        const settings = JSON.parse(statusData.boards[0].columns[0].settings_str);
+        const settings = JSON.parse(
+          data.items[0].board.columns[0].settings_str,
+        );
         if (settings && settings.labels) {
           return Object.values(settings.labels).map((label: any) => ({
             label,
