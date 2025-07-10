@@ -1,3 +1,11 @@
+# [1.208.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.207.0...v1.208.0) (2025-07-10)
+
+
+### Features
+
+* new migration ([18ef73a](https://github.com/skelebuda/lunnoa_automate/commit/18ef73abad445a595d1162641ee27c0116ec2442))
+* new pstgresql action ([8c4ae27](https://github.com/skelebuda/lunnoa_automate/commit/8c4ae275791fc9f17c906bf18c60af5e28d800f2))
+
 # [1.207.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.206.0...v1.207.0) (2025-07-10)
 
 
