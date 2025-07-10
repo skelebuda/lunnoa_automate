@@ -21,11 +21,11 @@ export const updateItemStatus = createAction({
       },
     }),
     createDynamicSelectInputField({
-      id: 'status',
-      label: 'New Status',
-      description: 'The new status value to set',
+      id: 'statusColumnId',
+      label: 'Status Column',
+      description: 'The status column to update.',
       required: {
-        missingMessage: 'New status value is required',
+        missingMessage: 'Status column is required.',
         missingStatus: 'error',
       },
       loadOptions: {
@@ -41,10 +41,75 @@ export const updateItemStatus = createAction({
         if (!itemId || isNaN(Number(itemId))) {
           return [];
         }
+        const itemQuery = `query($itemIds: [ID!]) { items(ids: $itemIds) { board { id } } }`;
+        const itemVariables = { itemIds: [Number(itemId)] };
+        const itemData = await shared.mondayApiRequest({
+          http,
+          workspaceId,
+          connection,
+          query: itemQuery,
+          variables: itemVariables,
+        });
+        if (
+          !itemData.items ||
+          itemData.items.length === 0 ||
+          !itemData.items[0].board
+        ) {
+          return [];
+        }
+        const boardId = itemData.items[0].board.id;
+        const statusQuery = `query($boardIds: [ID!]) {
+          boards(ids: $boardIds) {
+            columns(types: [status]) {
+              id
+              title
+            }
+          }
+        }`;
+        const statusVariables = { boardIds: [Number(boardId)] };
+        const statusData = await shared.mondayApiRequest({
+          http,
+          workspaceId,
+          connection,
+          query: statusQuery,
+          variables: statusVariables,
+        });
+        if (!statusData.boards || statusData.boards.length === 0) {
+          return [];
+        }
+        return statusData.boards[0].columns.map(
+          (column: { id: string; title: string }) => ({
+            label: column.title,
+            value: column.id,
+          }),
+        );
+      },
+    }),
+    createDynamicSelectInputField({
+      id: 'statusValue',
+      label: 'New Status',
+      description: 'The new status to set.',
+      required: {
+        missingMessage: 'New status is required.',
+        missingStatus: 'error',
+      },
+      loadOptions: {
+        dependsOn: ['itemId', 'statusColumnId'],
+      },
+      _getDynamicValues: async ({
+        http,
+        workspaceId,
+        connection,
+        extraOptions,
+      }) => {
+        const itemId = extraOptions?.itemId as string;
+        const statusColumnId = extraOptions?.statusColumnId as string;
+        if (!itemId || isNaN(Number(itemId)) || !statusColumnId) {
+          return [];
+        }
 
         const itemQuery = `query($itemIds: [ID!]) { items(ids: $itemIds) { board { id } } }`;
         const itemVariables = { itemIds: [Number(itemId)] };
-
         const itemData = await shared.mondayApiRequest({
           http,
           workspaceId,
@@ -62,16 +127,17 @@ export const updateItemStatus = createAction({
         }
         const boardId = itemData.items[0].board.id;
 
-        const statusQuery = `query($boardIds: [ID!]) {
+        const statusQuery = `query($boardIds: [ID!], $columnIds: [String!]) {
           boards(ids: $boardIds) {
-            columns(types: [status]) {
-              id
-              title
+            columns(ids: $columnIds) {
               settings_str
             }
           }
         }`;
-        const statusVariables = { boardIds: [Number(boardId)] };
+        const statusVariables = {
+          boardIds: [Number(boardId)],
+          columnIds: [statusColumnId],
+        };
 
         const statusData = await shared.mondayApiRequest({
           http,
@@ -81,42 +147,36 @@ export const updateItemStatus = createAction({
           variables: statusVariables,
         });
 
-        if (!statusData.boards || statusData.boards.length === 0) {
+        if (
+          !statusData.boards ||
+          statusData.boards.length === 0 ||
+          !statusData.boards[0].columns ||
+          statusData.boards[0].columns.length === 0
+        ) {
           return [];
         }
 
-        const options: { label: string; value: string }[] = [];
-        const columns = statusData.boards[0].columns;
-
-        for (const column of columns) {
-          const settings = JSON.parse(column.settings_str);
-          if (settings && settings.labels) {
-            for (const index in settings.labels) {
-              const label = settings.labels[index];
-              options.push({
-                label: `${column.title}: ${label}`,
-                value: `${column.id}|${label}`,
-              });
-            }
-          }
+        const settings = JSON.parse(statusData.boards[0].columns[0].settings_str);
+        if (settings && settings.labels) {
+          return Object.values(settings.labels).map((label: any) => ({
+            label,
+            value: label,
+          }));
         }
-        return options;
+
+        return [];
       },
     }),
   ],
   aiSchema: z.object({
     itemId: z.string().describe('The ID of the item to update'),
-    status: z
-      .string()
-      .describe(
-        'The new status to set, in the format "statusColumnId|statusValue"',
-      ),
+    statusColumnId: z.string().describe('The ID of the status column to update'),
+    statusValue: z.string().describe('The new status to set'),
   }),
   run: async ({ configValue, http, workspaceId, connection }) => {
-    const { itemId, status } = configValue;
-    const [statusColumnId, statusValue] = status.split('|');
+    const { itemId, statusColumnId, statusValue } = configValue;
 
-    const itemQuery = `query($itemIds: [ID!]) { items(ids: $itemIds) { board { id } } }`;
+    const itemQuery = `query($itemIds: [ID!]) { items(ids: $itemIds) { board { id column_values(ids: ["${statusColumnId}"]) { id settings_str } } } }`;
     const itemVariables = { itemIds: [Number(itemId)] };
     const itemData = await shared.mondayApiRequest({
       http,
@@ -134,6 +194,22 @@ export const updateItemStatus = createAction({
       throw new Error(`Item with ID "${itemId}" not found.`);
     }
     const boardId = itemData.items[0].board.id;
+    const column = itemData.items[0].board.column_values.find(
+      (c: { id: string }) => c.id === statusColumnId,
+    );
+
+    if (!column) {
+      throw new Error(`Status column with ID "${statusColumnId}" not found.`);
+    }
+
+    const settings = JSON.parse(column.settings_str);
+    const statusIndex = Object.keys(settings.labels).find(
+      (key) => settings.labels[key] === statusValue,
+    );
+
+    if (!statusIndex) {
+      throw new Error(`Status with label "${statusValue}" not found.`);
+    }
 
     const query = `
       mutation ($itemId: ID!, $boardId: ID!, $columnId: String!, $value: JSON!) {
@@ -152,7 +228,7 @@ export const updateItemStatus = createAction({
       itemId: Number(itemId),
       boardId: Number(boardId),
       columnId: statusColumnId,
-      value: JSON.stringify({ label: statusValue }),
+      value: JSON.stringify({ index: parseInt(statusIndex, 10) }),
     };
 
     const data = await shared.mondayApiRequest({
