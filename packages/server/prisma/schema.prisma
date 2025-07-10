@@ -758,6 +758,7 @@ model Connection {
   database     String? @db.VarChar
   host         String? @db.VarChar
   port         Int?
+  ssl          Boolean? @default(false)
 
   //Connection metadata that was returned when authenticating
   metadata Json? @db.JsonB

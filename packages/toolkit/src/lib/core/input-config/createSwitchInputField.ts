@@ -10,4 +10,4 @@ export function createSwitchInputField(
 }
 
 export type CreateSwitchInputFieldArgs = Omit<BaseFieldConfig, 'inputType'> &
-  Required<Pick<FieldConfig, 'switchOptions'>>;
+  Pick<FieldConfig, 'switchOptions'>;

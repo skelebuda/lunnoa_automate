@@ -74,6 +74,7 @@ jobs:
           VERSION: ${{ env.VERSION }}
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          zeit-token: ${{ secrets.VERCEL_TOKEN }} # Legacy token for amondnet/vercel-action
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           vercel-args: '--prod --build-env VERSION=${{ env.VERSION }}'

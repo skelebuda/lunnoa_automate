@@ -531,6 +531,7 @@ export class DatabaseConnection extends Connection {
         database: args.configValue.database,
         host: args.configValue.host,
         port: args.configValue.port,
+        ssl: args.configValue.ssl,
       },
     });
 
@@ -620,6 +621,7 @@ export type DatabaseConfigValues = {
   database: string;
   host: string;
   port: number;
+  ssl: boolean;
   projectId?: string;
 };
 

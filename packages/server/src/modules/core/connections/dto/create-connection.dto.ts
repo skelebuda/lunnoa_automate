@@ -1,4 +1,4 @@
-import { IsNumber, IsObject, IsOptional, IsString, MaxLength } from 'class-validator';
+import { IsBoolean, IsNumber, IsObject, IsOptional, IsString, MaxLength } from 'class-validator';
 
 export class CreateConnectionDto {
   @IsString()
@@ -64,6 +64,10 @@ export class CreateConnectionDto {
   @IsOptional()
   @IsNumber()
   port?: number;
+
+  @IsOptional()
+  @IsBoolean()
+  ssl?: boolean;
 
   //METADATA
   @IsOptional()

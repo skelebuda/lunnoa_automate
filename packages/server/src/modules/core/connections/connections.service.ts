@@ -215,6 +215,7 @@ export class ConnectionsService {
         database: expansion?.credentials ?? false,
         host: expansion?.credentials ?? false,
         port: expansion?.credentials ?? false,
+        ssl: expansion?.credentials ?? false,
         metadata: expansion?.metadata ?? false,
         connectionId: expansion?.connectionId ?? false,
         workflowAppId: expansion?.workflowAppId ?? false,

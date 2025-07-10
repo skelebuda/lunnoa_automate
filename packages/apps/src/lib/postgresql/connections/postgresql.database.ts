@@ -1,4 +1,4 @@
-import { createDatabaseConnection, createTextInputField } from "@lunnoa-automate/toolkit";
+import { createDatabaseConnection, createTextInputField, createSwitchInputField } from "@lunnoa-automate/toolkit";
 
 export const postgresqlConnection = createDatabaseConnection({
   id: "postgresql_connection",
@@ -50,6 +50,12 @@ export const postgresqlConnection = createDatabaseConnection({
         missingMessage: "Password is required",
         missingStatus: "error",
       },
+    }),
+    createSwitchInputField({
+      id: "ssl",
+      label: "Enable SSL",
+      description: "Enable SSL for the connection",
+      defaultValue: true,
     }),
   ],
 }); 
