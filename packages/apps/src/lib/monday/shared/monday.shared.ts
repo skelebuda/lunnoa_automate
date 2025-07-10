@@ -184,7 +184,7 @@ export const shared = {
               const label = settings.labels[index];
               options.push({
                 label: `${column.title}: ${label}`,
-                value: `${column.id}:${index}`,
+                value: `${column.id}|${label}`,
               });
             }
           }
