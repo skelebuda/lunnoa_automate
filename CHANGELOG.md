@@ -1,3 +1,10 @@
+# [1.209.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.208.0...v1.209.0) (2025-07-10)
+
+
+### Features
+
+* switchinputfield ([6fe6a19](https://github.com/skelebuda/lunnoa_automate/commit/6fe6a193f9ea01aded3f65576464f71b28b27acf))
+
 # [1.208.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.207.0...v1.208.0) (2025-07-10)
 
 
