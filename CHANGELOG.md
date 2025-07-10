@@ -1,3 +1,10 @@
+# [1.210.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.209.0...v1.210.0) (2025-07-10)
+
+
+### Features
+
+* ui adaption for ssl connection ([111071d](https://github.com/skelebuda/lunnoa_automate/commit/111071d806bcced44bbbc573b961c0912ed05013))
+
 # [1.209.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.208.0...v1.209.0) (2025-07-10)
 
 
