@@ -1,3 +1,10 @@
+# [1.206.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.205.0...v1.206.0) (2025-07-10)
+
+
+### Features
+
+* two step status update ([025147a](https://github.com/skelebuda/lunnoa_automate/commit/025147ad95a15d30f4e54c008c7fde4777ed6e7b))
+
 # [1.205.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.204.0...v1.205.0) (2025-07-10)
 
 
