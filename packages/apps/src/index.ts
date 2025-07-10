@@ -38,7 +38,7 @@ import { monday } from './lib/monday/monday.app';
 //import { notion } from './lib/notion/notion.app';
 import { openai } from './lib/openai/openai.app';
 //import { paradigmVendo } from './lib/paradigm-vendo/paradigm-vendo.app';
-//import { perplexityAi } from './lib/perplexity-ai/perplexity-ai.app';
+import { perplexityAi } from './lib/perplexity-ai/perplexity-ai.app';
 import { phone } from './lib/phone/phone.app';
 import { pinecone } from './lib/pinecone/pinecone.app';
 import { postgresqlApp } from './lib/postgresql/postgresql.app';
@@ -96,7 +96,7 @@ const apps: Record<string, ReturnType<typeof createApp>> = {
   //[notion.id]: notion,
   [openai.id]: openai,
   //[paradigmVendo.id]: paradigmVendo,
-  //[perplexityAi.id]: perplexityAi,
+  [perplexityAi.id]: perplexityAi,
   [phone.id]: phone,
   [pinecone.id]: pinecone,
   [postgresqlApp.id]: postgresqlApp,
