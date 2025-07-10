@@ -1,3 +1,10 @@
+# [1.207.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.206.0...v1.207.0) (2025-07-10)
+
+
+### Features
+
+* monday.com fix ([654548c](https://github.com/skelebuda/lunnoa_automate/commit/654548cbd9cef6b2d42d7f121d865c0d9419383a))
+
 # [1.206.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.205.0...v1.206.0) (2025-07-10)
 
 
