@@ -135,5 +135,63 @@ export const shared = {
         );
       },
     }),
+    dynamicSelectStatus: createDynamicSelectInputField({
+      id: 'status',
+      label: 'Status',
+      description: 'Select a status to filter tasks',
+      loadOptions: {
+        dependsOn: ['boardId'],
+      },
+      _getDynamicValues: async ({
+        http,
+        workspaceId,
+        connection,
+        extraOptions,
+      }) => {
+        const boardId = extraOptions?.boardId as string;
+        if (!boardId) return [];
+
+        const query = `query($boardId: ID!) {
+          boards(ids: [$boardId]) {
+            columns(types: [status]) {
+              id
+              title
+              settings_str
+            }
+          }
+        }`;
+        const variables = { boardId: Number(boardId) };
+
+        const data = await shared.mondayApiRequest({
+          http,
+          workspaceId,
+          connection,
+          query,
+          variables,
+        });
+
+        if (!data.boards || data.boards.length === 0) {
+          return [];
+        }
+
+        const options: { label: string; value: string }[] = [];
+        const columns = data.boards[0].columns;
+
+        for (const column of columns) {
+          const settings = JSON.parse(column.settings_str);
+          if (settings && settings.labels) {
+            for (const index in settings.labels) {
+              const label = settings.labels[index];
+              options.push({
+                label: `${column.title}: ${label}`,
+                value: `${column.id}:${index}`,
+              });
+            }
+          }
+        }
+
+        return options;
+      },
+    }),
   },
 };

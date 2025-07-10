@@ -12,17 +12,26 @@ export const getUserTasks = createAction({
     shared.fields.dynamicSelectBoard,
     shared.fields.dynamicSelectPersonColumn,
     shared.fields.dynamicSelectUser,
+    shared.fields.dynamicSelectStatus,
   ],
   aiSchema: z.object({
     boardId: z.string(),
     personColumnId: z.string(),
     userId: z.string(),
+    status: z.string().optional(),
   }),
   run: async ({ configValue, http, workspaceId, connection }) => {
-    const { boardId, personColumnId, userId } = configValue;
+    const { boardId, personColumnId, userId, status } = configValue;
+
+    let statusColumnId: string | undefined;
+    let statusValue: string | undefined;
+
+    if (status) {
+      [statusColumnId, statusValue] = status.split(':');
+    }
 
     const query = `
-      query ($boardId: ID!, $personColumnId: String!, $userId: String!) {
+      query ($boardId: ID!, $personColumnId: String!, $userId: String!${status ? ', $statusColumnId: String!, $statusValue: String!' : ''}) {
         items_page_by_column_values (
           board_id: $boardId,
           columns: [
@@ -30,6 +39,11 @@ export const getUserTasks = createAction({
               column_id: $personColumnId,
               column_values: [$userId]
             }
+            ${status ? `
+            ,{
+              column_id: $statusColumnId,
+              column_values: [$statusValue]
+            }` : ''}
           ]
         ) {
           cursor
@@ -43,11 +57,16 @@ export const getUserTasks = createAction({
       }
     `;
 
-    const variables = {
+    const variables: Record<string, any> = {
       boardId: Number(boardId),
       personColumnId,
       userId: String(userId),
     };
+
+    if (status && statusColumnId && statusValue) {
+      variables.statusColumnId = statusColumnId;
+      variables.statusValue = statusValue;
+    }
 
     const data = await shared.mondayApiRequest({
       http,
