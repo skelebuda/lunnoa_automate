@@ -1,3 +1,10 @@
+# [1.202.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.201.0...v1.202.0) (2025-07-10)
+
+
+### Features
+
+* monday action filter task by status ([0780bbb](https://github.com/skelebuda/lunnoa_automate/commit/0780bbbea8e67ce8082e480bbd1ecf888259847d))
+
 # [1.201.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.200.0...v1.201.0) (2025-07-10)
 
 
