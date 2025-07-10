@@ -1,3 +1,10 @@
+# [1.201.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.200.0...v1.201.0) (2025-07-10)
+
+
+### Features
+
+* add perplexity ([819eeb7](https://github.com/skelebuda/lunnoa_automate/commit/819eeb7425645e590977e4a1b68f4b6c641280ba))
+
 # [1.200.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.199.0...v1.200.0) (2025-07-09)
 
 
