@@ -1,3 +1,10 @@
+# [1.203.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.202.0...v1.203.0) (2025-07-10)
+
+
+### Features
+
+* monday update status fix ([5d197dd](https://github.com/skelebuda/lunnoa_automate/commit/5d197dd61f26c7e74a27cd14f2027be4692911fe))
+
 # [1.202.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.201.0...v1.202.0) (2025-07-10)
 
 
