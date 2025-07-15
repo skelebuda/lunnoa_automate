@@ -1,6 +1,6 @@
 services:
   ui:
-    image: ghcr.io/skelebuda/lunnoa_automate/ui:main
+    image: ghcr.io/skelebuda/lunnoa_automate/ui:latest
     container_name: lunnoa-automate-ui
     restart: unless-stopped
     ports:
@@ -9,7 +9,7 @@ services:
       - .env
 
   server:
-    image: ghcr.io/skelebuda/lunnoa_automate/server:main
+    image: ghcr.io/skelebuda/lunnoa_automate/server:latest
     container_name: lunnoa-automate-server
     restart: unless-stopped
     ports:
