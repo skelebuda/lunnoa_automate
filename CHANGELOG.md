@@ -1,3 +1,10 @@
+# [1.211.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.210.0...v1.211.0) (2025-07-15)
+
+
+### Features
+
+* register port ([f14c829](https://github.com/skelebuda/lunnoa_automate/commit/f14c8298d7a3561f32b92347a5735545d805da14))
+
 # [1.210.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.209.0...v1.210.0) (2025-07-10)
 
 
