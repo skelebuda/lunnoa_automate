@@ -26,6 +26,8 @@ jobs:
         run: |
           pnpm up @lunnoa-automate/apps@latest @lunnoa-automate/toolkit@latest
           pnpm install --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Build toolkit
         run: pnpm nx build toolkit
