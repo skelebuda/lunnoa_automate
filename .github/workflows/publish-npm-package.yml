@@ -50,18 +50,24 @@ jobs:
         run: |
           VERSION=$(node -p "require('./packages/toolkit/package.json').version")
           echo "Waiting for @lunnoa-automate/toolkit@$VERSION to be available on npm..."
-          timeout=300  # 2 minutes
+          timeout=300  # 5 minutes
           interval=5
-          until curl -s "https://registry.npmjs.org/@lunnoa-automate/toolkit/$VERSION" | grep -q "version" || [ $timeout -le 0 ]; do
+          while true; do
+            result=$(curl -s -H "Authorization: Bearer $NODE_AUTH_TOKEN" "https://registry.npmjs.org/@lunnoa-automate/toolkit/$VERSION")
+            if echo "$result" | grep -q "\"version\""; then
+              echo "Toolkit is available!"
+              break
+            fi
+            if [ $timeout -le 0 ]; then
+              echo "Timeout waiting for toolkit to be available"
+              exit 1
+            fi
             echo "Still waiting..."
             sleep $interval
             timeout=$((timeout - interval))
           done
-          if [ $timeout -le 0 ]; then
-            echo "Timeout waiting for toolkit to be available"
-            exit 1
-          fi
-          echo "Toolkit is available!"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish apps
         run: pnpm nx run apps:nx-release-publish --verbose
