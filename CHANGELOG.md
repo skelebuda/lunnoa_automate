@@ -1,3 +1,10 @@
+# [1.220.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.219.0...v1.220.0) (2025-07-16)
+
+
+### Features
+
+* auth for server and ui deploy ([9eaad69](https://github.com/skelebuda/lunnoa_automate/commit/9eaad69757cd5ccd5136969fb7ebad92ff4a0bc2))
+
 # [1.219.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.218.0...v1.219.0) (2025-07-16)
 
 
