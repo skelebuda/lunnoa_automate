@@ -64,7 +64,10 @@ jobs:
         env:
           VERSION: ${{ github.ref_name }}
         run: |
-          docker build -t ${{ env.SERVER_REGISTRY }}/${{ github.repository }}/server:$VERSION -f packages/server/Dockerfile .
+          docker build \
+            --build-arg NPM_TOKEN=${{ secrets.NPM_TOKEN }} \
+            -t ${{ env.SERVER_REGISTRY }}/${{ github.repository }}/server:$VERSION \
+            -f packages/server/Dockerfile .
           docker tag ${{ env.SERVER_REGISTRY }}/${{ github.repository }}/server:$VERSION ${{ env.SERVER_REGISTRY }}/${{ github.repository }}/server:latest
           docker push ${{ env.SERVER_REGISTRY }}/${{ github.repository }}/server:$VERSION
           docker push ${{ env.SERVER_REGISTRY }}/${{ github.repository }}/server:latest
