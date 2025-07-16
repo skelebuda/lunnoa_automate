@@ -1,3 +1,10 @@
+# [1.212.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.211.0...v1.212.0) (2025-07-15)
+
+
+### Features
+
+* fix npm package ([107ce5b](https://github.com/skelebuda/lunnoa_automate/commit/107ce5bcb8bdfd8f6da6c158b3566354d15d9470))
+
 # [1.211.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.210.0...v1.211.0) (2025-07-15)
 
 
