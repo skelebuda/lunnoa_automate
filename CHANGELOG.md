@@ -1,3 +1,10 @@
+# [1.225.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.224.0...v1.225.0) (2025-07-16)
+
+
+### Features
+
+* added google sheet loop action ([d43e615](https://github.com/skelebuda/lunnoa_automate/commit/d43e6159bc4c60b3b5fffb672a2b879831ada66d))
+
 # [1.224.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.223.0...v1.224.0) (2025-07-16)
 
 
