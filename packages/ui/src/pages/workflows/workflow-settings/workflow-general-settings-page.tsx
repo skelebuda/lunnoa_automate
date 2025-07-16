@@ -185,7 +185,6 @@ export default function WorkflowGeneralSettingsPage() {
     }
   }, [workflow]);
 
-  console.log("Current workflow state:", workflow);
 
   if (isLoadingWorkflow) {
     return <Loader />;

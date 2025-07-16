@@ -102,7 +102,6 @@ export function CreateConnectionForm({
 
   const onSubmit = async (values: CreateConnectionType) => {
     setCreateStatus('loading');
-    console.log(values);
     await mutation.mutateAsync(
       {
         appId: values.workflowAppId,

@@ -158,7 +158,6 @@ export class ConnectionsService {
   }) {
     this.#validateCreateConnectionArgs({ data });
     this.#encryptCredentials({ data });
-    console.log(data);
 
     const newConnection = await this.prisma.connection.create({
       data,

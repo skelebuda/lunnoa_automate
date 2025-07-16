@@ -1,6 +1,6 @@
 import { createAction, createCodeInputField } from '@lunnoa-automate/toolkit';
 import { z } from 'zod';
-import { Pool } from 'pg';
+import { Client } from 'pg';
 
 export const executeQuery = createAction({
   id: 'postgresql_action_execute-query',
@@ -22,25 +22,24 @@ export const executeQuery = createAction({
   }),
   run: async ({ configValue, connection }) => {
     const { sqlQuery } = configValue;
-    const { username, password, host, port, database } = connection as any;
+    const { username, password, host, port, database, ssl } = connection as any;
 
-    const pool = new Pool({
+    console.log('Connection:', connection);
+
+    const client = new Client({
       user: username,
       host,
       database,
       password,
       port,
+      ssl,
     });
-
+    await client.connect();
     try {
-      const result = await pool.query({text: sqlQuery});
-      await pool.end();
+      const result = await client.query({ text: sqlQuery });
       return result.rows;
-    } catch (error) {
-      await pool.end();
-      // It's good practice to throw the error to be handled by the global error handler
-      // and to let the user know what went wrong.
-      throw new Error(`Error executing query: ${error.message}`);
+    } finally {
+      await client.end();
     }
   },
   mockRun: async () => {

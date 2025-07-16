@@ -56,6 +56,7 @@ const databaseSchema = baseCreateSchema.extend({
   database: z.string(),
   host: z.string(),
   port: z.coerce.number(),
+  ssl: z.boolean().optional(),
 });
 
 const oauth2Schema = baseCreateSchema;
