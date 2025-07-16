@@ -497,6 +497,7 @@ function DatabaseContent({ form }: { form: UseFormReturn & any }) {
             <Form.Message />
             <Form.Control>
               <Input
+                type="password"
                 value={field.value ?? ''}
                 placeholder="Password for authenticating"
                 {...form.register('password', {
@@ -516,7 +517,8 @@ function DatabaseContent({ form }: { form: UseFormReturn & any }) {
             <Form.Message />
             <Form.Control>
               <Switch
-                value={field.value ?? ''}
+                checked={!!field.value}
+                onCheckedChange={field.onChange}
                 placeholder="Enable SSL"
                 {...form.register('ssl', {
                   required: true,
