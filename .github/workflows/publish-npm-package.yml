@@ -82,21 +82,36 @@ jobs:
           timeout=300  # 5 minutes timeout
           interval=10  # Check every 10 seconds
 
-          until curl -s "https://registry.npmjs.org/@lunnoa-automate/apps/$VERSION" | grep -q "version" || [ $timeout -le 0 ]; do
+          # Wait for apps
+          while true; do
+            result=$(curl -s -H "Authorization: Bearer $NODE_AUTH_TOKEN" "https://registry.npmjs.org/@lunnoa-automate/apps/$VERSION")
+            if echo "$result" | grep -q "\"version\""; then
+              break
+            fi
+            if [ $timeout -le 0 ]; then
+              echo "Timeout waiting for @lunnoa-automate/apps@$VERSION to be available"
+              exit 1
+            fi
             echo "Package @lunnoa-automate/apps@$VERSION not yet available, waiting..."
             sleep $interval
             timeout=$((timeout - interval))
           done
 
-          until curl -s "https://registry.npmjs.org/@lunnoa-automate/toolkit/$VERSION" | grep -q "version" || [ $timeout -le 0 ]; do
+          # Wait for toolkit
+          while true; do
+            result=$(curl -s -H "Authorization: Bearer $NODE_AUTH_TOKEN" "https://registry.npmjs.org/@lunnoa-automate/toolkit/$VERSION")
+            if echo "$result" | grep -q "\"version\""; then
+              break
+            fi
+            if [ $timeout -le 0 ]; then
+              echo "Timeout waiting for @lunnoa-automate/toolkit@$VERSION to be available"
+              exit 1
+            fi
             echo "Package @lunnoa-automate/toolkit@$VERSION not yet available, waiting..."
             sleep $interval
             timeout=$((timeout - interval))
           done
 
-          if [ $timeout -le 0 ]; then
-            echo "Timeout waiting for packages to be available"
-            exit 1
-          fi
-
           echo "Packages are available, first workflow complete"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
