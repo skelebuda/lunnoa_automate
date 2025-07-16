@@ -17,6 +17,7 @@ import { newRowAdded } from './triggers/new-row-added.trigger';
 import { newSheet } from './triggers/new-sheet.trigger';
 import { newSpreadsheetInFolder } from './triggers/new-spreadsheet-in-folder.trigger';
 import { newSpreadsheet } from './triggers/new-spreadsheet.trigger';
+import { loopColumnRunAgent } from './actions/loop-column-run-agent.action';
 
 export const googleSheets = createApp({
   id: 'google-sheets',
@@ -37,6 +38,7 @@ export const googleSheets = createApp({
     listSpreadsheets,
     listSheets,
     deleteSheet,
+    loopColumnRunAgent,
     // shareSpreadsheet, // Need scope auth/drive to do this.
     // deleteSpreadsheet, // Need scope auth/drive to do this.
   ],
