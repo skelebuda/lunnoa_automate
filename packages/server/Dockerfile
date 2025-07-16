@@ -14,6 +14,11 @@ COPY packages/apps ./packages/apps
 # Install pnpm and other global dependencies
 RUN npm install -g pnpm @nestjs/cli nx
 
+# Configure npm for private registry
+ARG NPM_TOKEN
+RUN echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+ENV NODE_AUTH_TOKEN=${NPM_TOKEN}
+
 # Install dependencies
 RUN pnpm install --frozen-lockfile 
 

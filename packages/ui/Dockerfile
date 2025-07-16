@@ -20,6 +20,10 @@ COPY packages/ui ./packages/ui
 # Install pnpm and other global dependencies
 RUN npm install -g pnpm nx
 
+
+ARG NPM_TOKEN
+RUN echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+ENV NODE_AUTH_TOKEN=${NPM_TOKEN}
 # Install dependencies
 RUN pnpm install --frozen-lockfile 
 
