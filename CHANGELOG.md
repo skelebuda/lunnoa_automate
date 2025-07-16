@@ -1,3 +1,10 @@
+# [1.223.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.222.0...v1.223.0) (2025-07-16)
+
+
+### Features
+
+* dockerfile with auth ([6c29e99](https://github.com/skelebuda/lunnoa_automate/commit/6c29e993f3a754a7e6dfdb777c2bf858bf0017bc))
+
 # [1.222.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.221.0...v1.222.0) (2025-07-16)
 
 
