@@ -1,3 +1,10 @@
+# [1.214.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.213.0...v1.214.0) (2025-07-16)
+
+
+### Features
+
+* restriced packages ([9053900](https://github.com/skelebuda/lunnoa_automate/commit/9053900070a71e99f1b3186b982f12fd41d13223))
+
 # [1.213.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.212.0...v1.213.0) (2025-07-16)
 
 
