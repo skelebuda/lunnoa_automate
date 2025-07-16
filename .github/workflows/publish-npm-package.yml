@@ -32,8 +32,21 @@ jobs:
       - name: Build toolkit
         run: pnpm nx build toolkit
 
+      - name: list toolkit build output
+        run: ls -l packages/toolkit/dist || ls -l packages/toolkit/build || ls -l packages/toolkit
+
       - name: Build apps
         run: pnpm nx build apps
+
+      - name: list apps build output
+        run: ls -l packages/apps/dist || ls -l packages/apps/build || ls -l packages/apps
+
+      - name: Publish toolkit directly for debug
+        run: |
+          cd packages/toolkit
+          npm publish --access=restricted --verbose
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish apps and toolkit using NX
         run: pnpm nx run-many --target=nx-release-publish --projects=apps,toolkit --verbose
