@@ -41,15 +41,30 @@ jobs:
       - name: list apps build output
         run: ls -l packages/apps/dist || ls -l packages/apps/build || ls -l packages/apps
 
-      - name: Publish toolkit directly for debug
-        run: |
-          cd packages/toolkit
-          npm publish --access=restricted --verbose
+      - name: Publish toolkit
+        run: pnpm nx run toolkit:nx-release-publish --verbose
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Publish apps and toolkit using NX
-        run: pnpm nx run-many --target=nx-release-publish --projects=apps,toolkit --verbose
+      - name: Wait for toolkit to be available on npm
+        run: |
+          VERSION=$(node -p "require('./packages/toolkit/package.json').version")
+          echo "Waiting for @lunnoa-automate/toolkit@$VERSION to be available on npm..."
+          timeout=120  # 2 minutes
+          interval=5
+          until curl -s "https://registry.npmjs.org/@lunnoa-automate/toolkit/$VERSION" | grep -q "version" || [ $timeout -le 0 ]; do
+            echo "Still waiting..."
+            sleep $interval
+            timeout=$((timeout - interval))
+          done
+          if [ $timeout -le 0 ]; then
+            echo "Timeout waiting for toolkit to be available"
+            exit 1
+          fi
+          echo "Toolkit is available!"
+
+      - name: Publish apps
+        run: pnpm nx run apps:nx-release-publish --verbose
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
