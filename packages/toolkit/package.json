@@ -2,7 +2,7 @@
   "name": "@lunnoa-automate/toolkit",
   "version": "1.212.0",
   "publishConfig": {
-    "access": "public"
+    "access": "restricted"
   },
   "dependencies": {
     "tslib": "^2.3.0"

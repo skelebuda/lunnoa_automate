@@ -2,7 +2,7 @@
   "name": "@lunnoa-automate/apps",
   "version": "1.212.0",
   "publishConfig": {
-    "access": "public"
+    "access": "restricted"
   },
   "dependencies": {
     "@lunnoa-automate/toolkit": "1.212.0"
