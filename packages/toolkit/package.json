@@ -1,6 +1,6 @@
 {
   "name": "@lunnoa-automate/toolkit",
-  "version": "1.221.0",
+  "version": "1.222.0",
   "publishConfig": {
     "access": "restricted"
   },

@@ -1,3 +1,10 @@
+# [1.222.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.221.0...v1.222.0) (2025-07-16)
+
+
+### Features
+
+* docker build with npm token ([2d4c89e](https://github.com/skelebuda/lunnoa_automate/commit/2d4c89e44377f38c898e57c8befa40d66bb23eb5))
+
 # [1.221.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.220.0...v1.221.0) (2025-07-16)
 
 
