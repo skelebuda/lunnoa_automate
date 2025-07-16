@@ -1,3 +1,10 @@
+# [1.217.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.216.0...v1.217.0) (2025-07-16)
+
+
+### Features
+
+* timeout to 5 minutes ([473e4b3](https://github.com/skelebuda/lunnoa_automate/commit/473e4b3cb18e8badb44f7ac55dd146ff0962488d))
+
 # [1.216.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.215.0...v1.216.0) (2025-07-16)
 
 
