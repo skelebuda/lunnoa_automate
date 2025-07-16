@@ -1,3 +1,10 @@
+# [1.224.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.223.0...v1.224.0) (2025-07-16)
+
+
+### Features
+
+* password for db connection fix ([fea49b6](https://github.com/skelebuda/lunnoa_automate/commit/fea49b6b12f893fc61cab605131cfff852f083e6))
+
 # [1.223.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.222.0...v1.223.0) (2025-07-16)
 
 
