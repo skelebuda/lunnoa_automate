@@ -1,3 +1,10 @@
+# [1.218.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.217.0...v1.218.0) (2025-07-16)
+
+
+### Features
+
+* check with auth ([d5944d0](https://github.com/skelebuda/lunnoa_automate/commit/d5944d0bedcd8f6e7cf00d9ab44f0f0a372e4b33))
+
 # [1.217.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.216.0...v1.217.0) (2025-07-16)
 
 
