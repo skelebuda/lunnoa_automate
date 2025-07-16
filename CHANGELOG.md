@@ -1,3 +1,10 @@
+# [1.213.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.212.0...v1.213.0) (2025-07-16)
+
+
+### Features
+
+* push with verbose ([2b5ac15](https://github.com/skelebuda/lunnoa_automate/commit/2b5ac15e983486dd16f84910e5993744b7085a10))
+
 # [1.212.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.211.0...v1.212.0) (2025-07-15)
 
 
