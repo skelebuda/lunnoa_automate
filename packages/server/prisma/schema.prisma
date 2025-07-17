@@ -380,7 +380,6 @@ model Agent {
 
   //THESE ARE ALL LEGACY
   connections      Connection[]      @relation(name: "AgentConnections")
-  agentActions     AgentAction[]
   agentKnowledge   AgentKnowledge[]
   agentVariables   AgentVariable[]
   agentWorkflows   AgentWorkflow[]
@@ -457,18 +456,6 @@ model AgentPhoneAccess {
 
   //AGENT RELATION
   FK_agentId String @unique
-  agent      Agent  @relation(fields: [FK_agentId], references: [id], onDelete: Cascade)
-}
-
-model AgentAction {
-  id        String    @id @default(uuid())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
-
-  actionId String //Not a db item
-
-  //AGENT RELATION
-  FK_agentId String
   agent      Agent  @relation(fields: [FK_agentId], references: [id], onDelete: Cascade)
 }
 
