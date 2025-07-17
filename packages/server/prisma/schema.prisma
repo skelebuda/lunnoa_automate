@@ -158,6 +158,7 @@ enum BillingPlanType {
   custom
 }
 
+
 enum BillingStatus {
   active
   canceled
@@ -285,6 +286,17 @@ model WorkflowTemplate {
 
   FK_workspaceId String
   workspace      Workspace @relation(fields: [FK_workspaceId], references: [id], onDelete: Cascade)
+}
+
+//APP
+model App {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name        String  @db.VarChar(100)
+  description String? @db.VarChar(1000)
+  addedToEnvironment     Boolean @default(true)
 }
 
 //WORKFLOW
