@@ -1,11 +1,11 @@
 {
   "name": "@lunnoa-automate/apps",
-  "version": "1.227.0",
+  "version": "1.228.0",
   "publishConfig": {
     "access": "restricted"
   },
   "dependencies": {
-    "@lunnoa-automate/toolkit": "1.227.0"
+    "@lunnoa-automate/toolkit": "1.228.0"
   },
   "main": "./src/index.js",
   "types": "./src/index.d.ts",

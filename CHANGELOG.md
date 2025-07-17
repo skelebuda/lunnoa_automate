@@ -1,3 +1,10 @@
+# [1.228.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.227.0...v1.228.0) (2025-07-17)
+
+
+### Features
+
+* removed agentActions Table ([c9a6309](https://github.com/skelebuda/lunnoa_automate/commit/c9a6309aa24ab517527338846d493e4452f34e97))
+
 # [1.227.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.226.0...v1.227.0) (2025-07-16)
 
 
