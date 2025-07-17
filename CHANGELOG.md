@@ -1,3 +1,10 @@
+# [1.230.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.229.0...v1.230.0) (2025-07-17)
+
+
+### Features
+
+* new table App ([ba6d643](https://github.com/skelebuda/lunnoa_automate/commit/ba6d6437ba371cd724c2ad1fbf6b5a53f5682ef7))
+
 # [1.229.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.228.0...v1.229.0) (2025-07-17)
 
 
