@@ -1,3 +1,10 @@
+# [1.229.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.228.0...v1.229.0) (2025-07-17)
+
+
+### Features
+
+* add agent actions 20250717140737_added_table_back ([da3ebf5](https://github.com/skelebuda/lunnoa_automate/commit/da3ebf5b6f20af641275ef2e778da0f8ffedaf82))
+
 # [1.228.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.227.0...v1.228.0) (2025-07-17)
 
 
