@@ -39,14 +39,8 @@ export const googleSearch = createAction({
     executionId,
     workflowId,
     http,
-    credits,
   }) => {
     const { q } = configValue;
-
-    await credits.checkIfWorkspaceHasEnoughCredits({
-      workspaceId,
-      usageType: 'serper',
-    });
 
     const response = await http.request({
       method: 'POST',
@@ -70,32 +64,8 @@ export const googleSearch = createAction({
         })) ?? [],
     };
 
-    const calculatedCreditsFromToken = credits.transformCostToCredits({
-      usageType: 'serper',
-      data: {
-        credits: data.credits,
-      },
-    });
-
-    const creditUsage = await credits.updateWorkspaceCredits({
-      workspaceId,
-      creditsUsed: calculatedCreditsFromToken,
-      projectId,
-      data: {
-        ref: {
-          agentId,
-          executionId,
-          workflowId,
-        },
-        details: {
-          actionId: 'web_action_google-search',
-        },
-      },
-    });
-
     return {
       ...formattedResponse,
-      creditUsage,
     };
   },
 

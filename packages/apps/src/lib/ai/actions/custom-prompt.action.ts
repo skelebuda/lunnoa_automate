@@ -67,7 +67,6 @@ export const customPrompt = createAction({
     agentId,
     executionId,
     workflowId,
-    credits,
     prisma,
     aiProviders,
   }) => {
@@ -87,48 +86,10 @@ export const customPrompt = createAction({
         prisma,
       });
 
-    if (!isUsingWorkspaceLlmConnection) {
-      await credits.checkIfWorkspaceHasLlmCredits({
-        workspaceId,
-        aiProvider: provider,
-        model,
-      });
-    }
-
     const { text, usage } = await generateText({
       model: aiProviderClient,
       messages: messages as any,
     });
-
-    if (!isUsingWorkspaceLlmConnection) {
-      const calculatedCreditsFromToken = credits.transformLlmTokensToCredits({
-        aiProvider: provider,
-        model,
-        data: {
-          inputTokens: usage.promptTokens,
-          outputTokens: usage.completionTokens,
-        },
-      });
-
-      await credits.updateWorkspaceCredits({
-        workspaceId,
-        creditsUsed: calculatedCreditsFromToken,
-        projectId,
-        data: {
-          ref: {
-            agentId,
-            executionId,
-            workflowId,
-          },
-          details: {
-            actionId: 'ai_action_custom-prompt',
-            aiProvider: provider,
-            llmModel: model,
-            usage: usage,
-          },
-        },
-      });
-    }
 
     return {
       response: text,

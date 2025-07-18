@@ -24,7 +24,7 @@ export const extractStaticWebsiteContent = createAction({
     createMarkdownField({
       id: 'markdown',
       markdown:
-        'Note that this action uses credits per run. The amount depends on the size of the website.',
+        'Uses external API. The amount depends on the size of the website.',
     }),
   ],
 
@@ -40,14 +40,8 @@ export const extractStaticWebsiteContent = createAction({
     executionId,
     workflowId,
     http,
-    credits,
   }) => {
     const { url } = configValue;
-
-    await credits.checkIfWorkspaceHasEnoughCredits({
-      workspaceId,
-      usageType: 'extract-static-website-content',
-    });
 
     const taskId = process.env.APIFY_EXTRACT_STATIC_CONTENT_TASK_ID.replace('/', '~');
     const taskUrl = `https://api.apify.com/v2/actor-tasks/${taskId}/runs?token=${process.env.APIFY_API_KEY}&timeout=60&waitForFinish=60`;
@@ -87,33 +81,10 @@ export const extractStaticWebsiteContent = createAction({
     const firstItem = items[0];
     const data = firstItem.data ?? '';
 
-    const calculatedCreditsFromToken = credits.transformCostToCredits({
-      usageType: 'extract-static-website-content',
-      data: {
-        cost: runSyncResponse.data.data.usageTotalUsd,
-      },
-    });
-
-    const creditUsage = await credits.updateWorkspaceCredits({
-      workspaceId,
-      creditsUsed: calculatedCreditsFromToken,
-      projectId,
-      data: {
-        ref: {
-          agentId,
-          executionId,
-          workflowId,
-        },
-        details: {
-          actionId: 'web_action_extract-static-website-content',
-        },
-      },
-    });
 
     return {
       url: firstItem.url,
       data,
-      creditUsage,
     };
   },
 

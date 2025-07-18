@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Cron } from '@nestjs/schedule';
-import { BillingPlanType, WorkflowStrategy } from '@prisma/client';
+import { WorkflowStrategy } from '@prisma/client';
 import { JsonValue } from '@prisma/client/runtime/library';
 
 import { ServerConfig } from '../../../config/server.config';
-import { CreditsService } from '../../global/credits/credits.service';
 import { PrismaService } from '../../global/prisma/prisma.service';
 import { S3ManagerService } from '../../global/s3/s3.service';
 import { WorkflowAppsService } from '../workflow-apps/workflow-apps.service';
@@ -21,93 +20,59 @@ export class PollerService {
     private prisma: PrismaService,
     private workflowAppService: WorkflowAppsService,
     private eventEmitter: EventEmitter2,
-    private credits: CreditsService,
     private s3: S3ManagerService,
   ) {}
 
   //Every 15 minute
   @Cron('0,15,30,45 * * * *')
   async workflowTriggerPollerBusinessTier() {
-    if (!this.credits.isBillingEnabled()) {
-      //If billing is not enabled, we don't want to run this. We'll use the other workflow trigger pollers
-      return;
-    } else {
       // Get all workflows with poll strategy
       const workflows = await this.#getWorkflowsByStrategyAndPaymentPlan({
         strategy: 'poll',
-        plan: 'business',
       });
 
       await this.#checkPollerWorkflowsForExecution({ workflows });
-    }
+    
   }
 
   //Every 15 minutes
   @Cron('0,15,30,45 * * * *')
   async workflowTriggerPollerTeamTier() {
-    if (!this.credits.isBillingEnabled()) {
-      //If billing is not enabled, we don't want to run this. We'll use the other workflow trigger pollers
-      return;
-    } else {
       // Get all workflows with poll strategy
       const workflows = await this.#getWorkflowsByStrategyAndPaymentPlan({
         strategy: 'poll',
-        plan: 'team',
       });
-
       await this.#checkPollerWorkflowsForExecution({ workflows });
-    }
   }
 
   //Every 15 minutes
   @Cron('0,15,30,45 * * * *')
   async workflowTriggerPollerProfessionalTier() {
-    if (!this.credits.isBillingEnabled()) {
-      //If billing is not enabled, we don't want to run this. We'll use the other workflow trigger pollers
-      return;
-    } else {
       // Get all workflows with poll strategy
       const workflows = await this.#getWorkflowsByStrategyAndPaymentPlan({
         strategy: 'poll',
-        plan: 'professional',
-      });
-
+      }
+    );
       await this.#checkPollerWorkflowsForExecution({ workflows });
-    }
   }
 
   //Every hour
   @Cron('0 * * * *')
   async workflowTriggerPollerFreeTier() {
-    if (!this.credits.isBillingEnabled()) {
-      //If billing is not enabled, we don't want to run this. We'll use the other workflow trigger pollers
-      return;
-    } else {
       // Get all workflows with poll strategy
       const workflows = await this.#getWorkflowsByStrategyAndPaymentPlan({
         strategy: 'poll',
-        plan: 'free',
       });
-
       await this.#checkPollerWorkflowsForExecution({ workflows });
-    }
   }
 
   //Every 10 seconds or whatever is set in ServerConfig
   @Cron(ServerConfig.CRON_TRIGGER_POLLING_INTERVAL || '*/5 * * * *')
   async workflowTriggerForNoBillingPlatform() {
-    // This is used for local development that doesn't use billing.
-    if (this.credits.isBillingEnabled()) {
-      //If billing is enabled, we don't want to run this. We'll use the other workflow trigger pollers
-      return;
-    } else {
       const workflows = await this.#getWorkflowsByStrategyAndPaymentPlan({
         strategy: 'poll',
-        plan: null,
       });
-
       await this.#checkPollerWorkflowsForExecution({ workflows });
-    }
   }
 
   //Every minute
@@ -129,37 +94,18 @@ export class PollerService {
   //Every 24 hours
   @Cron('0 0 * * *')
   async deleteExecutionHistory() {
-    if (!this.credits.isBillingEnabled()) {
-      //If billing is not enabled, we don't want to run this.
-      return;
-    }
-
-    const workspaces = await this.#getWorkspaceWithBillingType();
+    const workspaces = await this.prisma.workspace.findMany({
+      select: {
+        id: true,
+      },
+    });
 
     workspaces.forEach(async (workspace) => {
-      const planType = workspace.billing?.planType;
 
-      let days = 0;
-      switch (planType) {
-        case 'free':
-          days = 3;
-          break;
-        case 'professional':
-          days = 7;
-          break;
-        case 'team':
-          days = 7;
-          break;
-        case 'business':
-          days = 7;
-          break;
-        default:
-          days = 3;
-          break;
-      }
-
+      let retentionPeriodDays = 3650;
+      
       const date = new Date();
-      date.setDate(date.getDate() - days);
+      date.setDate(date.getDate() - retentionPeriodDays);
 
       await this.prisma.execution.deleteMany({
         where: {
@@ -185,23 +131,17 @@ export class PollerService {
   //Every 24 hours
   @Cron('0 0 * * *')
   async deleteAgentTaskHistory() {
-    if (!this.credits.isBillingEnabled()) {
-      //If billing is not enabled, we don't want to run this.
-      return;
-    }
-
-    const workspaces = await this.#getWorkspaceWithBillingType();
+    const workspaces = await this.prisma.workspace.findMany({
+      select: {
+        id: true,
+      },
+    });
 
     workspaces.forEach(async (workspace) => {
-      const planType = workspace.billing?.planType;
-
-      let days = 0;
-
-      if (planType === 'free') {
-        days = 3;
-
-        const date = new Date();
-        date.setDate(date.getDate() - days);
+      let retentionPeriodDays = 3650;
+      
+      const date = new Date();
+      date.setDate(date.getDate() - retentionPeriodDays);
 
         await this.prisma.taskMessage.deleteMany({
           where: {
@@ -243,7 +183,6 @@ export class PollerService {
             ],
           },
         });
-      }
     });
   }
 
@@ -267,83 +206,7 @@ export class PollerService {
     });
   }
 
-  //Beginning of the month
-  @Cron('0 0 1 * *')
-  async allotWorkspaceCreditsPerMonth() {
-    /**
-     * These are the monthly credits we allot to each defaultCreated workspace.
-     */
-
-    const allWorkspaces = await this.prisma.workspace.findMany({
-      where: {},
-      select: {
-        id: true,
-        defaultCreatedWorkspace: true,
-        billing: {
-          select: {
-            planType: true,
-          },
-        },
-      },
-    });
-
-    allWorkspaces.forEach(async (workspace) => {
-      const DEFAULT = this.credits.getMonthlyProatedCreditAllotment({
-        plan: 'free',
-      });
-      let amountToAllot = DEFAULT;
-
-      if (workspace?.billing?.planType) {
-        switch (workspace.billing.planType) {
-          case 'free':
-            if (!workspace.defaultCreatedWorkspace) {
-              //Only the first default workspace qualifies for free tokens
-              amountToAllot = 0;
-            }
-            break;
-          case 'professional':
-            amountToAllot = this.credits.getMonthlyProatedCreditAllotment({
-              plan: 'professional',
-            });
-            break;
-          case 'team':
-            amountToAllot = this.credits.getMonthlyProatedCreditAllotment({
-              plan: 'team',
-            });
-            break;
-          case 'business':
-            amountToAllot = this.credits.getMonthlyProatedCreditAllotment({
-              plan: 'business',
-            });
-            break;
-          default:
-            amountToAllot = DEFAULT;
-            break;
-        }
-      }
-
-      await this.prisma.workspace.update({
-        where: {
-          id: workspace.id,
-        },
-        data: {
-          usage: {
-            upsert: {
-              create: {
-                allottedCredits: amountToAllot,
-                refreshedAt: new Date().toISOString(),
-              },
-              update: {
-                allottedCredits: amountToAllot,
-                refreshedAt: new Date().toISOString(),
-              },
-            },
-          },
-        },
-      });
-    });
-  }
-
+  
   //Every hour
   @Cron('0 * * * *')
   async deleteTempS3Files() {
@@ -357,18 +220,7 @@ export class PollerService {
     }
   }
 
-  #getWorkspaceWithBillingType = async () => {
-    return await this.prisma.workspace.findMany({
-      select: {
-        id: true,
-        billing: {
-          select: {
-            planType: true,
-          },
-        },
-      },
-    });
-  };
+
 
   #checkPollerWorkflowsForExecution = async ({
     workflows,
@@ -426,23 +278,11 @@ export class PollerService {
 
   async #getWorkflowsByStrategyAndPaymentPlan({
     strategy,
-    plan,
   }: {
     strategy: WorkflowStrategy;
-    plan?: BillingPlanType;
   }) {
-    const workspacesWithWorkflows = await this.prisma.workspace.findMany({
-      where: plan
-        ? {
-            AND: [
-              {
-                billing: {
-                  planType: plan,
-                },
-              },
-            ],
-          }
-        : {},
+    const workspaces = await this.prisma.workspace.findMany({
+      where: {},
       select: {
         projects: {
           select: {
@@ -473,7 +313,7 @@ export class PollerService {
       },
     });
 
-    return workspacesWithWorkflows
+    return workspaces
       .map((workspace) => workspace.projects)
       .flat()
       .map((project) => project.workflows)

@@ -157,7 +157,7 @@ export const makePhoneCall = createAction({
       description: '',
       label: '',
       markdown:
-        'Note that this action uses credits per call. The amount depends on how long the call was. Maximum of 10 minutes.',
+        'Maximum of 10 minutes Call Duration.',
     },
   ],
   run: async ({
@@ -168,14 +168,8 @@ export const makePhoneCall = createAction({
     agentId,
     executionId,
     workflowId,
-    credits,
     http,
   }) => {
-    await credits.checkIfWorkspaceHasEnoughCredits({
-      workspaceId,
-      usageType: 'vapi',
-    });
-
     // Fetch the list of VAPI phone numbers using HTTP GET
     const getPhoneNumbersUrl = 'https://api.vapi.ai/phone-number';
     const phoneNumbersResult = await http.request({
@@ -271,42 +265,6 @@ export const makePhoneCall = createAction({
           status,
           transcript,
         } = callResult.data;
-
-        //CALCULATE COST
-        const { cost } = callResult.data;
-
-        //Because the cost is in Twilio, Vapi won't give it to us.
-        const twilioCost = shared.calculateTwilioCostFromCallDuration({
-          start: startedAt,
-          end: endedAt,
-        });
-
-        const calculatedCreditsFromCost = credits.transformCostToCredits({
-          usageType: 'vapi',
-          data: {
-            cost: twilioCost + cost,
-          },
-        });
-
-        await credits.updateWorkspaceCredits({
-          workspaceId,
-          creditsUsed: calculatedCreditsFromCost,
-          projectId,
-          data: {
-            ref: {
-              agentId,
-              executionId,
-              workflowId,
-            },
-            details: {
-              actionId: 'phone_action_make-phone-call',
-              durationInMinutes:
-                (new Date(endedAt).getTime() - new Date(startedAt).getTime()) /
-                1000 /
-                60,
-            },
-          },
-        });
 
         return {
           result: {

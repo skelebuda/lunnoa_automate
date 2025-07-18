@@ -11,7 +11,6 @@ import { KnowledgeService } from '../../modules/core/knowledge/knowledge.service
 import { TasksService } from '../../modules/core/tasks/tasks.service';
 import { WorkflowNodeForRunner } from '../../modules/core/workflow-runner/workflow-runner.service';
 import { AiProviderService } from '../../modules/global/ai-provider/ai-provider.service';
-import { CreditsService } from '../../modules/global/credits/credits.service';
 import { FileHandlerService } from '../../modules/global/file/file-handler.service';
 import { HttpService } from '../../modules/global/http/http.service';
 import { NotificationsService } from '../../modules/global/notifications/notifications.service';
@@ -60,7 +59,6 @@ export class App {
     this.jwt = args.jwt;
     this.http = args.http;
     this.eventEmitter = args.eventEmitter;
-    this.credits = args.credits;
     this.aiProviders = args.aiProviders;
 
     //Action Class Instances
@@ -260,7 +258,6 @@ export class App {
   jwt: JwtService;
   http: HttpService;
   eventEmitter: EventEmitter2;
-  credits: CreditsService;
   aiProviders: AiProviderService;
   redirectUrlLocalHostInDevelopment = `${ServerConfig.SERVER_URL}/workflow-apps/oauth2callback`;
   encodedRedirectUrl: string = encodeURIComponent(
@@ -732,7 +729,6 @@ export type AppContructorArgs = {
   jwt: JwtService;
   http: HttpService;
   eventEmitter: EventEmitter2;
-  credits: CreditsService;
   aiProviders: AiProviderService;
 };
 

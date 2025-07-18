@@ -381,7 +381,6 @@ export class WebhookService {
       fileHandler: this.workflowAppService.apps['flow-control'].fileHandler,
       s3: this.workflowAppService.apps['flow-control'].s3,
       aiProviders: this.workflowAppService.apps['flow-control'].aiProviders,
-      credits: this.workflowAppService.apps['flow-control'].credits,
       task: this.workflowAppService.apps['flow-control'].task,
       knowledge: this.workflowAppService.apps['flow-control'].knowledge,
       notification: this.workflowAppService.apps['flow-control'].notification,

@@ -26,7 +26,6 @@ import {
   AiProvider,
   AiProviderService,
 } from '../../global/ai-provider/ai-provider.service';
-import { CreditsService } from '../../global/credits/credits.service';
 import { PrismaService } from '../../global/prisma/prisma.service';
 import { WorkflowAppsService } from '../workflow-apps/workflow-apps.service';
 import { WorkflowNodeForRunner } from '../workflow-runner/workflow-runner.service';
@@ -43,7 +42,6 @@ export class TasksService {
     private prisma: PrismaService,
     @Inject(forwardRef(() => WorkflowAppsService))
     private workflowAppService: WorkflowAppsService,
-    private creditsService: CreditsService,
     private aiProviderService: AiProviderService,
   ) {}
 
@@ -143,14 +141,6 @@ export class TasksService {
 
       const messagesForContext = taskMessages.concat(inputMessages as any);
 
-      if (!agent.llmConnection) {
-        await this.creditsService.checkIfWorkspaceHasLlmCredits({
-          aiProvider: agent.llmProvider as AiProvider,
-          model: agent.llmModel,
-          workspaceId,
-        });
-      }
-
       const llmProviderClient = this.aiProviderService.getAiLlmProviderClient({
         aiProvider: agent.llmProvider as AiProvider,
         llmConnection: agent.llmConnection,
@@ -242,33 +232,6 @@ export class TasksService {
                 result.usage.promptTokens += nameTaskUsage.promptTokens;
                 result.usage.completionTokens += nameTaskUsage.completionTokens;
               }
-
-              const creditsUsed =
-                this.creditsService.transformLlmTokensToCredits({
-                  data: {
-                    inputTokens: result.usage.promptTokens,
-                    outputTokens: result.usage.completionTokens,
-                  },
-                  aiProvider: agent.llmProvider as AiProvider,
-                  model: agent.llmModel,
-                });
-
-              await this.creditsService.updateWorkspaceCredits({
-                creditsUsed,
-                workspaceId,
-                projectId: agent.FK_projectId,
-                data: {
-                  ref: {
-                    agentId: taskWithAgentId.FK_agentId,
-                    taskId,
-                  },
-                  details: {
-                    aiProvider: agent.llmProvider,
-                    model: agent.llmModel,
-                    usage: result.usage,
-                  },
-                },
-              });
             }
           },
         });
@@ -321,32 +284,6 @@ export class TasksService {
             result.usage.promptTokens += nameTaskUsage.promptTokens;
             result.usage.completionTokens += nameTaskUsage.completionTokens;
           }
-
-          const creditsUsed = this.creditsService.transformLlmTokensToCredits({
-            data: {
-              inputTokens: result.usage.promptTokens,
-              outputTokens: result.usage.completionTokens,
-            },
-            aiProvider: agent.llmProvider as AiProvider,
-            model: agent.llmModel,
-          });
-
-          await this.creditsService.updateWorkspaceCredits({
-            creditsUsed,
-            workspaceId,
-            projectId: agent.FK_projectId,
-            data: {
-              ref: {
-                agentId: taskWithAgentId.FK_agentId,
-                taskId,
-              },
-              details: {
-                aiProvider: agent.llmProvider,
-                model: agent.llmModel,
-                usage: result.usage,
-              },
-            },
-          });
         }
 
         if (simpleResponse) {

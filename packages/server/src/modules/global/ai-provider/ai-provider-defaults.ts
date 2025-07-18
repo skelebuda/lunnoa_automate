@@ -11,60 +11,36 @@ export const DEFAULT_PROVIDERS: AiProviders = {
         tools: true,
         canStreamText: true,
         canStreamTools: true,
-        creditConversionData: {
-          input: 240,
-          output: 60,
-        },
       },
       'gpt-4o-mini': {
         vision: true,
         tools: true,
         canStreamText: true,
         canStreamTools: true,
-        creditConversionData: {
-          input: 4000,
-          output: 1000,
-        },
       },
       'o3-mini': {
         vision: true,
         tools: true,
         canStreamText: true,
         canStreamTools: true,
-        creditConversionData: {
-          input: 200,
-          output: 50,
-        },
       },
       o1: {
         vision: true,
         tools: false,
         canStreamText: true,
         canStreamTools: false,
-        creditConversionData: {
-          input: 40,
-          output: 10,
-        },
       },
       'o1-preview': {
         vision: true,
         tools: false,
         canStreamText: true,
         canStreamTools: false,
-        creditConversionData: {
-          input: 40,
-          output: 10,
-        },
       },
       'o1-mini': {
         vision: true,
         tools: false,
         canStreamText: true,
         canStreamTools: false,
-        creditConversionData: {
-          input: 200,
-          output: 50,
-        },
       },
     },
     embeddingModels: {
@@ -126,7 +102,7 @@ export const DEFAULT_PROVIDERS: AiProviders = {
             canStreamTools: true,
             tools: true,
             vision: true,
-            creditConversionData: null,
+            
           };
 
           acc[model.id] = modelData;
@@ -144,44 +120,24 @@ export const DEFAULT_PROVIDERS: AiProviders = {
         tools: true,
         canStreamText: true,
         canStreamTools: true,
-        creditConversionData: {
-          input: 200,
-          output: 40,
-        },
-        //8192 output
       },
       'claude-3-5-haiku-latest': {
         vision: false,
         tools: true,
         canStreamText: true,
         canStreamTools: true,
-        creditConversionData: {
-          //1 third of sonnet
-          input: 120,
-          output: 600,
-        },
-        //8192 output
       },
       'claude-3-opus-latest': {
         vision: true,
         tools: true,
         canStreamText: true,
         canStreamTools: true,
-        creditConversionData: {
-          input: 8,
-          output: 40,
-        },
-        //4096
       },
       'claude-3-haiku-20240307': {
         vision: true,
         tools: true,
         canStreamText: true,
         canStreamTools: true,
-        creditConversionData: {
-          input: 2400,
-          output: 480,
-        },
       },
     },
     embeddingModels: {},
@@ -195,33 +151,18 @@ export const DEFAULT_PROVIDERS: AiProviders = {
         tools: true,
         canStreamText: true,
         canStreamTools: true,
-        creditConversionData: {
-          input: 4000,
-          output: 1000,
-        },
-        //8192 output
       },
       'gemini-1.5-flash': {
         vision: true,
         tools: false,
         canStreamText: true,
         canStreamTools: false,
-        creditConversionData: {
-          input: 4000,
-          output: 1000,
-        },
-        //8192 output
       },
       'gemini-1.5-pro': {
         vision: true,
         tools: true,
         canStreamText: true,
         canStreamTools: true,
-        creditConversionData: {
-          input: 240,
-          output: 60,
-        },
-        //8192 output
       },
     },
     embeddingModels: {},
@@ -258,7 +199,7 @@ export const DEFAULT_PROVIDERS: AiProviders = {
             canStreamTools: true,
             tools: true,
             vision: true,
-            creditConversionData: null,
+            
           };
 
           acc[model.id] = modelData;
@@ -276,7 +217,7 @@ export const DEFAULT_PROVIDERS: AiProviders = {
         tools: false,
         canStreamText: false,
         canStreamTools: false,
-        creditConversionData: null,
+        
         //200k context length
       },
       sonar: {
@@ -284,7 +225,7 @@ export const DEFAULT_PROVIDERS: AiProviders = {
         tools: false,
         canStreamText: false,
         canStreamTools: false,
-        creditConversionData: null,
+        
         //127k context length
       },
     },
@@ -306,14 +247,14 @@ export const DEFAULT_PROVIDERS: AiProviders = {
         tools: true,
         canStreamText: true,
         canStreamTools: true,
-        creditConversionData: null,
+        
       },
       'deepseek-reasoner': {
         vision: false,
         tools: false,
         canStreamText: false,
         canStreamTools: false,
-        creditConversionData: null,
+        
       },
     },
     embeddingModels: {},
@@ -337,56 +278,53 @@ export const DEFAULT_PROVIDERS: AiProviders = {
         tools: true,
         canStreamText: true,
         canStreamTools: true,
-        creditConversionData: null,
       },
       'grok-2': {
         vision: false,
         tools: true,
         canStreamText: true,
         canStreamTools: true,
-        creditConversionData: null,
       },
       'grok-2-latest': {
         vision: false,
         tools: true,
         canStreamText: true,
         canStreamTools: true,
-        creditConversionData: null,
       },
       'grok-beta': {
         vision: false,
         tools: true,
         canStreamText: true,
         canStreamTools: true,
-        creditConversionData: null,
+        
       },
       'grok-2-vision-1212': {
         vision: true,
         tools: true,
         canStreamText: true,
         canStreamTools: true,
-        creditConversionData: null,
+        
       },
       'grok-2-vision': {
         vision: true,
         tools: true,
         canStreamText: true,
         canStreamTools: true,
-        creditConversionData: null,
+        
       },
       'grok-2-vision-latest': {
         vision: true,
         tools: true,
         canStreamText: true,
         canStreamTools: true,
-        creditConversionData: null,
+        
       },
       'grok-vision-beta': {
         vision: true,
         tools: false,
         canStreamText: false,
         canStreamTools: false,
-        creditConversionData: null,
+        
       },
     },
     embeddingModels: {},

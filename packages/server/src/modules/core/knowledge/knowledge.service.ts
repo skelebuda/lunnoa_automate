@@ -11,7 +11,6 @@ import {
   AiProvider,
   AiProviderService,
 } from '../../global/ai-provider/ai-provider.service';
-import { CreditsService } from '../../global/credits/credits.service';
 import {
   PineconeMetadata,
   PineconeService,
@@ -32,7 +31,6 @@ export class KnowledgeService {
     private prisma: PrismaService,
     private pineconeService: PineconeService,
     private s3Manager: S3ManagerService,
-    private credits: CreditsService,
     private aiProviders: AiProviderService,
   ) {}
 
@@ -62,10 +60,6 @@ export class KnowledgeService {
     }
 
     this.#validateChunkSizeAndOverlap(data);
-
-    await this.#checkKnowledgeLimitForWorkspacePlan({
-      workspaceId,
-    });
 
     const newKnowledge = await this.prisma.knowledge.create({
       data: {
@@ -424,15 +418,6 @@ export class KnowledgeService {
       throw new NotFoundException('Knowledge notebook not found');
     }
 
-    const usageType = this.credits.getUsageTypeFromEmbeddingModel({
-      model: knowledge.embeddingModel as any,
-    });
-
-    await this.credits.checkIfWorkspaceHasEnoughCredits({
-      usageType,
-      workspaceId,
-    });
-
     const embeddingProviderClient =
       this.aiProviders.getAiEmbeddingProviderClient({
         aiProvider: knowledge.embeddingProvider as AiProvider,
@@ -444,27 +429,6 @@ export class KnowledgeService {
 
     const embeddingResponse = await embeddingProviderClient.doEmbed({
       values: [query],
-    });
-
-    const creditsUsed = this.credits.transformCostToCredits({
-      usageType,
-      data: {
-        numEmbeddings: 1,
-      },
-    });
-
-    await this.credits.updateWorkspaceCredits({
-      creditsUsed,
-      workspaceId,
-      projectId: knowledge.FK_projectId,
-      data: {
-        ref: {
-          knowledgeId,
-        },
-        details: {
-          reason: 'querying knowledge',
-        },
-      },
     });
 
     const queryResponse = await this.pineconeService.query({
@@ -548,22 +512,8 @@ export class KnowledgeService {
       chunkOverlap: data.chunkOverlap,
     });
 
-    const usageType = this.credits.getUsageTypeFromEmbeddingModel({
-      model: knowledge.embeddingModel as any,
-    });
 
-    const creditsRequired = this.credits.transformCostToCredits({
-      usageType,
-      data: {
-        numEmbeddings: chunks.length,
-      },
-    });
 
-    await this.credits.checkIfWorkspaceHasEnoughCredits({
-      usageType,
-      workspaceId,
-      overrideMinimumRequired: creditsRequired,
-    });
 
     if (chunks.length === 0) {
       throw new Error('No text found');
@@ -579,24 +529,6 @@ export class KnowledgeService {
 
       await Promise.all(
         chunks.map(async (chunk, index) => {
-          //We'll charge a credit for every 10 chunks
-          if (index % 10 === 0) {
-            await this.credits.updateWorkspaceCredits({
-              workspaceId,
-              creditsUsed: 1,
-              projectId: knowledge.project?.id,
-              data: {
-                ref: {
-                  knowledgeId,
-                },
-                details: {
-                  reason: 'uploading knowledge',
-                  chunks: chunks.length,
-                },
-              },
-            });
-          }
-
           return this.saveTextChunk({
             name: data.name,
             text: chunk,
@@ -627,21 +559,6 @@ export class KnowledgeService {
         embeddingModel: knowledge.embeddingModel,
         embeddingProvider: knowledge.embeddingProvider as AiProvider,
         requestedDimensionSize: knowledge.dimensions,
-      });
-
-      await this.credits.updateWorkspaceCredits({
-        creditsUsed: creditsRequired,
-        workspaceId,
-        projectId: knowledge.project?.id,
-        data: {
-          ref: {
-            knowledgeId,
-          },
-          details: {
-            reason: 'uploading knowledge',
-            chunks: 1,
-          },
-        },
       });
     }
 
@@ -1174,58 +1091,6 @@ export class KnowledgeService {
      * Return compiled text responses
      */
     return allTextResponses;
-  };
-
-  #checkKnowledgeLimitForWorkspacePlan = async ({
-    workspaceId,
-  }: {
-    workspaceId: string;
-  }) => {
-    /**
-     * free (Starter): 1 knowledge
-     * professional: No limit
-     * team: No limit
-     * business: No limit
-     */
-    if (!this.credits.isBillingEnabled()) {
-      return;
-    }
-
-    const workspace = await this.prisma.workspace.findUnique({
-      where: {
-        id: workspaceId,
-      },
-      select: {
-        _count: {
-          select: {
-            knowledge: true,
-          },
-        },
-        billing: {
-          select: {
-            planType: true,
-          },
-        },
-      },
-    });
-
-    if (!workspace) {
-      throw new NotFoundException(
-        'Workspace not found to check knowledge limit',
-      );
-    }
-
-    const numProjects: number = (workspace as any)._count.knowledge;
-
-    //TODO: If someone downgrades plan, do we delete knowledge? Do we tell them they need to delete knowledge to downgrade?
-    if (
-      (!workspace.billing || workspace.billing.planType === 'free') &&
-      numProjects >= 1
-    ) {
-      throw new ForbiddenException(
-        'You have reached the knowledge notebook limit for your plan. Please upgrade your plan to add more.',
-      );
-    }
   };
 
   #validateChunkSizeAndOverlap = (

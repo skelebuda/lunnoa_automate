@@ -69,7 +69,6 @@ export const extractWithAi = createAction({
     agentId,
     executionId,
     workflowId,
-    credits,
     aiProviders,
     prisma,
   }) => {
@@ -89,14 +88,6 @@ export const extractWithAi = createAction({
         aiProviders,
         prisma,
       });
-
-    if (!isUsingWorkspaceLlmConnection) {
-      await credits.checkIfWorkspaceHasLlmCredits({
-        workspaceId,
-        aiProvider: provider,
-        model,
-      });
-    }
 
     let fullInstructions =
       'Extract the following fields from the provided text in JSON format';
@@ -131,36 +122,6 @@ export const extractWithAi = createAction({
         ),
       }),
     });
-
-    if (!isUsingWorkspaceLlmConnection) {
-      const calculatedCreditsFromToken = credits.transformLlmTokensToCredits({
-        aiProvider: provider,
-        model,
-        data: {
-          inputTokens: usage.promptTokens,
-          outputTokens: usage.completionTokens,
-        },
-      });
-
-      await credits.updateWorkspaceCredits({
-        workspaceId,
-        creditsUsed: calculatedCreditsFromToken,
-        projectId,
-        data: {
-          ref: {
-            agentId,
-            executionId,
-            workflowId,
-          },
-          details: {
-            actionId: 'ai_action_extract-with-ai',
-            aiProvider: provider,
-            llmModel: model,
-            usage: usage,
-          },
-        },
-      });
-    }
 
     return {
       response: object,

@@ -3,7 +3,6 @@ import { ApiTags } from '@nestjs/swagger';
 import { Request, Response } from 'express';
 
 import { Public } from '../../../decorators/public.decorator';
-import { StripeService } from '../../commercial/stripe/stripe.service';
 
 import { WebhookService } from './webhook.service';
 
@@ -13,24 +12,8 @@ import { WebhookService } from './webhook.service';
 export class WebhookController {
   constructor(
     private readonly webhookService: WebhookService,
-    private readonly stripeService: StripeService,
   ) {}
 
-  /**
-   * This isn't used for workflows. The is the actual stripe webhook endpoint
-   * that our platform uses to receive stripe events.
-   */
-  @Post('stripe')
-  async stripeEvent(@Req() req: Request, @Res() res: Response) {
-    //1. Verify the signature and return the event
-    const stripeEvent = this.stripeService.verifySignatureAndReturnEvent(req);
-
-    //2. Return a 200 status code to stripe to avoid retries
-    res.status(200).send();
-
-    //3. Handle the stripe event
-    return await this.stripeService.handleStripeEvent(stripeEvent);
-  }
 
   /**
    * Used to trigger a workflow execution using an app integration webhook trigger

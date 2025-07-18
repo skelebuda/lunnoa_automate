@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 
-import { StripeService } from '../../commercial/stripe/stripe.service';
 import { ConnectionsService } from '../connections/connections.service';
 import { ExecutionsService } from '../executions/executions.service';
 import { KnowledgeService } from '../knowledge/knowledge.service';
@@ -15,7 +14,6 @@ import { WebhookService } from './webhook.service';
   controllers: [WebhookController],
   providers: [
     WebhookService,
-    StripeService,
     WorkflowAppsService,
     TasksService, //workflow apps
     ConnectionsService, //workflow apps

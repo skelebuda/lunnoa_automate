@@ -143,15 +143,6 @@ export class WorkspacesController {
     return this.workspaceService.delete({ workspaceId });
   }
 
-  @Post('/validate-workspace-beta-key')
-  @Roles(['MAINTAINER'])
-  validateWorkspaceBetaKey(@User() user: JwtUser, @Body() data: BetaKeyDto) {
-    return this.workspaceService.validateWorkspaceBetaKey({
-      workspaceId: user.workspaceId,
-      betaKey: data.betaKey,
-    });
-  }
-
   @Post('upload-temp-file-url')
   @Roles()
   async uploadTempFile(@User() user: JwtUser, @Body() data: UploadFileDto) {

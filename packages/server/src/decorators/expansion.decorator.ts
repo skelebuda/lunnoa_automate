@@ -18,7 +18,6 @@ import { WorkflowTemplateExpansionDto } from '../modules/core/workflow-templates
 import { WorkflowExpansionDto } from '../modules/core/workflows/dto/workflow-expansion.dto';
 import { WorkspaceUserExpansionDto } from '../modules/core/workspace-users/dto/workspace-user-expansion.dto';
 import { WorkspaceExpansionDto } from '../modules/core/workspaces/dto/workspace-expansion.dto';
-import { CreditExpansionDto } from '../modules/global/credits/dto/credit-expansion.dto';
 
 /**
  * Also make sure you add all your include type dtos to the expansionDtoMap below.
@@ -37,7 +36,6 @@ const expansionDtoMap = {
   variables: VariableExpansionDto,
   connections: ConnectionExpansionDto,
   knowledge: KnowledgeExpansionDto,
-  credits: CreditExpansionDto,
 };
 
 export const Expansion = createParamDecorator(

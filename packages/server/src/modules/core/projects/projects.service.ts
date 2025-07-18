@@ -5,7 +5,6 @@ import {
 } from '@nestjs/common';
 
 import { JwtUser } from '../../../types/jwt-user.type';
-import { CreditsService } from '../../global/credits/credits.service';
 import { PineconeService } from '../../global/pinecone/pinecone.service';
 import { PrismaService } from '../../global/prisma/prisma.service';
 import { S3ManagerService } from '../../global/s3/s3.service';
@@ -21,7 +20,6 @@ export class ProjectsService {
     private prisma: PrismaService,
     private pineconeService: PineconeService,
     private s3Manager: S3ManagerService,
-    private credits: CreditsService,
   ) {}
 
   async create({
@@ -35,9 +33,6 @@ export class ProjectsService {
     createdByWorkspaceUserId: string;
     expansion: ProjectExpansionDto;
   }) {
-    //Check project limit for workspace plan
-    await this.#checkProjectLimitForWorkspacePlan({ workspaceId });
-
     const newProject = await this.prisma.project.create({
       data: {
         ...data,
@@ -455,54 +450,4 @@ export class ProjectsService {
 
     return !!belongs;
   }
-
-  #checkProjectLimitForWorkspacePlan = async ({
-    workspaceId,
-  }: {
-    workspaceId: string;
-  }) => {
-    /**
-     * free (Starter): 1 project
-     * professional: No limit
-     * team: No limit
-     * business: No limit
-     */
-    if (!this.credits.isBillingEnabled()) {
-      return;
-    }
-
-    const workspace = await this.prisma.workspace.findUnique({
-      where: {
-        id: workspaceId,
-      },
-      select: {
-        _count: {
-          select: {
-            projects: true,
-          },
-        },
-        billing: {
-          select: {
-            planType: true,
-          },
-        },
-      },
-    });
-
-    if (!workspace) {
-      throw new NotFoundException('Workspace not found to check project limit');
-    }
-
-    const numProjects: number = (workspace as any)._count.projects;
-
-    //TODO: If someone downgrades plan, do we delete projects? Do we tell them they need to delete projects to downgrade?
-    if (
-      (!workspace.billing || workspace.billing.planType === 'free') &&
-      numProjects >= 1
-    ) {
-      throw new ForbiddenException(
-        'You have reached the project limit for your plan. Please upgrade your plan to add more projects.',
-      );
-    }
-  };
 }

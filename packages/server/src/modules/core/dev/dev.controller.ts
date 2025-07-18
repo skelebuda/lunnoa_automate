@@ -14,7 +14,6 @@ import { User } from '../../../decorators/user.decorator';
 import { JwtUser } from '../../../types/jwt-user.type';
 
 import { DevService } from './dev.service';
-import { DevUpdateWorkspaceCreditDto } from './dto/dev-update-workspace-credit.dto';
 
 /**
  * Used for dev purposes only.
@@ -55,21 +54,6 @@ export class DevController {
       }
 
       return this.devService.getWorkspacesByEmail({ email });
-    }
-  }
-
-  @Post('update-workspace-credits')
-  @Roles()
-  updateWorkspaceCredits(
-    @User() user: JwtUser,
-    @Body() body: DevUpdateWorkspaceCreditDto,
-  ) {
-    if (!user.email.endsWith(ServerConfig.DEV_EMAIL_DOMAIN)) {
-      throw new ForbiddenException(
-        'You are not allowed to perform this action',
-      );
-    } else {
-      return this.devService.updateWorkspaceCredits(body);
     }
   }
 }

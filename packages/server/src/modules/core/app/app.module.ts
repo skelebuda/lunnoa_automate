@@ -17,10 +17,8 @@ import { RolesGuard } from '../../../guards/roles.guard';
 import { JsonBodyMiddleware } from '../../../middleware/json-body.middleware';
 import { JsonUrlEncodedMiddleware } from '../../../middleware/json-url-encoded.middleware';
 import { RawBodyMiddleware } from '../../../middleware/raw-body.middleware';
-import { BillingModule } from '../../commercial/billing/billing.module';
 import { WorkspaceInvitationsModule } from '../../commercial/workspace-invitations/workspace-invitations.module';
 import { AiProviderModule } from '../../global/ai-provider/ai-provider.module';
-import { CreditsModule } from '../../global/credits/credits.module';
 import { CryptoModule } from '../../global/crypto/crypto.module';
 import { FileHandlerModule } from '../../global/file/file-handler.module';
 import { HttpModule } from '../../global/http/http.module';
@@ -102,7 +100,6 @@ const rawBodyParsingRoutes: Array<RouteInfo> = [
     ScheduleModule.forRoot(),
     AgentsModule,
     TasksModule,
-    BillingModule,
     PineconeModule,
     KnowledgeModule,
     WorkflowTemplatesModule,
@@ -110,7 +107,6 @@ const rawBodyParsingRoutes: Array<RouteInfo> = [
     PrismaModule,
     MailModule,
     CryptoModule,
-    CreditsModule,
     AiProviderModule,
     DevModule,
     WorkspaceInvitationsModule,

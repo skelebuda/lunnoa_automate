@@ -51,12 +51,6 @@ export class AiProviderService {
                     //Ollama does not support streaming tools.
                     //Even with the ollama-ai-provider I couldn't really get it to work.
                     canStreamTools: false,
-                    creditConversionData: {
-                      //This doesn't really matter, since it's only on local host at the moment.
-                      //And credits are not being used locally for the community.
-                      input: 4000,
-                      output: 1000,
-                    },
                   };
                 });
               });
@@ -127,7 +121,7 @@ export class AiProviderService {
 
       apiKey = llmConnection.apiKey;
     } else {
-      //We'll use our own model and api key if they don't have it. (We'll use their credits)
+      //We'll use our own model and api key if they don't have it.
       apiKey = process.env[this.providers[aiProvider].platformCredentialEnvVar];
       const platformCredentialsEnabled =
         this.providers[aiProvider].platformCredentialsEnabled;
@@ -238,7 +232,7 @@ export class AiProviderService {
 
       apiKey = llmConnection.apiKey;
     } else {
-      //We'll use our own model and api key if they don't have it. (We'll use their credits)
+      //We'll use our own model and api key if they don't have it.
       switch (aiProvider) {
         case 'openai':
           apiKey = ServerConfig.OPENAI_API_KEY;
@@ -525,10 +519,6 @@ export type AiLanguageModelData = {
   canStreamTools: boolean;
   vision: boolean;
   tools: boolean;
-  creditConversionData: {
-    input: number;
-    output: number;
-  } | null;
 
   /**
    * Some models don't support temperature.

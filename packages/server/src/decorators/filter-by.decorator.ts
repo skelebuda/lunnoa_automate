@@ -15,7 +15,6 @@ import { VariableFilterByDto } from '../modules/core/variables/dto/variable-filt
 import { WorkflowTemplateFilterByDto } from '../modules/core/workflow-templates/dto/workflow-template-filter-by.dto';
 import { WorkflowFilterByDto } from '../modules/core/workflows/dto/workflow-filter-by.dto';
 import { WorkspaceUserFilterByDto } from '../modules/core/workspace-users/dto/workspace-user-filter-by.dto';
-import { CreditFilterByDto } from '../modules/global/credits/dto/credit-filter-by.dto';
 
 /**
  * Also make sure you add all your filer by dtos to the filterByDtoMap below.
@@ -31,7 +30,6 @@ const filterByDtoMap = {
   connections: ConnectionFilterByDto,
   variables: VariableFilterByDto,
   knowledge: KnowledgeFilterByDto,
-  credits: CreditFilterByDto,
 };
 
 export const FilterBy = createParamDecorator(

@@ -10,7 +10,6 @@ import { Execution, Workflow } from '@prisma/client';
 
 import { Action } from '../../../apps/lib/action';
 import { Trigger, TriggerResponse } from '../../../apps/lib/trigger';
-import { CreditsService } from '../../global/credits/credits.service';
 import { PrismaService } from '../../global/prisma/prisma.service';
 import { ExecutionStatus } from '../executions/enums/execution-status.enum';
 import { ExecutionsService } from '../executions/executions.service';
@@ -22,7 +21,6 @@ export class WorkflowRunnerService {
     private prisma: PrismaService,
     private workflowAppService: WorkflowAppsService,
     private executionService: ExecutionsService,
-    private credits: CreditsService,
   ) {}
 
   private queues: Map<string, Promise<void>> = new Map();
@@ -87,28 +85,6 @@ export class WorkflowRunnerService {
         });
 
         return;
-      }
-
-      if (isInitialRun) {
-        const credits = this.credits.transformCostToCredits({
-          usageType: 'workflow-execution',
-          data: {
-            executionId,
-          },
-        });
-
-        await this.credits.updateWorkspaceCredits({
-          creditsUsed: credits,
-          workspaceId: execution.workflow.project.workspace.id,
-          projectId: execution.workflow.project.id,
-          data: {
-            ref: {
-              executionId,
-              workflowId: execution.workflow.id,
-            },
-            details: {},
-          },
-        });
       }
 
       const { nodes: nodesToRun, edges: edgesToAddToExecution } =

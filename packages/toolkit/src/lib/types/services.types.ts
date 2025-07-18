@@ -69,35 +69,6 @@ export type InjectedServices = {
     }) => LanguageModelV1;
     decryptCredentials: (args: { data: ConnectionData }) => void;
   };
-  credits: {
-    checkIfWorkspaceHasLlmCredits: (args: {
-      workspaceId: string;
-      aiProvider: any; //TODO
-      model: string;
-      throwIfFalse?: boolean;
-    }) => Promise<boolean>;
-    transformLlmTokensToCredits: (args: {
-      aiProvider: any; //TODO;
-      model: string;
-      data: {
-        inputTokens: number;
-        outputTokens: number;
-      };
-    }) => number;
-    updateWorkspaceCredits: (
-      args: UpdateWorkspaceCreditsData,
-    ) => Promise<CreditUsageResponse>;
-    checkIfWorkspaceHasEnoughCredits: (args: {
-      workspaceId: string;
-      usageType: UsageType;
-      throwIfFalse?: boolean;
-      overrideMinimumRequired?: number;
-    }) => Promise<boolean>;
-    transformCostToCredits: (args: {
-      data: any; //TODO
-      usageType: UsageType;
-    }) => number;
-  };
   task: {
     create: (args: {
       data: any & {

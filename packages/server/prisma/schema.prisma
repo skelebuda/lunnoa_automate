@@ -118,8 +118,6 @@ model Workspace {
 
   preferences    WorkspacePreferences?
   executionQueue WorkspaceExecutionQueue?
-  billing        WorkspaceBilling?
-  usage          WorkspaceUsage?
 
   workspaceUsers WorkspaceUser[]
   activeUsers    User[] //Users that currently have this workspace as their active workspace
@@ -134,8 +132,6 @@ model Workspace {
 
   FK_createdByWorkspaceUserId String?
   createdByWorkspaceUser      WorkspaceUser? @relation(fields: [FK_createdByWorkspaceUserId], references: [id], name: "CreatedByWorkspaceUser", onDelete: SetNull)
-
-  credits Credit[]
 }
 
 model WorkspacePreferences {
@@ -150,53 +146,7 @@ model WorkspacePreferences {
   workspace      Workspace @relation(fields: [FK_workspaceId], references: [id], onDelete: Cascade)
 }
 
-enum BillingPlanType {
-  free
-  team
-  professional
-  business
-  custom
-}
 
-
-enum BillingStatus {
-  active
-  canceled
-  unpaid
-}
-
-model WorkspaceBilling {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  stripeCustomerId       String?
-  stripeSubscriptionId   String?
-  stripePriceId          String?
-  stripeCurrentPeriodEnd DateTime?
-
-  planType BillingPlanType @default(free)
-  status   BillingStatus   @default(active)
-
-  //WORKSPACE USER RELATION
-  FK_workspaceId String    @unique
-  workspace      Workspace @relation(fields: [FK_workspaceId], references: [id], onDelete: Cascade)
-}
-
-model WorkspaceUsage {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  //These are tokens, but also are used for workflows usage
-  purchasedCredits Int       @default(0) //Purchased
-  allottedCredits  Int       @default(0) //Monthly Allotment
-  refreshedAt      DateTime?
-
-  //WORKSPACE USER RELATION
-  FK_workspaceId String    @unique
-  workspace      Workspace @relation(fields: [FK_workspaceId], references: [id], onDelete: Cascade)
-}
 
 //PROJECT
 model Project {
@@ -228,9 +178,6 @@ model Project {
   knowledge                   Knowledge[]
   connections                 Connection[]
   projectInvitations          ProjectInvitation[]
-
-  //CREDITS
-  credits Credit[]
 }
 
 model ProjectInvitation {
@@ -346,9 +293,6 @@ model Workflow {
   //EXECUTION RELATION 
   executions Execution[]
 
-  //CREDIT RELATION
-  credits Credit[]
-
   //AGENT RELATION
   agentWorkflows AgentWorkflow[]
   agentTriggers  AgentTrigger[]
@@ -412,9 +356,6 @@ model Agent {
   //PROJECT RELATION
   FK_projectId String
   project      Project @relation(fields: [FK_projectId], references: [id], onDelete: Cascade)
-
-  //CREDIT RELATION
-  credits Credit[]
 }
 
 model AgentTrigger {
@@ -637,9 +578,6 @@ model Execution {
   workflow      Workflow @relation(fields: [FK_workflowId], references: [id], onDelete: Cascade)
 
   workspaceExecutionQueueItem WorkspaceExecutionQueueItem?
-
-  //CREDITS
-  credits Credit[]
 }
 
 enum WorkspaceExecutionQueueStatus {
@@ -675,38 +613,6 @@ model WorkspaceExecutionQueueItem {
   execution      Execution @relation(fields: [FK_executionId], references: [id], onDelete: Cascade)
 }
 
-//CREDITS
-model Credit {
-  id        String    @id @default(uuid())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
-
-  creditsUsed Int
-
-  details Json?
-
-  FK_workspaceId String?
-  workspace      Workspace? @relation(fields: [FK_workspaceId], references: [id], onDelete: Cascade)
-
-  FK_projectId String?
-  project      Project? @relation(fields: [FK_projectId], references: [id], onDelete: SetNull)
-
-  FK_workflowId String?
-  workflow      Workflow? @relation(fields: [FK_workflowId], references: [id], onDelete: SetNull)
-
-  FK_agentId String?
-  agent      Agent?  @relation(fields: [FK_agentId], references: [id], onDelete: SetNull)
-
-  FK_taskId String?
-  task      Task?   @relation(fields: [FK_taskId], references: [id], onDelete: SetNull)
-
-  FK_executionId String?
-  execution      Execution? @relation(fields: [FK_executionId], references: [id], onDelete: SetNull)
-
-  FK_knowledgeId String?
-  knowledge      Knowledge? @relation(fields: [FK_knowledgeId], references: [id], onDelete: SetNull)
-}
-
 //TASKS
 model Task {
   id        String   @id @default(uuid())
@@ -722,9 +628,6 @@ model Task {
   //WORKFLOW RELATION
   FK_agentId String
   agent      Agent  @relation(fields: [FK_agentId], references: [id], onDelete: Cascade)
-
-  //CREDITS
-  credits Credit[]
 }
 
 enum TaskMessageRole {
@@ -861,8 +764,6 @@ model Knowledge {
 
   //AGENT RELATION
   agentKnowledge AgentKnowledge[]
-
-  credits Credit[]
 }
 
 model KnowledgeVectorRef {

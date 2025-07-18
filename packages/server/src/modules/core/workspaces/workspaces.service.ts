@@ -7,7 +7,6 @@ import {
 import { WorkspaceUserRole } from '@prisma/client';
 import { v4 } from 'uuid';
 
-import { CreditsService } from '../../global/credits/credits.service';
 import { PineconeService } from '../../global/pinecone/pinecone.service';
 import { PrismaService } from '../../global/prisma/prisma.service';
 import { S3ManagerService } from '../../global/s3/s3.service';
@@ -26,7 +25,6 @@ export class WorkspacesService {
     private users: UsersService,
     private s3Manager: S3ManagerService,
     private pineconeService: PineconeService,
-    private credits: CreditsService,
   ) {}
 
   async create({
@@ -46,16 +44,6 @@ export class WorkspacesService {
         ...data,
         preferences: {
           create: {},
-        },
-        usage: {
-          create: {
-            //Not allotting credits unless this is the default created workspace.
-            //Or else someone could created unlimited workspaces.
-            allottedCredits: defaultCreatedWorkspace
-              ? this.credits.getMonthlyProatedCreditAllotment({ plan: 'free' })
-              : 0,
-            refreshedAt: new Date().toISOString(),
-          },
         },
       },
       select: {
@@ -199,18 +187,6 @@ export class WorkspacesService {
         inBeta: true,
         logoUrl: true,
         defaultCreatedWorkspace: true,
-        billing: {
-          select: {
-            status: true,
-            planType: true,
-          },
-        },
-        usage: {
-          select: {
-            allottedCredits: true,
-            purchasedCredits: true,
-          },
-        },
         createdByWorkspaceUser: {
           select: {
             id: true,
@@ -424,7 +400,6 @@ export class WorkspacesService {
     roles?: WorkspaceUserRole[];
   }) {
     //Check user limit for workspace plan
-    await this.#checkUserLimitForWorkspacePlan({ workspaceId });
 
     /**
      * Check if workspace user already exists and is not deleted
@@ -634,86 +609,6 @@ export class WorkspacesService {
       });
     }
   }
-
-  #checkUserLimitForWorkspacePlan = async ({
-    workspaceId,
-  }: {
-    workspaceId: string;
-  }) => {
-    /**
-     * free (Starter): 1 user
-     * professional: 1 user
-     * team: No limit
-     * business: No limit
-     */
-
-    if (!this.credits.isBillingEnabled()) {
-      return;
-    }
-
-    const workspace = await this.prisma.workspace.findUnique({
-      where: {
-        id: workspaceId,
-      },
-      select: {
-        _count: {
-          select: {
-            workspaceUsers: true,
-          },
-        },
-        billing: {
-          select: {
-            planType: true,
-          },
-        },
-      },
-    });
-
-    if (!workspace) {
-      throw new NotFoundException(
-        'Workspace not found to determine user limit.',
-      );
-    }
-
-    const numUsers: number = (workspace as any)._count.workspaceUsers;
-
-    //TODO: If someone downgrades plan, do we delete projects? Do we tell them they need to delete projects to downgrade?
-    if (
-      (!workspace.billing ||
-        workspace.billing.planType === 'free' ||
-        workspace.billing.planType === 'professional') &&
-      numUsers >= 1
-    ) {
-      throw new ForbiddenException(
-        'This workspace has reached the maximum number of users allowed for this plan.',
-      );
-    }
-  };
-
-  validateWorkspaceBetaKey = async ({
-    workspaceId,
-    betaKey,
-  }: {
-    workspaceId: string;
-    betaKey: string;
-  }) => {
-    //It's not meant to be secure, just a quick way to prevent easy access to the public.
-    //We're launching slowly and want people to request access.
-    if (betaKey !== '1234') {
-      throw new ForbiddenException('Invalid beta key');
-    }
-
-    await this.prisma.workspace.update({
-      where: {
-        id: workspaceId,
-      },
-      data: {
-        inBeta: true,
-      },
-    });
-
-    return true;
-  };
 
   async getPresignedPostUrlForTempFile({
     fileName,

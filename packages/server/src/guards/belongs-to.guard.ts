@@ -23,7 +23,6 @@ import { WorkflowAppsService } from '../modules/core/workflow-apps/workflow-apps
 import { WorkflowTemplatesService } from '../modules/core/workflow-templates/workflow-templates.service';
 import { WorkflowsService } from '../modules/core/workflows/workflows.service';
 import { WorkspaceUsersService } from '../modules/core/workspace-users/workspace-users.service';
-import { CreditsService } from '../modules/global/credits/credits.service';
 import { NotificationsService } from '../modules/global/notifications/notifications.service';
 import { JwtUser } from '../types/jwt-user.type';
 
@@ -50,7 +49,6 @@ export class BelongsToGuard implements CanActivate {
     private projectInvitations: ProjectInvitationsService,
     private executions: ExecutionsService,
     private knowledge: KnowledgeService,
-    private credits: CreditsService,
   ) {}
 
   async canActivate(context: ExecutionContext) {
@@ -88,7 +86,6 @@ export class BelongsToGuard implements CanActivate {
             connections: this.connections,
             executions: this.executions,
             knowledge: this.knowledge,
-            credits: this.credits,
           },
         )
       ) {
@@ -116,7 +113,6 @@ export class BelongsToGuard implements CanActivate {
             connections: this.connections,
             executions: this.executions,
             knowledge: this.knowledge,
-            credits: this.credits,
           },
         )
       ) {
@@ -141,7 +137,6 @@ export class BelongsToGuard implements CanActivate {
             connections: this.connections,
             executions: this.executions,
             knowledge: this.knowledge,
-            credits: this.credits,
           },
         )) ||
         (await checkOwnerIsWorkspace(
@@ -164,7 +159,6 @@ export class BelongsToGuard implements CanActivate {
             connections: this.connections,
             executions: this.executions,
             knowledge: this.knowledge,
-            credits: this.credits,
           },
         ))
       ) {
@@ -195,7 +189,6 @@ const checkOwnerIsMe = async (
     connections: ConnectionsService;
     executions: ExecutionsService;
     knowledge: KnowledgeService;
-    credits: CreditsService;
   },
 ) => {
   switch (key) {
@@ -284,11 +277,6 @@ const checkOwnerIsMe = async (
         executionId: param[key],
         workspaceUserId: user.workspaceUserId,
       });
-    case 'creditId':
-      return await services.credits.checkCreditBelongsToWorkspaceUser({
-        creditId: param[key],
-        workspaceUserId: user.workspaceUserId,
-      });
     default:
       throw new InternalServerErrorException(
         'BelongsTo decorator key is not supported: ' + key,
@@ -316,7 +304,6 @@ const checkOwnerIsWorkspace = async (
     projectInvitations: ProjectInvitationsService;
     executions: ExecutionsService;
     knowledge: KnowledgeService;
-    credits: CreditsService;
   },
 ) => {
   if (!matchRoles(roles, user.roles)) {
@@ -404,11 +391,6 @@ const checkOwnerIsWorkspace = async (
     case 'executionId':
       return await services.executions.checkExecutionBelongsToWorkspace({
         executionId: param[key],
-        workspaceId: user.workspaceId,
-      });
-    case 'creditId':
-      return await services.credits.checkCreditBelongsToWorkspace({
-        creditId: param[key],
         workspaceId: user.workspaceId,
       });
     default:

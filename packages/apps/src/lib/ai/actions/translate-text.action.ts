@@ -54,7 +54,6 @@ export const translateText = createAction({
     workflowId,
     aiProviders,
     prisma,
-    credits,
   }) => {
     const { model, textToTranslate, language, provider } = configValue;
 
@@ -72,14 +71,6 @@ export const translateText = createAction({
         prisma,
       });
 
-    if (!isUsingWorkspaceLlmConnection) {
-      await credits.checkIfWorkspaceHasLlmCredits({
-        workspaceId,
-        aiProvider: provider,
-        model,
-      });
-    }
-
     const { text, usage } = await generateText({
       model: aiProviderClient,
       messages: [
@@ -93,37 +84,7 @@ export const translateText = createAction({
         },
       ],
     });
-
-    if (!isUsingWorkspaceLlmConnection) {
-      const calculatedCreditsFromToken = credits.transformLlmTokensToCredits({
-        aiProvider: provider,
-        model,
-        data: {
-          inputTokens: usage.promptTokens,
-          outputTokens: usage.completionTokens,
-        },
-      });
-
-      await credits.updateWorkspaceCredits({
-        workspaceId,
-        creditsUsed: calculatedCreditsFromToken,
-        projectId,
-        data: {
-          ref: {
-            agentId,
-            executionId,
-            workflowId,
-          },
-          details: {
-            actionId: 'ai_action_translate-text',
-            aiProvider: provider,
-            llmModel: model,
-            usage: usage,
-          },
-        },
-      });
-    }
-
+    
     return {
       response: text,
       usage: usage,

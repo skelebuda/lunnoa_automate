@@ -17,7 +17,6 @@ import { VariableIncludeTypeDto } from '../modules/core/variables/dto/variable-i
 import { WorkflowTemplateIncludeTypeDto } from '../modules/core/workflow-templates/dto/workflow-template-include-type.dto';
 import { WorkflowIncludeTypeDto } from '../modules/core/workflows/dto/workflow-include-type.dto';
 import { WorkspaceUserIncludeTypeDto } from '../modules/core/workspace-users/dto/workspace-user-include-type.dto';
-import { CreditIncludeTypeDto } from '../modules/global/credits/dto/credit-include-type.dto';
 
 /**
  * Also make sure you add all your include type dtos to the includeTypeDtoMap below.
@@ -35,7 +34,6 @@ const includeTypeDtoMap = {
   variables: VariableIncludeTypeDto,
   connections: ConnectionIncludeTypeDto,
   knowledge: KnowledgeIncludeTypeDto,
-  credits: CreditIncludeTypeDto,
 };
 
 export const IncludeType = createParamDecorator(

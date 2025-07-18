@@ -29,7 +29,7 @@ export const extractWebsiteContent = createAction({
     createMarkdownField({
       id: 'markdown2',
       markdown:
-        'Note that this action uses credits per run. The amount depends on the duration of the process.',
+        'API Costs can be high. The amount depends on the duration of the process.',
     }),
   ],
 
@@ -44,7 +44,6 @@ export const extractWebsiteContent = createAction({
     agentId,
     executionId,
     workflowId,
-    credits,
     http,
   }) => {
     const { url } = configValue;
@@ -52,11 +51,6 @@ export const extractWebsiteContent = createAction({
     if (!process.env.APIFY_EXTRACT_DYNAMIC_CONTENT_TASK_ID || !process.env.APIFY_API_KEY) {
       throw new Error('Apify environment variables are not configured.');
     }
-
-    await credits.checkIfWorkspaceHasEnoughCredits({
-      workspaceId,
-      usageType: 'extract-dynamic-website-content',
-    });
 
     const taskId = process.env.APIFY_EXTRACT_DYNAMIC_CONTENT_TASK_ID.replace('/', '~');
     const taskUrl = `https://api.apify.com/v2/actor-tasks/${taskId}/runs?token=${process.env.APIFY_API_KEY}&timeout=60&waitForFinish=60`;
@@ -96,33 +90,9 @@ export const extractWebsiteContent = createAction({
     const firstItem = items[0];
     const text = firstItem.text ?? '';
 
-    const calculatedCreditsFromToken = credits.transformCostToCredits({
-      usageType: 'extract-dynamic-website-content',
-      data: {
-        cost: runSyncResponse.data.data.usageTotalUsd,
-      },
-    });
-
-    const creditUsage = await credits.updateWorkspaceCredits({
-      workspaceId,
-      creditsUsed: calculatedCreditsFromToken,
-      projectId,
-      data: {
-        ref: {
-          agentId,
-          executionId,
-          workflowId,
-        },
-        details: {
-          actionId: 'web_action_extract-website-content',
-        },
-      },
-    });
-
     return {
       url: firstItem.url,
       text,
-      creditUsage,
     };
   },
 

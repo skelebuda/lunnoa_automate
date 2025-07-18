@@ -18,7 +18,6 @@ import {
 } from '../../../apps/lib/connection';
 import { Trigger } from '../../../apps/lib/trigger';
 import { AiProviderService } from '../../global/ai-provider/ai-provider.service';
-import { CreditsService } from '../../global/credits/credits.service';
 import { FileHandlerService } from '../../global/file/file-handler.service';
 import { HttpService } from '../../global/http/http.service';
 import { NotificationsService } from '../../global/notifications/notifications.service';
@@ -46,7 +45,6 @@ export class WorkflowAppsService {
     private readonly http: HttpService,
     private jwt: JwtService,
     private eventEmitter: EventEmitter2,
-    private credits: CreditsService,
     private aiProviders: AiProviderService,
   ) {
     this.apps = {} as Record<string, App>;
@@ -74,7 +72,6 @@ export class WorkflowAppsService {
         jwt: this.jwt,
         http: this.http,
         eventEmitter: this.eventEmitter,
-        credits: this.credits,
         aiProviders: this.aiProviders,
       });
     });

@@ -6,7 +6,7 @@ import {
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
 import { JwtUser } from '../../../types/jwt-user.type';
-import { CreditsService } from '../../global/credits/credits.service';
+
 import { PrismaService } from '../../global/prisma/prisma.service';
 import {
   ExecutionNodeForRunner,
@@ -25,7 +25,6 @@ export class ExecutionsService {
   constructor(
     private prisma: PrismaService,
     private eventEmitter: EventEmitter2,
-    private credits: CreditsService,
   ) {}
 
   async manuallyExecuteWorkflow({
@@ -119,11 +118,6 @@ export class ExecutionsService {
     if (!workspaceId) {
       throw new NotFoundException('Workspace not found to create execution');
     }
-
-    await this.credits.checkIfWorkspaceHasEnoughCredits({
-      usageType: 'workflow-execution',
-      workspaceId: workspaceId,
-    });
 
     //Find the highest execution number for the workflow, and then add 1
     const latestExecution = await this.prisma.execution.findFirst({
