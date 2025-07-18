@@ -1,3 +1,10 @@
+# [1.231.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.230.0...v1.231.0) (2025-07-18)
+
+
+### Features
+
+* deleted legacy code ([b094509](https://github.com/skelebuda/lunnoa_automate/commit/b094509668b582690d9b46d8185d5bfae6cbf2f8))
+
 # [1.230.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.229.0...v1.230.0) (2025-07-17)
 
 
