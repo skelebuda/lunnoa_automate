@@ -8,8 +8,10 @@ WORKDIR /app
 # can quickly use the app locally. If they are actually deploying
 # to a server, they need to build the image themselves with the
 # correct client url and server url.
-ENV VITE_CLIENT_URL=http://localhost:5173
-ENV VITE_SERVER_URL=http://localhost:9094
+ARG VITE_CLIENT_URL=http://localhost:5173
+ARG VITE_SERVER_URL=http://localhost:9094
+ENV VITE_CLIENT_URL=$VITE_CLIENT_URL
+ENV VITE_SERVER_URL=$VITE_SERVER_URL
 
 # Copy workspace configuration and root config files
 COPY package.json pnpm-lock.yaml ./

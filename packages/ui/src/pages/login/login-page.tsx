@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { api } from '../../api/api-library';
 import { GoogleSignIn } from '../../components/google-sign-in';
+import { AzureSignIn } from '../../components/azure-sign-in';
 import { Button, buttonVariants } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
@@ -123,6 +124,7 @@ export default function LoginPage() {
           </div>
           <div className="grid gap-4">
             <GoogleSignIn />
+            <AzureSignIn />
             <Button
               variant="ghost"
               type="button"
