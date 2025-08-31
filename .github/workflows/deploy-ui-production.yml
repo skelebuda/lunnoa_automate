@@ -1,4 +1,4 @@
-name: Build Docker Image & Deploy UI to ECS
+name: Build Docker Image & Deploy to Vercel
 
 on:
   workflow_run:
@@ -45,7 +45,7 @@ jobs:
             pnpm install --frozen-lockfile
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-  
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -66,33 +66,27 @@ jobs:
           docker push ${{ env.UI_REGISTRY }}/${{ env.UI_IMAGE_NAME }}:$VERSION
           docker push ${{ env.UI_REGISTRY }}/${{ env.UI_IMAGE_NAME }}:latest
 
-  deploy-to-ecs:
-    name: Deploy UI to ECS
+  deploy-to-vercel:
+    name: Deploy to Vercel
     needs: build-and-push
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Get Version
+        id: get_version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-      - name: Render UI task definition
-        id: render-task
-        uses: aws-actions/amazon-ecs-render-task-definition@v1
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v20
+        env:
+          VERSION: ${{ env.VERSION }}
         with:
-          task-definition: .aws/ui-task-definition.json
-          container-name: ${{ secrets.UI_CONTAINER_NAME }}
-          image: ghcr.io/${{ github.repository }}/ui:${{ github.ref_name }}
-
-      - name: Deploy to Amazon ECS
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
-        with:
-          task-definition: ${{ steps.render-task.outputs.task-definition }}
-          service: ${{ secrets.ECS_SERVICE_UI }}
-          cluster: ${{ secrets.ECS_CLUSTER }}
-          wait-for-service-stability: true
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          zeit-token: ${{ secrets.VERCEL_TOKEN }} # Legacy token for amondnet/vercel-action
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod --build-env VERSION=${{ env.VERSION }}'
