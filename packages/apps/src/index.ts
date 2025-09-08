@@ -26,6 +26,7 @@ import { googleDrive } from './lib/google-drive/google-drive.app';
 import { googleForms } from './lib/google-forms/google-forms.app';
 import { googleSheets } from './lib/google-sheets/google-sheets.app';
 import { googleSlides } from './lib/google-slides/google-slides.app';
+import { guidepoint } from './lib/guidepoint/guidepoint.app';
 import { hubspot } from './lib/hubspot/hubspot.app';
 import { json } from './lib/json/json.app';
 import { knowledge } from './lib/knowledge/knowledge.app';
@@ -85,6 +86,7 @@ const apps: Record<string, ReturnType<typeof createApp>> = {
   [googleForms.id]: googleForms,
   [googleSheets.id]: googleSheets,
   [googleSlides.id]: googleSlides,
+  [guidepoint.id]: guidepoint,
   [hubspot.id]: hubspot,
   [json.id]: json,
   [knowledge.id]: knowledge,
