@@ -1,3 +1,12 @@
+# [1.232.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.231.0...v1.232.0) (2025-08-31)
+
+
+### Features
+
+*  UI moving to AWS ([366bbf2](https://github.com/skelebuda/lunnoa_automate/commit/366bbf22f75f63a7933abebb4cf8142cb0f4dd41))
+* new k8s deployment ([a27fc84](https://github.com/skelebuda/lunnoa_automate/commit/a27fc840581b1674b11a203b84192ad47922dcc0))
+* old deployment for testing ([cde70bf](https://github.com/skelebuda/lunnoa_automate/commit/cde70bfbdffbdcf8865d350497678d39f599d776))
+
 # [1.231.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.230.0...v1.231.0) (2025-07-18)
 
 
