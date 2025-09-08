@@ -1,3 +1,11 @@
+# [1.233.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.232.0...v1.233.0) (2025-09-08)
+
+
+### Features
+
+* guidepoint import ([e072e48](https://github.com/skelebuda/lunnoa_automate/commit/e072e4823b30bccf0a2a5a11203278d43e7dbc8c))
+* new guidepoint implementation ([8d61750](https://github.com/skelebuda/lunnoa_automate/commit/8d617504b2bd8ea1cda61726833c0ea9e7637785))
+
 # [1.232.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.231.0...v1.232.0) (2025-08-31)
 
 
