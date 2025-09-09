@@ -1,3 +1,10 @@
+# [1.237.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.236.0...v1.237.0) (2025-09-09)
+
+
+### Features
+
+* constructor fix for gcp storage ([abc362a](https://github.com/skelebuda/lunnoa_automate/commit/abc362a630f84d9918b6d1361008501bf7fcb1d9))
+
 # [1.236.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.235.0...v1.236.0) (2025-09-09)
 
 
