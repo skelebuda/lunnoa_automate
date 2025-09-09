@@ -1,3 +1,10 @@
+# [1.236.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.235.0...v1.236.0) (2025-09-09)
+
+
+### Features
+
+* knowledge service implementation of GCP storage ([c6e08a8](https://github.com/skelebuda/lunnoa_automate/commit/c6e08a87ead1efd692a285dbd88e671f4d53fe64))
+
 # [1.235.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.234.0...v1.235.0) (2025-09-09)
 
 
