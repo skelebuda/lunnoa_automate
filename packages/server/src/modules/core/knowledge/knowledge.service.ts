@@ -17,8 +17,9 @@ import {
 } from '../../global/pinecone/pinecone.service';
 import { PrismaService } from '../../global/prisma/prisma.service';
 //Dependend on Cloud Provider the correct service is imported
-import { S3ManagerService } from '../../global/s3/s3.service';
+
 import { GCPStorageService } from '../../global/gcp_storage/gcp_storage.service';
+import { S3ManagerService } from '../../global/s3/s3.service';
 
 import { CreateKnowledgeDto } from './dto/create-knowledge.dto';
 import { KnowledgeExpansionDto } from './dto/knowledge-expansion.dto';
@@ -27,12 +28,34 @@ import { KnowledgeIncludeTypeDto } from './dto/knowledge-include-type.dto';
 import { SaveUploadedTextToKnowledgeDto } from './dto/save-uploaded-text-to-knowledge.dto';
 import { UpdateKnowledgeDto } from './dto/update-knowledge.dto';
 
+//Dependend on Cloud Provider the correct service is imported
+let storageService: any[] = [];
+
+if (process.env.GCS_BUCKET_ID && process.env.GCS_PROJECT_ID) {
+  storageService = [GCPStorageService];
+} else if (
+  process.env.S3_BUCKET_ID &&
+  process.env.S3_ACCESS_KEY_ID &&
+  process.env.S3_SECRET_ACCESS_KEY
+) {
+  storageService = [S3ManagerService];
+} else if (
+  process.env.AZURE_STORAGE_CONTAINER &&
+  process.env.AZURE_STORAGE_CONNECTION_STRING
+) {
+  //storageModules = [AzureStorageManagerModule]; // planned Azure support
+} else {
+  throw new Error(
+    '❌ No storage provider configured. Please set either GCS, S3, or Azure storage variables.'
+  );
+}
+
 @Injectable()
 export class KnowledgeService {
   constructor(
     private prisma: PrismaService,
     private pineconeService: PineconeService,
-    private s3Manager: S3ManagerService,
+    private storageService: GCPStorageService | S3ManagerService,
     private aiProviders: AiProviderService,
   ) {}
 
@@ -327,7 +350,7 @@ export class KnowledgeService {
       throwNotFoundException: true,
     });
 
-    await this.s3Manager.deletePath(
+    await this.storageService.deletePath(
       `workspaces/${knowledgeToDelete.workspace.id}/knowledge/${knowledgeId}`,
     );
 
@@ -361,7 +384,7 @@ export class KnowledgeService {
     // Delete all vector references but keep the notebook structure
     if (knowledgeToClear.vectorRefs.length) {
       // Delete all vector ref files from S3
-      await this.s3Manager.deletePath(
+      await this.storageService.deletePath(
         `workspaces/${workspaceId}/knowledge/${knowledgeId}/vectorRefs`,
       );
 
@@ -614,7 +637,7 @@ export class KnowledgeService {
 
     const filePath = `workspaces/${workspaceId}/knowledge/${knowledgeId}/vectorRefs/${newVectorRef.id}/data.txt`;
 
-    await this.s3Manager.uploadTextFile({
+    await this.storageService.uploadTextFile({
       filePath,
       textContent: text,
     });
@@ -751,7 +774,7 @@ export class KnowledgeService {
     if (vectorRef.s3Link) {
       //We delete the s3 link because it doesn't have it's own crud endpoints.
       //it only exists as a reference to the vector ref.
-      await this.s3Manager.deleteFile(vectorRef.s3Link);
+      await this.storageService.deleteFile(vectorRef.s3Link);
     }
 
     if (!skipPineconeDeletion) {
@@ -1074,7 +1097,7 @@ export class KnowledgeService {
     const rawTextsFromS3 = await Promise.all(
       s3Links.map(async (s3Link) => {
         try {
-          return await this.s3Manager.readTextFile({
+          return await this.storageService.readTextFile({
             filePath: s3Link,
           });
         } catch {
