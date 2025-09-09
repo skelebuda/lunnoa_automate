@@ -16,7 +16,9 @@ import {
   PineconeService,
 } from '../../global/pinecone/pinecone.service';
 import { PrismaService } from '../../global/prisma/prisma.service';
+//Dependend on Cloud Provider the correct service is imported
 import { S3ManagerService } from '../../global/s3/s3.service';
+import { GCPStorageService } from '../../global/gcp_storage/gcp_storage.service';
 
 import { CreateKnowledgeDto } from './dto/create-knowledge.dto';
 import { KnowledgeExpansionDto } from './dto/knowledge-expansion.dto';

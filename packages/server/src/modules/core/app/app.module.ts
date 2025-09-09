@@ -29,6 +29,7 @@ import { PineconeModule } from '../../global/pinecone/pinecone.module';
 import { PrismaModule } from '../../global/prisma/prisma.module';
 import { S3ManagerModule } from '../../global/s3/s3.module';
 import { GCPStorageManagerModule } from '../../global/gcp_storage/gcp_storage.module';
+
 import { AgentsModule } from '../agents/agents.module';
 import { AuthModule } from '../auth/auth.module';
 import { ConnectionsModule } from '../connections/connections.module';
@@ -64,6 +65,28 @@ const rawBodyParsingRoutes: Array<RouteInfo> = [
   },
 ];
 
+//Dependend on Cloud Provider the correct service is imported
+let storageModules: any[] = [];
+
+if (process.env.GCS_BUCKET_ID && process.env.GCS_PROJECT_ID) {
+  storageModules = [GCPStorageManagerModule];
+} else if (
+  process.env.S3_BUCKET_ID &&
+  process.env.S3_ACCESS_KEY_ID &&
+  process.env.S3_SECRET_ACCESS_KEY
+) {
+  storageModules = [S3ManagerModule];
+} else if (
+  process.env.AZURE_STORAGE_CONTAINER &&
+  process.env.AZURE_STORAGE_CONNECTION_STRING
+) {
+  //storageModules = [AzureStorageManagerModule]; // planned Azure support
+} else {
+  throw new Error(
+    '❌ No storage provider configured. Please set either GCS, S3, or Azure storage variables.'
+  );
+}
+
 @Module({
   imports: [
     ThrottlerModule.forRoot({
@@ -92,8 +115,7 @@ const rawBodyParsingRoutes: Array<RouteInfo> = [
     PollerModule,
     AppPollerModule,
     VariablesModule,
-    S3ManagerModule,
-    GCPStorageManagerModule,
+    ...storageModules,
     ProjectInvitationsModule,
     ConnectionsModule,
     HealthModule,
