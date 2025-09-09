@@ -158,6 +158,33 @@ export const ServerConfig = {
   S3_BUCKET_ID: process.env.S3_BUCKET_ID,
 
   /**
+   * Used for the GCP Storage Service. The GCP Storage Service is currently used for the following:
+   *  1. Storing profile pictures of workspace users.
+   *  2. Storing workspace logo images.
+   *  3. Storing uploaded files used for vector embedding references.
+   *  4. Storing temporary files when workflow actions require downloading them.
+   */
+  GCP_STORAGE_PROJECT_ID: process.env.GCP_STORAGE_PROJECT_ID,
+
+  /**
+   * Used with the S3_ACCESS_KEY_ID for the S3 Service.
+   * View the S3_ACCESS_KEY_ID for more information.
+   */
+  GCP_STORAGE_CLIENT_EMAIL: process.env.GCP_STORAGE_CLIENT_EMAIL,
+
+  /**
+   * The S3 Region for the S3 Service.
+   * View the S3_ACCESS_KEY_ID for more information.
+   */
+  GCP_STORAGE_PRIVATE_KEY: process.env.GCP_STORAGE_PRIVATE_KEY,
+
+  /**
+   * The S3 Bucket ID used for the S3 Service.
+   * View the S3_ACCESS_KEY_ID for more information.
+   */
+  GCP_STORAGE_BUCKET_ID: process.env.GCP_STORAGE_BUCKET_ID,
+
+  /**
    * If you are using ollama, you can override the base URL here.
    */
   OLLAMA_BASE_URL:

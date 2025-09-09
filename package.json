@@ -34,6 +34,7 @@
     "@commitlint/config-conventional": "19.6.0",
     "@dagrejs/dagre": "^1.1.4",
     "@faker-js/faker": "^8.4.1",
+    "@google-cloud/storage": "^7.17.0",
     "@hookform/resolvers": "^3.3.4",
     "@lunnoa-automate/apps": "1.232.0",
     "@lunnoa-automate/toolkit": "1.232.0",

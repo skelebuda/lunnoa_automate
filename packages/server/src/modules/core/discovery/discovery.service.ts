@@ -14,12 +14,22 @@ export class DiscoveryService {
     private aiProvider: AiProviderService,
   ) {
     //This is to use the Knowledge feature of the platform.
-    //Includes embedding text, uploading embeddings to Pinecone, and uploading files to S3.
-    const KNOWLEDGE =
+    //Includes embedding text, uploading embeddings to Pinecone, and uploading files to S3, Google Storage or Azure Blob Storage.
+
+    const HAS_AWS_S3 = 
       ServerConfig.S3_ACCESS_KEY_ID != null &&
       ServerConfig.S3_SECRET_ACCESS_KEY != null &&
       ServerConfig.S3_REGION != null &&
-      ServerConfig.S3_BUCKET_ID != null &&
+      ServerConfig.S3_BUCKET_ID != null;
+
+    const HAS_GCP_STORAGE =
+      ServerConfig.GCP_STORAGE_PROJECT_ID != null &&
+      ServerConfig.GCP_STORAGE_CLIENT_EMAIL != null &&
+      ServerConfig.GCP_STORAGE_PRIVATE_KEY != null &&
+      ServerConfig.GCP_STORAGE_BUCKET_ID != null;
+
+    const KNOWLEDGE =
+      (HAS_AWS_S3 || HAS_GCP_STORAGE) &&
       ServerConfig.PINECONE_API_KEY != null &&
       ServerConfig.OPENAI_API_KEY != null;
 
@@ -144,12 +154,8 @@ export class DiscoveryService {
               break;
             case 'KNOWLEDGE':
               reason =
-                'Missing S3 or Pinecone configuration or OPENAI_API_KEY not set';
+                'Missing S3 or Google Storage or Azure Blob Storage or Pinecone configuration or OPENAI_API_KEY not set';
               break;
-            case 'BILLING': {
-              //Not used except by Lecca.io cloud
-              break;
-            }
             case 'CALLING':
               reason = 'VAPI_API_KEY not set';
               break;

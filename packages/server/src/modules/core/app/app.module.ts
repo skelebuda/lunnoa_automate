@@ -28,6 +28,7 @@ import { OperationsModule } from '../../global/operations/operations.module';
 import { PineconeModule } from '../../global/pinecone/pinecone.module';
 import { PrismaModule } from '../../global/prisma/prisma.module';
 import { S3ManagerModule } from '../../global/s3/s3.module';
+import { GCPStorageManagerModule } from '../../global/gcp_storage/gcp_storage.module';
 import { AgentsModule } from '../agents/agents.module';
 import { AuthModule } from '../auth/auth.module';
 import { ConnectionsModule } from '../connections/connections.module';
@@ -92,6 +93,7 @@ const rawBodyParsingRoutes: Array<RouteInfo> = [
     AppPollerModule,
     VariablesModule,
     S3ManagerModule,
+    GCPStorageManagerModule,
     ProjectInvitationsModule,
     ConnectionsModule,
     HealthModule,
