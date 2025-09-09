@@ -1,5 +1,6 @@
 import {
   ForbiddenException,
+  Inject,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -28,36 +29,36 @@ import { KnowledgeIncludeTypeDto } from './dto/knowledge-include-type.dto';
 import { SaveUploadedTextToKnowledgeDto } from './dto/save-uploaded-text-to-knowledge.dto';
 import { UpdateKnowledgeDto } from './dto/update-knowledge.dto';
 
-//Dependend on Cloud Provider the correct service is imported
-let storageService: any[] = [];
 
-if (process.env.GCS_BUCKET_ID && process.env.GCS_PROJECT_ID) {
-  storageService = [GCPStorageService];
-} else if (
-  process.env.S3_BUCKET_ID &&
-  process.env.S3_ACCESS_KEY_ID &&
-  process.env.S3_SECRET_ACCESS_KEY
-) {
-  storageService = [S3ManagerService];
-} else if (
-  process.env.AZURE_STORAGE_CONTAINER &&
-  process.env.AZURE_STORAGE_CONNECTION_STRING
-) {
-  //storageModules = [AzureStorageManagerModule]; // planned Azure support
-} else {
-  throw new Error(
-    '❌ No storage provider configured. Please set either GCS, S3, or Azure storage variables.'
-  );
-}
 
 @Injectable()
 export class KnowledgeService {
-  constructor(
+    private storageService: GCPStorageService | S3ManagerService; //Dependend on Cloud Provider the correct service is imported, add azure storage service when implemented
+
+    constructor (
     private prisma: PrismaService,
     private pineconeService: PineconeService,
-    private storageService: GCPStorageService | S3ManagerService,
     private aiProviders: AiProviderService,
-  ) {}
+  ) {
+    if (process.env.GCS_BUCKET_ID && process.env.GCS_PROJECT_ID) {
+      this.storageService = new GCPStorageService();
+    } else if (
+      process.env.S3_BUCKET_ID &&
+      process.env.S3_ACCESS_KEY_ID &&
+      process.env.S3_SECRET_ACCESS_KEY
+    ) {
+      this.storageService = new S3ManagerService();
+    } else if (
+      process.env.AZURE_STORAGE_CONTAINER &&
+      process.env.AZURE_STORAGE_CONNECTION_STRING
+    ) {
+      // this.storageService = new AzureStorageService(); // Uncomment when Azure support is added
+    } else {
+      throw new Error(
+        '❌ No storage provider configured. Please set either GCS, S3, or Azure storage variables.'
+      );
+    }
+  }
 
   async create({
     data,
