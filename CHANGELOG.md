@@ -1,3 +1,10 @@
+# [1.235.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.234.0...v1.235.0) (2025-09-09)
+
+
+### Features
+
+* dependency cloud provider ([8d6fd72](https://github.com/skelebuda/lunnoa_automate/commit/8d6fd72e7ac0271b861d19f0c2efa653a8054ca5))
+
 # [1.234.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.233.0...v1.234.0) (2025-09-09)
 
 
