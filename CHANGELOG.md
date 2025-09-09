@@ -1,3 +1,10 @@
+# [1.234.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.233.0...v1.234.0) (2025-09-09)
+
+
+### Features
+
+* GCP storage added first version ([24df0b8](https://github.com/skelebuda/lunnoa_automate/commit/24df0b89500ce99621c760b02422f6afbb83c478))
+
 # [1.233.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.232.0...v1.233.0) (2025-09-08)
 
 
