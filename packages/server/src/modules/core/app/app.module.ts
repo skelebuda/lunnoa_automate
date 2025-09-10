@@ -65,7 +65,7 @@ const rawBodyParsingRoutes: Array<RouteInfo> = [
   },
 ];
 
-//Dependend on Cloud Provider the correct service is imported
+//Dependend on Cloud Provider the correct service is imported, azure is going to be implemented later
 let storageModules: any[] = [];
 
 if (process.env.GCS_BUCKET_ID && process.env.GCS_PROJECT_ID) {
