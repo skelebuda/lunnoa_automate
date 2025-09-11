@@ -1,3 +1,14 @@
+# [1.237.0-DEV.1](https://github.com/skelebuda/lunnoa_automate/compare/v1.236.0...v1.237.0-DEV.1) (2025-09-11)
+
+
+### Features
+
+* constructor fix for gcp storage ([abc362a](https://github.com/skelebuda/lunnoa_automate/commit/abc362a630f84d9918b6d1361008501bf7fcb1d9))
+* deploy with tag ([3a496c1](https://github.com/skelebuda/lunnoa_automate/commit/3a496c16048acb9730d51f59756dae9fd708b466))
+* new release rule ([496cdb7](https://github.com/skelebuda/lunnoa_automate/commit/496cdb739b5192fc0a80545dad65ddc4713ddcb0))
+* new run on dev ([ec33337](https://github.com/skelebuda/lunnoa_automate/commit/ec333374c2bacdbb8c7a7f3f7a3f30963d0a72dd))
+* test ([0319d9a](https://github.com/skelebuda/lunnoa_automate/commit/0319d9aa5338fe4f9504c8560593a2a5aa8c0f7b))
+
 # [1.236.0](https://github.com/skelebuda/lunnoa_automate/compare/v1.235.0...v1.236.0) (2025-09-09)
 
 
