@@ -35,13 +35,6 @@ jobs:
           echo "@lunnoa-automate:registry=https://npm.pkg.github.com" > .npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
 
-      - name: Update Dependencies and Install
-        run: |
-          pnpm up @lunnoa-automate/apps@latest @lunnoa-automate/toolkit@latest
-          pnpm install --frozen-lockfile
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Build toolkit
         run: pnpm nx build toolkit
 
@@ -97,5 +90,12 @@ jobs:
           check_package "toolkit"
 
           echo "Packages are available, workflow complete"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update Dependencies and Install
+        run: |
+          pnpm up @lunnoa-automate/apps@latest @lunnoa-automate/toolkit@latest
+          pnpm install --frozen-lockfile
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
