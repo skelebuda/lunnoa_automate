@@ -1,3 +1,10 @@
+# [1.237.0-DEV.2](https://github.com/skelebuda/lunnoa_automate/compare/v1.237.0-DEV.1...v1.237.0-DEV.2) (2025-09-11)
+
+
+### Features
+
+* update dependency at the end ([a2bdd07](https://github.com/skelebuda/lunnoa_automate/commit/a2bdd07c974208978c87ae1454857a71227576b4))
+
 # [1.237.0-DEV.1](https://github.com/skelebuda/lunnoa_automate/compare/v1.236.0...v1.237.0-DEV.1) (2025-09-11)
 
 
