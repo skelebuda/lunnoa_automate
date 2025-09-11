@@ -18,6 +18,13 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@lunnoa-automate'
 
+      - name: Get branch name
+        id: vars
+        run: echo "BRANCH_NAME=${GITHUB_REF##*/}" >> $GITHUB_ENV
+
+      - name: sanitize branch name
+        run: echo "TAG=${BRANCH_NAME//\//-}" >> $GITHUB_ENV
+
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
         with:
@@ -48,14 +55,16 @@ jobs:
         run: ls -l packages/apps/dist || ls -l packages/apps/build || ls -l packages/apps
 
       - name: Publish toolkit
-        run: pnpm nx run toolkit:nx-release-publish --verbose
+        run: pnpm nx run toolkit:nx-release-publish --verbose --tag $TAG
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ env.TAG }}
 
       - name: Publish apps
-        run: pnpm nx run apps:nx-release-publish --verbose
+        run: pnpm nx run apps:nx-release-publish --verbose --tag $TAG
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ env.TAG }}
 
       # Verify packages
       - name: Wait for GitHub Packages to be available
